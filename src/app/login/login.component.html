@@ -1,17 +1,17 @@
 <div class="container auth-container">
   <div class="row">
-    <form class="col s4 offset-s4">
+    <form class="col s4 offset-s4" name="form" (ngSubmit)="login()">
 
       <div class="row">
         <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Login</label>
+          <input [(ngModel)]="username" name="user" id="login" type="text" class="validate" >
+          <label for="login">Login</label>
         </div>
       </div>
 
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
+          <input [(ngModel)]="password" name="password" id="password" type="password" class="validate" >
           <label for="password">Password</label>
         </div>
       </div>
@@ -22,5 +22,3 @@
     </form>
   </div>
 </div>
-
-
