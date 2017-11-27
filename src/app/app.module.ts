@@ -10,6 +10,7 @@ import {AuthGuard} from "./auth.guard";
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {HttpClientModule} from "@angular/common/http";
     MainComponent,
     LeadComponent,
     OrderPageComponent,
-    LoginComponent
+    LoginComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
