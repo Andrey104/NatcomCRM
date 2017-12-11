@@ -1,15 +1,17 @@
-<div class="card horizontal">
+<div class="card horizontal order"
+     [ngClass]="{active: isActive(order)}" appHover>
   <div class="icon">
-    <i class="large material-icons">email</i>
+    <i class="large material-icons icon">email</i>
   </div>
   <div class="card-stacked">
     <div class="time">12:50</div>
     <div class="info">
-      <div class="company">Натком</div>
+      <div class="company">Натком {{order.id}}</div>
       <div class="client">Алексей</div>
-      <div class="number">8(909)977-44-54</div>
+      <div class="number">{{order.phone}}</div>
 
       <div class="type">Заявка с сайта</div>
     </div>
   </div>
 </div>
+

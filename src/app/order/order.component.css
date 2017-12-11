@@ -8,4 +8,15 @@
   margin-left: 5px;
   margin-bottom: 5px;
 }
+.icon{
+  color: #777777;
+}
+.order{
+}
+.hovered{
+  background-color: #dddddd;
+}
+.active{
+  background-color: #cccccc;
+}
 

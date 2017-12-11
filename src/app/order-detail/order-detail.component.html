@@ -1,0 +1,11 @@
+<div class="order-detail">
+  <div class="card" *ngIf="activeOrderNotNull()">
+    телефон : {{order.phone}} id : {{order.id}}
+    клиент: Имя: {{order.client.fio}}
+    телефоны:
+    <div *ngFor="let phone of order.client.phones">
+      {{phone.number}}
+    </div>
+
+  </div>
+</div>

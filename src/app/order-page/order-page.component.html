@@ -1,21 +1,11 @@
 <div class="row orders-main-row">
   <div class="col s3 orders">
-
-    <div class="order-group">
-      <h6> (Сегодня) Вторник 25 окт 2017</h6>
-      <app-order></app-order>
-      <app-order></app-order>
-      <app-order></app-order>
-    </div>
-    <br>
-    <div class="order-group">
-      <h6>Среда 26 окт 2017</h6>
-      <app-order></app-order>
-      <app-order></app-order>
-      <app-order></app-order>
-      <app-order></app-order>
-    </div>
+      <app-order *ngFor="let order of orders"
+                 [order]="order" [orderPage] = 'this' (click)="active(order)">
+      </app-order>
   </div>
-  <div class="col s9">
+  <div class="col s9 order-detail-col">
+    <app-order-detail [order]="activeOrder" [orderPage] = 'this'></app-order-detail>
   </div>
 </div>
+

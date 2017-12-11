@@ -11,6 +11,10 @@ import { LoginComponent } from './login/login.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { OrderComponent } from './order/order.component';
+import {OrderService} from "./services/order.service";
+import {MessageService} from "./services/message.service";
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import {HoverDirective} from "./directives/hover.directive";
 
 @NgModule({
   declarations: [
@@ -19,7 +23,9 @@ import { OrderComponent } from './order/order.component';
     LeadComponent,
     OrderPageComponent,
     LoginComponent,
-    OrderComponent
+    OrderComponent,
+    OrderDetailComponent,
+    HoverDirective
   ],
   imports: [
     BrowserModule,
@@ -28,7 +34,9 @@ import { OrderComponent } from './order/order.component';
     HttpClientModule,
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    OrderService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
