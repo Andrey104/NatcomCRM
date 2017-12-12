@@ -32,7 +32,7 @@ export class OrderService {
       );
   }
 
-  
+
 
   /** GET order by id. Return `undefined` when id not found */
   getHeroNo404<Data>(id: number): Observable<Order> {
