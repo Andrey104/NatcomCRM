@@ -19,7 +19,6 @@ import { DealPageComponent } from './deal-page/deal-page.component';
 import { DealComponent } from './deal/deal.component';
 import { DealDetailComponent } from './deal-detail/deal-detail.component';
 import {DealService} from './services/deal.service';
-import { TabComponent } from './tab/tab.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +40,7 @@ import { TabComponent } from './tab/tab.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [
     AuthGuard,

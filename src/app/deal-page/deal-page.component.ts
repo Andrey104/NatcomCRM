@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Deal} from '../models/deal';
-import {log} from "util";
+import {DealPage} from '../models/deal/deals';
+import {log} from 'util';
 import {DealService} from '../services/deal.service';
 
 @Component({
@@ -9,9 +9,8 @@ import {DealService} from '../services/deal.service';
   styleUrls: ['./deal-page.component.css']
 })
 export class DealPageComponent implements OnInit {
-  deals: Deal[];
-  activeDeal: Deal;
-  error;
+  dealPage: DealPage;
+  activeDeal: DealPage;
 
   constructor(private dealService: DealService) { }
 
@@ -20,11 +19,11 @@ export class DealPageComponent implements OnInit {
   }
 
 
-  active(deal:Deal){
+  active(deal: DealPage){
     this.activeDeal = deal;
   }
 
-  isActive(deal:Deal){
+  isActive(deal: DealPage){
     return this.activeDeal === deal;
   }
 
@@ -33,9 +32,14 @@ export class DealPageComponent implements OnInit {
   }
 
 
+  onScroll() {
+    console.log('scrooll');
+  }
+
+
   getDeals(): void {
     this.dealService.getDeals()
-      .subscribe(deals => this.deals = deals, error2 => log (error2));
+      .subscribe(dealPage => this.dealPage = dealPage, error2 => log (error2));
   }
 
 
