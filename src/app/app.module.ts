@@ -16,6 +16,9 @@ import {MessageService} from './services/message.service';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import {HoverDirective} from './directives/hover.directive';
 import { DealPageComponent } from './deal-page/deal-page.component';
+import { DealComponent } from './deal/deal.component';
+import { DealDetailComponent } from './deal-detail/deal-detail.component';
+import {DealService} from './services/deal.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { DealPageComponent } from './deal-page/deal-page.component';
     OrderComponent,
     OrderDetailComponent,
     HoverDirective,
-    DealPageComponent
+    DealPageComponent,
+    DealComponent,
+    DealDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +43,7 @@ import { DealPageComponent } from './deal-page/deal-page.component';
   providers: [
     AuthGuard,
     OrderService,
+    DealService,
     MessageService
   ],
   bootstrap: [AppComponent]
