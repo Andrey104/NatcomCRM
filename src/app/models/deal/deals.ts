@@ -1,5 +1,8 @@
-import {Result} from './deal_result';
+import {DealResult} from './deal_result';
 
 export class DealPage {
-  results: Result;
+  count: number;
+  next: string;
+  previous: string;
+  results: DealResult;
 }
