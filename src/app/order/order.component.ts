@@ -7,7 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class OrderComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   @Input() order;
   @Input() orderPage;
@@ -17,8 +18,16 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
 
   }
+
   isActive() {
     return this.orderPage.isActive(this.order);
   }
+
+  timeFormat(autoDate: string) {
+    var date;
+    date = new Date(autoDate);
+    return (date.getHours() +':'+ date.getMinutes())
+  }
+
 
 }

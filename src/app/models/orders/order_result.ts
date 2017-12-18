@@ -1,5 +1,6 @@
 import {Client} from "../client";
 import {OrderAction} from "./order_action";
+import {Company} from "../company";
 
 export class OrderResult{
   id: number;
@@ -8,7 +9,7 @@ export class OrderResult{
   comment: string;
   info: string;
   source: string;
-  company: object;
+  company: Company;
   fio: string;
   phone: string;
   email: string;

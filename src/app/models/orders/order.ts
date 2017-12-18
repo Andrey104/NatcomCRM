@@ -42,4 +42,35 @@ export class Orders {
       "order": 1
     }
   ]
-}*/
+}
+
+ {
+            "id": 31,
+            "auto_date": "2017-12-18T14:13:26.291444Z",
+            "status": 0,
+            "comment": "order comment",
+            "info": "information",
+            "source": "Natcom",
+            "fio": "FIO",
+            "phone": "453543",
+            "email": "bas@gmail.com",
+            "client": {
+                "id": 3,
+                "fio": "",
+                "email": null,
+                "phones": [
+                    {
+                        "id": 5,
+                        "client": 3,
+                        "number": "453543",
+                        "comment": null
+                    }
+                ]
+            },
+            "company": {
+                "id": 1,
+                "name": "Натком",
+                "symbol": "Н"
+            },
+            "actions": []
+        },*/

@@ -1,11 +1,13 @@
-<div class="row orders-main-row">
-  <div class="col s3 orders">
-      <app-order *ngFor="let order of orders?.results"
-                 [order]="order" [orderPage] = 'this' (click)="active(order)">
-      </app-order>
+<div class="row main-row">
+  <div class="col s3 list-col">
+    <app-order *ngFor="let order of orders?.results"
+               [order]="order" [orderPage]='this' (click)="active(order)">
+    </app-order>
   </div>
-  <div class="col s9 order-detail-col">
-    <app-order-detail [order]="activeOrder" [orderPage] = 'this'></app-order-detail>
+  <div class="col s9 detail-col">
+    <div class="detail">
+      <app-order-detail [order]="activeOrder" [orderPage]='this'></app-order-detail>
+    </div>
   </div>
 </div>
 

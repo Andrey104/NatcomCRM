@@ -1,1 +1,30 @@
+.list-col{
+  overflow: scroll;
+  background-color: rgba(190, 190, 190, 0.4);;
+  min-width: 200px;
+  width: 100%;
+  min-height: 95vh;
+  max-height: 95vh;
+  margin: 0;
+}
+.main-row{
+  padding: 0;
+  margin: 0;
+}
+.detail-col{
+  padding: 0;
+}
 
+.detail{
+  position: fixed;
+  overflow: scroll;
+  height: 90%;
+  width: 100%;
+  padding: 5px;
+}
+.hovered{
+  background-color: #dddddd;
+}
+.active{
+  background-color: #cccccc;
+}
