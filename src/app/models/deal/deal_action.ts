@@ -3,6 +3,7 @@ export class DealAction {
   user: string;
   type: number;
   casue: number;
+  auto_date: string;
   comment: string;
-  order: number;
+  deal: number;
 }

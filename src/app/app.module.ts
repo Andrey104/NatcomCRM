@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {HostBinding, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -19,8 +19,9 @@ import { DealPageComponent } from './deal-page/deal-page.component';
 import { DealComponent } from './deal/deal.component';
 import { DealDetailComponent } from './deal-detail/deal-detail.component';
 import {DealService} from './services/deal.service';
-import { TabComponent } from './tab/tab.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {TabComponent} from './tab/tab.component';
+import {PaginationDirective} from './directives/pagination.directive';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
     HoverDirective,
     DealPageComponent,
     DealComponent,
-    DealDetailComponent
+    DealDetailComponent,
+    TabComponent,
+    PaginationDirective,
   ],
   imports: [
     BrowserModule,

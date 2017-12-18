@@ -16,3 +16,8 @@
 .active{
   background-color: #222222;
 }
+
+.search-results {
+  height: 20rem;
+  overflow: scroll;
+}

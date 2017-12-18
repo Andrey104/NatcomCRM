@@ -1,15 +1,26 @@
-<div class="row orders-main-row">
-  <div class="col s3 orders">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    $(window).on("scroll", function() {
+      var scrollHeight = $(document).height();
+      var scrollPosition = $(window).height() + $(window).scrollTop();
+      if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+        console.log('ff');
+
+      }
+    });
+  </script>
+</head>
+
+<div class="row orders-main-row" >
+  <div class="col s3 orders" appPagination>
     <app-deal *ngFor="let deal of dealPage?.results"
-               [deal]="deal" [dealPage] = 'this' (click)="active(deal)"
-      infiniteScroll
-      [infiniteScrollDistance]="2"
-      [infiniteScrollThrottle]="50"
-      (scrolled)="onScroll()">
+               [deal]="deal" [dealPage] = 'this' (click)="active(deal)">
     </app-deal>
   </div>
   <div class="col s9 order-detail-col">
     <app-deal-detail [deal]="activeDeal" [dealPage] = 'this'></app-deal-detail>
   </div>
 </div>
+
 

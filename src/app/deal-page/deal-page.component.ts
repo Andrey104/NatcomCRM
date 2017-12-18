@@ -37,6 +37,10 @@ export class DealPageComponent implements OnInit {
   }
 
 
+  nextPage(){
+    alert("next");
+  }
+
   getDeals(): void {
     this.dealService.getDeals()
       .subscribe(dealPage => this.dealPage = dealPage, error2 => log (error2));
