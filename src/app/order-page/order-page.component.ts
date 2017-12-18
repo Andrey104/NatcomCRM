@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Order } from '../models/order';
+import { Orders } from '../models/orders/order';
 import { OrderService } from '../services/order.service';
 import {catchError} from "rxjs/operators";
 import {log} from "util";
+
 
 @Component({
   selector: 'app-order-page',
@@ -11,8 +12,8 @@ import {log} from "util";
   styleUrls: ['./order-page.component.css']
 })
 export class OrderPageComponent implements OnInit {
-  orders: Order[];
-  activeOrder: Order;
+  orders: Orders;
+  activeOrder: Orders;
   error;
 
   constructor(private orderService: OrderService) { }
@@ -21,11 +22,11 @@ export class OrderPageComponent implements OnInit {
    this.getOrders();
   }
 
-  active(order:Order){
+  active(order:Orders){
     this.activeOrder = order;
   }
 
-  isActive(order:Order){
+  isActive(order:Orders){
     return this.activeOrder === order;
   }
 
@@ -35,7 +36,7 @@ export class OrderPageComponent implements OnInit {
 
 
   getOrders(): void {
-    this.orderService.getOrders()
+    this.orderService.getOrders(1)
       .subscribe(orders => this.orders = orders, error2 => log (error2));
   }
 

@@ -21,4 +21,19 @@ export class OrderDetailComponent implements OnInit {
     return this.orderPage.activeOrderNotNull();
   }
 
+  // ф-ции для кнопок--------------
+  reject(){
+    alert('reject')
+  }
+
+  defer(){
+    alert('defer')
+  }
+
+  in_a_deal(){
+    alert('in a deal')
+  }
+
+  //-------------------------------
+
 }

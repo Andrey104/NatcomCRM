@@ -1,8 +1,10 @@
 .orders{
+  overflow: scroll;
   background-color: rgba(190, 190, 190, 0.4);;
   min-width: 200px;
   width: 100%;
   min-height: 95vh;
+  max-height: 95vh;
   margin: 0;
 }
 .orders-main-row{

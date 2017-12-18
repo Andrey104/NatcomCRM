@@ -2,31 +2,85 @@
   <div class="card" *ngIf="activeOrderNotNull()">
     <h2>{{order.id}}</h2>
     телефон : {{order.phone}} id : {{order.id}}
-    <div class="card">
-      Клиент
-      {{order.client.fio}}
-      <div *ngFor="let phone of order.client.phones">
-        {{phone.number}}
+    <div class="card client">
+      <div class="name"> {{order.client.fio}}</div>
+      <div class="phones" *ngFor="let phone of order.client.phones">
+        <div class="number">{{phone.number}}</div>
+        <div class="comment">{{phone.comment}}</div>
       </div>
-      <div *ngFor="let action of order.action">
-        {{action.type}}, {{action.comment}}
+    </div>
+
+    <div class="actions" *ngFor="let action of order.action" style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+      {{action.type}}, {{action.comment}}
+    </div>
+    <h2>{{order.id}}</h2>
+    телефон : {{order.phone}} id : {{order.id}}
+    <div class="card client">
+      <div class="name"> {{order.client.fio}}</div>
+      <div class="phones" *ngFor="let phone of order.client.phones">
+        <div class="number">{{phone.number}}</div>
+        <div class="comment">{{phone.comment}}</div>
       </div>
+    </div>
 
-      <h2>{{order.id}}</h2>
-      телефон : {{order.phone}} id : {{order.id}}
-      <div class="card">
-        Клиент
-        {{order.client.fio}}
-        <div *ngFor="let phone of order.client.phones">
-          {{phone.number}}
-        </div>
-        <div *ngFor="let action of order.action">
-          {{action.type}}, {{action.comment}}
-        </div>
+    <div class="actions" *ngFor="let action of order.action" style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+      {{action.type}}, {{action.comment}}
+    </div>
+    <h2>{{order.id}}</h2>
+    телефон : {{order.phone}} id : {{order.id}}
+    <div class="card client">
+      <div class="name"> {{order.client.fio}}</div>
+      <div class="phones" *ngFor="let phone of order.client.phones">
+        <div class="number">{{phone.number}}</div>
+        <div class="comment">{{phone.comment}}</div>
+      </div>
+    </div>
 
-      <a class="waves-effect waves-light btn-large"><i class="material-icons left">clear</i>Отказать</a>
-      <a class="waves-effect waves-light btn-large"><i class="material-icons left">access_time</i>Отложить</a>
-      <a class="waves-effect waves-light btn-large"><i class="material-icons left">check</i>В сделку</a>
+    <div class="actions" *ngFor="let action of order.action" style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+      {{action.type}}, {{action.comment}}
+    </div>
+    <h2>{{order.id}}</h2>
+    телефон : {{order.phone}} id : {{order.id}}
+    <div class="card client">
+      <div class="name"> {{order.client.fio}}</div>
+      <div class="phones" *ngFor="let phone of order.client.phones">
+        <div class="number">{{phone.number}}</div>
+        <div class="comment">{{phone.comment}}</div>
+      </div>
+    </div>
+
+    <div class="actions" *ngFor="let action of order.action" style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+      {{action.type}}, {{action.comment}}
+    </div><h2>{{order.id}}</h2>
+    телефон : {{order.phone}} id : {{order.id}}
+    <div class="card client">
+      <div class="name"> {{order.client.fio}}</div>
+      <div class="phones" *ngFor="let phone of order.client.phones">
+        <div class="number">{{phone.number}}</div>
+        <div class="comment">{{phone.comment}}</div>
+      </div>
+    </div>
+
+    <div class="actions" *ngFor="let action of order.action" style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+      {{action.type}}, {{action.comment}}
+    </div><h2>{{order.id}}</h2>
+    телефон : {{order.phone}} id : {{order.id}}
+    <div class="card client">
+      <div class="name"> {{order.client.fio}}</div>
+      <div class="phones" *ngFor="let phone of order.client.phones">
+        <div class="number">{{phone.number}}</div>
+        <div class="comment">{{phone.comment}}</div>
+      </div>
+    </div>
+
+    <div class="actions" *ngFor="let action of order.action" style="height:120px;width:120px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+      {{action.type}}, {{action.comment}}
+    </div>
+
+    <div class="buttons">
+      <a class="waves-effect waves-light btn-large" (click)="reject()"><i class="material-icons left">clear</i>Отказать</a>
+      <a class="waves-effect waves-light btn-large" (click)="defer()"><i class="material-icons left">access_time</i>Отложить</a>
+      <a class="waves-effect waves-light btn-large" (click)="in_a_deal()"><i class="material-icons left">check</i>В сделку</a>
     </div>
 
   </div>
