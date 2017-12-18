@@ -24,7 +24,7 @@ export class OrderComponent implements OnInit {
   }
 
   timeFormat(autoDate: string) {
-    var date;
+    let date;
     date = new Date(autoDate);
     return (date.getHours() +':'+ date.getMinutes())
   }
