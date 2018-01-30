@@ -1,6 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Observable} from "rxjs/Observable";
+import {catchError, tap} from "rxjs/operators";
+import {of} from "rxjs/observable/of";
+import {User} from "../models/user";
+import {MessageService} from "../services/message.service";
+
 
 @Component({
   selector: 'app-login',
@@ -17,7 +23,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -33,6 +40,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           localStorage.setItem('token', data['token']);
+          localStorage.setItem('user_type', data['type']);
           this.router.navigate([this.returnUrl]);
         },
         err => {
@@ -46,4 +54,10 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('token');
   }
 
+  private token(){
+    return localStorage.getItem('token')
+  }
+
 }
+
+

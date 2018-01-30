@@ -13,10 +13,10 @@ export class DealDetailComponent implements OnInit {
   }
 
   @Input() deal;
-  @Input() dealPage;
+  @Input() lastPage;
 
   activeDealNotNull(){
-    return this.dealPage.activeDealNotNull();
+    return this.lastPage.activeDealNotNull();
   }
 
 }

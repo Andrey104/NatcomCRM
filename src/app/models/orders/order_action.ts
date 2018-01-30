@@ -2,7 +2,7 @@ export class OrderAction {
   id: number;
   user: string;
   type: number;
-  casue: number;
+  cause: number;
   comment: string;
   order: number;
 }

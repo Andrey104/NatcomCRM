@@ -1,10 +1,9 @@
 .list-col{
-  overflow: scroll;
+  overflow-y: scroll;
   background-color: rgba(190, 190, 190, 0.4);;
   min-width: 200px;
   width: 100%;
-  min-height: 95vh;
-  max-height: 95vh;
+  height: 92vh;
   margin: 0;
 }
 .main-row{
@@ -14,17 +13,45 @@
 .detail-col{
   padding: 0;
 }
-
-.detail{
-  position: fixed;
-  overflow: scroll;
-  height: 90%;
-  width: 100%;
-  padding: 5px;
-}
 .hovered{
   background-color: #dddddd;
 }
-.active{
+.active_card{
   background-color: #cccccc;
 }
+.modal{
+  background: #fff;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-top: -300px;
+  overflow: hidden;
+  z-index: 2000;
+  width: 500px;
+  padding: 0;
+  margin-left: -250px;
+}
+
+.client{
+
+}
+.buttons{
+
+}
+.modal-overlay {
+  position: fixed;
+  z-index: 999;
+  top: -25%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 125%;
+  width: 100%;
+  background: #000;
+  will-change: opacity;
+}
+
+.icon{
+  color: #777777;
+}
+

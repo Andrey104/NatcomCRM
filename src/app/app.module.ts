@@ -4,16 +4,16 @@ import {HostBinding, NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { LeadComponent } from './lead/lead.component';
-import { OrderPageComponent } from './order-page/order-page.component';
+import { OrderPageComponent } from './orders/order-page/order-page.component';
 import { AppRoutingModule } from './/app-routing.module';
 import {AuthGuard} from './auth.guard';
 import { LoginComponent } from './login/login.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { OrderComponent } from './order/order.component';
+import { OrderComponent } from './orders/order/order.component';
 import {OrderService} from './services/order.service';
 import {MessageService} from './services/message.service';
-import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { OrderDetailComponent } from './orders/order-detail/order-detail.component';
 import {HoverDirective} from './directives/hover.directive';
 import { DealPageComponent } from './deal-page/deal-page.component';
 import { DealComponent } from './deal/deal.component';
@@ -22,6 +22,15 @@ import {DealService} from './services/deal.service';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {TabComponent} from './tab/tab.component';
 import {PaginationDirective} from './directives/pagination.directive';
+import {utils} from "protractor";
+import {UtilsService} from "./services/utils.service";
+import { OrderDeferComponent } from './orders/order-defer/order-defer.component';
+import {AdminGuard} from "./admin.guard";
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { OrderRejectComponent } from './orders/order-reject/order-reject.component';
+import { OrderToDealComponent } from './orders/order-to-deal/order-to-deal.component';
+import { ModalComponent } from './modal/modal.component';
+import { ClientComponent } from './client/client.component';
 
 @NgModule({
   declarations: [
@@ -38,19 +47,30 @@ import {PaginationDirective} from './directives/pagination.directive';
     DealDetailComponent,
     TabComponent,
     PaginationDirective,
+    OrderDeferComponent,
+    AdminPageComponent,
+    OrderRejectComponent,
+    OrderToDealComponent,
+    ModalComponent,
+    ClientComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    FormsModule,
+    ReactiveFormsModule,
+
   ],
   providers: [
     AuthGuard,
+    AdminGuard,
     OrderService,
     DealService,
-    MessageService
+    MessageService,
+    UtilsService
   ],
   bootstrap: [AppComponent]
 })

@@ -4,6 +4,7 @@ import {OrderResult} from "./order_result";
 
 export class Orders {
   results:OrderResult[];
+  next:string;
 }
 
 

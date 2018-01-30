@@ -19,6 +19,10 @@ export class DealPageComponent implements OnInit {
   }
 
 
+  onScrollDeal(){
+
+  }
+
   active(deal: DealPage){
     this.activeDeal = deal;
   }

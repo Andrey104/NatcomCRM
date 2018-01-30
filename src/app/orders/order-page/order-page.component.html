@@ -1,6 +1,11 @@
 <div class="row main-row">
-  <div class="col s3 list-col">
-    <app-order *ngFor="let order of orders?.results"
+  <div class="col s3 list-col"
+       infinite-scroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="300"
+       [scrollWindow]="false"
+       (scrolled)="onScroll()">
+    <app-order *ngFor="let order of orders"
                [order]="order" [orderPage]='this' (click)="active(order)">
     </app-order>
   </div>

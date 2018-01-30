@@ -1,0 +1,12 @@
+<div class="card horizontal client" appHover>
+  <div class="icon"><i class="large material-icons icon">contact_phone</i></div>
+  <div class="card-stacked">
+    <div class="info">
+      <div class="name"> <h5>{{nameFormat(client.fio)}}</h5> </div>
+      <div class="phones" *ngFor="let phone of client.phones">
+        <div class="number">{{phone.number}}</div>
+        <div class="comment">{{phone.comment}}</div>
+      </div>
+    </div>
+  </div>
+</div>

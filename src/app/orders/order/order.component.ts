@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {UtilsService} from "../../services/utils.service";
+
+
 
 @Component({
   selector: 'app-order',
@@ -7,7 +10,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class OrderComponent implements OnInit {
 
-  constructor() {
+  constructor(private utils: UtilsService) {
   }
 
   @Input() order;
@@ -16,7 +19,6 @@ export class OrderComponent implements OnInit {
   isSelect = false;
 
   ngOnInit() {
-
   }
 
   isActive() {
@@ -24,10 +26,14 @@ export class OrderComponent implements OnInit {
   }
 
   timeFormat(autoDate: string) {
-    let date;
-    date = new Date(autoDate);
-    return (date.getHours() +':'+ date.getMinutes())
+    return this.utils.timeFormat(autoDate);
   }
+
+  statusIcon(status:number){
+    return this.utils.statusIcon(status);
+  }
+
+
 
 
 }

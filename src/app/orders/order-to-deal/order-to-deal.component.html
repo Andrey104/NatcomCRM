@@ -1,0 +1,15 @@
+<div id="modal1" class="modal modal-fixed-footer" [ngClass]="{open: isOpen(order)}">
+  <div class="modal-content">
+    <h4>Cоздать новую сделку?</h4>
+    <form [formGroup]="deferForm">
+      <div class="input-field col s12">
+        <textarea name="comment" id="comment" class="materialize-textarea" formControlName="comment"></textarea>
+        <label for="comment">Комментарий</label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a (click)="close(false)" class="modal-action modal-close waves-effect waves-green btn-flat">Отмена</a>
+    <a (click)="ok()" class="modal-action modal-close waves-effect waves-green btn-flat">ОК</a>
+  </div>
+</div>

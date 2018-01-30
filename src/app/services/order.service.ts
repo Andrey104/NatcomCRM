@@ -33,12 +33,17 @@ export class OrderService {
     );
   }
 
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
+
+  deferOrder(cause, comment:string, id:string): Observable<Object>{
+    var defer = {'cause': cause, 'comment': comment}
+    return this.http.post<Object>(this.ordersUrl + '/'+ id +'/defer/', defer, {
+      headers: new HttpHeaders().set('Authorization', 'token '+ this.token()),
+    }).pipe(
+      tap((defer: Object) => this.log(`defered`)),
+      catchError(this.handleError<Object>('addHero'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -53,7 +58,7 @@ export class OrderService {
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+
   private log(message: string) {
     this.messageService.add('HeroService: ' + message);
   }

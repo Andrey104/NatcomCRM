@@ -1,0 +1,17 @@
+<div class="card horizontal order"
+     [ngClass]="{active_card: isActive(order)}" appHover>
+  <div class="icon">
+    <i class="large material-icons icon">{{statusIcon(order.status)}}</i>
+  </div>
+  <div class="card-stacked">
+    <div class="time">{{timeFormat(order.auto_date)}}</div>
+    <div class="info">
+      <div class="company">{{order.company?.name}}</div>
+      <div class="client">{{order.fio}}</div>
+      <div class="number">{{order.phone}}</div>
+
+      <div class="type">{{order.source}}</div>
+    </div>
+  </div>
+</div>
+

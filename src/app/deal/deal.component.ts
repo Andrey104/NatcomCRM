@@ -13,12 +13,12 @@ export class DealComponent implements OnInit {
   }
 
   @Input() deal;
-  @Input() dealPage;
+  @Input() lastPage;
 
   isSelect = false;
 
   isActive() {
-    return this.dealPage.isActive(this.deal);
+    return this.lastPage.isActive(this.deal);
   }
 
 }

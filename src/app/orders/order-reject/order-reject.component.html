@@ -1,0 +1,24 @@
+<div id="modal1" class="modal modal-fixed-footer" [ngClass]="{open: isOpen(order)}">
+  <div class="modal-content">
+    <h4>Удалить заявку?</h4>
+    <form [formGroup]="rejectForm">
+      <label>Причина</label>
+      <p>
+        <input name="cause" type="radio" id="cause1" formControlName="cause" value="1"/>
+        <label for="cause1">Не берет трубку</label>
+      </p>
+      <p>
+        <input name="cause" type="radio" id="cause2" formControlName="cause" value="2"/>
+        <label for="cause2">Другое</label>
+      </p>
+      <div class="input-field col s12">
+        <textarea name="comment" id="comment" class="materialize-textarea" formControlName="comment"></textarea>
+        <label for="comment">Комментарий</label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a (click)="close(false)" class="modal-action modal-close waves-effect waves-green btn-flat">Отмена</a>
+    <a (click)="ok()" class="modal-action modal-close waves-effect waves-green btn-flat">ОК</a>
+  </div>
+</div>
