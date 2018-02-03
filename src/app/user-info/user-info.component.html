@@ -1,0 +1,21 @@
+<article>
+  <div class="image">
+    <img src="assets/images/avatar.png" alt="аватар"/>
+  </div>
+  <div class="user_info">
+    <p id="interval">{{user?.username}} <br>
+      <span id="name">{{user?.first_name}} {{user?.last_name}}</span></p>
+    <ul>
+      <li id="email">{{user?.email}}</li>
+      <li>{{user?.phone}}</li>
+      <li>{{user?.telegram}}</li>
+    </ul>
+  </div>
+</article>
+<footer>
+  <a (click)="logOut()" routerLink="/login" class="waves-effect waves-light btn-large button"><i class="material-icons left">cloud</i>Выйти из аккаунта</a>
+</footer>
+
+
+
+

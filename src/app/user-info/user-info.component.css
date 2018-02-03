@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial;
+}
+
+article {
+  margin-top: 60px;
+}
+
+.image {
+  float: left;
+  margin-left: 60px;
+}
+
+.user_info {
+  overflow: hidden;
+  padding-left: 25px;
+  padding-top: 25px;
+}
+
+#interval {
+  line-height: 1.4em;
+  font-size: 18px;
+}
+
+#name {
+  font-size: 36px;
+}
+
+#email {
+  font-size: 22px;
+}
+
+ul {
+  margin-top: 20px;
+  font-size: 26px;
+}
+
+.button {
+  position: absolute;
+  overflow: auto;
+  top: 570px;
+  right: 50px;
+  background-color: darkslateblue;
+  font-size: 18px;
+  text-transform: none;
+}
+
+
+
+

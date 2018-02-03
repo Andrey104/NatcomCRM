@@ -1,13 +1,14 @@
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
-import {AuthGuard} from "./auth.guard";
+import {AuthGuard} from './auth.guard';
 import {DealPageComponent} from './deal-page/deal-page.component';
-import {OrderPageComponent} from "./orders/order-page/order-page.component";
-import {AdminGuard} from "./admin.guard";
-import {AdminPageComponent} from "./admin-page/admin-page.component";
+import {OrderPageComponent} from './orders/order-page/order-page.component';
+import {AdminGuard} from './admin.guard';
+import {AdminPageComponent} from './admin-page/admin-page.component';
+import {UserInfoComponent} from './user-info/user-info.component';
 
 //import { AuthGuard } from './_guards/index';
 
@@ -22,13 +23,13 @@ const deals_routes: Routes = [
 const pages_routes: Routes = [
   { path: 'deals', component: DealPageComponent, children: deals_routes},
   { path: 'orders', component: OrderPageComponent},
-  { path: 'user', component: OrderPageComponent}
+  { path: 'user', component: UserInfoComponent}
 ];
 
 const admin_routes: Routes = [
   { path: 'deals', component: DealPageComponent, children: deals_routes},
   { path: 'orders', component: OrderPageComponent},
-  { path: 'user', component: OrderPageComponent}
+  { path: 'user', component: UserInfoComponent}
 ];
 
 const routes: Routes = [
