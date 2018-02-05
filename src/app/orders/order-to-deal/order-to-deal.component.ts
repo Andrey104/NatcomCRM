@@ -12,4 +12,11 @@ export class OrderToDealComponent implements OnInit {
   ngOnInit() {
   }
 
+  close(){
+
+  }
+  ok(){
+    
+  }
+
 }
