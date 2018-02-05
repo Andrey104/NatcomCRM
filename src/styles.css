@@ -35,9 +35,16 @@
 .client{
 
 }
-.buttons{
-
+.button {
+  font-size: 18px;
+  text-transform: none;
+  background-color: #5c6b96;
 }
+
+.button:hover {
+  background-color: #5c8496;
+}
+
 .modal-overlay {
   position: fixed;
   z-index: 999;

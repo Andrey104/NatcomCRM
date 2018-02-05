@@ -1,9 +1,19 @@
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper header">
-      <a href="#!" class="brand-logo"><img src="/logo.png"></a>
-      <a class="right" routerLink="/user"><i class="material-icons">person</i></a>
-      <ul class="right hide-on-med-and-down">
+      <div class="right size username" routerLinkActive="active">
+        <a routerLink="/user" id="name">{{name}} {{lastName}} </a>
+      </div>
+      <div class="right size">
+        <a routerLink="/user" [ngSwitch]="type">
+          <img *ngSwitchCase="1" class="avatar" src="assets/images/worker.png"/>
+          <img *ngSwitchCase="2" class="avatar" src="assets/images/avatar.png"/>
+          <img *ngSwitchCase="3" class="avatar" src="assets/images/admin.png"/>
+          <img *ngSwitchCase="4" class="avatar" src="assets/images/admin.png"/>
+        </a>
+      </div>
+      <a class="logo" href="#!"><img class="logo" src="assets/images/logo.png"/></a>
+      <ul class="right hide-on-med-and-down margin_r">
         <li routerLinkActive="active"><a routerLink="/orders">Заявки</a></li>
         <li routerLinkActive="active"><a routerLink="/deals/processing">В обработке</a></li>
         <li routerLinkActive="active"><a routerLink="/deals/measurements">Замеры</a></li>

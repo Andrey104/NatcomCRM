@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import 'rxjs/add/operator/map'
-import {catchError, tap} from "rxjs/operators";
-import {Observable} from "rxjs/Observable";
-import {User} from "../models/user";
-import {MessageService} from "./message.service";
+import 'rxjs/add/operator/map';
+import {catchError, tap} from 'rxjs/operators';
+import {Observable} from 'rxjs/Observable';
+import {User} from '../models/user';
+import {MessageService} from './message.service';
 import { of } from 'rxjs/observable/of';
 
 
@@ -13,9 +13,11 @@ import { of } from 'rxjs/observable/of';
 export class AuthenticationService {
   constructor(private http: HttpClient, private messageService: MessageService) {
   }
+  private userUrl = 'http://188.225.46.31//api/user_info';
 
   login(username: string, password: string) {
     const user = {username: username, password: password};
+
 
     this.http
       .post('/api/login', user)
@@ -38,12 +40,8 @@ export class AuthenticationService {
   }
 
   getUser(): Observable<User> {
-    return this.http.get<User>('/api/user_info',
-      {headers: new HttpHeaders().set('Authorization', 'token '+ this.token())})
-      .pipe(
-      tap(_ => this.log(`fetched user`)),
-      catchError(this.handleError<User>(`getUser`))
-    );
+    return this.http.get<User>(this.userUrl,
+      {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())});
   }
 
   private log(message: string) {
@@ -65,17 +63,19 @@ export class AuthenticationService {
   }
 
 
-  private token(){
-    return localStorage.getItem('token')
+  private token() {
+    return localStorage.getItem('token');
   }
 
-  checkUser(){
+  checkUser() {
     console.log('start');
     alert('start');
-    this.getUser().subscribe(user=>{
+    this.getUser().subscribe(user => {
       localStorage.setItem('user_name', user.username);
       localStorage.setItem('user_type', user.type.toString());
-      alert('Успех!')
-    }, error => {console.log(error)})
+      alert('Успех!');
+    }, error => {console.log(error); });
   }
+
+
 }

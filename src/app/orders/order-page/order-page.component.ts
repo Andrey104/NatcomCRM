@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 
 import {Orders} from '../../models/orders/order';
 import {OrderService} from '../../services/order.service';
-import {catchError} from "rxjs/operators";
-import {log} from "util";
-import {OrderResult} from "../../models/orders/order_result";
-import {loadavg} from "os";
+import {catchError} from 'rxjs/operators';
+import {log} from 'util';
+import {OrderResult} from '../../models/orders/order_result';
+import {loadavg} from 'os';
 
 
 @Component({
@@ -17,8 +17,8 @@ export class OrderPageComponent implements OnInit {
   orders: OrderResult[];
   activeOrder: Orders;
   error;
-  page:number;
-  lastPage:boolean;
+  page: number;
+  lastPage: boolean;
   load: boolean;
 
   constructor(private orderService: OrderService) {
@@ -49,11 +49,11 @@ export class OrderPageComponent implements OnInit {
       .subscribe(orders => {
         this.load = false;
         this.orders = orders.results;
-        if (orders.next === 'null'){
+        if (orders.next === 'null') {
           this.lastPage = true;
         }
         // if id !== null - update order list
-        if (id!==null){
+        if (id !== null) {
           let order = this.getOrderById(id);
           if (order !== null) {
             this.activeOrder = order;
@@ -70,11 +70,11 @@ export class OrderPageComponent implements OnInit {
     this.showOrders(id);
   }
 
-  onScroll(){
-    this.nextPage()
+  onScroll() {
+    this.nextPage();
   }
 
-  nextPage(){
+  nextPage() {
     this.page = this.page + 1;
     if (!this.lastPage && !this.load) {
       this.load = true;
@@ -82,7 +82,7 @@ export class OrderPageComponent implements OnInit {
         .subscribe(orders => {
           this.orders = this.orders.concat(orders.results);
           this.load = false;
-          if (orders.next === null){
+          if (orders.next === null) {
             this.lastPage = true;
           }
         }, error2 => {

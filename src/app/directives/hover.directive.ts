@@ -1,9 +1,9 @@
-import {Directive, HostBinding, HostListener} from "@angular/core";
+import {Directive, HostBinding, HostListener} from '@angular/core';
 
 @Directive({
   selector: '[appHover]'
 })
-export class HoverDirective{
+export class HoverDirective {
 
   @HostBinding('class.hovered') isHovered = false;
 

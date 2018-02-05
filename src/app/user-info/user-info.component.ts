@@ -12,7 +12,7 @@ import {applyRedirects} from '@angular/router/src/apply_redirects';
 })
 export class UserInfoComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService) { }
-  @Input() user: User;
+  user: User;
 
   ngOnInit() {
       this.authenticationService.getUser().subscribe((user: User) => {

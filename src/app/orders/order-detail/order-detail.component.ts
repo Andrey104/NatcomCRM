@@ -24,48 +24,48 @@ export class OrderDetailComponent implements OnInit {
 
 
 
-  activeOrderNotNull(){
+  activeOrderNotNull() {
     return this.orderPage.activeOrderNotNull();
   }
 
-  deferIsOpen(){
+  deferIsOpen() {
     return this.deferOpenValue;
   }
 
-  rejectIsOpen(){
+  rejectIsOpen() {
     return this.rejectOpenValue;
   }
 
-  inDealIsOpen(){
+  inDealIsOpen() {
     return this.inDealOpenValue;
   }
 
   // ф-ции для кнопок--------------
-  reject(){
+  reject() {
     this.rejectOpenValue = true;
   }
-  defer(){
+  defer() {
     this.deferOpenValue = true;
   }
-  in_a_deal(){
+  in_a_deal() {
     this.inDealOpenValue = true;
   }
   //-------------------------------
 
-  closeDefer(update:boolean){
+  closeDefer(update: boolean) {
     this.deferOpenValue = false;
     if (update) {
-      this.orderPage.update(this.order.id)
+      this.orderPage.update(this.order.id);
     }
   }
-  closeReject(){
+  closeReject() {
     this.rejectOpenValue = false;
   }
-  closeInDeal(){
+  closeInDeal() {
     this.inDealOpenValue = false;
   }
   //-------------------------------
-  actionDecoder(action: OrderAction){
+  actionDecoder(action: OrderAction) {
     return this.utils.orderActionDecoder(action);
   }
 }

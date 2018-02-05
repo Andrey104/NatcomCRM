@@ -40,11 +40,8 @@ export class DealService {
     const url = this.dealsUrl;
     return this.http.get<DealPage>(url, {
       params: params,
-      headers: new HttpHeaders().set('Authorization', 'token '+ this.token()),
-    }).pipe(
-      tap(_ => this.log(`fetched order`)),
-      catchError(this.handleError<DealPage>(`getDeals`))
-    );
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
+    });
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
@@ -66,7 +63,7 @@ export class DealService {
     this.messageService.add('HeroService: ' + message);
   }
 
-  private token(){
+  private token() {
     return localStorage.getItem('token');
   }
 
