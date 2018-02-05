@@ -1,3 +1,36 @@
 .header{
-  background-color: blue;
+  background-color: #5c6b96;
 }
+
+.logo {
+  height: 65px;
+  width: 65px;
+  float: left;
+}
+
+.avatar {
+  height: 67px;
+  padding-left: 10px;
+}
+
+.size {
+  height: 64px;
+}
+
+#name {
+  font-size: 20px;
+  margin-right: 10px;
+  padding-left: 10px;
+  display: block;
+}
+
+.username:hover {
+  background-color: #536087;
+}
+
+.margin_r {
+  margin-right: 110px;
+}
+
+
+

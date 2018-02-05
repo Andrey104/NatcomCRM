@@ -1,0 +1,43 @@
+article {
+  margin-top: 60px;
+}
+
+.image {
+  float: left;
+  margin-left: 60px;
+}
+
+.user_info {
+  overflow: hidden;
+  padding-left: 25px;
+  padding-top: 25px;
+}
+
+#interval {
+  line-height: 1.7em;
+  font-size: 18px;
+}
+
+#name {
+  font-size: 36px;
+}
+
+ul {
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.button {
+  position: absolute;
+  overflow: auto;
+  bottom: 90px;
+  right: 50px;
+}
+
+
+
+
+
+
+
+

@@ -29,7 +29,7 @@ export class OrderComponent implements OnInit {
     return this.utils.timeFormat(autoDate);
   }
 
-  statusIcon(status:number){
+  statusIcon(status: number) {
     return this.utils.statusIcon(status);
   }
 

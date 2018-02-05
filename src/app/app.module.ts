@@ -31,6 +31,8 @@ import { OrderRejectComponent } from './orders/order-reject/order-reject.compone
 import { OrderToDealComponent } from './orders/order-to-deal/order-to-deal.component';
 import { ModalComponent } from './modal/modal.component';
 import { ClientComponent } from './client/client.component';
+import { UserInfoComponent } from './user-info/user-info.component';
+import {AuthenticationService} from './services/auntification.service';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { ClientComponent } from './client/client.component';
     OrderToDealComponent,
     ModalComponent,
     ClientComponent,
+    UserInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,6 @@ import { ClientComponent } from './client/client.component';
     InfiniteScrollModule,
     FormsModule,
     ReactiveFormsModule,
-
   ],
   providers: [
     AuthGuard,
@@ -70,7 +72,8 @@ import { ClientComponent } from './client/client.component';
     OrderService,
     DealService,
     MessageService,
-    UtilsService
+    UtilsService,
+    AuthenticationService,
   ],
   bootstrap: [AppComponent]
 })

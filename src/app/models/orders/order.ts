@@ -3,8 +3,8 @@ import {OrderAction} from "./order_action";
 import {OrderResult} from "./order_result";
 
 export class Orders {
-  results:OrderResult[];
-  next:string;
+  results: OrderResult[];
+  next: string;
 }
 
 

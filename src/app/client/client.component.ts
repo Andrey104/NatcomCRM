@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UtilsService} from "../services/utils.service";
+import {UtilsService} from '../services/utils.service';
 
 @Component({
   selector: 'app-client',
@@ -17,12 +17,12 @@ export class ClientComponent implements OnInit {
   @Input() lastPage;
 
 
-  nameFormat(name: String){
-    if (name === null){
-      name = "Нет имени";
+  nameFormat(name: String) {
+    if (name === null) {
+      name = 'Нет имени';
     }
-    if (name === ""){
-      name = "Нет имени";
+    if (name === '') {
+      name = 'Нет имени';
     }
     return name;
   }

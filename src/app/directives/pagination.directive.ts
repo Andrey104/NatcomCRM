@@ -9,16 +9,13 @@ import {DealPageComponent} from '../deal-page/deal-page.component';
 export class PaginationDirective {
 
 
-  @HostListener("window:scroll", [])
+  @HostListener('window:scroll', [])
   onScroll(): void {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      console.log('tt')
+      console.log('tt');
       // you're at the bottom of the page
     }
       // you're at the bottom of the page
-
-
-    //console.log('tt')
 
 
   }

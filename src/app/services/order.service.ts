@@ -25,7 +25,7 @@ export class OrderService {
   getOrders(page): Observable<Orders> {
     const url = this.ordersUrl;
     return this.http.get<Orders>(url, {
-      headers: new HttpHeaders().set('Authorization', 'token '+ this.token()),
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
       params: new HttpParams().set('page', page)
     }).pipe(
       tap(_ => this.log(`fetched order`)),
@@ -33,11 +33,10 @@ export class OrderService {
     );
   }
 
-
-  deferOrder(cause, comment:string, id:string): Observable<Object>{
-    var defer = {'cause': cause, 'comment': comment}
-    return this.http.post<Object>(this.ordersUrl + '/'+ id +'/defer/', defer, {
-      headers: new HttpHeaders().set('Authorization', 'token '+ this.token()),
+  deferOrder(cause, comment: string, id: string): Observable<Object> {
+    const defer = {'cause': cause, 'comment': comment};
+    return this.http.post<Object>(this.ordersUrl + '/' + id + '/defer/', defer, {
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
     }).pipe(
       tap((defer: Object) => this.log(`defered`)),
       catchError(this.handleError<Object>('addHero'))
@@ -63,8 +62,8 @@ export class OrderService {
     this.messageService.add('HeroService: ' + message);
   }
 
-  private token(){
-    return localStorage.getItem('token')
+  private token() {
+    return localStorage.getItem('token');
   }
 
 

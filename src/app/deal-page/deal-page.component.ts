@@ -19,19 +19,19 @@ export class DealPageComponent implements OnInit {
   }
 
 
-  onScrollDeal(){
+  onScrollDeal() {
 
   }
 
-  active(deal: DealPage){
+  active(deal: DealPage ) {
     this.activeDeal = deal;
   }
 
-  isActive(deal: DealPage){
+  isActive(deal: DealPage) {
     return this.activeDeal === deal;
   }
 
-  activeDealNotNull(){
+  activeDealNotNull() {
     return this.activeDeal != null;
   }
 
@@ -41,8 +41,8 @@ export class DealPageComponent implements OnInit {
   }
 
 
-  nextPage(){
-    alert("next");
+  nextPage() {
+    alert('next');
   }
 
   getDeals(): void {
