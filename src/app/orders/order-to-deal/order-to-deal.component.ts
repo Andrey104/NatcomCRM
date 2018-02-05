@@ -16,7 +16,11 @@ export class OrderToDealComponent implements OnInit {
 
   }
   ok(){
-    
+
+  }
+
+  isOpen(){
+
   }
 
 }
