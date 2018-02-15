@@ -1,0 +1,49 @@
+ <div class="row">
+  <div class="col s4 indigo lighten-2 size white-text">
+    <div>
+      <div class="row main-row">
+        <div class="col s4 detail-col cursor  no-border" routerLink="/orders/{{id}}">
+          <i class="medium material-icons white-text center-align">arrow_back</i>
+          <div class="back">Назад</div>
+        </div>
+      </div>
+      <div class="center-align">
+        <img class="image col s8 offset-s2" src="assets/images/client.png"/>
+      </div>
+      <div class="center-align name">{{client?.fio}}</div>
+      <div class="divider"></div>
+      <div class="info-block">
+        <div class="left-align email"><i class="tiny material-icons">email</i> {{client?.email}}</div>
+          <div class="left-align phone-info" *ngFor="let phone of client?.phones">
+            <div class="phone"><i class="tiny material-icons">local_phone</i> {{phone?.number}}</div>
+            <div>{{phone?.comment}}</div>
+          </div>
+      </div>
+    </div>
+  </div>
+   <div class="col s8 deep-purple lighten-5 scrollPosition">
+     <div class="col s10 offset-s1">
+       <h4 class="white-text">Сделки</h4>
+      <div *ngFor="let deal of client?.deals">
+        <div class="card horizontal hoverable radius">
+          <div class="icon min_width">
+            <div class="round center-align">{{deal?.company?.symbol}}</div>
+            <div class="center-align">{{deal?.offer}}</div>
+          </div>
+            <div class="card-content">
+              <div class="right-align"><i class="tiny material-icons icon">date_range</i> {{dateFormat(deal?.task_date)}} </div>
+               <h5>{{deal?.company?.name}}</h5>
+              <div><i class="tiny material-icons icon">location_on</i> {{deal?.address}}</div>
+              <div><i class="tiny material-icons icon">attach_money</i> {{deal?.sum}}</div>
+              <div class="right-align red-text">{{statusDeal(deal?.status)}}</div>
+            </div>
+        </div>
+      </div>
+     </div>
+  </div>
+ </div>
+
+
+
+
+
