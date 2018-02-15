@@ -1,0 +1,23 @@
+.position {
+  position: fixed;
+  z-index: 1;
+  height: 84px;
+}
+
+input[type="search"] {
+  margin-bottom: 0;
+  border: 2px solid #ffe0b2;
+  border-radius: 15px;
+  background: #f1f8e9;
+  text-indent: 10px;
+  height: 30px;
+}
+
+input[type="search"]:focus {
+  background: white;
+  border: 2px solid grey;
+  color: #333;
+  outline: 0;
+}
+
+

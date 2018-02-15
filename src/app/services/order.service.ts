@@ -7,6 +7,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { Orders } from '../models/orders/order';
 import { MessageService } from './message.service';
+import {OrderResult} from '../models/orders/order_result';
+import {resolveReflectiveProviders} from '@angular/core/src/di/reflective_provider';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,13 +26,31 @@ export class OrderService {
   /** GET orders from the server */
   getOrders(page): Observable<Orders> {
     const url = this.ordersUrl;
+    let  params = new HttpParams();
+    params = params.append('page', page);
+    params = params.append('status', '0');
+    params = params.append('status', '2');
     return this.http.get<Orders>(url, {
       headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
-      params: new HttpParams().set('page', page)
+      params: params
     }).pipe(
       tap(_ => this.log(`fetched order`)),
       catchError(this.handleError<Orders>(`getDeals`))
     );
+  }
+  getOrderById(id: number): Observable<OrderResult> {
+    return this.http.get<OrderResult>(this.ordersUrl + '/' + id, {
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
+    }).pipe(
+      tap(_ => this.log(`fetched order`)),
+      catchError(this.handleError<OrderResult>(`getDeals`))
+    );
+  }
+  getFilterOrders(search): Observable<Orders> {
+    return this.http.get<Orders>('http://188.225.46.31/api/orders/search', {
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
+      params: new HttpParams().set('text', search)
+    });
   }
 
   deferOrder(cause, comment: string, id: string): Observable<Object> {
@@ -65,6 +85,5 @@ export class OrderService {
   private token() {
     return localStorage.getItem('token');
   }
-
 
 }

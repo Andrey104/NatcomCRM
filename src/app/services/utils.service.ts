@@ -11,10 +11,16 @@ export class UtilsService {
   }
 
   dateFormat(autoDate: string) {
+    let months = ['янв', 'Фев', 'мрт', 'апр', 'мая', 'июн',
+      'июл', 'авг', 'сен', 'окт', 'нбр', 'дек'];
     let date;
     date = new Date(autoDate);
-    return (date.getDate() + ' ' + date.getMonth() + ' ' + date.getFullYear() + ' '
-      + date.getHours() + ':' + this.minutesStringFormat(date.getMinutes()));
+    return (date.getDate() + ' ' + months[date.getMonth()] + '. ' + date.getFullYear());
+  }
+  fullDateFormat(autoDate: string) {
+    let date;
+    date = new Date(autoDate);
+    return (this.dateFormat(date) + ' в ' + date.getHours() + ':' + date.getMinutes());
   }
 
   minutesStringFormat(minutes: number) {
@@ -28,35 +34,66 @@ export class UtilsService {
   }
 
   statusIcon(status: number) {
-    let icon: string;
+    let icon: {image, color};
     switch (status) {
       case 0: {
-        icon = 'mail_outline'
+        icon = {image: 'mail_outline', color: 'untreated'};
         break;
       }
       case 1: {
-        icon = 'clear';
+        icon = {image: 'clear', color: 'renouncement'};
         break;
       }
       case 2: {
-        icon = 'access_time';
+        icon = {image: 'access_time', color: 'deferred'};
         break;
       }
       case 3: {
-        icon = 'check';
+        icon = {image: 'check', color: 'accepted'};
         break;
       }
       default: {
-        icon = 'check_box_outline_blank';
+        icon = {image: 'check_box_outline_blank', color: 'others'};
         break;
       }
     }
     return icon;
   }
 
+  statusDeal(status: number) {
+    let ourStatus = '';
+    switch (status) {
+      case 0: {
+        ourStatus = 'В обработке';
+        break;
+      }
+      case 1: {
+        ourStatus = 'В процессе замера';
+        break;
+      }
+      case 2: {
+        ourStatus = 'Контракт не заключен';
+        break;
+      }
+      case 3: {
+        ourStatus = 'Монтаж';
+        break;
+      }
+      case 4: {
+        ourStatus = 'Закрыта';
+        break;
+      }
+      case 5: {
+        ourStatus = 'Отменена';
+        break;
+      }
+    }
+    return ourStatus;
+  }
+
   orderActionDecoder (action: OrderAction) {
-    let date = '';
-    let user = action.user;
+    let date = action.auto_date;
+    let user = action.user.first_name;
     let type = '';
     let essence = 'заявку';
     let causeStr = '';
@@ -98,14 +135,11 @@ export class UtilsService {
     }
 
     if (action.comment !== null) {
-      commentStr = ', с комментарием';
+      commentStr = ', с комментарием: ';
       comment = action.comment;
     }
-
-    return date + '. ' + user + ', ' + type + ' ' + essence + ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
-
-
-
+    return this.fullDateFormat(date) + '. ' + user + ', ' + type + ' ' + essence +
+                ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
   }
 
 

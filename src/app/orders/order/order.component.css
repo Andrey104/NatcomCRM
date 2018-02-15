@@ -1,12 +1,56 @@
-.time{
-  position: absolute;
-  right: 5px;
-  top: 5px;
+* {
+  font-size: 14px;
+  line-height: 1.8;
 }
 .info{
   margin-top: 5px;
   margin-left: 5px;
   margin-bottom: 5px;
+}
+.time {
+  padding: 0 5px 0 5px;
+}
+
+.cursor:hover {
+  cursor: pointer;
+}
+
+.size {
+  min-width: 60px;
+}
+
+.round {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  border-radius: 50%;
+}
+
+.company {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.accepted {
+  background-color: green;
+}
+
+.renouncement {
+  background-color: red;
+}
+
+.untreated {
+  background-color: orange;
+}
+
+.deferred {
+  background-color: #bdbdbd;
+}
+
+.others {
+  background-color: white;
 }
 
 

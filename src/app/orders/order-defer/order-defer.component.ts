@@ -8,7 +8,7 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./order-defer.component.css']
 })
 export class OrderDeferComponent implements OnInit {
-
+  @Input() order;
   cause;
   comment;
 
@@ -18,17 +18,12 @@ export class OrderDeferComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  @Input() lastPage;
-  @Input() order;
-
-
   deferForm = new FormGroup({
     cause: new FormControl(''),
     comment: new FormControl('')
   });
 
-  isOpen() {
+  /*isOpen() {
     return this.lastPage.deferIsOpen();
   }
 
@@ -53,6 +48,6 @@ export class OrderDeferComponent implements OnInit {
 
   reset() {
     this.deferForm.reset();
-  }
+  }*/
 
 }

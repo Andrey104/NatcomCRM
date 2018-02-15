@@ -33,6 +33,9 @@ import { ModalComponent } from './modal/modal.component';
 import { ClientComponent } from './client/client.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import {AuthenticationService} from './services/auntification.service';
+import { ClientInfoComponent } from './client-info/client-info.component';
+import { ClientService } from './services/client.service';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +59,7 @@ import {AuthenticationService} from './services/auntification.service';
     ModalComponent,
     ClientComponent,
     UserInfoComponent,
+    ClientInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +78,7 @@ import {AuthenticationService} from './services/auntification.service';
     MessageService,
     UtilsService,
     AuthenticationService,
+    ClientService,
   ],
   bootstrap: [AppComponent]
 })

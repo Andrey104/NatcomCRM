@@ -1,17 +1,21 @@
 .list-col{
   overflow-y: scroll;
-  background-color: rgba(190, 190, 190, 0.4);;
+  background-color: #e5e5e5;
   min-width: 200px;
   width: 100%;
-  height: 92vh;
-  margin: 0;
+  height: 80vh;
+  margin: 83px 0 0 0;
 }
+.list-col::-webkit-scrollbar{width: 0;}
+.list-col { -ms-overflow-style: none;}
+.list-col { overflow: -moz-scrollbars-none; }
 .main-row{
   padding: 0;
   margin: 0;
 }
+
 .detail-col{
-  padding: 0;
+  padding: 0!important;
 }
 .hovered{
   background-color: #dddddd;
@@ -19,7 +23,7 @@
 .active_card{
   background-color: #cccccc;
 }
-.modal{
+.modal {
   background: #fff;
   position: fixed;
   left: 50%;
@@ -62,3 +66,25 @@
   color: #777777;
 }
 
+.radius {
+  border-radius: 10px;
+}
+.cursor {
+  cursor: pointer;
+}
+.scrollPosition {
+  overflow: scroll;
+  height: 91vh;
+  overflow-x: hidden;
+}
+.max_string {
+  word-wrap: break-word;
+}
+
+.no-border:focus {
+  outline: none;
+}
+
+.left_indent {
+  padding-left: 0!important;
+}
