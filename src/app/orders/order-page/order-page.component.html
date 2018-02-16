@@ -1,17 +1,17 @@
 <div class="row main-row">
   <div class="row main-row">
-    <div class="col s3 position grey lighten-3 detail-col">
-      <form (click)="privet(0)">
+    <div class="col s3 input-form detail-col">
+      <form (change)="filterByStatus()">
         <p class="col s4 detail-col">
-          <input name="group1" type="radio" id="test1" />
+          <input name="orderStatus" type="radio" id="test1" [(ngModel)]="selector" [value]="1"/>
           <label for="test1">Red</label>
         </p>
         <p class="col s4 detail-col">
-          <input name="group1" type="radio" id="test2" />
+          <input name="orderStatus" type="radio" id="test2" [(ngModel)]="selector" [value]="2"/>
           <label for="test2">Yellow</label>
         </p>
         <p class="col s4 detail-col">
-          <input class="with-gap" name="group1" type="radio" id="test3"  />
+          <input class="with-gap" name="orderStatus" type="radio" id="test3" [(ngModel)]="selector" [value]="3"/>
           <label for="test3">Green</label>
         </p>
       </form>

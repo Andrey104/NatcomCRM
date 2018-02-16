@@ -3,7 +3,6 @@ import {OrderService} from "../../services/order.service";
 import {UtilsService} from "../../services/utils.service";
 import {OrderAction} from "../../models/orders/order_action";
 import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
 import {OrderResult} from '../../models/orders/order_result';
 
 @Component({
@@ -17,11 +16,10 @@ export class OrderDetailComponent implements OnInit {
   }
   orders: OrderResult[];
   private id: number;
-  private subscription: Subscription;
+  order: OrderResult;
   ngOnInit() {
     this.subscribeOrderId();
   }
-  order: OrderResult;
 
   deferOpenValue: boolean;
   rejectOpenValue: boolean;

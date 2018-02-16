@@ -1,17 +1,18 @@
-.size {
+.client-info {
   min-height: 91vh;
+  background-color: #7481a6;
 }
 
 .row {
   margin-bottom: 0;
 }
 
-.min_width {
+.image-info {
   min-width: 90px;
   padding-left: 3%;
 }
 
-.round {
+.image {
   width: 80px;
   height: 80px;
   background: #ffa726;

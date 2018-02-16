@@ -23,6 +23,7 @@ export class OrderPageComponent implements OnInit {
   lastPage: boolean;
   load: boolean;
   @Input() searchStr = '';
+  @Input() selector = 1;
   id: string;
   constructor(private orderService: OrderService) {
   }
@@ -30,28 +31,23 @@ export class OrderPageComponent implements OnInit {
   ngOnInit() {
     this.showOrders(null);
   }
-  privet(num: number) {
-    if (num === 0) {
-      console.log('button 1');
+  filterByStatus() {
+    console.log(this.selector);
+    if (this.selector === 1) {
+      console.log(this.selector);
     }
-    if (num === 1) {
-      console.log('button 2');
+    if (this.selector === 2) {
+      console.log(this.selector);
     }
-    if (num === 2) {
-      console.log('button 3');
+    if (this.selector === 3) {
+      console.log(this.selector);
     }
   }
   search() {
-    console.log(this.searchStr);
-    if (this.searchStr === '') {
-      console.log(this.orders);
-    } else {
-      console.log(this.searchStr);
       this.orderService.getFilterOrders(this.searchStr).subscribe(order => {
         this.orders = order.results;
         console.log(this.orders);
       });
-    }
   }
 
   active(order: Orders) {

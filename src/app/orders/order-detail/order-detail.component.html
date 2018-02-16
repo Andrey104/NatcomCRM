@@ -1,8 +1,8 @@
-<div class="order-detail col s12 scrollPosition indigo lighten-5">
-  <div class="card horizontal radius">
+<div class="order-detail col s12 scrollable-page white">
+  <div class="card horizontal info-card grey lighten-5">
     <div class="card-stacked col s12">
       <div class="card-content col s12">
-        <div class="order_info max_string col s7">
+        <div class="text col s7">
           <h3>{{order?.company?.name}}</h3>
           <h5 class="indigo-text text-lighten-2">Данные с заявки:</h5>
           <ul>
@@ -11,9 +11,9 @@
             <li><i class="tiny material-icons icon">email</i> {{order?.email}}</li>
           </ul>
         </div>
-        <div class="date_info col s5">
-          <div style="float: left"> <i class="tiny material-icons icon">date_range</i> </div>
-          <div class="shift_right">
+        <div class="date-info col s5">
+          <div class="date-icon"> <i class="tiny material-icons icon">date_range</i> </div>
+          <div class="data-detail">
             <div>Дата создания: {{this.utils.dateFormat(order?.auto_date)}}</div>
             <div>Дата последнего изменения: {{this.utils.dateFormat(order?.task_date)}}</div>
           </div>
@@ -22,22 +22,20 @@
           </div>
         </div>
       </div>
-      <div class="card-action max_string">
-        <p class="indigo-text text-lighten-2">Комментарий с сайта:</p>
-        <p>{{order?.info}}</p>
+      <div class=" col s12 text comment-info">
+        <div class="indigo-text text-lighten-2">Комментарий с сайта: </div>
+        <p class="text-black comment">{{order?.info}}</p>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class=" col s12 card horizontal radius">
-        <div class="card-content max_string col s12">
-          <h5 class="indigo-text text-lighten-2">История:</h5>
-          <div *ngFor="let action of order?.actions">
-            <p>{{actionDecoder(action)}}</p>
-          </div>
+    <div class="col s12 card horizontal info-card grey lighten-5">
+      <div class="card-stacked text col s12">
+        <h5 class="col s12 indigo-text text-lighten-2 history">История:</h5>
+        <div class="col s12" *ngFor="let action of order?.actions">
+          <p>{{actionDecoder(action)}}</p>
         </div>
+      </div>
     </div>
-  </div>
   <div class="col s12 right-align buttons">
     <a class="waves-effect waves-light btn-large button" (click)="reject()"><i class="material-icons left">clear</i>Отказать</a>
     <a class="waves-effect waves-light btn-large button" (click)="defer()"><i class="material-icons left">access_time</i>Отложить</a>

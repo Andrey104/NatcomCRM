@@ -1,7 +1,7 @@
- <div class="card horizontal order cursor hoverable no-border" routerLinkActive="active_card" routerLink="{{order.id}}">
+ <div class="card horizontal order hover-element hoverable no-border" routerLinkActive="active_card" routerLink="{{order.id}}">
    <div class="center-align valign-wrapper">
-    <div class="icon size">
-      <i class="small material-icons icon round {{statusColor(order.status)}}">{{statusIcon(order.status)}}</i>
+    <div class="icon status-image">
+      <i class="small material-icons icon image {{statusColor(order.status)}}">{{statusIcon(order.status)}}</i>
     </div>
    </div>
     <div class="card-stacked">

@@ -2,18 +2,18 @@ article {
   margin-top: 60px;
 }
 
-.image {
+.status-image {
   float: left;
   margin-left: 60px;
 }
 
-.user_info {
+.user-info {
   overflow: hidden;
   padding-left: 25px;
   padding-top: 25px;
 }
 
-#interval {
+#user {
   line-height: 1.7em;
   font-size: 18px;
 }

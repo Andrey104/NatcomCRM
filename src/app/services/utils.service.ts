@@ -9,7 +9,6 @@ export class UtilsService {
     date = new Date(autoDate);
     return (date.getHours() + ':' + this.minutesStringFormat(date.getMinutes()));
   }
-
   dateFormat(autoDate: string) {
     let months = ['янв', 'Фев', 'мрт', 'апр', 'мая', 'июн',
       'июл', 'авг', 'сен', 'окт', 'нбр', 'дек'];
@@ -93,7 +92,7 @@ export class UtilsService {
 
   orderActionDecoder (action: OrderAction) {
     let date = action.auto_date;
-    let user = action.user.first_name;
+    let user = action.user.first_name + ' ' + action.user.last_name;
     let type = '';
     let essence = 'заявку';
     let causeStr = '';

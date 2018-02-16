@@ -1,10 +1,11 @@
 .list-col{
   overflow-y: scroll;
-  background-color: #e5e5e5;
+  background-color: #ffffff;
   min-width: 200px;
   width: 100%;
   height: 80vh;
   margin: 83px 0 0 0;
+  border-right: 1px solid black;
 }
 .list-col::-webkit-scrollbar{width: 0;}
 .list-col { -ms-overflow-style: none;}
@@ -20,7 +21,7 @@
 .hovered{
   background-color: #dddddd;
 }
-.active_card{
+.active-card{
   background-color: #cccccc;
 }
 .modal {
@@ -66,18 +67,18 @@
   color: #777777;
 }
 
-.radius {
+.info-card {
   border-radius: 10px;
 }
-.cursor {
+.hover-element {
   cursor: pointer;
 }
-.scrollPosition {
+.scrollable-page {
   overflow: scroll;
   height: 91vh;
   overflow-x: hidden;
 }
-.max_string {
+.text {
   word-wrap: break-word;
 }
 
@@ -85,6 +86,6 @@
   outline: none;
 }
 
-.left_indent {
+.detail-col-left {
   padding-left: 0!important;
 }

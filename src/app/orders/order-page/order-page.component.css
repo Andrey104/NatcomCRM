@@ -1,7 +1,8 @@
-.position {
+.input-form {
   position: fixed;
   z-index: 1;
   height: 84px;
+  border-right: 1px solid black;
 }
 
 input[type="search"] {
