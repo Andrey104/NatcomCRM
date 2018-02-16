@@ -1,10 +1,13 @@
+import {User} from '../user';
+
 export class OrderAction {
   id: number;
-  user: string;
+  user: User;
   type: number;
   cause: number;
   comment: string;
   order: number;
+  auto_date: string;
 }
 
 /*"actions": [

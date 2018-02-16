@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UtilsService} from "../../services/utils.service";
+import {UtilsService} from '../../services/utils.service';
 
 
 
@@ -14,15 +14,8 @@ export class OrderComponent implements OnInit {
   }
 
   @Input() order;
-  @Input() orderPage;
-
-  isSelect = false;
 
   ngOnInit() {
-  }
-
-  isActive() {
-    return this.orderPage.isActive(this.order);
   }
 
   timeFormat(autoDate: string) {
@@ -30,7 +23,10 @@ export class OrderComponent implements OnInit {
   }
 
   statusIcon(status: number) {
-    return this.utils.statusIcon(status);
+    return this.utils.statusIcon(status).image;
+  }
+  statusColor(status: number) {
+    return this.utils.statusIcon(status).color;
   }
 
 

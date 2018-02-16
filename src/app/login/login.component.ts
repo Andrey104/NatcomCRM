@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit {
         data => {
           localStorage.setItem('token', data['token']);
           localStorage.setItem('user_type', data['type']);
-          localStorage.setItem('first_name', data['first_name']);
-          localStorage.setItem('last_name', data['last_name']);
           this.router.navigate([this.returnUrl]);
         },
         err => {

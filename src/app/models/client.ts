@@ -1,10 +1,12 @@
-import {Phone} from "./phone";
+import {Phone} from './phone';
+import {UserDeals} from './deal/user_deals';
 
 export class Client {
   id: number;
   fio: string;
   email: string;
   phones: Phone[];
+  deals: UserDeals[];
 }
 
 /*"client": {

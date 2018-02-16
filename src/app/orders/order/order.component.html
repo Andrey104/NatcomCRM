@@ -1,17 +1,19 @@
-<div class="card horizontal order"
-     [ngClass]="{active_card: isActive()}" appHover>
-  <div class="icon">
-    <i class="large material-icons icon">{{statusIcon(order.status)}}</i>
-  </div>
-  <div class="card-stacked">
-    <div class="time">{{timeFormat(order.auto_date)}}</div>
-    <div class="info">
-      <div class="company">{{order.company?.name}}</div>
-      <div class="client">{{order.fio}}</div>
-      <div class="number">{{order.phone}}</div>
-
-      <div class="type">{{order.source}}</div>
+ <div class="card horizontal order hover-element hoverable no-border" routerLinkActive="active_card" routerLink="{{order.id}}">
+   <div class="center-align valign-wrapper">
+    <div class="icon status-image">
+      <i class="small material-icons icon image {{statusColor(order.status)}}">{{statusIcon(order.status)}}</i>
+    </div>
+   </div>
+    <div class="card-stacked">
+      <div class="info">
+        <div class="col s12 detail-col">
+          <div class="company col s7 detail-col">{{order.company?.name}}</div>
+          <div class="right-align col s5 time"><i class="tiny material-icons icon">access_time</i> {{timeFormat(order.auto_date)}}</div>
+        </div>
+        <div class="client">{{order.fio}}</div>
+        <div class="number"><i class="tiny material-icons icon">local_phone</i> {{order.phone}}</div>
+        <div class="type">{{order.source}}</div>
+      </div>
     </div>
   </div>
-</div>
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 import {Orders} from '../../models/orders/order';
 import {OrderService} from '../../services/order.service';
@@ -6,6 +6,8 @@ import {catchError} from 'rxjs/operators';
 import {log} from 'util';
 import {OrderResult} from '../../models/orders/order_result';
 import {loadavg} from 'os';
+import {Observable} from 'rxjs/Observable';
+import {FormBuilder, FormsModule} from '@angular/forms';
 
 
 @Component({
@@ -20,12 +22,32 @@ export class OrderPageComponent implements OnInit {
   page: number;
   lastPage: boolean;
   load: boolean;
-
+  @Input() searchStr = '';
+  @Input() selector = 1;
+  id: string;
   constructor(private orderService: OrderService) {
   }
 
   ngOnInit() {
     this.showOrders(null);
+  }
+  filterByStatus() {
+    console.log(this.selector);
+    if (this.selector === 1) {
+      console.log(this.selector);
+    }
+    if (this.selector === 2) {
+      console.log(this.selector);
+    }
+    if (this.selector === 3) {
+      console.log(this.selector);
+    }
+  }
+  search() {
+      this.orderService.getFilterOrders(this.searchStr).subscribe(order => {
+        this.orders = order.results;
+        console.log(this.orders);
+      });
   }
 
   active(order: Orders) {
@@ -39,7 +61,6 @@ export class OrderPageComponent implements OnInit {
   activeOrderNotNull() {
     return this.activeOrder != null;
   }
-
 
   showOrders(id): void {
     this.page = 1;

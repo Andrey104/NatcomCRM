@@ -1,25 +1,30 @@
 .list-col{
   overflow-y: scroll;
-  background-color: rgba(190, 190, 190, 0.4);;
+  background-color: #ffffff;
   min-width: 200px;
   width: 100%;
-  height: 92vh;
-  margin: 0;
+  height: 80vh;
+  margin: 83px 0 0 0;
+  border-right: 1px solid black;
 }
+.list-col::-webkit-scrollbar{width: 0;}
+.list-col { -ms-overflow-style: none;}
+.list-col { overflow: -moz-scrollbars-none; }
 .main-row{
   padding: 0;
   margin: 0;
 }
+
 .detail-col{
-  padding: 0;
+  padding: 0!important;
 }
 .hovered{
   background-color: #dddddd;
 }
-.active_card{
+.active-card{
   background-color: #cccccc;
 }
-.modal{
+.modal {
   background: #fff;
   position: fixed;
   left: 50%;
@@ -62,3 +67,25 @@
   color: #777777;
 }
 
+.info-card {
+  border-radius: 10px;
+}
+.hover-element {
+  cursor: pointer;
+}
+.scrollable-page {
+  overflow: scroll;
+  height: 91vh;
+  overflow-x: hidden;
+}
+.text {
+  word-wrap: break-word;
+}
+
+.no-border:focus {
+  outline: none;
+}
+
+.detail-col-left {
+  padding-left: 0!important;
+}

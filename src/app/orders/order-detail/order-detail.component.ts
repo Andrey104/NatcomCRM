@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {OrderService} from "../../services/order.service";
 import {UtilsService} from "../../services/utils.service";
 import {OrderAction} from "../../models/orders/order_action";
+import {ActivatedRoute} from '@angular/router';
+import {OrderResult} from '../../models/orders/order_result';
 
 @Component({
   selector: 'app-order-detail',
@@ -10,13 +12,14 @@ import {OrderAction} from "../../models/orders/order_action";
 })
 export class OrderDetailComponent implements OnInit {
 
-  constructor(private orderService: OrderService, private utils: UtilsService) { }
-
-  ngOnInit() {
+  constructor(private orderService: OrderService, private utils: UtilsService, private activatedRoute: ActivatedRoute) {
   }
-
-  @Input() order;
-  @Input() orderPage;
+  orders: OrderResult[];
+  private id: number;
+  order: OrderResult;
+  ngOnInit() {
+    this.subscribeOrderId();
+  }
 
   deferOpenValue: boolean;
   rejectOpenValue: boolean;
@@ -24,7 +27,7 @@ export class OrderDetailComponent implements OnInit {
 
 
 
-  activeOrderNotNull() {
+ /* activeOrderNotNull() {
     return this.orderPage.activeOrderNotNull();
   }
 
@@ -38,7 +41,7 @@ export class OrderDetailComponent implements OnInit {
 
   inDealIsOpen() {
     return this.inDealOpenValue;
-  }
+  }*/
 
   // ф-ции для кнопок--------------
   reject() {
@@ -52,7 +55,7 @@ export class OrderDetailComponent implements OnInit {
   }
   //-------------------------------
 
-  closeDefer(update: boolean) {
+  /*closeDefer(update: boolean) {
     this.deferOpenValue = false;
     if (update) {
       this.orderPage.update(this.order.id);
@@ -63,9 +66,17 @@ export class OrderDetailComponent implements OnInit {
   }
   closeInDeal() {
     this.inDealOpenValue = false;
-  }
+  }*/
   //-------------------------------
   actionDecoder(action: OrderAction) {
     return this.utils.orderActionDecoder(action);
   }
+  subscribeOrderId(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.id = params['id'];
+      this.orderService.getOrderById(this.id).subscribe(order => {
+        this.order = order;
+      });
+    });
+    }
 }

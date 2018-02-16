@@ -8,22 +8,17 @@ import {OrderService} from "../../services/order.service";
   styleUrls: ['./order-reject.component.css']
 })
 export class OrderRejectComponent implements OnInit {
-
+  @Input() order;
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
   }
-
-  @Input() lastPage;
-  @Input() order;
-
-
   rejectForm = new FormGroup({
     cause: new FormControl(''),
     comment: new FormControl('')
   });
 
-  isOpen() {
+  /*isOpen() {
     return this.lastPage.rejectIsOpen();
   }
 
@@ -45,7 +40,7 @@ export class OrderRejectComponent implements OnInit {
 
   reset() {
     this.rejectForm.reset();
-  }
+  }*/
 }
 
 
