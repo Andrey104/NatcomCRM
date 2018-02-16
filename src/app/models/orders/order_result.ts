@@ -5,6 +5,7 @@ import {Company} from "../company";
 export class OrderResult {
   id: number;
   auto_date: string;
+  task_date: string;
   status: number;
   comment: string;
   info: string;

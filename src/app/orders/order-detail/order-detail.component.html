@@ -14,8 +14,8 @@
         <div class="date-info col s5">
           <div class="date-icon"> <i class="tiny material-icons icon">date_range</i> </div>
           <div class="data-detail">
-            <div>Дата создания: {{this.utils.dateFormat(order?.auto_date)}}</div>
-            <div>Дата последнего изменения: {{this.utils.dateFormat(order?.task_date)}}</div>
+            <div>Дата создания: {{dateFormat(order?.auto_date)}}</div>
+            <div>Дата последнего изменения: {{dateFormat(order?.task_date)}}</div>
           </div>
           <div class="client no-border" routerLink="client/{{order?.client?.id}}">
               <app-client [client]="order?.client"></app-client>

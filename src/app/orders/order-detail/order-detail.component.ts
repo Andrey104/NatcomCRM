@@ -71,6 +71,9 @@ export class OrderDetailComponent implements OnInit {
   actionDecoder(action: OrderAction) {
     return this.utils.orderActionDecoder(action);
   }
+  dateFormat(date: string) {
+    return this.utils.fullDateFormat(date);
+  }
   subscribeOrderId(): void {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
