@@ -1,0 +1,12 @@
+<div>
+  <h3>Замеры</h3>
+  <div *ngFor="let measurement of measuremts">
+    <p>{{measurement.id}}</p>
+    <p>{{measurement.address}}</p>
+    <p>{{measurement.address_comment}}</p>
+    <div *ngFor="let picture of measurement.pictures">
+      <p>{{picture.id}}</p>
+      <img class="image" src={{picture.url}}/>
+    </div>
+  </div>
+</div>

@@ -15,9 +15,9 @@ import {OrderService} from './services/order.service';
 import {MessageService} from './services/message.service';
 import { OrderDetailComponent } from './orders/order-detail/order-detail.component';
 import {HoverDirective} from './directives/hover.directive';
-import { DealPageComponent } from './deal-page/deal-page.component';
-import { DealComponent } from './deal/deal.component';
-import { DealDetailComponent } from './deal-detail/deal-detail.component';
+import { DealPageComponent } from './deals/deal-page/deal-page.component';
+import { DealComponent } from './deals/deal/deal.component';
+import { DealDetailComponent } from './deals/deal-detail/deal-detail.component';
 import {DealService} from './services/deal.service';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {TabComponent} from './tab/tab.component';
@@ -42,6 +42,9 @@ import {EmailPipe} from './pipes/email.pipe';
 import {DateFormatPipe} from './pipes/dateFormat.pipe';
 import {AddressPipe} from './pipes/address.pipe';
 import {MoneyPipe} from './pipes/money.pipe';
+import { MountsComponent } from './deals/mounts/mounts.component';
+import { MeasurementsComponent } from './deals/measurements/measurements.component';
+import {MeasurementService} from './services/measurement.service';
 
 
 @NgModule({
@@ -73,7 +76,9 @@ import {MoneyPipe} from './pipes/money.pipe';
     EmailPipe,
     DateFormatPipe,
     AddressPipe,
-    MoneyPipe
+    MoneyPipe,
+    MountsComponent,
+    MeasurementsComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +98,7 @@ import {MoneyPipe} from './pipes/money.pipe';
     UtilsService,
     AuthenticationService,
     ClientService,
+    MeasurementService,
   ],
   bootstrap: [AppComponent]
 })

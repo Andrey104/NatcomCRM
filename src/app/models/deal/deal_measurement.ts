@@ -1,16 +1,20 @@
-export class DealMeasurement{
+export class DealMeasurement {
   id: number;
+  pictures: object;
+  clients: object;
+  actions: object;
+  transfers: object;
+  address: string;
+  address_comment: string;
+  company: object;
+  non_cash: boolean;
   auto_date: string;
   date: string;
   status: number;
-  manager_comment: string;
-  comment: string;
   time: string;
-  sum: number; //??
-  prepayment: string; // ??
-  worker: string; //??
+  sum: number;
+  prepayment: number;
+  worker: object;
   deal: number;
-  deal_comment: string;
-  address: string;
-  pictures: object;
+  color: number;
 }

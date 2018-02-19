@@ -13,12 +13,5 @@ export class DealComponent implements OnInit {
   }
 
   @Input() deal;
-  @Input() lastPage;
-
-  isSelect = false;
-
-  isActive() {
-    return this.lastPage.isActive(this.deal);
-  }
 
 }

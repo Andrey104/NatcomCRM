@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Client } from '../models/client';
-import {catchError, tap} from 'rxjs/operators';
-import {DealResult} from '../models/deal/deal_result';
+
 
 
 @Injectable()

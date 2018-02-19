@@ -6,12 +6,12 @@
        [scrollWindow]="false"
        (scrolled)="onScrollDeal()">
     <app-deal *ngFor="let deal of dealPage"
-               [deal]="deal" [lastPage]='this' (click)="active(deal)">
+               [deal]="deal"  (click)="active(deal)">
     </app-deal>
   </div>
   <div class="col s9 detail-col">
     <div class="detail">
-      <app-deal-detail [deal]="activeDeal" [lastPage]='this'></app-deal-detail>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

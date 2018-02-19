@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { DealPage } from '../models/deal/deals';
 import { MessageService } from './message.service';
+import {DealResult} from '../models/deal/deal_result';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -41,6 +42,11 @@ export class DealService {
     return this.http.get<DealPage>(url, {
       headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
       params: params,
+    });
+  }
+  getDealById(id: number): Observable<DealResult> {
+    return this.http.get<DealResult>(this.dealsUrl + id, {
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
     });
   }
 

@@ -1,5 +1,5 @@
 import {Directive, HostBinding, HostListener} from '@angular/core';
-import {DealPageComponent} from '../deal-page/deal-page.component';
+import {DealPageComponent} from '../deals/deal-page/deal-page.component';
 
 
 @Directive({

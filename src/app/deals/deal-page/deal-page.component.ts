@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {DealPage} from '../models/deal/deals';
+import {DealPage} from '../../models/deal/deals';
 import {log} from 'util';
-import {DealService} from '../services/deal.service';
-import {DealResult} from '../models/deal/deal_result';
+import {DealService} from '../../services/deal.service';
+import {DealResult} from '../../models/deal/deal_result';
 
 @Component({
   selector: 'app-deal-page',

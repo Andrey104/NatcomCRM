@@ -4,22 +4,24 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
 import {AuthGuard} from './auth.guard';
-import {DealPageComponent} from './deal-page/deal-page.component';
+import {DealPageComponent} from './deals/deal-page/deal-page.component';
 import {OrderPageComponent} from './orders/order-page/order-page.component';
 import {AdminGuard} from './admin.guard';
 import {AdminPageComponent} from './admin-page/admin-page.component';
 import {UserInfoComponent} from './user-info/user-info.component';
 import {ClientInfoComponent} from './client-info/client-info.component';
 import {OrderDetailComponent} from './orders/order-detail/order-detail.component';
+import {DealDetailComponent} from './deals/deal-detail/deal-detail.component';
+import {MountsComponent} from './deals/mounts/mounts.component';
+import {MeasurementsComponent} from './deals/measurements/measurements.component';
 
 // import { AuthGuard } from './_guards/index';
+// deals/id/mounts
 
 const deals_routes: Routes = [
-  { path: 'processing', component: OrderPageComponent},
-  { path: 'not_concluded', component: OrderPageComponent},
-  { path: 'measurements', component: OrderPageComponent},
-  { path: 'mount', component: OrderPageComponent},
-  { path: 'completed', component: OrderPageComponent}
+  { path: ':id', component: DealDetailComponent},
+  { path: ':id/mounts', component: MountsComponent},
+  { path: ':id/measurements', component: MeasurementsComponent }
 ];
 
 

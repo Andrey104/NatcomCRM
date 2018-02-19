@@ -1,0 +1,46 @@
+<div class="detail">
+  <div class="card">
+    <h3>Оплаты</h3>
+    <div *ngFor="let payment of deal?.payments">
+      <p>{{payment.id}}</p>
+      <p>{{payment.comment}}</p>
+      <p>{{payment.auto_date}}</p>
+      <p>{{payment.date}}</p>
+      <p>{{payment.sum}}</p>
+      <p>{{payment.non_cash}}</p>
+      <p>{{payment.receiver}}</p>
+    </div>
+    <a routerLink="measurements"><h3>Замеры</h3></a>
+    <a routerLink="mounts"><h3>Монтажи</h3></a>
+    <h3>Комментарии</h3>
+    <div *ngFor="let comment of deal?.comments">
+      <p>{{comment.id}}</p>
+      <p>{{comment.auto_date}}</p>
+      <p>{{comment.user.username}}</p>
+      <p>{{comment.text}}</p>
+      <p>{{comment.read}}</p>
+    </div>
+    <h3>Перерасчеты</h3>
+    <div *ngFor="let discount of deal?.discounts">
+      <p>{{discount.id}}</p>
+      <p>{{discount.user.username}}</p>
+      <p>{{discount.before}}</p>
+      <p>{{discount.after}}</p>
+      <p>{{discount.comment}}</p>
+      <p>{{discount.auto_date}}</p>
+    </div>
+    <a><h3>Клиенты</h3></a>
+    <div *ngFor="let client of deal?.clients">
+      <p>{{client.id}}</p>
+      <p>{{client.client.id}}</p>
+      <p>{{client.client.fio}}</p>
+    </div>
+    <div class="card">
+      Клиент
+      <a class="waves-effect waves-light btn-large button"><i class="material-icons left">clear</i>Отказать</a>
+      <a class="waves-effect waves-light btn-large button"><i class="material-icons left">access_time</i>Отложить</a>
+      <a class="waves-effect waves-light btn-large button"><i class="material-icons left">check</i>В сделку</a>
+    </div>
+
+  </div>
+</div>
