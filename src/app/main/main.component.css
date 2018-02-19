@@ -3,22 +3,37 @@
 }
 
 .logo {
-  height: 65px;
-  width: 65px;
+  height: 9vh;
   float: left;
 }
 
 .avatar {
-  height: 67px;
+  height: 9vh;
 }
 
-.size {
-  height: 64px;
+.image {
+  height: 9px;
 }
 
-.margin_right {
+ul {
   margin-right: 60px;
+  height: 9vh;
 }
 
+ul li {
+  line-height: 9vh;
+}
+
+ul li a {
+  font-size: 1.1rem;
+}
+
+.navbar-fixed {
+  height: 9vh;
+}
+
+nav {
+  height: 9vh;
+}
 
 

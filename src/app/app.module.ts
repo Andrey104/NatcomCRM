@@ -35,6 +35,13 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import {AuthenticationService} from './services/auntification.service';
 import { ClientInfoComponent } from './client-info/client-info.component';
 import { ClientService } from './services/client.service';
+import { ClientNamePipe } from './pipes/client-name.pipe';
+import { PhonePipe } from './pipes/phone.pipe';
+import {CompanyNamePipe} from './pipes/company-name.pipe';
+import {EmailPipe} from './pipes/email.pipe';
+import {DateFormatPipe} from './pipes/dateFormat.pipe';
+import {AddressPipe} from './pipes/address.pipe';
+import {MoneyPipe} from './pipes/money.pipe';
 
 
 @NgModule({
@@ -60,6 +67,13 @@ import { ClientService } from './services/client.service';
     ClientComponent,
     UserInfoComponent,
     ClientInfoComponent,
+    ClientNamePipe,
+    PhonePipe,
+    CompanyNamePipe,
+    EmailPipe,
+    DateFormatPipe,
+    AddressPipe,
+    MoneyPipe
   ],
   imports: [
     BrowserModule,

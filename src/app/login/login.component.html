@@ -1,24 +1,34 @@
 <div class="container auth-container">
   <div class="row">
-    <form class="col s4 offset-s4" name="form" (ngSubmit)="login()">
+    <form [formGroup]="myForm" class="col s4 offset-s4" (ngSubmit)="login()">
 
       <div class="row">
         <div class="input-field col s12">
-          <input [(ngModel)]="username" name="user" id="login" type="text" class="validate" >
-          <label for="login">Login</label>
+          <input [(ngModel)]="username" name="user" id="login" type="text" class="validate" formControlName="userName"/>
+          <label for="login">Логин</label>
         </div>
+      </div>
+      <div class="alert alert-danger"
+           *ngIf="myForm.controls['userName'].invalid && myForm.controls['userName'].touched">
+        <div class="fail">Не указано имя</div>
       </div>
 
       <div class="row">
-        <div class="input-field col s12">
-          <input [(ngModel)]="password" name="password" id="password" type="password" class="validate" >
-          <label for="password">Password</label>
+        <div  class="input-field col s12">
+          <input [(ngModel)]="password" name="password" id="password" type="password" class="validate" formControlName="userPassword">
+          <label for="password">Пароль</label>
         </div>
       </div>
+      <div class="alert alert-danger"
+           *ngIf="myForm.controls['userPassword'].invalid && myForm.controls['userPassword'].touched">
+        <div class="fail">Не указан пароль</div>
+      </div>
 
-      <button class="btn waves-effect waves-light button">Login
+      <button [disabled]="myForm.invalid" class="btn waves-effect waves-light button">Login
         <i class="material-icons right">send</i>
       </button>
+      <div [class.fail]="fail" *ngIf="fail">Неверный логин или пароль</div>
+
     </form>
   </div>
 </div>

@@ -34,13 +34,13 @@ export class DealService {
 
    let params = new HttpParams();
     params = params.append('page', this.quantity.toString());
-    //params = params.append('offset', this.offset.toString());
+    // params = params.append('offset', this.offset.toString());
 
 
     const url = this.dealsUrl;
     return this.http.get<DealPage>(url, {
-      params: params,
       headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
+      params: params,
     });
   }
 

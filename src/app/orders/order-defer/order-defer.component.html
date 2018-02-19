@@ -1,4 +1,4 @@
-<div id="modal1" class="modal modal-fixed-footer">
+<div id="modal1" class="modal modal-fixed-footer" [ngClass]="{open: isOpen()}">
   <div class="modal-content">
     <h4>Отложить заявку?</h4>
     <form [formGroup]="deferForm">
@@ -18,7 +18,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <a class="modal-action modal-close waves-effect waves-green btn-flat">Отмена</a>
-    <a class="modal-action modal-close waves-effect waves-green btn-flat">ОК</a>
+    <a  class="modal-action modal-close waves-effect waves-green btn-flat">Отмена</a>
+    <a  class="modal-action modal-close waves-effect waves-green btn-flat">ОК</a>
   </div>
 </div>

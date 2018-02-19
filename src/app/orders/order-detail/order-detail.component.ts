@@ -29,13 +29,13 @@ export class OrderDetailComponent implements OnInit {
 
  /* activeOrderNotNull() {
     return this.orderPage.activeOrderNotNull();
-  }
+  }*/
 
-  deferIsOpen() {
+  /*deferIsOpen() {
     return this.deferOpenValue;
-  }
+  }*/
 
-  rejectIsOpen() {
+  /*rejectIsOpen() {
     return this.rejectOpenValue;
   }
 
@@ -53,7 +53,7 @@ export class OrderDetailComponent implements OnInit {
   in_a_deal() {
     this.inDealOpenValue = true;
   }
-  //-------------------------------
+  // -------------------------------
 
   /*closeDefer(update: boolean) {
     this.deferOpenValue = false;
@@ -67,12 +67,9 @@ export class OrderDetailComponent implements OnInit {
   closeInDeal() {
     this.inDealOpenValue = false;
   }*/
-  //-------------------------------
+  // -------------------------------
   actionDecoder(action: OrderAction) {
     return this.utils.orderActionDecoder(action);
-  }
-  dateFormat(date: string) {
-    return this.utils.fullDateFormat(date);
   }
   subscribeOrderId(): void {
     this.activatedRoute.params.subscribe(params => {

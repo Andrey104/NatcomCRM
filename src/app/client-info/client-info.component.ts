@@ -21,6 +21,7 @@ export class ClientInfoComponent implements OnInit {
   ngOnInit() {
     this.getDeals();
   }
+
   getDeals(): void {
     this.subscription = this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
@@ -29,9 +30,6 @@ export class ClientInfoComponent implements OnInit {
         this.client = client;
       });
     });
-  }
-  dateFormat(autoDate: string): string {
-    return this.utils.dateFormat(autoDate);
   }
   statusIcon(status: number) {
     return this.utils.statusIcon(status);

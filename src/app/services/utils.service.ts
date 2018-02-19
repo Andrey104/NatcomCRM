@@ -9,18 +9,6 @@ export class UtilsService {
     date = new Date(autoDate);
     return (date.getHours() + ':' + this.minutesStringFormat(date.getMinutes()));
   }
-  dateFormat(autoDate: string) {
-    let months = ['янв', 'Фев', 'мрт', 'апр', 'мая', 'июн',
-      'июл', 'авг', 'сен', 'окт', 'нбр', 'дек'];
-    let date;
-    date = new Date(autoDate);
-    return (date.getDate() + ' ' + months[date.getMonth()] + '. ' + date.getFullYear());
-  }
-  fullDateFormat(autoDate: string) {
-    let date;
-    date = new Date(autoDate);
-    return (this.dateFormat(date) + ' в ' + date.getHours() + ':' + date.getMinutes());
-  }
 
   minutesStringFormat(minutes: number) {
     let strMinutes: string;
@@ -137,10 +125,8 @@ export class UtilsService {
       commentStr = ', с комментарием: ';
       comment = action.comment;
     }
-    return this.fullDateFormat(date) + '. ' + user + ', ' + type + ' ' + essence +
+    return ' ' + user + ', ' + type + ' ' + essence +
                 ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
   }
-
-
 
 }

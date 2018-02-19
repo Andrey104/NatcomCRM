@@ -1,5 +1,5 @@
 .client-info {
-  min-height: 91vh;
+  height: 91vh;
   background-color: #7481a6;
 }
 
@@ -55,6 +55,7 @@
   margin-top: 20px;
   line-height: 1.5em;
 }
+
 
 
 

@@ -24,12 +24,18 @@ export class OrderService {
     private messageService: MessageService) { }
 
   /** GET orders from the server */
-  getOrders(page): Observable<Orders> {
+  getOrders(page, selector): Observable<Orders> {
     const url = this.ordersUrl;
     let  params = new HttpParams();
     params = params.append('page', page);
-    params = params.append('status', '0');
-    params = params.append('status', '2');
+    if (selector === 1) {
+      params = params.append('status', '0');
+      params = params.append('status', '2');
+    } else if (selector === 2) {
+      params = params.append('status', '1');
+    } else {
+      params = params.append('status', '3');
+    }
     return this.http.get<Orders>(url, {
       headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
       params: params

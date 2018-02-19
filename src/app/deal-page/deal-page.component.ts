@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DealPage} from '../models/deal/deals';
 import {log} from 'util';
 import {DealService} from '../services/deal.service';
+import {DealResult} from '../models/deal/deal_result';
 
 @Component({
   selector: 'app-deal-page',
@@ -9,18 +10,21 @@ import {DealService} from '../services/deal.service';
   styleUrls: ['./deal-page.component.css']
 })
 export class DealPageComponent implements OnInit {
-  dealPage: DealPage;
+  dealPage: DealResult[];
   activeDeal: DealPage;
+  page: number;
+  lastPage: boolean;
+  load: boolean;
 
   constructor(private dealService: DealService) { }
 
   ngOnInit() {
-    this.getDeals();
+    this.showDeals();
   }
 
 
   onScrollDeal() {
-
+    this.nextPage();
   }
 
   active(deal: DealPage ) {
@@ -35,19 +39,35 @@ export class DealPageComponent implements OnInit {
     return this.activeDeal != null;
   }
 
-
-  onScroll() {
-    console.log('scrooll');
-  }
-
-
   nextPage() {
-    alert('next');
+    if (!this.lastPage && !this.load) {
+      this.load = true;
+      this.page = this.page + 1;
+      console.log('Пошла загрузка');
+      this.dealService.getDeals().subscribe(dealPage => {
+        console.log('Загрузка с сервера завершилась');
+        this.dealPage  = this.dealPage.concat(dealPage.results);
+        if (dealPage.next === null) {
+          this.lastPage = true;
+        }
+        this.load = false;
+        console.log('Загрузка завершилась');
+      });
+    }
   }
 
-  getDeals(): void {
+  showDeals(): void {
+    this.page = 1;
+    this.load = true;
+    this.lastPage = false;
     this.dealService.getDeals()
-      .subscribe(dealPage => this.dealPage = dealPage, error2 => log (error2));
+      .subscribe(dealPage => {
+        this.dealPage = dealPage.results;
+        if (dealPage.next === null) {
+          this.lastPage = true;
+        }
+        this.load = false;
+        }, error2 => log (error2));
   }
 
 

@@ -5,7 +5,7 @@
        [infiniteScrollThrottle]="300"
        [scrollWindow]="false"
        (scrolled)="onScrollDeal()">
-    <app-deal *ngFor="let deal of dealPage?.results"
+    <app-deal *ngFor="let deal of dealPage"
                [deal]="deal" [lastPage]='this' (click)="active(deal)">
     </app-deal>
   </div>

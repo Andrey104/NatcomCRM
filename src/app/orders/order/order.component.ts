@@ -28,8 +28,4 @@ export class OrderComponent implements OnInit {
   statusColor(status: number) {
     return this.utils.statusIcon(status).color;
   }
-
-
-
-
 }

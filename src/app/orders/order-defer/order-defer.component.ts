@@ -11,23 +11,25 @@ export class OrderDeferComponent implements OnInit {
   @Input() order;
   cause;
   comment;
+  open: boolean;
 
   constructor(private orderService: OrderService) {
 
   }
-
-  ngOnInit() {
-  }
-  deferForm = new FormGroup({
+  deferForm: FormGroup = new FormGroup({
     cause: new FormControl(''),
     comment: new FormControl('')
   });
 
-  /*isOpen() {
-    return this.lastPage.deferIsOpen();
+  ngOnInit() {
   }
 
-  ok() {
+  /*isOpen() {
+    this.open = this.order.deferIsOpen();
+    console.log(this.open);
+  }*/
+
+  /*ok() {
     this.cause = this.deferForm.get('cause').value;
     this.comment = this.deferForm.get('comment').value;
     this.deferResponse(this.cause, this.comment);
@@ -44,10 +46,10 @@ export class OrderDeferComponent implements OnInit {
     }, err=> {
       console.log('error')
     });
-  }
+  }*/
 
   reset() {
     this.deferForm.reset();
-  }*/
+  }
 
 }

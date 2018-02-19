@@ -13,16 +13,4 @@ export class ClientComponent implements OnInit {
 
   ngOnInit() {
   }
-  nameFormat(name: String) {
-    if (name === null) {
-      name = 'Нет имени';
-    }
-    if (name === '') {
-      name = 'Нет имени';
-    }
-    return name;
-  }
-
-
-
 }

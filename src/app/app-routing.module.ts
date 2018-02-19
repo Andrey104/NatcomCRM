@@ -12,7 +12,7 @@ import {UserInfoComponent} from './user-info/user-info.component';
 import {ClientInfoComponent} from './client-info/client-info.component';
 import {OrderDetailComponent} from './orders/order-detail/order-detail.component';
 
-//import { AuthGuard } from './_guards/index';
+// import { AuthGuard } from './_guards/index';
 
 const deals_routes: Routes = [
   { path: 'processing', component: OrderPageComponent},

@@ -5,9 +5,8 @@ import {OrderService} from '../../services/order.service';
 import {catchError} from 'rxjs/operators';
 import {log} from 'util';
 import {OrderResult} from '../../models/orders/order_result';
-import {loadavg} from 'os';
-import {Observable} from 'rxjs/Observable';
 import {FormBuilder, FormsModule} from '@angular/forms';
+
 
 
 @Component({
@@ -32,22 +31,20 @@ export class OrderPageComponent implements OnInit {
     this.showOrders(null);
   }
   filterByStatus() {
-    console.log(this.selector);
-    if (this.selector === 1) {
-      console.log(this.selector);
-    }
-    if (this.selector === 2) {
-      console.log(this.selector);
-    }
-    if (this.selector === 3) {
-      console.log(this.selector);
+    if (this.searchStr !== '') {
+      return;
+    } else {
+      this.showOrders(null);
     }
   }
   search() {
+    if (this.searchStr === '') {
+      this.showOrders(null);
+    } else {
       this.orderService.getFilterOrders(this.searchStr).subscribe(order => {
         this.orders = order.results;
-        console.log(this.orders);
       });
+    }
   }
 
   active(order: Orders) {
@@ -66,11 +63,11 @@ export class OrderPageComponent implements OnInit {
     this.page = 1;
     this.lastPage = false;
     this.load = true;
-    this.orderService.getOrders(this.page)
+    this.orderService.getOrders(this.page, this.selector)
       .subscribe(orders => {
         this.load = false;
         this.orders = orders.results;
-        if (orders.next === 'null') {
+        if (orders.next === null) {
           this.lastPage = true;
         }
         // if id !== null - update order list
@@ -96,13 +93,16 @@ export class OrderPageComponent implements OnInit {
   }
 
   nextPage() {
-    this.page = this.page + 1;
     if (!this.lastPage && !this.load) {
+      console.log('Начало загрузки');
       this.load = true;
-      this.orderService.getOrders(this.page)
+      this.page = this.page + 1;
+      this.orderService.getOrders(this.page, this.selector)
         .subscribe(orders => {
+          console.log('Получение с сервера');
           this.orders = this.orders.concat(orders.results);
           this.load = false;
+          console.log('конец');
           if (orders.next === null) {
             this.lastPage = true;
           }
@@ -117,12 +117,10 @@ export class OrderPageComponent implements OnInit {
     let resultOrder = null;
     for (let order of this.orders) {
       if (order.id === id) {
-        //console.log('ok');
         resultOrder = order;
       }
     }
     return resultOrder;
   }
-
 
 }
