@@ -6,7 +6,7 @@ import { DealComment } from './deal_comment';
 export class DealResult {
   id: number;
   clients: object; // add clacc
-  measurments: DealMeasurement[];
+  measurements: DealMeasurement[];
   mounts: object;
   discounts: object;
   comments: object;

@@ -1,46 +1,42 @@
-<div class="detail">
-  <div class="card">
-    <h3>Оплаты</h3>
-    <div *ngFor="let payment of deal?.payments">
-      <p>{{payment.id}}</p>
-      <p>{{payment.comment}}</p>
-      <p>{{payment.auto_date}}</p>
-      <p>{{payment.date}}</p>
-      <p>{{payment.sum}}</p>
-      <p>{{payment.non_cash}}</p>
-      <p>{{payment.receiver}}</p>
+<div class="col s6 main-page">
+  <div class="white-text offer">Объект {{deal?.offer}}</div>
+  <div class="white content">
+    <div class="deal-info">
+      <div class="deal-status">{{deal?.company?.symbol}}</div>
+      <div>
+        <div class="company-name">{{deal?.company?.name}}</div>
+        <div *ngFor="let client of deal?.clients">
+          <p>{{client.client.fio}}</p>
+        </div>
+        <div>{{deal?.address| address}}</div>
+        <div>{{deal?.address_comment}}</div>
+        <div>{{deal?.sum| money}}</div>
+        <div>{{deal?.non_cash}}</div>
+        <div>Создана: {{deal?.auto_date| dateFormat: false}}</div>
+        <div>Изменялась: {{deal?.task_date| dateFormat: false}}</div>
+        <div></div>
+      </div>
     </div>
-    <a routerLink="measurements"><h3>Замеры</h3></a>
-    <a routerLink="mounts"><h3>Монтажи</h3></a>
-    <h3>Комментарии</h3>
-    <div *ngFor="let comment of deal?.comments">
-      <p>{{comment.id}}</p>
-      <p>{{comment.auto_date}}</p>
-      <p>{{comment.user.username}}</p>
-      <p>{{comment.text}}</p>
-      <p>{{comment.read}}</p>
+  </div>
+  <div class="status-info">
+    <div class="col s5 detail-col">
+      <div class="contract-status"></div>
     </div>
-    <h3>Перерасчеты</h3>
-    <div *ngFor="let discount of deal?.discounts">
-      <p>{{discount.id}}</p>
-      <p>{{discount.user.username}}</p>
-      <p>{{discount.before}}</p>
-      <p>{{discount.after}}</p>
-      <p>{{discount.comment}}</p>
-      <p>{{discount.auto_date}}</p>
+    <div class="col s5 offset-s2 detail-col">
+      <div class="contract-status">{{deal?.contract}}</div>
     </div>
-    <a><h3>Клиенты</h3></a>
-    <div *ngFor="let client of deal?.clients">
-      <p>{{client.id}}</p>
-      <p>{{client.client.id}}</p>
-      <p>{{client.client.fio}}</p>
-    </div>
-    <div class="card">
-      Клиент
-      <a class="waves-effect waves-light btn-large button"><i class="material-icons left">clear</i>Отказать</a>
-      <a class="waves-effect waves-light btn-large button"><i class="material-icons left">access_time</i>Отложить</a>
-      <a class="waves-effect waves-light btn-large button"><i class="material-icons left">check</i>В сделку</a>
-    </div>
-
   </div>
 </div>
+<div class="col s6 detail-col">
+  <div class="col s12 detail-col">
+    <div style="height: 8vh; background: #6783a0">
+    </div>
+    <div class="header-measurement">Замеры</div>
+  </div>
+  <div *ngFor="let measurement of deal?.measurements">
+    <app-measurement-card [measurement]="measurement"></app-measurement-card>
+  </div>
+
+</div>
+
+

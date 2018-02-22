@@ -37,10 +37,11 @@
       </div>
     </div>
   <div class="col s12 right-align buttons">
-    <a class="waves-effect waves-light btn-large button" (click)="reject()"><i class="material-icons left">clear</i>Отказать</a>
-    <a class="waves-effect waves-light btn-large button" (click)="defer()"><i class="material-icons left">access_time</i>Отложить</a>
-    <a class="waves-effect waves-light btn-large button" (click)="in_a_deal()"><i class="material-icons left">check</i>В сделку</a>
+    <a class="waves-effect waves-light btn-large button" (click)="openDefer()"><i class="material-icons left">clear</i>Отложить</a>
+    <a class="waves-effect waves-light btn-large button" (click)="openReject()"><i class="material-icons left">access_time</i>Отказать</a>
+    <a class="waves-effect waves-light btn-large button" (click)="openToDeal()"><i class="material-icons left">check</i>В сделку</a>
   </div>
-  <!--<app-order-defer [order]="order"></app-order-defer>
-  <app-order-reject [order]="order"></app-order-reject>-->
+  <app-order-defer [openDefer]="deferOpenValue" (close)="closeDefer()"></app-order-defer>
+  <app-order-reject [openReject]="rejectOpenValue" (close)="closeReject()"></app-order-reject>
+  <app-order-to-deal [order]="order" [openToDeal]="inDealOpenValue" (close)="closeToDeal()"></app-order-to-deal>
 </div>

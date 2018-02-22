@@ -10,7 +10,7 @@ import {DealMeasurement} from '../../models/deal/deal_measurement';
 })
 export class MeasurementsComponent implements OnInit {
   id: number;
-  measuremts: DealMeasurement;
+  measuremts: DealMeasurement[];
   constructor(private measurementService: MeasurementService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {

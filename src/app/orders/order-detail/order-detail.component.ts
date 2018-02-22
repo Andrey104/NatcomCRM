@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {OrderService} from "../../services/order.service";
-import {UtilsService} from "../../services/utils.service";
-import {OrderAction} from "../../models/orders/order_action";
+import {OrderService} from '../../services/order.service';
+import {UtilsService} from '../../services/utils.service';
+import {OrderAction} from '../../models/orders/order_action';
 import {ActivatedRoute} from '@angular/router';
 import {OrderResult} from '../../models/orders/order_result';
 
@@ -17,57 +17,35 @@ export class OrderDetailComponent implements OnInit {
   orders: OrderResult[];
   private id: number;
   order: OrderResult;
+  deferOpenValue = false;
+  rejectOpenValue = false;
+  inDealOpenValue = false;
   ngOnInit() {
     this.subscribeOrderId();
   }
 
-  deferOpenValue: boolean;
-  rejectOpenValue: boolean;
-  inDealOpenValue: boolean;
-
-
-
- /* activeOrderNotNull() {
-    return this.orderPage.activeOrderNotNull();
-  }*/
-
-  /*deferIsOpen() {
-    return this.deferOpenValue;
-  }*/
-
-  /*rejectIsOpen() {
-    return this.rejectOpenValue;
-  }
-
-  inDealIsOpen() {
-    return this.inDealOpenValue;
-  }*/
-
-  // ф-ции для кнопок--------------
-  reject() {
-    this.rejectOpenValue = true;
-  }
-  defer() {
+  openDefer() {
     this.deferOpenValue = true;
   }
-  in_a_deal() {
-    this.inDealOpenValue = true;
-  }
-  // -------------------------------
-
-  /*closeDefer(update: boolean) {
+  closeDefer() {
     this.deferOpenValue = false;
-    if (update) {
-      this.orderPage.update(this.order.id);
-    }
+    this.subscribeOrderId();
+  }
+
+  openReject() {
+    this.rejectOpenValue = true;
   }
   closeReject() {
     this.rejectOpenValue = false;
+    this.subscribeOrderId();
   }
-  closeInDeal() {
+  openToDeal() {
+    this.inDealOpenValue = true;
+  }
+  closeToDeal() {
     this.inDealOpenValue = false;
-  }*/
-  // -------------------------------
+    this.subscribeOrderId();
+  }
   actionDecoder(action: OrderAction) {
     return this.utils.orderActionDecoder(action);
   }

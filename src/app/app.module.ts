@@ -45,6 +45,9 @@ import {MoneyPipe} from './pipes/money.pipe';
 import { MountsComponent } from './deals/mounts/mounts.component';
 import { MeasurementsComponent } from './deals/measurements/measurements.component';
 import {MeasurementService} from './services/measurement.service';
+import {MountService} from './services/mount.service';
+import { MeasurementCardComponent } from './deals/measurement-card/measurement-card.component';
+
 
 
 @NgModule({
@@ -78,7 +81,8 @@ import {MeasurementService} from './services/measurement.service';
     AddressPipe,
     MoneyPipe,
     MountsComponent,
-    MeasurementsComponent
+    MeasurementsComponent,
+    MeasurementCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +103,7 @@ import {MeasurementService} from './services/measurement.service';
     AuthenticationService,
     ClientService,
     MeasurementService,
+    MountService,
   ],
   bootstrap: [AppComponent]
 })

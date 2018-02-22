@@ -14,7 +14,7 @@ export class DealMeasurement {
   time: string;
   sum: number;
   prepayment: number;
-  worker: object;
+  worker: Worker;
   deal: number;
   color: number;
 }

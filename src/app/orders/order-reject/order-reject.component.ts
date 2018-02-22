@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {OrderService} from "../../services/order.service";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {OrderService} from '../../services/order.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-order-reject',
@@ -8,15 +9,20 @@ import {OrderService} from "../../services/order.service";
   styleUrls: ['./order-reject.component.css']
 })
 export class OrderRejectComponent implements OnInit {
-  @Input() order;
-  constructor(private orderService: OrderService) { }
-
-  ngOnInit() {
-  }
+  @Input() openReject;
+  @Output() close = new EventEmitter();
+  id;
+  constructor(private orderService: OrderService, private activatedRoute: ActivatedRoute) { }
   rejectForm = new FormGroup({
     cause: new FormControl(''),
     comment: new FormControl('')
   });
+  ngOnInit() {
+    this.id = this.activatedRoute.params.subscribe(params => {
+      this.id = params['id'];
+    });
+  }
+
 
   /*isOpen() {
     return this.lastPage.rejectIsOpen();
@@ -41,6 +47,10 @@ export class OrderRejectComponent implements OnInit {
   reset() {
     this.rejectForm.reset();
   }*/
+  onClose() {
+    this.close.emit();
+    this.rejectForm.reset();
+  }
 }
 
 
