@@ -3,19 +3,19 @@
     <div class="card-stacked col s12">
       <div class="card-content col s12">
         <div class="text col s7">
-          <h3>{{order?.company?.name| companyName}}</h3>
+          <h3>{{order?.company?.name | companyName}}</h3>
           <h5 class="indigo-text text-lighten-2">Данные с заявки:</h5>
           <ul>
-            <li><i class="tiny material-icons icon">person</i> {{order?.fio| clientName}}</li>
-            <li><i class="tiny material-icons icon">local_phone</i> {{order?.phone| phoneFormat}}</li>
-            <li><i class="tiny material-icons icon">email</i> {{order?.email| email}}</li>
+            <li><i class="tiny material-icons icon">person</i> {{order?.fio | clientName}}</li>
+            <li><i class="tiny material-icons icon">local_phone</i> {{order?.phone | phoneFormat}}</li>
+            <li><i class="tiny material-icons icon">email</i> {{order?.email | email}}</li>
           </ul>
         </div>
         <div class="date-info col s5">
           <div class="date-icon"> <i class="tiny material-icons icon">date_range</i> </div>
           <div class="data-detail">
-            <div>Дата создания: {{order?.auto_date| dateFormat: true}}</div>
-            <div>Дата последнего изменения: {{order?.task_date| dateFormat: true}}</div>
+            <div>Дата создания: {{order?.auto_date | dateFormat: 'fullDate'}}</div>
+            <div>Дата последнего изменения: {{order?.task_date | dateFormat: 'fullDate'}}</div>
           </div>
           <div class="client no-border" routerLink="client/{{order?.client?.id}}">
               <app-client [client]="order?.client"></app-client>

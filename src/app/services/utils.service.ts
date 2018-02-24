@@ -4,12 +4,6 @@ import {OrderAction} from '../models/orders/order_action';
 @Injectable()
 export class UtilsService {
 
-  timeFormat(autoDate: string) {
-    let date;
-    date = new Date(autoDate);
-    return (date.getHours() + ':' + this.minutesStringFormat(date.getMinutes()));
-  }
-
   minutesStringFormat(minutes: number) {
     let strMinutes: string;
     if (minutes < 10) {
@@ -18,6 +12,20 @@ export class UtilsService {
       strMinutes = minutes.toString();
     }
     return strMinutes;
+  }
+  hoursStringFormat(hour: number) {
+    let strHour: string;
+    if (hour < 10) {
+      strHour = '0' + hour.toString();
+    } else {
+      strHour = hour.toString();
+    }
+    return strHour;
+  }
+  monthStringFormat(numberMonth: number) {
+    const months = ['янв', 'фев', 'мрт', 'апр', 'мая', 'июн',
+      'июл', 'авг', 'сен', 'окт', 'нбр', 'дек'];
+    return months[numberMonth];
   }
 
   statusIcon(status: number) {

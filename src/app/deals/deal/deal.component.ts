@@ -6,12 +6,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./deal.component.css']
 })
 export class DealComponent implements OnInit {
+  @Input() deal;
 
   constructor() { }
 
   ngOnInit() {
   }
-
-  @Input() deal;
 
 }

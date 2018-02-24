@@ -1,19 +1,32 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {UtilsService} from '../services/utils.service';
 
 @Pipe({
   name: 'dateFormat'
 })
+// Формат полной/неполной даты и времени
 export class DateFormatPipe implements PipeTransform {
-  transform(date: string, full: boolean): string {
+  constructor(private utils: UtilsService) {}
+  transform(date: string, dateType: string): string {
     let dateStr: string;
-    const months = ['янв', 'Фев', 'мрт', 'апр', 'мая', 'июн',
-      'июл', 'авг', 'сен', 'окт', 'нбр', 'дек'];
     const newDate = new Date(date);
-    if (full === false) {
-      dateStr = newDate.getDate() + ' ' + months[newDate.getMonth()] + '. ' + newDate.getFullYear();
-    } else {
-      dateStr = newDate.getDate() + ' ' + months[newDate.getMonth()] + '. ' + newDate.getFullYear() +
-        ' в ' + newDate.getHours() + ':' + newDate.getMinutes();
+    switch (dateType) {
+      case 'date': {
+        dateStr = newDate.getDate() + ' ' + this.utils.monthStringFormat(newDate.getMonth()) +
+        '. ' + newDate.getFullYear();
+        break;
+      }
+      case 'fullDate': {
+        dateStr = newDate.getDate() + ' ' + this.utils.monthStringFormat(newDate.getMonth()) +
+          '. ' + newDate.getFullYear() + ' в ' + newDate.getHours() + ':' +
+          this.utils.minutesStringFormat(newDate.getMinutes());
+        break;
+      }
+      case 'time': {
+        dateStr = this.utils.hoursStringFormat(newDate.getHours()) + ':' +
+          this.utils.minutesStringFormat(newDate.getMinutes());
+        break;
+      }
     }
     return dateStr;
   }

@@ -2,9 +2,9 @@
   <div class="icon center-align valign-wrapper"><img class="image" src="assets/images/client.png"/></div>
   <div class="card-stacked">
     <div class="info">
-      <div class="name"> {{client?.fio| clientName}} </div>
+      <div class="name"> {{client?.fio | clientName}} </div>
       <div class="phones" *ngFor="let phone of client?.phones">
-        <div class="number"><i class="tiny material-icons icon">local_phone</i>{{phone?.number| phoneFormat}}</div>
+        <div class="number"><i class="tiny material-icons icon">local_phone</i>{{phone?.number | phoneFormat}}</div>
         <div class="comment">{{phone.comment}}</div>
       </div>
     </div>

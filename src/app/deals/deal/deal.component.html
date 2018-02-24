@@ -3,13 +3,13 @@
     <i class="large material-icons icon">email</i>
   </div>
   <div class="card-stacked">
-    <div class="time">time </div>
+    <div class="time">time</div>
     <div class="info">
-      <div class="company">{{deal.company?.name}}</div>
+      <div class="company">{{deal.company?.name | companyName}}</div>
       <div class="client"></div>
-      <div class="number">{{deal.address}}</div>
+      <div class="number">{{deal.address | address}}</div>
 
-      <div class="type">{{deal.task_date}}</div>
+      <div class="type">{{deal.task_date | dateFormat: 'fullDate'}}</div>
     </div>
   </div>
 </div>

@@ -25,11 +25,11 @@ input[type="search"]:focus {
   height: 83px;
 }
 
-.rectangle {
-  height: 60px;
-  width: 60px;
-  background-color: #ffa726;
+label {
+  width: 30px;
 }
 
-
+.rectangle {
+  background-color: #ffa726;
+}
 

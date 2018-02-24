@@ -8,12 +8,12 @@
         <div *ngFor="let client of deal?.clients">
           <p>{{client.client.fio}}</p>
         </div>
-        <div>{{deal?.address| address}}</div>
+        <div>{{deal?.address | address}}</div>
         <div>{{deal?.address_comment}}</div>
-        <div>{{deal?.sum| money}}</div>
+        <div>{{deal?.sum | money}}</div>
         <div>{{deal?.non_cash}}</div>
-        <div>Создана: {{deal?.auto_date| dateFormat: false}}</div>
-        <div>Изменялась: {{deal?.task_date| dateFormat: false}}</div>
+        <div>Создана: {{deal?.auto_date | dateFormat: 'fullDate'}}</div>
+        <div>Изменялась: {{deal?.task_date | dateFormat: 'fullDate'}}</div>
         <div></div>
       </div>
     </div>
