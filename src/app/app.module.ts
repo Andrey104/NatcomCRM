@@ -49,6 +49,7 @@ import { MeasurementCardComponent } from './deals/measurement-card/measurement-c
 import { MountCardComponent } from './deals/mount-card/mount-card.component';
 import { MountDatePipe } from './pipes/mount-date.pipe';
 import { NonCashPipe } from './pipes/non-cash.pipe';
+import { ContractPipe } from './pipes/contract.pipe';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { NonCashPipe } from './pipes/non-cash.pipe';
     MountCardComponent,
     MountDatePipe,
     NonCashPipe,
+    ContractPipe,
   ],
   imports: [
     BrowserModule,

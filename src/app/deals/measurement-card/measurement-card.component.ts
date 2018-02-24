@@ -12,7 +12,6 @@ export class MeasurementCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('asdasd');
   }
 
 }

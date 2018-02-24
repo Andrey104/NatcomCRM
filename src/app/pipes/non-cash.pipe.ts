@@ -4,9 +4,10 @@ import {Pipe, PipeTransform} from '@angular/core';
   name: 'nonCash'
 })
 // Проверка типа оплаты: Наличный/Безналичный
-export class NonCashPipe implements PipeTransform{
-  transform(paymentType: string): string {
-    if (paymentType === 'true') {
+export class NonCashPipe implements PipeTransform {
+  transform(type: boolean): string {
+    let paymentType: string;
+    if (type === true) {
       paymentType = 'Безналичный';
     } else {
       paymentType = 'Наличные';
