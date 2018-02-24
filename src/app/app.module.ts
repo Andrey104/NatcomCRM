@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {HostBinding, NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -22,10 +22,9 @@ import {DealService} from './services/deal.service';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {TabComponent} from './tab/tab.component';
 import {PaginationDirective} from './directives/pagination.directive';
-import {utils} from "protractor";
-import {UtilsService} from "./services/utils.service";
+import {UtilsService} from './services/utils.service';
 import { OrderDeferComponent } from './orders/order-defer/order-defer.component';
-import {AdminGuard} from "./admin.guard";
+import {AdminGuard} from './admin.guard';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { OrderRejectComponent } from './orders/order-reject/order-reject.component';
 import { OrderToDealComponent } from './orders/order-to-deal/order-to-deal.component';
@@ -49,6 +48,7 @@ import {MountService} from './services/mount.service';
 import { MeasurementCardComponent } from './deals/measurement-card/measurement-card.component';
 import { MountCardComponent } from './deals/mount-card/mount-card.component';
 import { MountDatePipe } from './pipes/mount-date.pipe';
+import { NonCashPipe } from './pipes/non-cash.pipe';
 
 
 @NgModule({
@@ -86,6 +86,7 @@ import { MountDatePipe } from './pipes/mount-date.pipe';
     MeasurementCardComponent,
     MountCardComponent,
     MountDatePipe,
+    NonCashPipe,
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@
         <div>{{deal?.address | address}}</div>
         <div>{{deal?.address_comment}}</div>
         <div>{{deal?.sum | money}}</div>
-        <div>{{deal?.non_cash}}</div>
+        <div>{{deal?.non_cash | nonCash}}</div>
         <div>Создана: {{deal?.auto_date | dateFormat: 'fullDate'}}</div>
         <div>Изменялась: {{deal?.task_date | dateFormat: 'fullDate'}}</div>
         <div></div>
@@ -41,8 +41,6 @@
       <app-mount-card [mount]="mount"></app-mount-card>
     </div>
   </div>
-
-
 </div>
 
 
