@@ -78,11 +78,37 @@ export class UtilsService {
     return ourStatus;
   }
 
+  statusMount(status: number) {
+    let ourStatus: {image, color};
+    switch (status) {
+      case 0: {
+        ourStatus = {image: 'autorenew', color: 'mountDuring'};
+        break;
+      }
+      case 1: {
+        ourStatus = {image: 'more_horiz', color: 'mountExpectation'};
+        break;
+      }
+      case 2: {
+        ourStatus = {image: 'check', color: 'mountSuccess'};
+        break;
+      }
+      case 3: {
+        ourStatus = {image: 'clear', color: 'mountRejected'};
+        break;
+      }
+      default: {
+        ourStatus = {image: 'check_box_outline_blank', color: 'others'};
+      }
+    }
+    return ourStatus;
+  }
+
   orderActionDecoder (action: OrderAction) {
-    let date = action.auto_date;
-    let user = action.user.first_name + ' ' + action.user.last_name;
+    const date = action.auto_date;
+    const user = action.user.first_name + ' ' + action.user.last_name;
     let type = '';
-    let essence = 'заявку';
+    const essence = 'заявку';
     let causeStr = '';
     let cause = '';
     let commentStr = '';

@@ -28,14 +28,20 @@
   </div>
 </div>
 <div class="col s6 detail-col">
-  <div class="col s12 detail-col">
-    <div style="height: 8vh; background: #6783a0">
-    </div>
+  <div class="col s12 detail-col white" style="height: 49vh">
+    <div style="height: 8vh; background: #6783a0"></div>
     <div class="header-measurement">Замеры</div>
+    <div *ngFor="let measurement of deal?.measurements">
+      <app-measurement-card [measurement]="measurement"></app-measurement-card>
+    </div>
   </div>
-  <div *ngFor="let measurement of deal?.measurements">
-    <app-measurement-card [measurement]="measurement"></app-measurement-card>
+  <div class="col s12 detail-col white" style="height: 42vh;">
+    <div class="header-measurement">Монтажи</div>
+    <div *ngFor="let mount of deal?.mounts">
+      <app-mount-card [mount]="mount"></app-mount-card>
+    </div>
   </div>
+
 
 </div>
 

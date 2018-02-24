@@ -1,0 +1,11 @@
+<div class="card horizontal order hover-element hoverable no-border col s12">
+  <div class="center-align valign-wrapper">
+    <div class="icon status-image">
+      <i class="small material-icons icon image {{statusColor(mount?.status)}}">{{statusIcon(mount?.status)}}</i>
+    </div>
+  </div>
+  <div class="card-stacked">
+    <div class="time"><i class="tiny material-icons icon">access_time</i> {{mount?.date | mountDate}}</div>
+    <div class="name"><i class="tiny material-icons icon">person</i> {{mount?.date_mount | dateFormat: true}} </div>
+  </div>
+</div>

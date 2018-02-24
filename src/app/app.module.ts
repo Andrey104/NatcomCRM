@@ -47,7 +47,8 @@ import { MeasurementsComponent } from './deals/measurements/measurements.compone
 import {MeasurementService} from './services/measurement.service';
 import {MountService} from './services/mount.service';
 import { MeasurementCardComponent } from './deals/measurement-card/measurement-card.component';
-
+import { MountCardComponent } from './deals/mount-card/mount-card.component';
+import { MountDatePipe } from './pipes/mount-date.pipe';
 
 
 @NgModule({
@@ -83,6 +84,8 @@ import { MeasurementCardComponent } from './deals/measurement-card/measurement-c
     MountsComponent,
     MeasurementsComponent,
     MeasurementCardComponent,
+    MountCardComponent,
+    MountDatePipe,
   ],
   imports: [
     BrowserModule,
