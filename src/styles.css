@@ -1,3 +1,4 @@
+/*Блок, содержащий список карточек(заказы, сделки)*/
 .list-col{
   overflow-y: scroll;
   background-color: #ffffff;
@@ -6,24 +7,34 @@
   height: 91vh;
   border-right: 1px solid black;
 }
-
+/*Классы для отмены прокрутки в list-col*/
 .list-col::-webkit-scrollbar{width: 0;}
 .list-col { -ms-overflow-style: none;}
 .list-col { overflow: -moz-scrollbars-none; }
+/*---------------------------------------*/
+/*Классы для отмены встроенных padding, margin*/
 .main-row{
   padding: 0;
   margin: 0;
 }
-
 .detail-col{
   padding: 0!important;
 }
+.detail-col-left {
+  padding-left: 0!important;
+}
+/*-------------------------------*/
+/*Классы для работы с карточками*/
 .hovered{
   background-color: #dddddd;
 }
 .active-card{
   background-color: #cccccc;
 }
+.info-card {
+  border-radius: 10px;
+}
+/*------------------------------*/
 .modal {
   background: #fff;
   position: fixed;
@@ -36,20 +47,16 @@
   padding: 0;
   margin-left: -250px;
 }
-
-.client{
-
-}
+/*Классы для кнопки*/
 .button {
   font-size: 18px;
   text-transform: none;
   background-color: #5c6b96;
 }
-
 .button:hover {
   background-color: #5c8496;
 }
-
+/*---------------------------------*/
 .modal-overlay {
   position: fixed;
   z-index: 999;
@@ -66,18 +73,17 @@
 .icon{
   color: #777777;
 }
-
-.info-card {
-  border-radius: 10px;
-}
+/*Выделенный элемент*/
 .hover-element {
   cursor: pointer;
 }
+/*Отмена горизонтальной прокрутки*/
 .scrollable-page {
   overflow: scroll;
   height: 91vh;
   overflow-x: hidden;
 }
+/*Ограничение текста в родительском контейнере*/
 .text {
   word-wrap: break-word;
 }
@@ -86,6 +92,36 @@
   outline: none;
 }
 
-.detail-col-left {
-  padding-left: 0!important;
+/*Контенер для расположения preloadera*/
+.spinner-contener {
+  height: 91vh;
 }
+
+/*Классы для карточек заказов и каточек сделок в списке*/
+.status-image {
+  min-width: 60px;
+}
+.image {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  border-radius: 50%;
+}
+.info {
+  margin: 5px;
+}
+.company {
+  font-size: 20px;
+  line-height: 1.5;
+}
+.time {
+  padding: 0 5px 0 5px;
+}
+.main-info-card {
+  font-size: 14px;
+  line-height: 1.8;
+  padding-right: 5px;
+}
+/*-------------------------------*/

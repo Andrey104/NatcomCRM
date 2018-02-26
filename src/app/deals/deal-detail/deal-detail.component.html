@@ -6,13 +6,15 @@
       <div>
         <div class="company-name">{{deal?.company?.name}}</div>
         <div *ngFor="let client of deal?.clients">
-          <p>{{client.client.fio}}</p>
+          <p><i class="tiny material-icons icon">person</i> {{client.client.fio}}</p>
         </div>
-        <div>{{deal?.address | address}}</div>
-        <div>{{deal?.address_comment}}</div>
-        <div>{{deal?.sum | money}}</div>
-        <div>{{deal?.non_cash | nonCash}}</div>
-        <div>Создана: {{deal?.auto_date | dateFormat: 'fullDate'}}</div>
+        <div><i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}</div>
+        <div><i class="tiny material-icons icon">access_time</i> {{deal?.address_comment}}</div>
+        <div><i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}</div>
+        <div><i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}</div>
+        <div><i class="tiny material-icons icon">date_range</i>
+          Создана: {{deal?.auto_date | dateFormat: 'fullDate'}}
+        </div>
         <div>Изменялась: {{deal?.task_date | dateFormat: 'fullDate'}}</div>
         <div></div>
       </div>
@@ -28,18 +30,21 @@
   </div>
 </div>
 <div class="col s6 detail-col">
-  <div class="col s12 detail-col white" style="height: 49vh">
-    <div style="height: 8vh; background: #6783a0"></div>
-    <div class="header-measurement">Замеры</div>
-    <div *ngFor="let measurement of deal?.measurements">
-      <app-measurement-card [measurement]="measurement"></app-measurement-card>
+  <nav>
+    <div class="nav-wrapper col s12 detail-col">
+      <ul class="hide-on-med-and-down">
+        <li><a (click)="onSelect(0)">Этапы объекта</a></li>
+        <li><a (click)="onSelect(1)">Комментарии</a></li>
+        <li><a (click)="onSelect(2)">Перерасчеты</a></li>
+        <li><a (click)="onSelect(3)">Оплата</a></li>
+      </ul>
     </div>
-  </div>
-  <div class="col s12 detail-col white" style="height: 42vh;">
-    <div class="header-measurement">Монтажи</div>
-    <div *ngFor="let mount of deal?.mounts">
-      <app-mount-card [mount]="mount"></app-mount-card>
-    </div>
+  </nav>
+  <div [ngSwitch]="select" class="col s12">
+    <div *ngSwitchCase="0"><app-object-stages></app-object-stages></div>
+    <div *ngSwitchCase="1"><app-deal-comments></app-deal-comments></div>
+    <app-deal-discounts *ngSwitchCase="2"></app-deal-discounts>
+    <app-deal-payments *ngSwitchCase="3"></app-deal-payments>
   </div>
 </div>
 

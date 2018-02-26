@@ -20,16 +20,19 @@
       </div>
     </div>
   </div>
-    <div class=" order col s3 list-col"
+    <div id="scroll" class="order col s3 list-col"
        infinite-scroll
-       [infiniteScrollDistance]="1"
+       [infiniteScrollDistance]="2"
        [infiniteScrollThrottle]="300"
        [scrollWindow]="false"
        (scrolled)="onScroll()">
       <div class="contener"></div>
     <app-order *ngFor="let order of orders"
-               [order]="order" (click)="active(order)">
+               [order]="order">
     </app-order>
+      <div *ngIf="!lastPage" class="col s10">
+        <app-preloader></app-preloader>
+      </div>
   </div>
   <div class="detail-col col s9">
     <div class="detail">

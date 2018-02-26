@@ -8,7 +8,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Orders } from '../models/orders/order';
 import { MessageService } from './message.service';
 import {OrderResult} from '../models/orders/order_result';
-import {resolveReflectiveProviders} from '@angular/core/src/di/reflective_provider';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -52,11 +51,17 @@ export class OrderService {
       catchError(this.handleError<OrderResult>(`getDeals`))
     );
   }
-  getFilterOrders(search): Observable<Orders> {
+  getFilterOrders(search, page): Observable<Orders> {
+    let  params = new HttpParams();
+    params = params.append('page', page);
+    params = params.append('text', search);
     return this.http.get<Orders>('http://188.225.46.31/api/orders/search', {
       headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
-      params: new HttpParams().set('text', search)
-    });
+      params: params
+    }).pipe(
+      tap(_ => this.log(`fetched order`)),
+      catchError(this.handleError<Orders>(`getOrders`))
+    );
   }
 
   deferOrder(cause, comment: string, id: string): Observable<Object> {

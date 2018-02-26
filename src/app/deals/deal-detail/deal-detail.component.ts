@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
 
-
 @Component({
   selector: 'app-deal-detail',
   templateUrl: './deal-detail.component.html',
@@ -11,13 +10,14 @@ import {DealResult} from '../../models/deal/deal_result';
 })
 export class DealDetailComponent implements OnInit {
   private id;
+  page = 1;
+  select;
 
   constructor(private activatedRoute: ActivatedRoute, private dealService: DealService) { }
   deal: DealResult;
   ngOnInit() {
     this.subscribeDealId();
   }
-
   subscribeDealId(): void {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
@@ -26,5 +26,8 @@ export class DealDetailComponent implements OnInit {
       });
     });
   }
-
+  onSelect(ourSelect) {
+    this.select = ourSelect;
+    console.log(this.select);
+  }
 }

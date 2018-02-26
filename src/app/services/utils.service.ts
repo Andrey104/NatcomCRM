@@ -28,23 +28,23 @@ export class UtilsService {
     return months[numberMonth];
   }
 
-  statusIcon(status: number) {
+  statusOrder(status: number) {
     let icon: {image, color};
     switch (status) {
       case 0: {
-        icon = {image: 'mail_outline', color: 'untreated'};
+        icon = {image: 'mail_outline', color: 'untreatedOrder'};
         break;
       }
       case 1: {
-        icon = {image: 'clear', color: 'renouncement'};
+        icon = {image: 'clear', color: 'renouncementOrder'};
         break;
       }
       case 2: {
-        icon = {image: 'access_time', color: 'deferred'};
+        icon = {image: 'access_time', color: 'deferredOrder'};
         break;
       }
       case 3: {
-        icon = {image: 'check', color: 'accepted'};
+        icon = {image: 'check', color: 'acceptedOrder'};
         break;
       }
       default: {

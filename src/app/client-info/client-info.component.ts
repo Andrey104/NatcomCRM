@@ -17,6 +17,7 @@ export class ClientInfoComponent implements OnInit {
   private subscription: Subscription;
   private id_client: number;
   id: number;
+  loader: boolean;
   constructor(private clientService: ClientService, private activatedRoute: ActivatedRoute, private utils: UtilsService) { }
   ngOnInit() {
     this.getDeals();
@@ -26,13 +27,12 @@ export class ClientInfoComponent implements OnInit {
     this.subscription = this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
       this.id_client = params['client_id'];
+      this.loader = true;
       this.clientService.getClient(this.id_client).subscribe(client => {
         this.client = client;
+        this.loader = false;
       });
     });
-  }
-  statusIcon(status: number) {
-    return this.utils.statusIcon(status);
   }
   statusDeal(status: number) {
     return this.utils.statusDeal(status);

@@ -1,8 +1,3 @@
-* {
-  font-size: 14px;
-  color: #6280a0;
-}
-
 .main-page {
   background-color: #6783a0;
   height: 91vh;
@@ -15,6 +10,7 @@
 
 .deal-info {
   padding: 10px 0 0 10px;
+  color: #6280a0;
 }
 
 .offer {
@@ -53,8 +49,15 @@
   border-radius: 10px;
 }
 
-.header-measurement {
-  height: 6vh;
-  font-size: 18px;
-  line-height: 6vh;
+nav {
+  box-shadow: none;
+  height: 8vh;
+}
+
+ul li {
+  line-height: 8vh;
+}
+
+ul li a {
+  height: 8vh;
 }

@@ -1,12 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-
-import {Orders} from '../../models/orders/order';
 import {OrderService} from '../../services/order.service';
-import {catchError} from 'rxjs/operators';
 import {log} from 'util';
 import {OrderResult} from '../../models/orders/order_result';
-import {FormBuilder, FormsModule} from '@angular/forms';
-
 
 
 @Component({
@@ -16,8 +11,6 @@ import {FormBuilder, FormsModule} from '@angular/forms';
 })
 export class OrderPageComponent implements OnInit {
   orders: OrderResult[];
-  activeOrder: Orders;
-  error;
   page: number;
   lastPage: boolean;
   load: boolean;
@@ -28,38 +21,35 @@ export class OrderPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showOrders(null);
+    this.showOrders();
   }
+  // отображение заказов(если поисковая строка пустая)
   filterByStatus() {
     if (this.searchStr !== '') {
       return;
     } else {
-      this.showOrders(null);
+      this.showOrders();
     }
   }
+  // отображение первой страницы заказов в зависимости от содержимого поисковой строки
   search() {
     if (this.searchStr === '') {
-      this.showOrders(null);
+      this.showOrders();
     } else {
-      this.orderService.getFilterOrders(this.searchStr).subscribe(order => {
+      this.page = 1;
+      this.orderService.getFilterOrders(this.searchStr, this.page).subscribe(order => {
         this.orders = order.results;
+        if (order.next === null) {
+          this.lastPage = true;
+        } else {
+          this.lastPage = false;
+        }
+        document.getElementById('scroll').scrollTop = 0;
       });
     }
   }
-
-  active(order: Orders) {
-    this.activeOrder = order;
-  }
-
-  isActive(order: Orders) {
-    return this.activeOrder === order;
-  }
-
-  activeOrderNotNull() {
-    return this.activeOrder != null;
-  }
-
-  showOrders(id): void {
+  // отображение первой страницы заказов по статусу
+  showOrders(): void {
     this.page = 1;
     this.lastPage = false;
     this.load = true;
@@ -70,28 +60,21 @@ export class OrderPageComponent implements OnInit {
         if (orders.next === null) {
           this.lastPage = true;
         }
-        // if id !== null - update order list
-        if (id !== null) {
-          let order = this.getOrderById(id);
-          if (order !== null) {
-            this.activeOrder = order;
-          }
-        }
-
+        document.getElementById('scroll').scrollTop = 0;
       }, error2 => {
         log(error2);
         this.load = false;
       });
   }
 
-  update(id: string) {
-    this.showOrders(id);
-  }
-
   onScroll() {
-    this.nextPage();
+    if (this.searchStr === '') {
+      this.nextPage();
+    } else {
+      this.nextFilterPage();
+    }
   }
-
+  // подгрузка страницы заказов по статусу
   nextPage() {
     if (!this.lastPage && !this.load) {
       console.log('Начало загрузки');
@@ -112,15 +95,22 @@ export class OrderPageComponent implements OnInit {
         });
     }
   }
-
-  getOrderById(id) {
-    let resultOrder = null;
-    for (let order of this.orders) {
-      if (order.id === id) {
-        resultOrder = order;
-      }
+  // подгрузка страницы заказов со значением фильтра
+  nextFilterPage() {
+    if (!this.lastPage && !this.load) {
+      this.load = true;
+      this.page = this.page + 1;
+      this.orderService.getFilterOrders(this.searchStr, this.page)
+        .subscribe(orders => {
+          this.orders = this.orders.concat(orders.results);
+          this.load = false;
+          if (orders.next === null) {
+            this.lastPage = true;
+          }
+        },  error2 => {
+          log(error2);
+          this.load = false;
+        });
     }
-    return resultOrder;
   }
-
 }

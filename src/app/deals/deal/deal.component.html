@@ -1,15 +1,22 @@
-<div routerLink="{{deal.id}}" routerLinkActive="active-card" class="card horizontal order">
-  <div class="icon">
-    <i class="large material-icons icon">email</i>
+<div routerLink="{{deal.id}}" routerLinkActive="active-card"
+     class="card horizontal order hover-element no-border hoverable">
+  <div class="center-align valign-wrapper">
+    <div class="icon status-image">
+      <i class="small material-icons icon image">email</i>
+    </div>
   </div>
   <div class="card-stacked">
-    <div class="time">time</div>
     <div class="info">
-      <div class="company">{{deal.company?.name | companyName}}</div>
-      <div class="client"></div>
-      <div class="number">{{deal.address | address}}</div>
-
-      <div class="type">{{deal.task_date | dateFormat: 'fullDate'}}</div>
+      <div class="col s12 detail-col">
+        <div class="company col s7 detail-col">{{deal?.company?.name | companyName}}</div>
+        <div class="right-align col s5 time">
+          <i class="tiny material-icons icon">access_time</i> {{deal?.auto_date | dateFormat: 'time'}}
+        </div>
+      </div>
+      <div class="main-info-card">
+        <div class="address">{{deal.address | address}}</div>
+        <div class="deal-status">{{statusDeal(deal?.status)}}</div>
+      </div>
     </div>
   </div>
 </div>

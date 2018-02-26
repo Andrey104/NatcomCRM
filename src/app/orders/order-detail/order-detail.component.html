@@ -1,4 +1,7 @@
-<div class="order-detail col s12 scrollable-page white">
+<div *ngIf="loader" class="spinner-contener">
+  <app-preloader></app-preloader>
+</div>
+<div *ngIf="!loader" class="order-detail col s12 scrollable-page white">
   <div class="card horizontal info-card grey lighten-5">
     <div class="card-stacked col s12">
       <div class="card-content col s12">
@@ -14,8 +17,8 @@
         <div class="date-info col s5">
           <div class="date-icon"> <i class="tiny material-icons icon">date_range</i> </div>
           <div class="data-detail">
-            <div>Дата создания: {{order?.auto_date | dateFormat: 'fullDate'}}</div>
-            <div>Дата последнего изменения: {{order?.task_date | dateFormat: 'fullDate'}}</div>
+            <div>Создана: {{order?.auto_date | dateFormat: 'fullDate'}}</div>
+            <div>Последнее изменение: {{order?.task_date | dateFormat: 'fullDate'}}</div>
           </div>
           <div class="client no-border" routerLink="client/{{order?.client?.id}}">
               <app-client [client]="order?.client"></app-client>
@@ -26,21 +29,21 @@
         <div class="indigo-text text-lighten-2">Комментарий с сайта: </div>
         <p class="text-black comment">{{order?.info}}</p>
       </div>
+      <div class="col s12 buttons right-align">
+        <a class="waves-effect waves-light btn-large button" (click)="openDefer()"><i class="material-icons left">clear</i>Отложить</a>
+        <a class="waves-effect waves-light btn-large button" (click)="openReject()"><i class="material-icons left">access_time</i>Отказать</a>
+        <a class="waves-effect waves-light btn-large button" (click)="openToDeal()"><i class="material-icons left">check</i>В сделку</a>
+      </div>
     </div>
   </div>
     <div *ngIf="order?.actions.length !== 0" class="col s12 card horizontal info-card grey lighten-5">
       <div class="card-stacked text col s12">
         <h5 class="col s12 indigo-text text-lighten-2 history">История:</h5>
         <div class="col s12" *ngFor="let action of order?.actions">
-          <p>{{action.auto_date| dateFormat: true}} {{actionDecoder(action)}}</p>
+          <p>{{action.auto_date | dateFormat: 'fullDate'}} {{actionDecoder(action)}}</p>
         </div>
       </div>
     </div>
-  <div class="col s12 right-align buttons">
-    <a class="waves-effect waves-light btn-large button" (click)="openDefer()"><i class="material-icons left">clear</i>Отложить</a>
-    <a class="waves-effect waves-light btn-large button" (click)="openReject()"><i class="material-icons left">access_time</i>Отказать</a>
-    <a class="waves-effect waves-light btn-large button" (click)="openToDeal()"><i class="material-icons left">check</i>В сделку</a>
-  </div>
   <app-order-defer [openDefer]="deferOpenValue" (close)="closeDefer()"></app-order-defer>
   <app-order-reject [openReject]="rejectOpenValue" (close)="closeReject()"></app-order-reject>
   <app-order-to-deal [order]="order" [openToDeal]="inDealOpenValue" (close)="closeToDeal()"></app-order-to-deal>

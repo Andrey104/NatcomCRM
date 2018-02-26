@@ -46,10 +46,15 @@ import { MeasurementsComponent } from './deals/measurements/measurements.compone
 import {MeasurementService} from './services/measurement.service';
 import {MountService} from './services/mount.service';
 import { MeasurementCardComponent } from './deals/measurement-card/measurement-card.component';
-import { MountCardComponent } from './deals/mount-card/mount-card.component';
 import { MountDatePipe } from './pipes/mount-date.pipe';
 import { NonCashPipe } from './pipes/non-cash.pipe';
 import { ContractPipe } from './pipes/contract.pipe';
+import { PreloaderComponent } from './preloader/preloader.component';
+import { ObjectStagesComponent } from './deals/object-stages/object-stages.component';
+import { DealCommentsComponent } from './deals/deal-comments/deal-comments.component';
+import { DealDiscountsComponent } from './deals/deal-discounts/deal-discounts.component';
+import { DealPaymentsComponent } from './deals/deal-payments/deal-payments.component';
+import {MountCardComponent} from './deals/mount-card/mount-card.component';
 
 
 @NgModule({
@@ -89,6 +94,11 @@ import { ContractPipe } from './pipes/contract.pipe';
     MountDatePipe,
     NonCashPipe,
     ContractPipe,
+    PreloaderComponent,
+    ObjectStagesComponent,
+    DealCommentsComponent,
+    DealDiscountsComponent,
+    DealPaymentsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule} from '@angular/router';
+
 
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './login/login.component';
@@ -14,14 +15,17 @@ import {OrderDetailComponent} from './orders/order-detail/order-detail.component
 import {DealDetailComponent} from './deals/deal-detail/deal-detail.component';
 import {MountsComponent} from './deals/mounts/mounts.component';
 import {MeasurementsComponent} from './deals/measurements/measurements.component';
+import {ObjectStagesComponent} from './deals/object-stages/object-stages.component';
+import {DealCommentsComponent} from './deals/deal-comments/deal-comments.component';
+import {DealDiscountsComponent} from './deals/deal-discounts/deal-discounts.component';
+import {DealPaymentsComponent} from './deals/deal-payments/deal-payments.component';
+import {DealResult} from './models/deal/deal_result';
 
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts
 
 const deals_routes: Routes = [
   { path: ':id', component: DealDetailComponent},
-  { path: ':id/mounts', component: MountsComponent},
-  { path: ':id/measurements', component: MeasurementsComponent }
 ];
 
 
