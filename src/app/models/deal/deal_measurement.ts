@@ -1,3 +1,5 @@
+import {Worker} from '../worker';
+
 export class DealMeasurement {
   id: number;
   pictures: object;
