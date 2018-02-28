@@ -4,8 +4,7 @@
   background-color: #ffffff;
   min-width: 200px;
   width: 100%;
-  height: 91vh;
-  border-right: 1px solid black;
+  height: calc(100vh - 64px);
 }
 /*Классы для отмены прокрутки в list-col*/
 .list-col::-webkit-scrollbar{width: 0;}
@@ -22,6 +21,9 @@
 }
 .detail-col-left {
   padding-left: 0!important;
+}
+.detail-col-right {
+  padding-right: 0!important;
 }
 /*-------------------------------*/
 /*Классы для работы с карточками*/
@@ -80,7 +82,7 @@
 /*Отмена горизонтальной прокрутки*/
 .scrollable-page {
   overflow: scroll;
-  height: 91vh;
+  height: calc(100vh - 64px);
   overflow-x: hidden;
 }
 /*Ограничение текста в родительском контейнере*/

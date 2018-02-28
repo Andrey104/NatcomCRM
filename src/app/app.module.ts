@@ -55,6 +55,8 @@ import { DealCommentsComponent } from './deals/deal-comments/deal-comments.compo
 import { DealDiscountsComponent } from './deals/deal-discounts/deal-discounts.component';
 import { DealPaymentsComponent } from './deals/deal-payments/deal-payments.component';
 import {MountCardComponent} from './deals/mount-card/mount-card.component';
+import { DealMeasurementComponent } from './deals/deal-measurement/deal-measurement.component';
+import { DealMountComponent } from './deals/deal-mount/deal-mount.component';
 
 
 @NgModule({
@@ -99,7 +101,9 @@ import {MountCardComponent} from './deals/mount-card/mount-card.component';
     DealCommentsComponent,
     DealDiscountsComponent,
     DealPaymentsComponent,
-  ],
+    DealMeasurementComponent,
+    DealMountComponent,
+],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {DealService} from '../../services/deal.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-deal-comments',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deal-comments.component.css']
 })
 export class DealCommentsComponent implements OnInit {
-
-  constructor() { }
+  @Input() deal;
+  @Output() close = new EventEmitter();
+  id;
+  comment = '';
+  constructor(private dealService: DealService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
   }
-
+  addComment() {
+    this.activatedRoute.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    this.dealService.dealComments(this.id, this.comment).subscribe(() =>
+      this.close.emit()
+    );
+  }
 }

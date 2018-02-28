@@ -6,8 +6,11 @@
        [scrollWindow]="false"
        (scrolled)="onScrollDeal()">
     <app-deal *ngFor="let deal of dealPage"
-               [deal]="deal"  (click)="active(deal)">
+               [deal]="deal">
     </app-deal>
+    <div *ngIf="!lastPage" class="col s10">
+      <app-preloader></app-preloader>
+    </div>
   </div>
   <div class="col s9 detail-col">
     <div class="detail">

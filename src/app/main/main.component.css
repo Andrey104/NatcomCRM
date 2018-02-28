@@ -3,37 +3,54 @@
 }
 
 .logo {
-  height: 9vh;
   float: left;
+  height: 64px;
+  width: 64px;
 }
 
 .avatar {
-  height: 9vh;
+  height: 64px;
+  width: 64px;
 }
 
 .image {
-  height: 9px;
+  height: 64px;
+  margin-right: 20px;
 }
 
 ul {
   margin-right: 60px;
-  height: 9vh;
 }
 
-ul li {
-  line-height: 9vh;
+.menu ul ul{
+  display: none;
+  position: absolute;
+  background-color: #5c6b96;
 }
 
-ul li a {
-  font-size: 2vh;
+.menu ul ul a{
+  color: #fff;
+  text-decoration: none;
+}
+.menu li:hover ul{
+  display: block;
+  width: 130px;
+  line-height: 1.3rem;
+}
+.menu li:hover ul li {
+  display: block;
+  width: 130px;
+  height: 25px;
+}
+.menu li:hover ul li a{
+  display: block;
+  width: 130px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  padding: 0;
 }
 
-.navbar-fixed {
-  height: 9vh;
-}
 
-nav {
-  height: 9vh;
-}
 
 

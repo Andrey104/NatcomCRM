@@ -14,7 +14,6 @@
         <img class="status-image col s8 offset-s2" src="assets/images/client.png"/>
       </div>
       <div class="center-align name">{{client?.fio | clientName}}</div>
-      <div class="divider"></div>
       <div class="info-block">
         <div class="left-align email"><i class="tiny material-icons">email</i> {{client?.email | email}}</div>
           <div class="left-align phone-info" *ngFor="let phone of client?.phones">

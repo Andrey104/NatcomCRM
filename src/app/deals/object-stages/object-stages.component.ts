@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {DealResult} from '../../models/deal/deal_result';
 
 
 @Component({
@@ -8,6 +9,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ObjectStagesComponent implements OnInit {
   constructor() { }
+  @Input() deal: DealResult;
 
   ngOnInit() {
   }

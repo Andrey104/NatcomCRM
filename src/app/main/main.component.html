@@ -1,6 +1,6 @@
 <div class="navbar-fixed">
   <nav>
-    <div class="nav-wrapper header">
+    <div class="nav-wrapper header menu">
       <div class="right image">
         <a routerLink="/user" [ngSwitch]="type">
           <img *ngSwitchCase="1" class="avatar" src="assets/images/worker.png"/>
@@ -12,11 +12,18 @@
       <a class="logo" href="/orders"><img class="logo" src="assets/images/logo.png"/></a>
       <ul class="right hide-on-med-and-down">
         <li routerLinkActive="active"><a routerLink="/orders">Заявки</a></li>
-        <li routerLinkActive="active"><a routerLink="/deals">В обработке</a></li>
-        <li routerLinkActive="active"><a routerLink="/deals/measurements">Замеры</a></li>
-        <li routerLinkActive="active"><a routerLink="/deals/not_concluded">Не заключенные</a></li>
-        <li routerLinkActive="active"><a routerLink="/deals/mount">Монтажи</a></li>
-        <li routerLinkActive="active"><a routerLink="/deals/completed">Завершенные</a></li>
+        <li routerLinkActive="active"><a routerLink="/deals">Сделки</a>
+          <ul>
+            <li routerLinkActive="active"><a routerLink="/deals/processing">Обработка</a></li>
+            <li routerLinkActive="active"><a routerLink="/deals/measurement_assigned">Замеры</a></li>
+            <li routerLinkActive="active"><a routerLink="/deals/unconnected">Незаключенные</a></li>
+            <li routerLinkActive="active"><a routerLink="/deals/mount_assigned">Монтажи</a></li>
+            <li routerLinkActive="active"><a routerLink="/deals/completed">Завершенные</a></li>
+            <li routerLinkActive="active"><a routerLink="/deals/canceled">Отмененные</a></li>
+          </ul>
+        </li>
+        <li routerLinkActive="active"><a routerLink="/measurements">Замеры</a></li>
+        <li routerLinkActive="active"><a routerLink="/mount">Монтажи</a></li>
       </ul>
     </div>
   </nav>

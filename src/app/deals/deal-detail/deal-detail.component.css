@@ -1,6 +1,6 @@
 .main-page {
   background-color: #6783a0;
-  height: 91vh;
+  height: calc(100vh - 64px);
 }
 
 .content {
@@ -49,6 +49,10 @@
   border-radius: 10px;
 }
 
+.deal-stage-info {
+  height: calc(100vh - 64px);
+}
+
 nav {
   box-shadow: none;
   height: 8vh;
@@ -60,4 +64,12 @@ ul li {
 
 ul li a {
   height: 8vh;
+  font-size: 10px;
+  text-align: center;
+  line-height: 8vh;
+  padding: 0;
+}
+
+.active-a {
+  background-color: red;
 }

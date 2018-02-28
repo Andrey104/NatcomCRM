@@ -1,3 +1,20 @@
-<p>
-  deal-discounts works!
-</p>
+<div *ngFor="let discount of deal?.discounts">
+  <div class="card horizontal order hover-element hoverable no-border col s12">
+      <div class="card-stacked">
+        <div class="card-content">
+          <div class="col s7">
+            <div class="name">{{discount.user.first_name}} {{discount.user.last_name}}</div>
+            <div>{{discount.before}}=>{{discount.after}}</div>
+          </div>
+          <div class="col s5 right-align">
+            <div>{{discount.auto_date | dateFormat: 'fullDate'}}</div>
+          </div>
+        </div>
+        <div class="card-action">
+          <div class="col s11">
+            <div>Комментарий: {{discount.comment}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

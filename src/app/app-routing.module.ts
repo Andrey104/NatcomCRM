@@ -13,21 +13,17 @@ import {UserInfoComponent} from './user-info/user-info.component';
 import {ClientInfoComponent} from './client-info/client-info.component';
 import {OrderDetailComponent} from './orders/order-detail/order-detail.component';
 import {DealDetailComponent} from './deals/deal-detail/deal-detail.component';
-import {MountsComponent} from './deals/mounts/mounts.component';
-import {MeasurementsComponent} from './deals/measurements/measurements.component';
-import {ObjectStagesComponent} from './deals/object-stages/object-stages.component';
-import {DealCommentsComponent} from './deals/deal-comments/deal-comments.component';
-import {DealDiscountsComponent} from './deals/deal-discounts/deal-discounts.component';
-import {DealPaymentsComponent} from './deals/deal-payments/deal-payments.component';
-import {DealResult} from './models/deal/deal_result';
+import {DealMeasurementComponent} from './deals/deal-measurement/deal-measurement.component';
+import {DealMountComponent} from './deals/deal-mount/deal-mount.component';
 
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts
 
 const deals_routes: Routes = [
   { path: ':id', component: DealDetailComponent},
+  { path: ':id/measurement/:measurement_id', component: DealMeasurementComponent },
+  { path: ':id/mount/:mount_id', component: DealMountComponent }
 ];
-
 
 const orders_routes: Routes = [
   { path: ':id', component: OrderDetailComponent},
@@ -36,6 +32,7 @@ const orders_routes: Routes = [
 
 
 const pages_routes: Routes = [
+  { path: 'deals/:status', component: DealPageComponent, children: deals_routes},
   { path: 'deals', component: DealPageComponent, children: deals_routes},
   { path: 'orders', component: OrderPageComponent, children: orders_routes},
   { path: 'user', component: UserInfoComponent}

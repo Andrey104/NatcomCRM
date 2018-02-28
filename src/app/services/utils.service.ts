@@ -162,5 +162,35 @@ export class UtilsService {
     return ' ' + user + ', ' + type + ' ' + essence +
                 ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
   }
+  statusUrlDeal(statusStr: string): number {
+    let status: number;
+    switch (statusStr) {
+      case 'processing': {
+        status = 0;
+        break;
+      }
+      case 'measurement_assigned': {
+        status = 1;
+        break;
+      }
+      case 'unconnected': {
+        status = 2;
+        break;
+      }
+      case 'mount_assigned': {
+        status = 3;
+        break;
+      }
+      case 'completed': {
+        status = 4;
+        break;
+      }
+      case 'canceled': {
+        status = 5;
+        break;
+      }
+    }
+    return status;
+  }
 
 }

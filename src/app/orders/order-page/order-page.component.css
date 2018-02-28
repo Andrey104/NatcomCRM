@@ -2,7 +2,6 @@
   position: fixed;
   z-index: 1;
   height: 84px;
-  border-right: 1px solid black;
 }
 
 input[type="search"] {
@@ -31,6 +30,10 @@ label {
 
 .rectangle {
   background-color: #ffa726;
+}
+
+.main-page {
+  position: static;
 }
 
 

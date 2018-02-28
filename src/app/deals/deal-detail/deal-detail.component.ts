@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
@@ -6,7 +6,7 @@ import {DealResult} from '../../models/deal/deal_result';
 @Component({
   selector: 'app-deal-detail',
   templateUrl: './deal-detail.component.html',
-  styleUrls: ['./deal-detail.component.css']
+  styleUrls: ['./deal-detail.component.css'],
 })
 export class DealDetailComponent implements OnInit {
   private id;
@@ -16,6 +16,7 @@ export class DealDetailComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private dealService: DealService) { }
   deal: DealResult;
   ngOnInit() {
+    this.select = 0;
     this.subscribeDealId();
   }
   subscribeDealId(): void {
@@ -28,6 +29,5 @@ export class DealDetailComponent implements OnInit {
   }
   onSelect(ourSelect) {
     this.select = ourSelect;
-    console.log(this.select);
   }
 }
