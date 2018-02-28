@@ -57,6 +57,9 @@ import { DealPaymentsComponent } from './deals/deal-payments/deal-payments.compo
 import {MountCardComponent} from './deals/mount-card/mount-card.component';
 import { DealMeasurementComponent } from './deals/deal-measurement/deal-measurement.component';
 import { DealMountComponent } from './deals/deal-mount/deal-mount.component';
+import {ActionPipe} from './pipes/action-pipe';
+import { CommentPipe } from './pipes/comment.pipe';
+import {TransferPipe} from './pipes/transfer.pipe';
 
 
 @NgModule({
@@ -103,6 +106,9 @@ import { DealMountComponent } from './deals/deal-mount/deal-mount.component';
     DealPaymentsComponent,
     DealMeasurementComponent,
     DealMountComponent,
+    ActionPipe,
+    CommentPipe,
+    TransferPipe,
 ],
   imports: [
     BrowserModule,

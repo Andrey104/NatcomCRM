@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: 'app-deal-detail',
@@ -13,7 +14,7 @@ export class DealDetailComponent implements OnInit {
   page = 1;
   select;
 
-  constructor(private activatedRoute: ActivatedRoute, private dealService: DealService) { }
+  constructor(private activatedRoute: ActivatedRoute, private dealService: DealService, private utils: UtilsService) { }
   deal: DealResult;
   ngOnInit() {
     this.select = 0;
@@ -29,5 +30,8 @@ export class DealDetailComponent implements OnInit {
   }
   onSelect(ourSelect) {
     this.select = ourSelect;
+  }
+  dealStatus(status) {
+    return this.utils.statusDeal(status);
   }
 }

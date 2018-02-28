@@ -1,11 +1,32 @@
-.main-page {
-  background-color: #6783a0;
-  height: calc(100vh - 64px);
+.card {
+  background-color: #f9f9f9;
+}
+
+.offer {
+  height: 30px;
+  font-size: 25px;
+  text-align: center;
 }
 
 .content {
-  height: 70vh;
-  border-radius: 15px;
+  padding-left: 15px;
+  line-height: 2rem;
+}
+
+.status-container {
+  height: 80px;
+}
+
+.company-name {
+  overflow: hidden;
+  font-size: 36px;
+  line-height: 2.5rem;
+  margin-left: 15px;
+}
+
+.contract-status {
+  height: 20px;
+  border-radius: 10px;
 }
 
 .deal-info {
@@ -13,40 +34,8 @@
   color: #6280a0;
 }
 
-.offer {
-  height: 8vh;
-  font-size: 25px;
-  text-align: center;
-  line-height: 8vh;
-}
-
-.deal-status {
-  height: 80px;
-  width: 80px;
-  border-radius: 50px;
-  background-color: #ffa726;
-  float: left;
-  text-align: center;
-  font-size: 42px;
-  color: white;
-  line-height: 80px;
-  margin-right: 15px;
-}
-
-.company-name {
-  font-size: 36px;
-  padding-top: 30px;
-  line-height: 1.4rem;
-}
-
 .status-info {
   padding-top: 6vh;
-}
-
-.contract-status {
-  height: 20px;
-  background-color: #5c6b96;
-  border-radius: 10px;
 }
 
 .deal-stage-info {

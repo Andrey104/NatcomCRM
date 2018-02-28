@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {OrderAction} from '../models/orders/order_action';
+import {DealAction} from '../models/deal/deal_action';
 
 @Injectable()
 export class UtilsService {
@@ -8,11 +9,12 @@ export class UtilsService {
     let strMinutes: string;
     if (minutes < 10) {
       strMinutes = '0' + minutes.toString();
-    }else {
+    } else {
       strMinutes = minutes.toString();
     }
     return strMinutes;
   }
+
   hoursStringFormat(hour: number) {
     let strHour: string;
     if (hour < 10) {
@@ -22,6 +24,7 @@ export class UtilsService {
     }
     return strHour;
   }
+
   monthStringFormat(numberMonth: number) {
     const months = ['янв', 'фев', 'мрт', 'апр', 'мая', 'июн',
       'июл', 'авг', 'сен', 'окт', 'нбр', 'дек'];
@@ -29,7 +32,7 @@ export class UtilsService {
   }
 
   statusOrder(status: number) {
-    let icon: {image, color};
+    let icon: { image, color };
     switch (status) {
       case 0: {
         icon = {image: 'mail_outline', color: 'untreatedOrder'};
@@ -87,7 +90,7 @@ export class UtilsService {
   }
 
   statusMount(status: number) {
-    let ourStatus: {image, color};
+    let ourStatus: { image, color };
     switch (status) {
       case 0: {
         ourStatus = {image: 'autorenew', color: 'mountDuring'};
@@ -112,8 +115,7 @@ export class UtilsService {
     return ourStatus;
   }
 
-  orderActionDecoder (action: OrderAction) {
-    const date = action.auto_date;
+  orderActionDecoder(action: OrderAction) {
     const user = action.user.first_name + ' ' + action.user.last_name;
     let type = '';
     const essence = 'заявку';
@@ -160,8 +162,9 @@ export class UtilsService {
       comment = action.comment;
     }
     return ' ' + user + ', ' + type + ' ' + essence +
-                ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
+      ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
   }
+
   statusUrlDeal(statusStr: string): number {
     let status: number;
     switch (statusStr) {
@@ -191,6 +194,34 @@ export class UtilsService {
       }
     }
     return status;
+  }
+
+  dealActionDecoder(action: DealAction) {
+    let comment = '';
+    let type = '';
+    let cause = 'ПО ПРИЧИНЕ СПРОСИТЬ У СЕРЕГИ';
+    switch (action.type) {
+      case 0: {
+        type = ' завершил(ла) замер ';
+        break;
+      }
+      case 1: {
+        type = ' перенес(ла) замер ';
+        break;
+      }
+      case 2: {
+        type = ' отменил(ла) замер ';
+        break;
+      }
+      case 3: {
+        type = ' стал(ла) ответсвенным(ой) ';
+        break;
+      }
+    }
+    if (action.comment !== null) {
+      comment = ', с комментарием: ' + action.comment;
+    }
+    return type + cause + comment;
   }
 
 }

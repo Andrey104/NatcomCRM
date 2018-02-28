@@ -1,29 +1,24 @@
-<div class="col s12">
-  <div class="col s6 main-page">
-    <div class="white-text offer">Объект {{deal?.offer}}</div>
-    <div class="white content">
-      <div class="deal-info">
-        <div class="deal-status">{{deal?.company?.symbol}}</div>
-        <div>
-          <div class="company-name">{{deal?.company?.name}}</div>
-          <div *ngFor="let client of deal?.clients">
-            <p><i class="tiny material-icons icon">person</i> {{client.client.fio}}</p>
-          </div>
-          <div><i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}</div>
-          <div><i class="tiny material-icons icon">access_time</i> {{deal?.address_comment}}</div>
-          <div><i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}</div>
-          <div><i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}</div>
-          <div><i class="tiny material-icons icon">date_range</i>
-            Создана: {{deal?.auto_date | dateFormat: 'fullDate'}}
-          </div>
-          <div>Изменялась: {{deal?.task_date | dateFormat: 'fullDate'}}</div>
-          <div></div>
-        </div>
+<div class="col s12 detail-col-right">
+  <div class="card col s6 info-card">
+    <div class="offer">Объект {{deal?.offer}}</div>
+    <div class="content">
+      <div class="status-container valign-wrapper">
+        <div class="company-symbol">{{deal?.company?.symbol}}</div>
+        <div class="company-name">{{deal?.company?.name}}</div>
       </div>
-    </div>
-    <div class="status-info">
+      <div *ngFor="let client of deal?.clients">
+        <div><i class="tiny material-icons icon">person</i> {{client.client.fio}}</div>
+      </div>
+      <div><i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}</div>
+      <div><i class="tiny material-icons icon">access_time</i> {{deal?.address_comment}}</div>
+      <div><i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}</div>
+      <div><i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}</div>
+      <div><i class="tiny material-icons icon">date_range</i>
+        Создана: {{deal?.auto_date | dateFormat: 'fullDate'}}
+      </div>
+      <div>Изменялась: {{deal?.task_date | dateFormat: 'fullDate'}}</div>
       <div class="col s5 detail-col">
-        <div class="contract-status"></div>
+        <div class="contract-status">{{dealStatus(deal?.status)}}</div>
       </div>
       <div class="col s5 offset-s2 detail-col">
         <div class="contract-status">{{deal?.contract | contract }}</div>
@@ -50,6 +45,4 @@
   </div>
   <router-outlet></router-outlet>
 </div>
-
-
 

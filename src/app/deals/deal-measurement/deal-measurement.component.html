@@ -1,4 +1,37 @@
-<div>
-  {{measurement?.id}}
-  {{measurement?.address_comment}}
+<div class="spinner-contener" *ngIf="loader">
+  <app-preloader></app-preloader>
+</div>
+<div *ngIf="!loader" class="col s12 scrollable-page">
+  <div class="company-symbol">{{measurement?.company.symbol}}</div>
+  <div>{{measurement?.worker?.first_name}} {{measurement?.worker?.last_name}}</div>
+  <div>{{measurement?.date | dateFormat: 'fullDate'}}</div>
+  <div>{{measurement?.address}}</div>
+  <div>{{measurement?.address_comment}}</div>
+  <div>{{measurement?.status}}</div>
+  <div>Clients</div>
+  <div *ngFor="let client of measurement?.clients">
+    <div>{{client.client.fio}}</div>
+    <div>{{client.client.email}}</div>
+    <div *ngFor="let phone of client.client.phones">
+      <div>{{phone.number}}</div>
+      <div>{{phone.comment}}</div>
+    </div>
+  </div>
+  <div>Comments</div>
+  <div *ngFor="let comment of measurement?.comments">
+    <div>{{comment.auto_date | dateFormat: 'fullDate'}} {{comment | comment}}</div>
+  </div>
+  <div>Actions</div>
+  <div *ngFor="let action of measurement?.actions">
+    <div>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'measurement'}}</div>
+  </div>
+  <div>Transfers</div>
+  <div *ngFor="let transfer of measurement?.transfers">
+    <div>{{transfer.auto_date | dateFormat: 'fullDate'}} {{transfer | transfer: 'measurement'}}</div>
+  </div>
+  <div>{{measurement?.non_cash | nonCash}}</div>
+  <div>Pictures</div>
+  <div *ngFor="let picture of measurement?.pictures">
+    <img class="picture" src="{{picture.url}}"/>
+  </div>
 </div>

@@ -1,14 +1,19 @@
 import {Worker} from '../worker';
+import {Company} from '../company';
+import {Client} from '../client';
+import {Transfer} from '../transfer';
+import {OurComment} from '../comment';
 
 export class DealMeasurement {
   id: number;
   pictures: object;
-  clients: object;
+  clients: Client[];
   actions: object;
-  transfers: object;
+  transfers: Transfer[];
+  comments: OurComment[];
   address: string;
   address_comment: string;
-  company: object;
+  company: Company;
   non_cash: boolean;
   auto_date: string;
   date: string;

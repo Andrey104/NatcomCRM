@@ -5,7 +5,6 @@ import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
-import {MeasurementContainerService} from '../../services/measurement-container.service';
 
 @Component({
   selector: 'app-deal-page',
