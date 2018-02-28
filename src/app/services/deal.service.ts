@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { DealPage } from '../models/deal/deals';
 import { MessageService } from './message.service';
+import {DealResult} from '../models/deal/deal_result';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,21 +27,23 @@ export class DealService {
 
 
   /** GET deals from the server */
-  getDeals(): Observable<DealPage> {
-
-   /** let params: URLSearchParams = new URLSearchParams();
-    params.set('limit', this.quantity.toString());
-    params.set('offset', this.offset.toString()); */
+  getDeals(status, page): Observable<DealPage> {
 
    let params = new HttpParams();
-    params = params.append('page', this.quantity.toString());
-    //params = params.append('offset', this.offset.toString());
-
-
+    params = params.append('page', page);
+    if (status !== undefined) {
+      console.log(status);
+      params = params.append('status', status);
+    }
     const url = this.dealsUrl;
     return this.http.get<DealPage>(url, {
-      params: params,
       headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
+      params: params,
+    });
+  }
+  getDealById(id: number): Observable<DealResult> {
+    return this.http.get<DealResult>(this.dealsUrl + id, {
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
     });
   }
 
@@ -65,6 +68,23 @@ export class DealService {
 
   private token() {
     return localStorage.getItem('token');
+  }
+  dealComments(id, comment): Observable<Object> {
+    return this.http.post<Object>(this.dealsUrl + id + '/comment/', {'text': comment},
+      {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
+      ).pipe(
+      tap(( _: Object) => this.log(`defered`)),
+      catchError(this.handleError<Object>('addHero'))
+    );
+  }
+  dealDiscount(id, after, comment): Observable<Object> {
+    const discount = {'after': after, 'comment': comment };
+    return this.http.post<Object>(this.dealsUrl + id + '/discount/', discount,
+      {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
+      ).pipe(
+      tap(( _: Object) => this.log(`defered`)),
+      catchError(this.handleError<Object>('addHero'))
+    );
   }
 
 

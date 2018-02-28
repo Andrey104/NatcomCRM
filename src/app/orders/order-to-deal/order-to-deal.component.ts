@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-order-to-deal',
@@ -6,21 +8,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-to-deal.component.css']
 })
 export class OrderToDealComponent implements OnInit {
-
-  constructor() { }
-
+  @Input() openToDeal;
+  @Output() close = new EventEmitter();
+  @Input() order;
+  id;
+  comment;
+  commentAddress;
+  statusMeasure = false;
+  iconStyle = 'add';
+  constructor(private activatedRoute: ActivatedRoute) { }
+  formToDeal = new FormGroup( {
+    comment: new FormControl(''),
+    commentAddress: new FormControl('')
+    }
+  );
   ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.id = params['id'];
+    });
   }
-
-  close(){
-
+  onClose() {
+    this.close.emit();
   }
-  ok(){
-
+  openMeasure() {
+    this.statusMeasure = !this.statusMeasure;
+    if (this.iconStyle === 'add') {
+      this.iconStyle = 'remove';
+    } else {
+      this.iconStyle = 'add';
+    }
   }
-
-  isOpen(){
-
-  }
-
 }

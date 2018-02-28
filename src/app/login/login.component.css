@@ -1,3 +1,19 @@
 .auth-container {
   margin-top: 200px;
 }
+
+.fail {
+  overflow: hidden;
+  color: red;
+  font-style: italic;
+  font-size: 15px;
+}
+
+input[type="text"], input[type="password"]{
+  margin-bottom: 40px!important;
+  float: left;
+}
+
+.button {
+  float: right;
+}

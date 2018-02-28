@@ -6,6 +6,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
 import {User} from '../models/user';
 import {MessageService} from '../services/message.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -20,18 +21,21 @@ export class LoginComponent implements OnInit {
   password;
   loading = false;
   returnUrl: string;
+  fail: boolean;
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
               private router: Router,
               private messageService: MessageService) {
   }
-
+  myForm: FormGroup = new FormGroup({
+    'userName': new FormControl('', Validators.required),
+    'userPassword': new FormControl('', Validators.required),
+  });
   ngOnInit() {
     this.logout();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/orders';
   }
-
   login() {
     this.loading = true;
     this.http
@@ -45,6 +49,9 @@ export class LoginComponent implements OnInit {
         err => {
           console.log('Error:' + err.error);
           this.loading = false;
+          if (err.status === 400) {
+            this.fail = true;
+          }
         }
       );
   }

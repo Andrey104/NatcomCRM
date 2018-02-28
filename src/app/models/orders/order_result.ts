@@ -1,6 +1,6 @@
-import {Client} from "../client";
-import {OrderAction} from "./order_action";
-import {Company} from "../company";
+import {Client} from '../client';
+import {OrderAction} from './order_action';
+import {Company} from '../company';
 
 export class OrderResult {
   id: number;

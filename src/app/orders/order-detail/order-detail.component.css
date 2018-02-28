@@ -2,7 +2,7 @@
   padding-top: 15px;
 }
 .buttons{
-  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 ul li {
@@ -27,7 +27,7 @@ ul li {
 }
 
 .card-content {
-  padding: 0 0 7px 0;
+  padding: 0 0 18px 0;
 }
 
 .scrollable-page {
@@ -50,5 +50,6 @@ ul li {
 .history {
   margin-bottom: 0;
 }
+
 
 

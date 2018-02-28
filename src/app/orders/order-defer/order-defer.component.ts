@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OrderService} from "../../services/order.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-order-defer',
@@ -8,46 +9,46 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./order-defer.component.css']
 })
 export class OrderDeferComponent implements OnInit {
-  @Input() order;
+  id;
   cause;
   comment;
+  error = false;
+  errorMessage = 'Пустой коммент';
+  @Input() openDefer: boolean;
+  @Output() close = new EventEmitter();
 
-  constructor(private orderService: OrderService) {
-
+  constructor(private orderService: OrderService, private activatedRoute: ActivatedRoute) {
   }
-
-  ngOnInit() {
-  }
-  deferForm = new FormGroup({
-    cause: new FormControl(''),
-    comment: new FormControl('')
+  deferForm: FormGroup = new FormGroup({
+    cause: new FormControl('', Validators.required),
+    comment: new FormControl('', Validators.required),
   });
 
-  /*isOpen() {
-    return this.lastPage.deferIsOpen();
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => this.id = params['id']);
   }
-
   ok() {
     this.cause = this.deferForm.get('cause').value;
     this.comment = this.deferForm.get('comment').value;
-    this.deferResponse(this.cause, this.comment);
+    console.log(this.comment);
+    console.log(this.cause);
+    if (this.cause === '' || this.comment === '' || this.comment === null || this.cause === null) {
+      this.error = true;
+      this.errorMessage = 'Заполните все поля';
+    } else {
+      this.deferResponse(this.cause, this.comment);
+    }
   }
-
-  close(update: boolean) {
-    this.reset();
-    return this.lastPage.closeDefer(update);
-  }
-
   deferResponse(cause: number, comment: string) {
-    this.orderService.deferOrder(cause, comment, this.order.id).subscribe(resp => {
-      this.close(true)
-    }, err=> {
-      console.log('error')
+    this.orderService.deferOrder(cause, comment, this.id).subscribe(resp => {
+      this.onClose();
+    }, err => {
+      console.log('error');
     });
   }
-
-  reset() {
+  onClose() {
+    this.errorMessage = '';
     this.deferForm.reset();
-  }*/
-
+    this.close.emit();
+  }
 }

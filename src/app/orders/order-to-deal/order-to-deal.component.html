@@ -1,10 +1,45 @@
-<div id="modal1" class="modal modal-fixed-footer">
+<div id="modal1" class="modal modal-fixed-footer" [ngClass]="{open: openToDeal}">
   <div class="modal-content">
     <h4>Cоздать новую сделку?</h4>
+    <div class="row">
+      <div class="input-field col s6">
+        <input value={{order?.company?.name}} id="first_name2" type="text" class="validate">
 
+        <label class="active" for="first_name2">First Name</label>
+      </div>
+    </div>
+    <div class="col s12" [formGroup]="formToDeal">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea1" class="materialize-textarea" formControlName="comment"></textarea>
+          <label for="textarea1">Комментарий</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea2" class="materialize-textarea" formControlName="commentAddress"></textarea>
+          <label for="textarea2">Комментарий к адресу</label>
+        </div>
+      </div>
+        <div class="valign-wrapper"><i class="small material-icons hover-element" (click)="openMeasure()">{{iconStyle}}</i>Добавить замер</div>
+        <div *ngIf="statusMeasure" class="purple lighten-5">
+          <div class="row">
+            <div class="input-field col s8 offset-s2">
+              <textarea id="textarea3" class="materialize-textarea"></textarea>
+              <label for="textarea3">Коммент к замеру</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s8 offset-s2">
+              <textarea id="textarea4" class="materialize-textarea"></textarea>
+              <label for="textarea4">Коммент к замеру4</label>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
   <div class="modal-footer">
-    <a (click)="close()" class="modal-action modal-close waves-effect waves-green btn-flat">Отмена</a>
-    <a (click)="ok()" class="modal-action modal-close waves-effect waves-green btn-flat">ОК</a>
+    <a (click)="onClose()" class="modal-action modal-close waves-effect waves-green btn-flat">Отмена</a>
+    <a  class="modal-action modal-close waves-effect waves-green btn-flat">ОК</a>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: 'app-deal',
@@ -6,19 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./deal.component.css']
 })
 export class DealComponent implements OnInit {
+  @Input() deal;
 
-  constructor() { }
+  constructor(private utils: UtilsService) { }
 
   ngOnInit() {
   }
-
-  @Input() deal;
-  @Input() lastPage;
-
-  isSelect = false;
-
-  isActive() {
-    return this.lastPage.isActive(this.deal);
+  statusDeal(status) {
+    return this.utils.statusDeal(status);
   }
-
 }

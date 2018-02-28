@@ -1,13 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-
-import {Orders} from '../../models/orders/order';
 import {OrderService} from '../../services/order.service';
-import {catchError} from 'rxjs/operators';
 import {log} from 'util';
 import {OrderResult} from '../../models/orders/order_result';
-import {loadavg} from 'os';
-import {Observable} from 'rxjs/Observable';
-import {FormBuilder, FormsModule} from '@angular/forms';
 
 
 @Component({
@@ -17,8 +11,6 @@ import {FormBuilder, FormsModule} from '@angular/forms';
 })
 export class OrderPageComponent implements OnInit {
   orders: OrderResult[];
-  activeOrder: Orders;
-  error;
   page: number;
   lastPage: boolean;
   load: boolean;
@@ -29,80 +21,71 @@ export class OrderPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showOrders(null);
+    this.showOrders();
   }
+  // отображение заказов(если поисковая строка пустая)
   filterByStatus() {
-    console.log(this.selector);
-    if (this.selector === 1) {
-      console.log(this.selector);
-    }
-    if (this.selector === 2) {
-      console.log(this.selector);
-    }
-    if (this.selector === 3) {
-      console.log(this.selector);
+    if (this.searchStr !== '') {
+      return;
+    } else {
+      this.showOrders();
     }
   }
+  // отображение первой страницы заказов в зависимости от содержимого поисковой строки
   search() {
-      this.orderService.getFilterOrders(this.searchStr).subscribe(order => {
+    if (this.searchStr === '') {
+      this.showOrders();
+    } else {
+      this.page = 1;
+      this.orderService.getFilterOrders(this.searchStr, this.page).subscribe(order => {
         this.orders = order.results;
-        console.log(this.orders);
+        if (order.next === null) {
+          this.lastPage = true;
+        } else {
+          this.lastPage = false;
+        }
+        document.getElementById('scroll').scrollTop = 0;
       });
+    }
   }
-
-  active(order: Orders) {
-    this.activeOrder = order;
-  }
-
-  isActive(order: Orders) {
-    return this.activeOrder === order;
-  }
-
-  activeOrderNotNull() {
-    return this.activeOrder != null;
-  }
-
-  showOrders(id): void {
+  // отображение первой страницы заказов по статусу
+  showOrders(): void {
     this.page = 1;
     this.lastPage = false;
     this.load = true;
-    this.orderService.getOrders(this.page)
+    this.orderService.getOrders(this.page, this.selector)
       .subscribe(orders => {
         this.load = false;
         this.orders = orders.results;
-        if (orders.next === 'null') {
+        if (orders.next === null) {
           this.lastPage = true;
         }
-        // if id !== null - update order list
-        if (id !== null) {
-          let order = this.getOrderById(id);
-          if (order !== null) {
-            this.activeOrder = order;
-          }
-        }
-
+        document.getElementById('scroll').scrollTop = 0;
       }, error2 => {
         log(error2);
         this.load = false;
       });
   }
 
-  update(id: string) {
-    this.showOrders(id);
-  }
-
   onScroll() {
-    this.nextPage();
+    if (this.searchStr === '') {
+      this.nextPage();
+    } else {
+      this.nextFilterPage();
+    }
   }
-
+  // подгрузка страницы заказов по статусу
   nextPage() {
-    this.page = this.page + 1;
     if (!this.lastPage && !this.load) {
+      console.log('Начало загрузки');
       this.load = true;
-      this.orderService.getOrders(this.page)
+      this.page = this.page + 1;
+      this.orderService.getOrders(this.page, this.selector)
         .subscribe(orders => {
+          console.log('Получение с сервера');
           this.orders = this.orders.concat(orders.results);
           this.load = false;
+          console.log('конец');
           if (orders.next === null) {
             this.lastPage = true;
           }
@@ -112,17 +95,22 @@ export class OrderPageComponent implements OnInit {
         });
     }
   }
-
-  getOrderById(id) {
-    let resultOrder = null;
-    for (let order of this.orders) {
-      if (order.id === id) {
-        //console.log('ok');
-        resultOrder = order;
-      }
+  // подгрузка страницы заказов со значением фильтра
+  nextFilterPage() {
+    if (!this.lastPage && !this.load) {
+      this.load = true;
+      this.page = this.page + 1;
+      this.orderService.getFilterOrders(this.searchStr, this.page)
+        .subscribe(orders => {
+          this.orders = this.orders.concat(orders.results);
+          this.load = false;
+          if (orders.next === null) {
+            this.lastPage = true;
+          }
+        },  error2 => {
+          log(error2);
+          this.load = false;
+        });
     }
-    return resultOrder;
   }
-
-
 }

@@ -1,0 +1,21 @@
+.status-image {
+  min-width: 40px;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background-color: #ffa726;
+  text-align: center;
+  line-height: 40px;
+  font-size: 25px;
+  color: white;
+  margin: 10px 15px 10px 10px;
+}
+
+.name {
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.time {
+  margin-top: 5px;
+}

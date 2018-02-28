@@ -1,54 +1,53 @@
 import {Injectable} from '@angular/core';
 import {OrderAction} from '../models/orders/order_action';
+import {DealAction} from '../models/deal/deal_action';
 
 @Injectable()
 export class UtilsService {
-
-  timeFormat(autoDate: string) {
-    let date;
-    date = new Date(autoDate);
-    return (date.getHours() + ':' + this.minutesStringFormat(date.getMinutes()));
-  }
-  dateFormat(autoDate: string) {
-    let months = ['янв', 'Фев', 'мрт', 'апр', 'мая', 'июн',
-      'июл', 'авг', 'сен', 'окт', 'нбр', 'дек'];
-    let date;
-    date = new Date(autoDate);
-    return (date.getDate() + ' ' + months[date.getMonth()] + '. ' + date.getFullYear());
-  }
-  fullDateFormat(autoDate: string) {
-    let date;
-    date = new Date(autoDate);
-    return (this.dateFormat(date) + ' в ' + date.getHours() + ':' + date.getMinutes());
-  }
 
   minutesStringFormat(minutes: number) {
     let strMinutes: string;
     if (minutes < 10) {
       strMinutes = '0' + minutes.toString();
-    }else {
+    } else {
       strMinutes = minutes.toString();
     }
     return strMinutes;
   }
 
-  statusIcon(status: number) {
-    let icon: {image, color};
+  hoursStringFormat(hour: number) {
+    let strHour: string;
+    if (hour < 10) {
+      strHour = '0' + hour.toString();
+    } else {
+      strHour = hour.toString();
+    }
+    return strHour;
+  }
+
+  monthStringFormat(numberMonth: number) {
+    const months = ['янв', 'фев', 'мрт', 'апр', 'мая', 'июн',
+      'июл', 'авг', 'сен', 'окт', 'нбр', 'дек'];
+    return months[numberMonth];
+  }
+
+  statusOrder(status: number) {
+    let icon: { image, color };
     switch (status) {
       case 0: {
-        icon = {image: 'mail_outline', color: 'untreated'};
+        icon = {image: 'mail_outline', color: 'untreatedOrder'};
         break;
       }
       case 1: {
-        icon = {image: 'clear', color: 'renouncement'};
+        icon = {image: 'clear', color: 'renouncementOrder'};
         break;
       }
       case 2: {
-        icon = {image: 'access_time', color: 'deferred'};
+        icon = {image: 'access_time', color: 'deferredOrder'};
         break;
       }
       case 3: {
-        icon = {image: 'check', color: 'accepted'};
+        icon = {image: 'check', color: 'acceptedOrder'};
         break;
       }
       default: {
@@ -90,11 +89,36 @@ export class UtilsService {
     return ourStatus;
   }
 
-  orderActionDecoder (action: OrderAction) {
-    let date = action.auto_date;
-    let user = action.user.first_name + ' ' + action.user.last_name;
+  statusMount(status: number) {
+    let ourStatus: { image, color };
+    switch (status) {
+      case 0: {
+        ourStatus = {image: 'autorenew', color: 'mountDuring'};
+        break;
+      }
+      case 1: {
+        ourStatus = {image: 'more_horiz', color: 'mountExpectation'};
+        break;
+      }
+      case 2: {
+        ourStatus = {image: 'check', color: 'mountSuccess'};
+        break;
+      }
+      case 3: {
+        ourStatus = {image: 'clear', color: 'mountRejected'};
+        break;
+      }
+      default: {
+        ourStatus = {image: 'check_box_outline_blank', color: 'others'};
+      }
+    }
+    return ourStatus;
+  }
+
+  orderActionDecoder(action: OrderAction) {
+    const user = action.user.first_name + ' ' + action.user.last_name;
     let type = '';
-    let essence = 'заявку';
+    const essence = 'заявку';
     let causeStr = '';
     let cause = '';
     let commentStr = '';
@@ -137,10 +161,67 @@ export class UtilsService {
       commentStr = ', с комментарием: ';
       comment = action.comment;
     }
-    return this.fullDateFormat(date) + '. ' + user + ', ' + type + ' ' + essence +
-                ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
+    return ' ' + user + ', ' + type + ' ' + essence +
+      ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
   }
 
+  statusUrlDeal(statusStr: string): number {
+    let status: number;
+    switch (statusStr) {
+      case 'processing': {
+        status = 0;
+        break;
+      }
+      case 'measurement_assigned': {
+        status = 1;
+        break;
+      }
+      case 'unconnected': {
+        status = 2;
+        break;
+      }
+      case 'mount_assigned': {
+        status = 3;
+        break;
+      }
+      case 'completed': {
+        status = 4;
+        break;
+      }
+      case 'canceled': {
+        status = 5;
+        break;
+      }
+    }
+    return status;
+  }
 
+  dealActionDecoder(action: DealAction) {
+    let comment = '';
+    let type = '';
+    let cause = 'ПО ПРИЧИНЕ СПРОСИТЬ У СЕРЕГИ';
+    switch (action.type) {
+      case 0: {
+        type = ' завершил(ла) замер ';
+        break;
+      }
+      case 1: {
+        type = ' перенес(ла) замер ';
+        break;
+      }
+      case 2: {
+        type = ' отменил(ла) замер ';
+        break;
+      }
+      case 3: {
+        type = ' стал(ла) ответсвенным(ой) ';
+        break;
+      }
+    }
+    if (action.comment !== null) {
+      comment = ', с комментарием: ' + action.comment;
+    }
+    return type + cause + comment;
+  }
 
 }

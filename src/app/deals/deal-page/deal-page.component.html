@@ -5,13 +5,16 @@
        [infiniteScrollThrottle]="300"
        [scrollWindow]="false"
        (scrolled)="onScrollDeal()">
-    <app-deal *ngFor="let deal of dealPage?.results"
-               [deal]="deal" [lastPage]='this' (click)="active(deal)">
+    <app-deal *ngFor="let deal of dealPage"
+               [deal]="deal">
     </app-deal>
+    <div *ngIf="!lastPage" class="col s10">
+      <app-preloader></app-preloader>
+    </div>
   </div>
   <div class="col s9 detail-col">
     <div class="detail">
-      <app-deal-detail [deal]="activeDeal" [lastPage]='this'></app-deal-detail>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

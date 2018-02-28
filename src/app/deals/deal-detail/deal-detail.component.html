@@ -1,0 +1,48 @@
+<div class="col s12 detail-col-right">
+  <div class="card col s6 info-card">
+    <div class="offer">Объект {{deal?.offer}}</div>
+    <div class="content">
+      <div class="status-container valign-wrapper">
+        <div class="company-symbol">{{deal?.company?.symbol}}</div>
+        <div class="company-name">{{deal?.company?.name}}</div>
+      </div>
+      <div *ngFor="let client of deal?.clients">
+        <div><i class="tiny material-icons icon">person</i> {{client.client.fio}}</div>
+      </div>
+      <div><i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}</div>
+      <div><i class="tiny material-icons icon">access_time</i> {{deal?.address_comment}}</div>
+      <div><i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}</div>
+      <div><i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}</div>
+      <div><i class="tiny material-icons icon">date_range</i>
+        Создана: {{deal?.auto_date | dateFormat: 'fullDate'}}
+      </div>
+      <div>Изменялась: {{deal?.task_date | dateFormat: 'fullDate'}}</div>
+      <div class="col s5 detail-col">
+        <div class="contract-status">{{dealStatus(deal?.status)}}</div>
+      </div>
+      <div class="col s5 offset-s2 detail-col">
+        <div class="contract-status">{{deal?.contract | contract }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col s6 detail-col deal-stage-info">
+    <nav>
+      <div class="nav-wrapper col s12 detail-col">
+        <ul class="hide-on-med-and-down col s12 detail-col">
+          <li class="col s3"><a [class.active-a]="0===select" (click)="onSelect(0)">Этапы</a></li>
+          <li class="col s3"><a [class.active-a]="1===select" (click)="onSelect(1)">Комментарии</a></li>
+          <li class="col s3"><a [class.active-a]="2===select" (click)="onSelect(2)">Перерасчеты</a></li>
+          <li class="col s3"><a [class.active-a]="3===select" (click)="onSelect(3)">Оплата</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div [ngSwitch]="select" class="col s12 detail-col-right" style="height: calc(75vh - 64px)"><!--убрать-->
+      <app-object-stages *ngSwitchCase="0" [deal]="deal"></app-object-stages>
+      <app-deal-comments *ngSwitchCase="1" [deal]="deal" (close)="subscribeDealId()"></app-deal-comments>
+      <app-deal-discounts *ngSwitchCase="2" [deal]="deal" (close)="subscribeDealId()"></app-deal-discounts>
+      <app-deal-payments *ngSwitchCase="3"></app-deal-payments>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+

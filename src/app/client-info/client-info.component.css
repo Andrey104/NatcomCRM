@@ -1,5 +1,5 @@
 .client-info {
-  min-height: 91vh;
+  height: calc(100vh - 64px);
   background-color: #7481a6;
 }
 
@@ -34,7 +34,7 @@
 
 .name {
   font-size: 24px;
-  line-height: 2;
+  line-height: 1.4rem;
 }
 
 .email {
@@ -55,6 +55,7 @@
   margin-top: 20px;
   line-height: 1.5em;
 }
+
 
 
 

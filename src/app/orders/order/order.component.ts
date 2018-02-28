@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UtilsService} from '../../services/utils.service';
 
-
-
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -17,19 +15,10 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  timeFormat(autoDate: string) {
-    return this.utils.timeFormat(autoDate);
-  }
-
   statusIcon(status: number) {
-    return this.utils.statusIcon(status).image;
+    return this.utils.statusOrder(status).image;
   }
   statusColor(status: number) {
-    return this.utils.statusIcon(status).color;
+    return this.utils.statusOrder(status).color;
   }
-
-
-
-
 }

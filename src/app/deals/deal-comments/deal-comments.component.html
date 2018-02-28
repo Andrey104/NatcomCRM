@@ -1,0 +1,19 @@
+<div class="comment">
+  <div *ngIf="deal?.comments.length===0">Комментарии отсутствуют</div>
+  <div class="col s10 offset-s1" *ngFor="let comment of deal?.comments">
+      <div>{{comment.auto_date | dateFormat: 'fullDate'}} {{comment.user.first_name}}
+        {{comment.user.last_name}} добавил комментарий: {{comment.text}}
+      </div>
+  </div >
+</div>
+<div class="row main-row">
+<div class="col s12">
+  <div class="input-field col s8">
+    <input id="icon_prefix" type="text" class="validate" [(ngModel)]="comment">
+    <label for="icon_prefix">First Name</label>
+  </div>
+  <div class="col s3">
+    <a class="waves-effect waves-light btn" (click)="addComment()">button</a>
+  </div>
+</div>
+</div>
