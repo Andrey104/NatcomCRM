@@ -25,7 +25,7 @@ import {PaginationDirective} from './directives/pagination.directive';
 import {UtilsService} from './services/utils.service';
 import { OrderDeferComponent } from './orders/order-defer/order-defer.component';
 import {AdminGuard} from './admin.guard';
-import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { OrderRejectComponent } from './orders/order-reject/order-reject.component';
 import { OrderToDealComponent } from './orders/order-to-deal/order-to-deal.component';
 import { ModalComponent } from './modal/modal.component';
@@ -66,6 +66,9 @@ import {PaymentPipe} from './pipes/payment.pipe';
 import { CommentComponent } from './comment/comment.component';
 import { ColorCompanyDirective } from './directives/color-company.directive';
 import { InputSearchComponent } from './input-search/input-search.component';
+import { InstallersPageComponent } from './admin/installers-page/installers-page.component';
+import { InstallerComponent } from './admin/installers-page/installer/installer.component';
+import {InstallersService} from './services/installers.service';
 
 
 @NgModule({
@@ -121,6 +124,8 @@ import { InputSearchComponent } from './input-search/input-search.component';
     CommentComponent,
     ColorCompanyDirective,
     InputSearchComponent,
+    InstallersPageComponent,
+    InstallerComponent,
 ],
   imports: [
     BrowserModule,
@@ -142,6 +147,7 @@ import { InputSearchComponent } from './input-search/input-search.component';
     ClientService,
     MeasurementService,
     MountService,
+    InstallersService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,52 @@
+.header{
+  background-color: #5c6b96;
+}
+
+.logo {
+  float: left;
+  height: 64px;
+  width: 64px;
+}
+
+.avatar {
+  height: 64px;
+  width: 64px;
+}
+
+.image {
+  height: 64px;
+  margin-right: 20px;
+}
+
+ul {
+  margin-right: 60px;
+}
+
+.menu ul ul{
+  display: none;
+  position: absolute;
+  background-color: #5c6b96;
+}
+
+.menu ul ul a{
+  color: #fff;
+  text-decoration: none;
+}
+.menu li:hover ul{
+  display: block;
+  width: 130px;
+  line-height: 1.3rem;
+}
+.menu li:hover ul li {
+  display: block;
+  width: 130px;
+  height: 25px;
+}
+.menu li:hover ul li a{
+  display: block;
+  width: 130px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  padding: 0;
+}
