@@ -1,19 +1,19 @@
 import {DealAction} from './deal_action';
 import {DealMeasurement} from './deal_measurement';
 import {Company} from '../company';
-import { DealComment } from './deal_comment';
+import {User} from '../user';
 
 export class DealResult {
   id: number;
-  clients: object; // add clacc
+  clients: object; // add class
   measurements: DealMeasurement[];
   mounts: object;
   discounts: object;
   comments: object;
   payments: object; // !!!!!
-  order_action: object; // !!!!!!!!!!!!!!!!!!!!add class
+  order_actions: DealAction[]; // !!!!!!!!!!!!!!!!!!!!add class
   actions: DealAction[];
-  user: object;
+  user: User;
   offer: string;
   sum: number;
   status: number;

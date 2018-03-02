@@ -1,8 +1,10 @@
 <div routerLink="{{deal.id}}" routerLinkActive="active-card"
      class="card horizontal order hover-element no-border hoverable">
   <div class="center-align valign-wrapper">
-    <div class="icon status-image">
-      <i class="small material-icons icon image">email</i>
+    <div class="status-image info">
+      <div [appColorCompany]="deal?.company.symbol" class="image">
+        {{deal?.company.symbol}}
+      </div>
     </div>
   </div>
   <div class="card-stacked">

@@ -129,15 +129,14 @@
 /*-------------------------------*/
 /*Блок для символа компания*/
 .company-symbol {
-  height: 70px;
-  width: 70px;
-  border-radius: 50px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
   background-color: #ffa726;
   float: left;
   text-align: center;
-  font-size: 40px;
+  font-size: 28px;
   color: white;
-  line-height: 70px;
-  margin-right: 15px;
+  line-height: 50px;
 }
 /*-------------------------------*/

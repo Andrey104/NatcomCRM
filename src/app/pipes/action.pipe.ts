@@ -12,8 +12,11 @@ export class ActionPipe implements PipeTransform {
     const user = action.user.first_name + ' ' + action.user.last_name;
     switch (typeDecoder) {
       case 'measurement': {
-        message = user + this.utils.dealActionDecoder(action);
+        message = user + this.utils.measurementActionDecoder(action);
         break;
+      }
+      case 'deal': {
+        message = user + this.utils.dealActionDecoder(action);
       }
     }
     return message;
