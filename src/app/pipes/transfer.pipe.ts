@@ -9,10 +9,15 @@ export class TransferPipe implements PipeTransform {
     const user = transfer.user.first_name + ' ' + transfer.user.last_name;
     let commentType = '';
     let comment = '';
-    let cause = 'по причине: НАДО СПРОСИТЬ У СЕРЕГИ';
+    let cause = '';
     switch (type) {
       case 'measurement': {
         commentType = 'замер';
+        if (transfer.cause === 1) {
+          cause = 'по причине: клиент перенес ';
+        } else {
+          cause = 'по причине: замерщик перенес ';
+        }
         break;
       }
       case 'mount': {

@@ -1,48 +1,144 @@
-<div class="col s12 detail-col-right">
-  <div class="card col s6 info-card">
-    <div class="offer">Объект {{deal?.offer}}</div>
-    <div class="content">
+<app-preloader *ngIf="!deal"></app-preloader>
+<div *ngIf="deal" class="col s12 detail-col scrollable-page">
+  <div class="row main-row valign-wrapper">
+    <div class="col s4 valign-wrapper">
+      <img  class="avatar" src="{{deal?.user.type | imageType}}">
+      <div>{{deal?.user.first_name}} {{deal?.user.last_name}}</div>
+    </div>
+    <div class="col s3">{{deal?.status}}</div>
+    <div class="col s2">{{deal?.contract | contract}}</div>
+    <div class="col s3">
+      <i class="tiny material-icons icon date-icon">date_range</i>
+      <div class="deal-date">
+        <div>Создана:{{deal?.task_date | dateFormat: 'date'}}</div>
+        <div>Изменялась:{{deal?.auto_date | dateFormat: 'date'}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="row main-info">
+    <div class="col s7">
+      <div class="offer">Сделка {{deal?.offer}}</div>
       <div class="status-container valign-wrapper">
-        <div class="company-symbol">{{deal?.company?.symbol}}</div>
+        <div [appColorCompany]="deal?.company?.symbol" class="company-symbol">{{deal?.company?.symbol}}</div>
         <div class="company-name">{{deal?.company?.name}}</div>
       </div>
-      <div *ngFor="let client of deal?.clients">
-        <div><i class="tiny material-icons icon">person</i> {{client.client.fio}}</div>
+      <div class="deal-info">
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}
+        </div>
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">access_time</i> {{deal?.address_comment}}
+        </div>
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}
+        </div>
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}
+        </div>
       </div>
-      <div><i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}</div>
-      <div><i class="tiny material-icons icon">access_time</i> {{deal?.address_comment}}</div>
-      <div><i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}</div>
-      <div><i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}</div>
-      <div><i class="tiny material-icons icon">date_range</i>
-        Создана: {{deal?.auto_date | dateFormat: 'fullDate'}}
-      </div>
-      <div>Изменялась: {{deal?.task_date | dateFormat: 'fullDate'}}</div>
-      <div class="col s5 detail-col">
-        <div class="contract-status">{{dealStatus(deal?.status)}}</div>
-      </div>
-      <div class="col s5 offset-s2 detail-col">
-        <div class="contract-status">{{deal?.contract | contract }}</div>
+    </div>
+    <div class="col s5 detail-col">
+        <div class="row">
+          <div class="col s12 valign-wrapper">
+            <hr class="col s4">
+            <div class="col s4 center-align header">Контакты</div>
+            <hr class="col s4">
+          </div>
+        </div>
+      <div class="row">
+        <div *ngFor="let client of deal?.clients" class="col s12">
+          <div class="valign-wrapper">
+            <div class="col s7 valign-wrapper">
+              <i class="small material-icons icon">person</i>
+              {{client.client.fio}}
+            </div>
+            <div class="col s5">{{client.client.phones[0].number | phoneFormat}}</div>
+          </div>
+          <hr class="col s12 black">
+        </div>
       </div>
     </div>
   </div>
-  <div class="col s6 detail-col deal-stage-info">
-    <nav>
-      <div class="nav-wrapper col s12 detail-col">
-        <ul class="hide-on-med-and-down col s12 detail-col">
-          <li class="col s3"><a [class.active-a]="0===select" (click)="onSelect(0)">Этапы</a></li>
-          <li class="col s3"><a [class.active-a]="1===select" (click)="onSelect(1)">Комментарии</a></li>
-          <li class="col s3"><a [class.active-a]="2===select" (click)="onSelect(2)">Перерасчеты</a></li>
-          <li class="col s3"><a [class.active-a]="3===select" (click)="onSelect(3)">Оплата</a></li>
-        </ul>
+  <div class="row valign-wrapper">
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">Замеры</div>
+    <div class="col s5 divider"></div>
+  </div>
+  <div class="row">
+    <div *ngFor="let measurement of deal?.measurements; let i = index" class="col s12">
+      <div *ngIf="i!==0">
+        <div class="divider"></div>
       </div>
-    </nav>
-    <div [ngSwitch]="select" class="col s12 detail-col-right" style="height: calc(75vh - 64px)"><!--убрать-->
-      <app-object-stages *ngSwitchCase="0" [deal]="deal"></app-object-stages>
-      <app-deal-comments *ngSwitchCase="1" [deal]="deal" (close)="subscribeDealId()"></app-deal-comments>
-      <app-deal-discounts *ngSwitchCase="2" [deal]="deal" (close)="subscribeDealId()"></app-deal-discounts>
-      <app-deal-payments *ngSwitchCase="3"></app-deal-payments>
+      <app-measurement-card [measurement]="measurement"></app-measurement-card>
     </div>
   </div>
-  <router-outlet></router-outlet>
+  <div class="row valign-wrapper">
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">Монтажи</div>
+    <div class="col s5 divider"></div>
+  </div>
+  <div class="row">
+    <div *ngFor="let mount of deal?.mounts; let i = index" class="col s12">
+      <div *ngIf="i!==0">
+        <div class="divider"></div>
+      </div>
+      <app-mount-card [mount]="mount"></app-mount-card>
+    </div>
+  </div>
+  <div class="deal-action">
+    <div class="row valign-wrapper">
+      <div class="col s5 divider"></div>
+      <div class="col s2 center-align header">Перерасчеты</div>
+      <div class="col s5 divider"></div>
+    </div>
+    <div class="row">
+      <div *ngFor="let discount of deal?.discounts" class="col s10 offset-s1">
+        <p>{{discount.auto_date | dateFormat: 'fullDate'}} {{discount | discount}}</p>
+      </div>
+    </div>
+    <div class="row valign-wrapper">
+      <div class="col s5 divider"></div>
+      <div class="col s2 center-align header">Оплаты</div>
+      <div class="col s5 divider"></div>
+    </div>
+    <div class="row">
+      <div *ngFor="let payment of deal?.payments" class="col s10 offset-s1">
+        <p>{{payment.auto_date | dateFormat: 'fullDate'}} {{payment | payment}}</p>
+      </div>
+    </div>
+    <div class="row valign-wrapper">
+      <div class="col s5 divider"></div>
+      <div class="col s2 center-align header">История</div>
+      <div class="col s5 divider"></div>
+    </div>
+    <div class="col s12 offset-s1">История заказа:</div>
+    <div class="row">
+      <div *ngFor="let action of deal?.order_actions" class="col s10 offset-s1">
+        <p>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'deal'}}</p>
+      </div>
+    </div>
+    <div class="col s12 offset-s1">История сделки:</div>
+    <div class="row">
+      <div *ngFor="let action of deal?.actions" class="col s10 offset-s1">
+        <p>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'deal'}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row valign-wrapper">
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">Комментарии</div>
+    <div class="col s5 divider"></div>
+  </div>
+  <div class="row">
+    <div *ngFor="let comment of deal?.comments" class="col s12">
+        <app-deal-comments [comment]="comment"></app-deal-comments>
+    </div>
+  </div>
 </div>
+<div class="col s12 deal-comment-content valign-wrapper">
+  <textarea placeholder="Введите комментарий" type="text" id="input-comment"></textarea>
+  <i class="small material-icons icon send">send</i>
+</div>
+
 

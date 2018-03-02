@@ -165,6 +165,62 @@ export class UtilsService {
       ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
   }
 
+  dealActionDecoder(action: DealAction) {
+    let type = '';
+    let causeStr = '';
+    let cause = '';
+    let commentStr = '';
+    let comment = '';
+
+    switch (action.type) {
+      case 0: {
+        type = 'отказал(а) в сделке';
+        break;
+      }
+      case 1: {
+        type = 'добавил(а) монтаж в сделку';
+        break;
+      }
+      case 2: {
+        type = 'успешно завершил(а) сделку';
+        break;
+      }
+      case 3: {
+        type = 'добавил(а) клиента в сделку';
+        break;
+      }
+      case 4: {
+        type = 'изменил(а) сделку';
+        break;
+      }
+      case 5: {
+        type = 'добавил(а) обсуждение в сделку';
+        break;
+      }
+    }
+
+    if (action.cause !== null) {
+      causeStr = 'по причине:';
+      switch (action.cause) {
+        case 1: {
+          cause = 'клиент не взял трубку';
+          break;
+        }
+        case 2: {
+          cause = 'другое';
+          break;
+        }
+      }
+    }
+
+    if (action.comment !== null) {
+      commentStr = ', с комментарием: ';
+      comment = action.comment;
+    }
+    return ', ' + type +
+      ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
+  }
+
   statusUrlDeal(statusStr: string): number {
     let status: number;
     switch (statusStr) {
@@ -196,7 +252,7 @@ export class UtilsService {
     return status;
   }
 
-  dealActionDecoder(action: DealAction) {
+  measurementActionDecoder(action: DealAction) {
     let comment = '';
     let type = '';
     let cause = 'ПО ПРИЧИНЕ СПРОСИТЬ У СЕРЕГИ';

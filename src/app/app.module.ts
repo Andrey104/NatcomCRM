@@ -57,9 +57,15 @@ import { DealPaymentsComponent } from './deals/deal-payments/deal-payments.compo
 import {MountCardComponent} from './deals/mount-card/mount-card.component';
 import { DealMeasurementComponent } from './deals/deal-measurement/deal-measurement.component';
 import { DealMountComponent } from './deals/deal-mount/deal-mount.component';
-import {ActionPipe} from './pipes/action-pipe';
+import {ActionPipe} from './pipes/action.pipe';
 import { CommentPipe } from './pipes/comment.pipe';
 import {TransferPipe} from './pipes/transfer.pipe';
+import {ImageTypePipe} from './pipes/image-type.pipe';
+import {DiscountPipe} from './pipes/discount.pipe';
+import {PaymentPipe} from './pipes/payment.pipe';
+import { CommentComponent } from './comment/comment.component';
+import { ColorCompanyDirective } from './directives/color-company.directive';
+import { InputSearchComponent } from './input-search/input-search.component';
 
 
 @NgModule({
@@ -109,6 +115,12 @@ import {TransferPipe} from './pipes/transfer.pipe';
     ActionPipe,
     CommentPipe,
     TransferPipe,
+    ImageTypePipe,
+    DiscountPipe,
+    PaymentPipe,
+    CommentComponent,
+    ColorCompanyDirective,
+    InputSearchComponent,
 ],
   imports: [
     BrowserModule,
