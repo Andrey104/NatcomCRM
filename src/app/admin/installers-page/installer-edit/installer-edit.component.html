@@ -1,0 +1,20 @@
+<div class="modal modal-fixed-footer" [ngClass]="{open: isOpen}">
+  <div class="modal-content">
+    <h5>Редактировть</h5>
+    <form>
+      <div class="input-field">
+        <input id="name" type="text" class="validate">
+        <label for="name">Имя</label>
+      </div>
+      <div class="input-field">
+        <input id="phone" type="text" class="validate">
+        <label for="phone">Телефон</label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="close()">Отмена</a>
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="ok()">ОК</a>
+  </div>
+</div>
+

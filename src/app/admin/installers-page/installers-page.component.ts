@@ -13,6 +13,8 @@ import {InstallersPage} from '../../models/installers/installers_page';
 })
 export class InstallersPageComponent implements OnInit {
   installers: Installer[];
+  editInstallerModalIsOpen = false;
+  modalIsOpen = false;
 
 
   constructor(private installerService: InstallersService) {
@@ -29,6 +31,14 @@ export class InstallersPageComponent implements OnInit {
       }, error2 => {
         log(error2);
       });
+  }
+  openEditInstallerModal() {
+    this.editInstallerModalIsOpen = true;
+    this.modalIsOpen = true;
+  }
+  editInstallerModalClose() {
+    this.editInstallerModalIsOpen = false;
+    this.modalIsOpen = false;
   }
 
 }

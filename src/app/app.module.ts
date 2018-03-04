@@ -69,6 +69,7 @@ import { InputSearchComponent } from './input-search/input-search.component';
 import { InstallersPageComponent } from './admin/installers-page/installers-page.component';
 import { InstallerComponent } from './admin/installers-page/installer/installer.component';
 import {InstallersService} from './services/installers.service';
+import { InstallerEditComponent } from './admin/installers-page/installer-edit/installer-edit.component';
 
 
 @NgModule({
@@ -126,6 +127,7 @@ import {InstallersService} from './services/installers.service';
     InputSearchComponent,
     InstallersPageComponent,
     InstallerComponent,
+    InstallerEditComponent,
 ],
   imports: [
     BrowserModule,
