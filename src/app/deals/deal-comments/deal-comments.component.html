@@ -1,11 +1,11 @@
 <div>
   <img class="image" src="{{comment?.user.type | imageType}}"/>
   <div>
-    <div class="comment-content te">
+    <div class="comment-content">
       <div class="comment-name">{{comment?.user.first_name}} {{comment?.user.last_name}}</div>
       <div class="comment-date">{{comment?.auto_date | dateFormat: 'fullDate'}}</div>
     </div>
-    <div>{{comment?.text}}</div>
+    <div class="text">{{comment?.text}}</div>
   </div>
 </div>
 

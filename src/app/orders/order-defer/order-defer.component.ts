@@ -30,8 +30,6 @@ export class OrderDeferComponent implements OnInit {
   ok() {
     this.cause = this.deferForm.get('cause').value;
     this.comment = this.deferForm.get('comment').value;
-    console.log(this.comment);
-    console.log(this.cause);
     if (this.cause === '' || this.comment === '' || this.comment === null || this.cause === null) {
       this.error = true;
       this.errorMessage = 'Заполните все поля';

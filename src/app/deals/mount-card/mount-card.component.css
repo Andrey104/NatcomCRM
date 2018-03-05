@@ -1,5 +1,9 @@
-.status-image {
-  margin: 10px 15px 10px 10px;
+.image-content {
+  float: left;
+}
+
+.icon {
+  margin-right: 5px;
 }
 
 .image {
@@ -11,12 +15,16 @@
   border-radius: 50%;
 }
 
+.content {
+  margin-left: 20px;
+}
+
 .name {
   margin-top: 8px;
   font-size: 16px;
 }
 
-.time {
+.mount-time {
   margin-top: 5px;
 }
 

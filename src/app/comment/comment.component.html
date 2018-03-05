@@ -1,3 +1,5 @@
-<p>
-  comment works!
-</p>
+<form [formGroup]="form" class="col s12 valign-wrapper">
+  <textarea class="col s11" placeholder="Введите комментарий"
+            (keydown)="buttonComment($event)" formControlName="commentArea"></textarea>
+  <i class="col s1 small material-icons icon send hover-element" (click)="sendComment()">send</i>
+</form>

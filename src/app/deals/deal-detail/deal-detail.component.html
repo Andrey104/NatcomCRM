@@ -1,12 +1,14 @@
-<app-preloader *ngIf="!deal"></app-preloader>
-<div *ngIf="deal" class="col s12 detail-col scrollable-page">
+<div *ngIf="!deal" class="spinner-contener">
+  <app-preloader></app-preloader>
+</div>
+<div *ngIf="deal" class="col s12 detail-col scrollable-page" id="page">
   <div class="row main-row valign-wrapper">
     <div class="col s4 valign-wrapper">
       <img  class="avatar" src="{{deal?.user.type | imageType}}">
       <div>{{deal?.user.first_name}} {{deal?.user.last_name}}</div>
     </div>
-    <div class="col s3">{{deal?.status}}</div>
-    <div class="col s2">{{deal?.contract | contract}}</div>
+    <div class="col s3">{{getDealStatus(deal?.status)}}</div>
+    <div [style.color]="deal?.contract ? 'green' : 'red'" class="col s2">{{deal?.contract | contract}}</div>
     <div class="col s3">
       <i class="tiny material-icons icon date-icon">date_range</i>
       <div class="deal-date">
@@ -38,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div class="col s5 detail-col">
+    <div class="col s5">
         <div class="row">
           <div class="col s12 valign-wrapper">
             <hr class="col s4">
@@ -48,12 +50,13 @@
         </div>
       <div class="row">
         <div *ngFor="let client of deal?.clients" class="col s12">
-          <div class="valign-wrapper">
-            <div class="col s7 valign-wrapper">
+          <div class="valign-wrapper contact-info forward-block col s12">
+            <div class="col s6 valign-wrapper detail-col-right">
               <i class="small material-icons icon">person</i>
               {{client.client.fio}}
             </div>
             <div class="col s5">{{client.client.phones[0].number | phoneFormat}}</div>
+            <i class="arrow col s1 material-icons detail-col-left">chevron_right</i>
           </div>
           <hr class="col s12 black">
         </div>
@@ -66,11 +69,12 @@
     <div class="col s5 divider"></div>
   </div>
   <div class="row">
-    <div *ngFor="let measurement of deal?.measurements; let i = index" class="col s12">
+    <div *ngFor="let measurement of deal?.measurements; let i = index" class="col s12 valign-wrapper forward-block">
       <div *ngIf="i!==0">
         <div class="divider"></div>
       </div>
-      <app-measurement-card [measurement]="measurement"></app-measurement-card>
+      <app-measurement-card [measurement]="measurement" class="col s11"></app-measurement-card>
+      <i class="arrow col s1 material-icons">chevron_right</i>
     </div>
   </div>
   <div class="row valign-wrapper">
@@ -79,11 +83,14 @@
     <div class="col s5 divider"></div>
   </div>
   <div class="row">
-    <div *ngFor="let mount of deal?.mounts; let i = index" class="col s12">
+    <div *ngFor="let mount of deal?.mounts; let i = index" class="col s12 valign-wrapper forward-block">
       <div *ngIf="i!==0">
-        <div class="divider"></div>
+        <div class="row">
+          <div class="divider"></div>
+        </div>
       </div>
-      <app-mount-card [mount]="mount"></app-mount-card>
+      <app-mount-card [mount]="mount" class="col s11"></app-mount-card>
+      <i class="arrow col s1 material-icons">chevron_right</i>
     </div>
   </div>
   <div class="deal-action">
@@ -136,9 +143,8 @@
     </div>
   </div>
 </div>
-<div class="col s12 deal-comment-content valign-wrapper">
-  <textarea placeholder="Введите комментарий" type="text" id="input-comment"></textarea>
-  <i class="small material-icons icon send">send</i>
+<div *ngIf="deal" class="col s12 deal-comment-content valign-wrapper">
+  <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
 
 

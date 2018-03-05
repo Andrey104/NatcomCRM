@@ -1,11 +1,13 @@
-<div routerLink="mount/{{mount?.id}}" class="card horizontal order hover-element hoverable no-border col s12">
-  <div class="center-align valign-wrapper">
-    <div class="icon status-image">
+<div routerLink="mount/{{mount?.id}}" class="hover-element no-border valign-wrapper col s12">
+  <div class="image-content">
       <i class="small material-icons icon image {{statusColor(mount?.status)}}">{{statusIcon(mount?.status)}}</i>
-    </div>
   </div>
-  <div class="card-stacked">
-    <div class="time"><i class="tiny material-icons icon">access_time</i> {{mount?.date | mountDate}}</div>
-    <div class="name"><i class="tiny material-icons icon">error_outline</i> {{mount?.date_mount | dateFormat: 'date'}} </div>
+  <div class="content">
+    <div class="mount-time valign-wrapper">
+      <i class="tiny material-icons icon">access_time</i> {{mount?.date | mountDate}}
+    </div>
+    <div class="name valign-wrapper">
+      <i class="tiny material-icons icon">error_outline</i> {{mount?.status | mountStatus}}
+    </div>
   </div>
 </div>

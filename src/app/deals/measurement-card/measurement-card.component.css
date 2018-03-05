@@ -1,14 +1,18 @@
-.status-image {
-  min-width: 40px;
-  height: 40px;
+.image-content {
+  float: left;
+}
+
+.image {
   width: 40px;
-  border-radius: 20px;
-  background-color: #ffa726;
+  height: 40px;
   text-align: center;
   line-height: 40px;
-  font-size: 25px;
   color: white;
-  margin: 10px 15px 10px 10px;
+  border-radius: 50%;
+}
+
+.content {
+  margin-left: 20px;
 }
 
 .name {
@@ -16,6 +20,30 @@
   font-size: 16px;
 }
 
-.time {
+.mount-time {
   margin-top: 5px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.undistributedMeasurement {
+  background-color: grey;
+}
+
+.responsibleAppointed {
+  background-color: #ffa726;
+}
+
+.closedNotConcluded {
+  background-color: grey;
+}
+
+.closedContractConcluded {
+  background-color: green;
+}
+
+.renouncement {
+  background-color: red;
 }
