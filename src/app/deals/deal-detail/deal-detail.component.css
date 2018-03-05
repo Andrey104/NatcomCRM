@@ -39,9 +39,7 @@
 .main-info {
   padding-top: 30px;
 }
-.contact-divider {
-  border-bottom: 1px solid black;
-}
+
 .company-name {
   overflow: hidden;
   font-size: 24px;
@@ -64,6 +62,15 @@
   background-color: #f9f9f9;
 }
 
+.forward-block:hover .arrow{
+  font-size: 40px;
+  opacity: 1;
+  color: #666666;
+}
+
+.arrow {
+  opacity: 0;
+}
 
 .content {
   padding-left: 15px;
@@ -74,38 +81,6 @@
   height: 80px;
 }
 
-
-
-.contract-status {
-  height: 20px;
-  border-radius: 10px;
-}
-
-.status-info {
-  padding-top: 6vh;
-}
-
-.deal-stage-info {
-  height: calc(100vh - 64px);
-}
-
-nav {
-  box-shadow: none;
-  height: 8vh;
-}
-
-ul li {
-  line-height: 8vh;
-}
-
-ul li a {
-  height: 8vh;
-  font-size: 10px;
-  text-align: center;
-  line-height: 8vh;
-  padding: 0;
-}
-
 .deal-comment-content {
   height: 80px;
   position: fixed;
@@ -114,30 +89,6 @@ ul li a {
   border: 1px solid #c4c4c4;
 }
 
-textarea {
-  margin-bottom: 0;
-  border: 1px solid #c4c4c4;
-  background: #ffffff;
-  text-indent: 10px;
-  min-height: 20px;
-  margin-left: 20px;
-  width: calc(100% - 32%);
-  resize: none;
-  overflow: auto;
-}
-
-textarea:focus {
-  background: white;
-  border: 1px solid grey!important;
-  border-bottom: 1px solid grey!important;
-  box-shadow: none!important;
-  -webkit-box-shadow: none!important;
-  color: #333;
-  outline: 0;
-}
-.input-field {
-
-}
-.send {
-  margin-left: 20px;
+.comment-content {
+  width: calc(100% - 25%);
 }

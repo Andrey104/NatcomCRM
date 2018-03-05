@@ -1,12 +1,13 @@
-<div routerLink="measurement/{{measurement?.id}}"
-     class="card horizontal order hover-element hoverable no-border col s12">
-  <div class="center-align valign-wrapper">
-    <div class="icon status-image">
-        H
-    </div>
+<div routerLink="mount/{{measurement?.id}}" class="hover-element no-border valign-wrapper col s12">
+  <div class="image-content">
+    <i ngClass="{{measurementStatus.color}}" class="small material-icons icon image">{{measurementStatus?.icon}}</i>
   </div>
-  <div class="card-stacked">
-    <div class="time"><i class="tiny material-icons icon">access_time</i> {{measurement?.time}}</div>
-    <div class="name"><i class="tiny material-icons icon">person</i> {{measurement?.worker?.first_name}} {{measurement?.worker?.last_name}}</div>
+  <div class="content">
+    <div class="mount-time valign-wrapper">
+      <i class="tiny material-icons icon">access_time</i>{{measurement?.time}}
+    </div>
+    <div class="name valign-wrapper">
+      <i class="tiny material-icons icon">error_outline</i>{{measurement?.worker.last_name}} {{measurement?.worker.first_name}}
+    </div>
   </div>
 </div>

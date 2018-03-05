@@ -9,7 +9,7 @@ export class DealResult {
   measurements: DealMeasurement[];
   mounts: object;
   discounts: object;
-  comments: object;
+  comments: object[];
   payments: object; // !!!!!
   order_actions: DealAction[]; // !!!!!!!!!!!!!!!!!!!!add class
   actions: DealAction[];

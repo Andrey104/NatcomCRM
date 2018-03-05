@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DealMeasurement} from '../../models/deal/deal_measurement';
+import {UtilsService} from '../../services/utils.service';
 
 
 @Component({
@@ -9,10 +10,17 @@ import {DealMeasurement} from '../../models/deal/deal_measurement';
 })
 export class MeasurementCardComponent implements OnInit {
   @Input() measurement: DealMeasurement;
+  measurementStatus: { icon: string, color: string };
 
-  constructor() { }
+  constructor(private utils: UtilsService) {
+  }
 
   ngOnInit() {
+    this.getMeasurementStatus(this.measurement.status);
+  }
+
+  getMeasurementStatus(status) {
+    this.measurementStatus = this.utils.measurementIconDecoder(status);
   }
 
 }

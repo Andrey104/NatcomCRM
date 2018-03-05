@@ -14,7 +14,6 @@ import {UtilsService} from '../../services/utils.service';
 export class DealPageComponent implements OnInit {
   dealPage: DealResult[];
   status = 0;
-  status_deal;
   page: number;
   lastPage: boolean;
   load: boolean;

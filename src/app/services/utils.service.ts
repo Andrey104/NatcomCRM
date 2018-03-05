@@ -280,4 +280,35 @@ export class UtilsService {
     return type + cause + comment;
   }
 
+  measurementIconDecoder(status: number) {
+    let measurement: {icon: string, color: string};
+    switch (status) {
+      case 0: {
+        measurement = {icon: 'priority_high', color: 'undistributedMeasurement'};
+        break;
+      }
+      case 1: {
+        measurement = {icon: 'autorenew', color: 'responsibleAppointed'};
+        break;
+      }
+      case 2: {
+        measurement = {icon: 'check', color: 'closedNotConcluded'};
+        break;
+      }
+      case 3: {
+        measurement = {icon: 'check', color: 'closedContractConcluded'};
+        break;
+      }
+      case 4: {
+        measurement = {icon: 'clear', color: 'renouncement'};
+        break;
+      }
+      case 5: {
+        measurement = {icon: 'clear', color: 'processFailure'};
+        break;
+      }
+    }
+    return measurement;
+  }
+
 }

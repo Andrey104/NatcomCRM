@@ -66,6 +66,9 @@ import {PaymentPipe} from './pipes/payment.pipe';
 import { CommentComponent } from './comment/comment.component';
 import { ColorCompanyDirective } from './directives/color-company.directive';
 import { InputSearchComponent } from './input-search/input-search.component';
+import {MountStatusPipe} from './pipes/mountStatus.pipe';
+import { HoverArrowDirective } from './directives/hover-arrow.directive';
+import { CommentFieldComponent } from './comment-field/comment-field.component';
 
 
 @NgModule({
@@ -121,6 +124,9 @@ import { InputSearchComponent } from './input-search/input-search.component';
     CommentComponent,
     ColorCompanyDirective,
     InputSearchComponent,
+    MountStatusPipe,
+    HoverArrowDirective,
+    CommentFieldComponent,
 ],
   imports: [
     BrowserModule,

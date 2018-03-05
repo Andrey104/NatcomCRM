@@ -47,20 +47,6 @@ export class DealService {
     });
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
-
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
     this.messageService.add('HeroService: ' + message);
@@ -69,7 +55,7 @@ export class DealService {
   private token() {
     return localStorage.getItem('token');
   }
-  dealComments(id, comment): Observable<Object> {
+  dealComment(id, comment): Observable<Object> {
     return this.http.post<Object>(this.dealsUrl + id + '/comment/', {'text': comment},
       {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
       ).pipe(
@@ -87,5 +73,18 @@ export class DealService {
     );
   }
 
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 
 }

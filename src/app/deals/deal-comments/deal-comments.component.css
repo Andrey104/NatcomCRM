@@ -14,3 +14,7 @@
   padding-left: 7px;
   color: #8b8989;
 }
+
+.text {
+  overflow: hidden;
+}

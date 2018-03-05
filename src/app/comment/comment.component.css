@@ -1,0 +1,22 @@
+textarea {
+  margin-bottom: 0;
+  border: 1px solid #c4c4c4;
+  background: #ffffff;
+  text-indent: 10px;
+  height: 30px;
+  margin-left: 20px;
+  resize: none;
+  overflow: auto;
+}
+
+textarea:focus {
+  background: white;
+  border: 1px solid grey!important;
+  color: #333;
+  outline: 0;
+  height: 50px;
+}
+
+.send {
+  margin-left: 20px;
+}
