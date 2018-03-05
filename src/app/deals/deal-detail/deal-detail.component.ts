@@ -1,4 +1,4 @@
-import {AfterContentChecked, AfterViewChecked, Component, ElementRef, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
