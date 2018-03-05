@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {Phone} from '../models/phone';
 import {OrderAction} from '../models/orders/order_action';
 import {UtilsService} from '../services/utils.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-client-info',
@@ -18,7 +19,10 @@ export class ClientInfoComponent implements OnInit {
   private id_client: number;
   id: number;
   loader: boolean;
-  constructor(private clientService: ClientService, private activatedRoute: ActivatedRoute, private utils: UtilsService) { }
+  constructor(private location: Location,
+              private clientService: ClientService,
+              private activatedRoute: ActivatedRoute,
+              private utils: UtilsService) { }
   ngOnInit() {
     this.getDeals();
   }
@@ -36,5 +40,9 @@ export class ClientInfoComponent implements OnInit {
   }
   statusDeal(status: number) {
     return this.utils.statusDeal(status);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent implements OnInit {
-
+  name = localStorage.getItem('first_name');
+  lastName = localStorage.getItem('last_name');
+  type = localStorage.getItem('user_type');
   constructor() { }
 
   ngOnInit() {

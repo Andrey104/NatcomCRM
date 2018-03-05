@@ -1,0 +1,13 @@
+.edit-btn{
+  position: absolute;
+  top: 25%;
+  right: 15px;
+  cursor: pointer;
+}
+.name{
+  font-size: 25px;
+  padding: 10px 10px 5px 15px;
+}
+.phone{
+ padding: 0 0 5px 15px;
+}

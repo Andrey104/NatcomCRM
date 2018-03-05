@@ -25,7 +25,7 @@ import {PaginationDirective} from './directives/pagination.directive';
 import {UtilsService} from './services/utils.service';
 import { OrderDeferComponent } from './orders/order-defer/order-defer.component';
 import {AdminGuard} from './admin.guard';
-import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { OrderRejectComponent } from './orders/order-reject/order-reject.component';
 import { OrderToDealComponent } from './orders/order-to-deal/order-to-deal.component';
 import { ModalComponent } from './modal/modal.component';
@@ -66,6 +66,13 @@ import {PaymentPipe} from './pipes/payment.pipe';
 import { CommentComponent } from './comment/comment.component';
 import { ColorCompanyDirective } from './directives/color-company.directive';
 import { InputSearchComponent } from './input-search/input-search.component';
+import { SettingsPageComponent } from './admin/settings-page/settings-page.component';
+import { InstallerComponent } from './admin/settings-page/installers/installer/installer.component';
+import {InstallersService} from './services/installers.service';
+import { InstallersComponent } from './admin/settings-page/installers/installers.component';
+import { BrigadesComponent } from './admin/settings-page/brigades/brigades.component';
+import { CompaniesComponent } from './admin/settings-page/companies/companies.component';
+import {InstallerEditComponent} from './admin/settings-page/installers/installer-edit/installer-edit.component';
 import {MountStatusPipe} from './pipes/mountStatus.pipe';
 import { HoverArrowDirective } from './directives/hover-arrow.directive';
 import { CommentFieldComponent } from './comment-field/comment-field.component';
@@ -124,6 +131,12 @@ import { CommentFieldComponent } from './comment-field/comment-field.component';
     CommentComponent,
     ColorCompanyDirective,
     InputSearchComponent,
+    SettingsPageComponent,
+    InstallerComponent,
+    InstallerEditComponent,
+    InstallersComponent,
+    BrigadesComponent,
+    CompaniesComponent,
     MountStatusPipe,
     HoverArrowDirective,
     CommentFieldComponent,
@@ -148,6 +161,7 @@ import { CommentFieldComponent } from './comment-field/comment-field.component';
     ClientService,
     MeasurementService,
     MountService,
+    InstallersService
   ],
   bootstrap: [AppComponent]
 })
