@@ -15,7 +15,11 @@ import {OrderDetailComponent} from './orders/order-detail/order-detail.component
 import {DealDetailComponent} from './deals/deal-detail/deal-detail.component';
 import {DealMeasurementComponent} from './deals/deal-measurement/deal-measurement.component';
 import {DealMountComponent} from './deals/deal-mount/deal-mount.component';
-import {InstallersPageComponent} from './admin/installers-page/installers-page.component';
+import {SettingsPageComponent} from './admin/settings-page/settings-page.component';
+import {InstallersPage} from './models/installers/installers_page';
+import {InstallersComponent} from './admin/settings-page/installers/installers.component';
+import {BrigadesComponent} from './admin/settings-page/brigades/brigades.component';
+import {CompaniesComponent} from './admin/settings-page/companies/companies.component';
 
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts
@@ -39,11 +43,18 @@ const pages_routes: Routes = [
   {path: 'user', component: UserInfoComponent}
 ];
 
+const settings_router: Routes = [
+  {path: 'installers', component: InstallersComponent},
+  {path: 'brigades', component: BrigadesComponent},
+  {path: 'companies', component: CompaniesComponent},
+  {path: '', redirectTo: 'installers', pathMatch: 'full'}
+];
+
 const admin_routes: Routes = [
   {path: 'deals', component: DealPageComponent, children: deals_routes},
   {path: 'orders', component: OrderPageComponent, children: orders_routes},
   {path: 'user', component: UserInfoComponent},
-  {path: 'installers', component: InstallersPageComponent}
+  {path: 'settings', component: SettingsPageComponent, children: settings_router}
 ];
 
 const routes: Routes = [

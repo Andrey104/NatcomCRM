@@ -1,0 +1,11 @@
+<h5>Монтажники</h5>
+<div class="col s2"></div>
+<div class="col s6">
+  <app-installer *ngFor="let installer of installers"
+                 [installer]="installer" (onEdit)="openEditInstallerModal()">
+  </app-installer>
+</div>
+<div class="col s4"></div>
+<a class="btn-floating btn-large waves-effect waves-light red float-action-btn"><i class="material-icons">add</i></a>
+
+<app-installer-edit [isOpen]="editInstallerModalIsOpen" (onClose)="editInstallerModalClose()"></app-installer-edit>

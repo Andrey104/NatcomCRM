@@ -66,10 +66,13 @@ import {PaymentPipe} from './pipes/payment.pipe';
 import { CommentComponent } from './comment/comment.component';
 import { ColorCompanyDirective } from './directives/color-company.directive';
 import { InputSearchComponent } from './input-search/input-search.component';
-import { InstallersPageComponent } from './admin/installers-page/installers-page.component';
-import { InstallerComponent } from './admin/installers-page/installer/installer.component';
+import { SettingsPageComponent } from './admin/settings-page/settings-page.component';
+import { InstallerComponent } from './admin/settings-page/installers/installer/installer.component';
 import {InstallersService} from './services/installers.service';
-import { InstallerEditComponent } from './admin/installers-page/installer-edit/installer-edit.component';
+import { InstallersComponent } from './admin/settings-page/installers/installers.component';
+import { BrigadesComponent } from './admin/settings-page/brigades/brigades.component';
+import { CompaniesComponent } from './admin/settings-page/companies/companies.component';
+import {InstallerEditComponent} from './admin/settings-page/installers/installer-edit/installer-edit.component';
 
 
 @NgModule({
@@ -125,9 +128,12 @@ import { InstallerEditComponent } from './admin/installers-page/installer-edit/i
     CommentComponent,
     ColorCompanyDirective,
     InputSearchComponent,
-    InstallersPageComponent,
+    SettingsPageComponent,
     InstallerComponent,
     InstallerEditComponent,
+    InstallersComponent,
+    BrigadesComponent,
+    CompaniesComponent,
 ],
   imports: [
     BrowserModule,
