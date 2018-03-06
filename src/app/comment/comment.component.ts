@@ -31,7 +31,9 @@ export class CommentComponent implements OnInit {
     const userComment = this.form.get('commentArea').value;
     if (userComment !== '') {
       this.form.reset();
-      this.comment.emit(this.text);
+      this.comment.emit(userComment);
+    } else {
+      alert('Нельзя отправлять пустой коммент');
     }
   }
 

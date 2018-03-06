@@ -62,6 +62,14 @@
   background-color: #f9f9f9;
 }
 
+.forward-block {
+  padding: 5px 0 5px 0;
+}
+
+.forward-block:hover {
+  background-color: #e2e2e2;
+}
+
 .forward-block:hover .arrow{
   font-size: 40px;
   opacity: 1;

@@ -18,3 +18,13 @@
 .text {
   overflow: hidden;
 }
+pre {
+  line-height: 1.8;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  color: rgba(0,0,0,0.87);
+  word-wrap: break-word;
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  margin-top: 0;
+}

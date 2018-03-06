@@ -1,0 +1,26 @@
+.open {
+  height: 400px;
+  width: 430px;
+  display: block;
+}
+
+.modal {
+  top: calc((100vh - 400px)/2);
+  left: calc((100vh - 430px)/2);
+}
+
+.client-name {
+  font-size: 24px;
+}
+
+.modal-content {
+  padding: 0 0 24px 24px;
+}
+
+.client-info-content {
+  padding: 24px 18px 0 0;
+}
+
+.modal-footer {
+  height: 30px;
+}

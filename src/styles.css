@@ -40,14 +40,12 @@
 .modal {
   background: #fff;
   position: fixed;
-  left: 50%;
-  top: 50%;
-  margin-top: -300px;
+  left: 50vh;
+  top: 50vh;
   overflow: hidden;
   z-index: 2000;
   width: 500px;
   padding: 0;
-  margin-left: -250px;
 }
 /*Классы для кнопки*/
 .button {
