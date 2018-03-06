@@ -47,7 +47,11 @@ export class DealPageComponent implements OnInit {
   }
 
   onScrollDeal() {
-    this.nextPage();
+    if (this.searchStr === '') {
+      this.nextPage();
+    } else {
+      this.nextFilterPage();
+    }
   }
 
   nextPage() {
@@ -55,6 +59,20 @@ export class DealPageComponent implements OnInit {
       this.load = true;
       this.page = this.page + 1;
       this.dealService.getDeals(this.status, this.page).subscribe(dealPage => {
+        this.dealPage = this.dealPage.concat(dealPage.results);
+        if (dealPage.next === null) {
+          this.lastPage = true;
+        }
+        this.load = false;
+      });
+    }
+  }
+
+  nextFilterPage() {
+    if (!this.lastPage && !this.load) {
+      this.load = true;
+      this.page = this.page + 1;
+      this.dealService.getFilterDeals(this.page, this.searchStr).subscribe( dealPage => {
         this.dealPage = this.dealPage.concat(dealPage.results);
         if (dealPage.next === null) {
           this.lastPage = true;
