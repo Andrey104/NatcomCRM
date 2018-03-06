@@ -11,6 +11,7 @@ import {DealMount} from '../../models/deal/deal_mount';
 export class DealMountComponent implements OnInit {
   id;
   mount: DealMount;
+  dealId;
 
   constructor(private activatedRoute: ActivatedRoute, private mountService: MountService) {
   }
@@ -22,9 +23,14 @@ export class DealMountComponent implements OnInit {
   subscribeMount() {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['mount_id'];
+      this.dealId = params['id'];
       this.mountService.getMount(this.id).subscribe(mount => {
         this.mount = mount;
       });
     });
   }
 }
+// 0 - в процессе
+// 1 - добавлена стадия
+// 2 - успешно завершен
+// 3 - отклонен

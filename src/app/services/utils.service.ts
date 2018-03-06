@@ -115,6 +115,21 @@ export class UtilsService {
     return ourStatus;
   }
 
+  statusStageMount(status: number) {
+    let ourStatus: { image, color };
+    switch (status) {
+      case 0: {
+        ourStatus = {image: 'autorenew', color: 'stageDuring'};
+        break;
+      }
+      case 1: {
+        ourStatus = {image: 'check', color: 'stageSuccess'};
+        break;
+      }
+    }
+    return ourStatus;
+  }
+
   orderActionDecoder(action: OrderAction) {
     const user = action.user.first_name + ' ' + action.user.last_name;
     let type = '';
@@ -281,7 +296,7 @@ export class UtilsService {
   }
 
   measurementIconDecoder(status: number) {
-    let measurement: {icon: string, color: string};
+    let measurement: { icon: string, color: string };
     switch (status) {
       case 0: {
         measurement = {icon: 'priority_high', color: 'undistributedMeasurement'};

@@ -76,6 +76,9 @@ import {InstallerEditComponent} from './admin/settings-page/installers/installer
 import {MountStatusPipe} from './pipes/mountStatus.pipe';
 import { HoverArrowDirective } from './directives/hover-arrow.directive';
 import { CommentFieldComponent } from './comment-field/comment-field.component';
+import {DealContractView} from './pipes/deal-contract-view.pipe';
+import { StageComponent } from './stage/stage.component';
+import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
 
 
 @NgModule({
@@ -124,6 +127,7 @@ import { CommentFieldComponent } from './comment-field/comment-field.component';
     DealMountComponent,
     ActionPipe,
     CommentPipe,
+    DealContractView,
     TransferPipe,
     ImageTypePipe,
     DiscountPipe,
@@ -140,6 +144,8 @@ import { CommentFieldComponent } from './comment-field/comment-field.component';
     MountStatusPipe,
     HoverArrowDirective,
     CommentFieldComponent,
+    StageComponent,
+    StageMountStatusPipe
 ],
   imports: [
     BrowserModule,

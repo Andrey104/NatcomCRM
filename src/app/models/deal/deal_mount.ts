@@ -1,4 +1,5 @@
 import {Company} from '../company';
+import {User} from '../user';
 
 export class DealMount {
   id: number;
@@ -10,4 +11,5 @@ export class DealMount {
   date: string;
   status: number;
   deal: number;
+  user: User;
 }
