@@ -49,8 +49,8 @@
           </div>
         </div>
       <div class="row">
-        <div *ngFor="let client of deal?.clients" class="col s12">
-          <div class="valign-wrapper contact-info forward-block col s12">
+        <div *ngFor="let client of deal?.clients; let i = index" class="col s12">
+          <div (click)="openClientInfo(i)" class="valign-wrapper contact-info forward-block col s12 hover-element">
             <div class="col s6 valign-wrapper detail-col-right">
               <i class="small material-icons icon">person</i>
               {{client.client.fio}}
@@ -74,7 +74,7 @@
         <div class="divider"></div>
       </div>
       <app-measurement-card [measurement]="measurement" class="col s11"></app-measurement-card>
-      <i class="arrow col s1 material-icons">chevron_right</i>
+      <i class="arrow col s1 material-icons right-align">chevron_right</i>
     </div>
   </div>
   <div class="row valign-wrapper">
@@ -90,7 +90,7 @@
         </div>
       </div>
       <app-mount-card [mount]="mount" class="col s11"></app-mount-card>
-      <i class="arrow col s1 material-icons">chevron_right</i>
+      <i class="arrow col s1 material-icons right-align">chevron_right</i>
     </div>
   </div>
   <div class="deal-action">
@@ -142,6 +142,7 @@
         <app-deal-comments [comment]="comment"></app-deal-comments>
     </div>
   </div>
+  <app-deal-client-info [openClientInfo]="clientInfo" [client]="client" (close)="closeClientInfo()"></app-deal-client-info>
 </div>
 <div *ngIf="deal" class="col s12 deal-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>

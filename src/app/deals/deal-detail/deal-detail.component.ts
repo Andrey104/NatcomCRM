@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
 import {UtilsService} from '../../services/utils.service';
+import {Client} from '../../models/client';
 
 @Component({
   selector: 'app-deal-detail',
@@ -14,10 +15,12 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   private id;
   page = 1;
   select;
+  clientInfo = false;
+  client: Client;
+  deal: DealResult;
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService, private utils: UtilsService) { }
-  deal: DealResult;
   ngOnInit() {
     this.select = 0;
     this.subscribeDealId();
@@ -42,11 +45,20 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
         this.deal.comments.push(next);
         this.flag = true;
       }, error => {
-        console.log('ghfdsf');
         console.log(error.error);
       });
   }
   getDealStatus(status) {
     return this.utils.statusDeal(status);
+  }
+  openClientInfo(idClient: number) {
+    this.clientInfo = true;
+    this.client = this.deal.clients[idClient];
+    console.log(this.client);
+  }
+  closeClientInfo() {
+    console.log('closeClientInfo');
+    this.clientInfo = false;
+    this.client = null;
   }
 }
