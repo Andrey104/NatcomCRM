@@ -1,4 +1,47 @@
-<div>
-  {{mount?.id}}
-  {{mount?.company.id}}
+<div *ngIf="!mount" class="spinner-contener">
+  <app-preloader></app-preloader>
+</div>
+<div class="mainDiv col s12 detail-col" >
+  <div class="col s12 detail-col valign-wrapper left-align">
+    <!--<div class="col s4 valign-wrapper">-->
+    <!--<img  class="avatar" src="{{mount?.user.type | imageType}}">-->
+    <!--<div>{{mount?.user.first_name}} {{mount?.user.last_name}}</div>-->
+    <!--</div>-->
+    <div class="col s3"></div>
+    <div class="col s8">{{mount?.status | mountStatus}}</div>
+    <div class="col s1 namePage">Монтаж</div>
+  </div>
+  <div class="col s12 divider detail-col"></div>
+  <div class="col s12 valign-wrapper">
+    <div class="status-container valign-wrapper main-info">
+      <div [appColorCompany]="mount?.company?.symbol" class="company-symbol">{{mount?.company?.symbol}}</div>
+      <div class="company-name">{{mount?.company?.name}}</div>
+    </div>
+  </div>
+  <div class="mount-info">
+    <div class="col s12 str-info">
+      <i class="tiny material-icons icon">date_range</i><span>  {{mount?.date | dateFormat: 'date'}}</span>
+      <div class="valign-wrapper">
+      </div>
+    </div>
+    <div class="col s12 str-info">
+      <div class="valign-wrapper">
+        <i class="tiny material-icons icon">assignment</i><span> Номер договора:  {{dealId | dealContractView}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 row valign-wrapper">
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align">Cтадии</div>
+    <div class="col s5 divider"></div>
+  </div>
+  <div class="col s12 main-row valign-wrapper forward-block" *ngFor="let stage of mount?.stages; let i = index">
+    <div *ngIf="i!==0">
+      <div class="row">
+        <div class="divider"></div>
+      </div>
+    </div>
+    <app-stage [stage]="stage" class="col s11"></app-stage>
+    <i class="arrow col s1 material-icons right-align">chevron_right</i>
+  </div>
 </div>

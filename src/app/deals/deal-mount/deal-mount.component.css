@@ -1,0 +1,51 @@
+.namePage {
+  margin: 10px;
+  font-size: 16px
+}
+
+.mainDiv {
+  border-left: 1px solid #c4c4c4;
+}
+
+
+.forward-block:hover {
+  background-color: #E2E2E2;
+}
+
+.forward-block:hover .arrow {
+  font-size: 40px;
+  opacity: 1;
+  color: #666666;
+}
+
+.arrow {
+  opacity: 0;
+}
+
+.company-name {
+  overflow: hidden;
+  font-size: 24px;
+  line-height: 2.5rem;
+  margin-left: 15px;
+}
+
+.main-info {
+  padding-top: 30px;
+}
+
+.str-info {
+  margin-top: 15px;
+}
+
+.mount-info {
+  margin-left: 20px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.header {
+  font-size: 14px;
+  color: black;
+}

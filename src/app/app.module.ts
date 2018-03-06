@@ -77,6 +77,9 @@ import {MountStatusPipe} from './pipes/mountStatus.pipe';
 import { HoverArrowDirective } from './directives/hover-arrow.directive';
 import { CommentFieldComponent } from './comment-field/comment-field.component';
 import { DealClientInfoComponent } from './deals/deal-client-info/deal-client-info.component';
+import {DealContractView} from './pipes/deal-contract-view.pipe';
+import { StageComponent } from './stage/stage.component';
+import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
 
 
 @NgModule({
@@ -125,6 +128,7 @@ import { DealClientInfoComponent } from './deals/deal-client-info/deal-client-in
     DealMountComponent,
     ActionPipe,
     CommentPipe,
+    DealContractView,
     TransferPipe,
     ImageTypePipe,
     DiscountPipe,
@@ -141,6 +145,8 @@ import { DealClientInfoComponent } from './deals/deal-client-info/deal-client-in
     MountStatusPipe,
     HoverArrowDirective,
     CommentFieldComponent,
+    StageComponent,
+    StageMountStatusPipe,
     DealClientInfoComponent,
 ],
   imports: [
