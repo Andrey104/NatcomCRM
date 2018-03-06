@@ -1,23 +1,29 @@
-.orders{
-  background-color: rgba(190, 190, 190, 0.4);;
-  min-width: 200px;
-  width: 100%;
-  min-height: 95vh;
-  margin: 0;
-}
-.orders-main-row{
-  padding: 0;
-  margin: 0;
-}
-.order-detail-col{
-  padding: 0;
+.input-field {
+  position: fixed;
+  left: 0!important;
+  top: 50px;
+  z-index: 1;
+  height: 50px;
 }
 
-.active{
-  background-color: #222222;
+input[type="search"] {
+  margin-bottom: 0;
+  border: 2px solid #ffe0b2;
+  border-radius: 15px;
+  background: #f1f8e9;
+  text-indent: 10px;
+  height: 30px;
+  margin-top: 10px;
 }
 
-.search-results {
-  height: 20rem;
-  overflow: scroll;
+input[type="search"]:focus {
+  background: white;
+  border: 2px solid grey;
+  color: #333;
+  outline: 0;
+}
+
+.list-col {
+  margin-top: 50px;
+  height: calc(100vh - 114px);
 }
