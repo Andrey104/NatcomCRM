@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {log} from 'util';
 import {InstallersService} from '../../../services/installers.service';
 import {Installer} from '../../../models/installers/installer';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-installers',
@@ -11,7 +12,7 @@ import {Installer} from '../../../models/installers/installer';
 export class InstallersComponent implements OnInit {
   installers: Installer[];
   editInstallerModalIsOpen = false;
-  modalIsOpen = false;
+  modal: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   @Output() onModalOpen = new EventEmitter<number>();
   /* 0 - installerEdit */
@@ -31,11 +32,13 @@ export class InstallersComponent implements OnInit {
   }
   openEditInstallerModal() {
     this.editInstallerModalIsOpen = true;
-    this.modalIsOpen = true;
-    this.onModalOpen.emit(0);
+    this.openModal(true);
   }
   editInstallerModalClose() {
     this.editInstallerModalIsOpen = false;
-    this.modalIsOpen = false;
+    this.openModal(false);
+  }
+  openModal(open: Boolean) {
+    this.modal.next(open);
   }
 }
