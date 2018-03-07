@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {log} from 'util';
 import {InstallersService} from '../../../services/installers.service';
 import {Installer} from '../../../models/installers/installer';
@@ -11,33 +11,57 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 })
 export class InstallersComponent implements OnInit {
   installers: Installer[];
-  editInstallerModalIsOpen = false;
+  installerModalState: { open: Boolean, installer?: Installer } = {open: false, installer: null};
   modal: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
-  @Output() onModalOpen = new EventEmitter<number>();
-  /* 0 - installerEdit */
-
-  constructor(private installerService: InstallersService) { }
+  constructor(private installerService: InstallersService) {
+  }
 
   ngOnInit() {
     this.showInstallers();
   }
-  showInstallers(): void {
-    this.installerService.getInstallers()
-      .subscribe(installers => {
-        this.installers = installers.results;
-      }, error2 => {
-        log(error2);
-      });
+  showInstallers() {
+    this.loadInstallers(null);
   }
-  openEditInstallerModal() {
-    this.editInstallerModalIsOpen = true;
+
+  loadInstallers(page?: number): void {
+    if (page == null) {
+      page = 1;
+      this.installerService.getInstallers()
+        .subscribe(installers => {
+          this.installers = installers.results;
+          if (installers.next != null) {
+            this.loadInstallers(page + 1);
+          }
+        }, error2 => {
+          log(error2);
+        });
+    } else {
+      this.installerService.getInstallers(page.toString())
+        .subscribe(installers => {
+          this.installers = this.installers.concat(installers.results);
+          if (installers.next != null) {
+            this.loadInstallers(page + 1);
+          }
+        }, error2 => {
+          log(error2);
+        });
+    }
+  }
+
+  openInstallerModal(installer?: Installer) {
+    this.installerModalState = {open: true, installer: installer};
     this.openModal(true);
   }
-  editInstallerModalClose() {
-    this.editInstallerModalIsOpen = false;
+
+  editInstallerModalClose(successfully) {
+    if (successfully) {
+      this.showInstallers();
+    }
+    this.installerModalState.open = false;
     this.openModal(false);
   }
+
   openModal(open: Boolean) {
     this.modal.next(open);
   }

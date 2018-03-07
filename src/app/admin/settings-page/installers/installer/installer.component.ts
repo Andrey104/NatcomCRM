@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Installer} from '../../../../models/installers/installer';
 
 @Component({
   selector: 'app-installer',
@@ -10,12 +11,12 @@ export class InstallerComponent implements OnInit {
 
   constructor() { }
   @Input() installer;
-  @Output() onEdit = new EventEmitter();
+  @Output() onEdit = new EventEmitter<Installer>();
 
   ngOnInit() {
   }
   edit() {
-    this.onEdit.emit();
+    this.onEdit.emit(this.installer);
   }
 
 }
