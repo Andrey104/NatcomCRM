@@ -270,22 +270,46 @@ export class UtilsService {
   measurementActionDecoder(action: DealAction) {
     let comment = '';
     let type = '';
-    let cause = 'ПО ПРИЧИНЕ СПРОСИТЬ У СЕРЕГИ';
+    let cause = '';
     switch (action.type) {
       case 0: {
-        type = ' завершил(ла) замер ';
+        type = ' завершил(а) замер ';
         break;
       }
       case 1: {
         type = ' перенес(ла) замер ';
+        switch (action.cause) {
+          case 1: {
+            cause = 'по инициативе клиента';
+            break;
+          }
+          case 2: {
+            cause = 'по инициативе замерщика';
+            break;
+          }
+        }
         break;
       }
       case 2: {
-        type = ' отменил(ла) замер ';
+        type = ' отменил(а) замер ';
+        switch (action.cause) {
+          case 1: {
+            cause = 'из-за ошибки менеджера';
+            break;
+          }
+          case 2: {
+            cause = 'из-за того, что клиент выбрал другую компанию';
+            break;
+          }
+          case 3: {
+            cause = 'из-за ошибки замерщика';
+            break;
+          }
+        }
         break;
       }
       case 3: {
-        type = ' стал(ла) ответсвенным(ой) ';
+        type = ' стал(а) ответсвенным(ой) ';
         break;
       }
     }
@@ -324,5 +348,33 @@ export class UtilsService {
       }
     }
     return measurement;
+  }
+
+  mountActionDecoder(action: DealAction) {
+    let comment = '';
+    let type = '';
+    switch (action.type) {
+      case 1: {
+        type = ' добавил(а) стадию ';
+        break;
+      }
+      case 2: {
+        type = ' добавил(а) дату ';
+        break;
+      }
+      case 3: {
+        type = ' закрыл(а) монтаж(успешно) ';
+        break;
+      }
+      case 4: {
+        type = ' отказался(лась) от монтажа ';
+        break;
+      }
+    }
+    if (action.comment !== null) {
+      comment = ', с комментарием: ' + action.comment;
+    }
+
+    return type + comment;
   }
 }

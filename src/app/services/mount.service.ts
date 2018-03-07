@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {DealMount} from '../models/deal/deal_mount';
+import {OurComment} from '../models/comment';
 
 @Injectable()
 export class MountService {
@@ -16,11 +17,19 @@ export class MountService {
       headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
     });
   }
+
+  sendComment(idMount, comment: string): Observable<OurComment> {
+    return this.http.post<OurComment>(this.urlMount + idMount + '/comment/', {text: comment}, {
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
+    });
+  }
+
   getMount(idMount): Observable<DealMount> {
     return this.http.get<DealMount>(this.urlMount + idMount, {
       headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
     });
   }
+
   private token() {
     return localStorage.getItem('token');
   }

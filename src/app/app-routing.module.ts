@@ -20,6 +20,7 @@ import {InstallersPage} from './models/installers/installers_page';
 import {InstallersComponent} from './admin/settings-page/installers/installers.component';
 import {BrigadesComponent} from './admin/settings-page/brigades/brigades.component';
 import {CompaniesComponent} from './admin/settings-page/companies/companies.component';
+import {StageComponent} from './stage/stage.component';
 
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts
@@ -27,7 +28,8 @@ import {CompaniesComponent} from './admin/settings-page/companies/companies.comp
 const deals_routes: Routes = [
   {path: ':id', component: DealDetailComponent},
   {path: ':id/measurement/:measurement_id', component: DealMeasurementComponent},
-  {path: ':id/mount/:mount_id', component: DealMountComponent}
+  {path: ':id/mount/:mount_id', component: DealMountComponent},
+  {path: ':id/mount/:mount_id/stage/:stage_id', component: StageComponent},
 ];
 
 const orders_routes: Routes = [

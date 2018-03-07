@@ -78,8 +78,10 @@ import { HoverArrowDirective } from './directives/hover-arrow.directive';
 import { CommentFieldComponent } from './comment-field/comment-field.component';
 import { DealClientInfoComponent } from './deals/deal-client-info/deal-client-info.component';
 import {DealContractView} from './pipes/deal-contract-view.pipe';
-import { StageComponent } from './stage/stage.component';
+import { StageDealComponent } from './stage-deal/stage-deal.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
+import {ActionStagePipe} from './pipes/action.stage.pipe';
+import {StageComponent} from './stage/stage.component';
 import {WorkerNamePipe} from './pipes/worker-name.pipe';
 import {MeasurementStatusPipe} from './pipes/measurement-status.pipe';
 import { ImageModalComponent } from './image-modal/image-modal.component';
@@ -148,9 +150,11 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
     MountStatusPipe,
     HoverArrowDirective,
     CommentFieldComponent,
-    StageComponent,
+    StageDealComponent,
     StageMountStatusPipe,
     DealClientInfoComponent,
+    ActionStagePipe,
+    StageComponent,
     WorkerNamePipe,
     MeasurementStatusPipe,
     ImageModalComponent,
