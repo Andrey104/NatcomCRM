@@ -6,7 +6,7 @@
        [scrollWindow]="false"
        (scrolled)="onScrollDeal()">
     <div class="col s3 input-field white">
-      <input class="col s12" type="search" (input)="search()" [(ngModel)]="searchStr">
+      <input class="col s12" type="search" (input)="term$.next()" [(ngModel)]="searchStr">
     </div>
     <app-deal *ngFor="let deal of dealPage"
                [deal]="deal">

@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {DealMeasurement} from '../models/deal/deal_measurement';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {catchError, tap} from 'rxjs/operators';
+import {OurComment} from '../models/comment';
 
 @Injectable()
 export class MeasurementService {
@@ -21,6 +23,13 @@ export class MeasurementService {
     return this.http.get<DealMeasurement>(this.urlMeasurement + idMeasurement, {
       headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
     });
+  }
+
+  measurementComment(idMeasurement, comment): Observable<OurComment> {
+    return this.http.post<OurComment>(this.urlMeasurement + idMeasurement + '/comment/',
+      {'text': comment },
+      {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
+    );
   }
 
   private token() {
