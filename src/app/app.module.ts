@@ -80,6 +80,9 @@ import { DealClientInfoComponent } from './deals/deal-client-info/deal-client-in
 import {DealContractView} from './pipes/deal-contract-view.pipe';
 import { StageComponent } from './stage/stage.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
+import {WorkerNamePipe} from './pipes/worker-name.pipe';
+import {MeasurementStatusPipe} from './pipes/measurement-status.pipe';
+import { ImageModalComponent } from './image-modal/image-modal.component';
 
 
 @NgModule({
@@ -148,6 +151,9 @@ import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
     StageComponent,
     StageMountStatusPipe,
     DealClientInfoComponent,
+    WorkerNamePipe,
+    MeasurementStatusPipe,
+    ImageModalComponent,
 ],
   imports: [
     BrowserModule,

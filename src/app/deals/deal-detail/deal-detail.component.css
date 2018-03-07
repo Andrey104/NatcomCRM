@@ -78,6 +78,7 @@
 
 .arrow {
   opacity: 0;
+  line-height: 0;
 }
 
 .content {
