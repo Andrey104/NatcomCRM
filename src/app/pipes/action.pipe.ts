@@ -5,7 +5,8 @@ import {UtilsService} from '../services/utils.service';
   name: 'action'
 })
 export class ActionPipe implements PipeTransform {
-  constructor(private utils: UtilsService) {}
+  constructor(private utils: UtilsService) {
+  }
 
   transform(action, typeDecoder: string): string {
     let message = '';
@@ -17,6 +18,11 @@ export class ActionPipe implements PipeTransform {
       }
       case 'deal': {
         message = user + this.utils.dealActionDecoder(action);
+        break;
+      }
+      case 'mount': {
+        message = user + this.utils.mountActionDecoder(action);
+        break;
       }
     }
     return message;

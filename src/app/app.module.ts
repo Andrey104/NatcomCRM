@@ -78,8 +78,10 @@ import { HoverArrowDirective } from './directives/hover-arrow.directive';
 import { CommentFieldComponent } from './comment-field/comment-field.component';
 import { DealClientInfoComponent } from './deals/deal-client-info/deal-client-info.component';
 import {DealContractView} from './pipes/deal-contract-view.pipe';
-import { StageComponent } from './stage/stage.component';
+import { StageDealComponent } from './stage-deal/stage-deal.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
+import {ActionStagePipe} from './pipes/action.stage.pipe';
+import {StageComponent} from './stage/stage.component';
 
 
 @NgModule({
@@ -145,9 +147,11 @@ import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
     MountStatusPipe,
     HoverArrowDirective,
     CommentFieldComponent,
-    StageComponent,
+    StageDealComponent,
     StageMountStatusPipe,
     DealClientInfoComponent,
+    ActionStagePipe,
+    StageComponent
 ],
   imports: [
     BrowserModule,

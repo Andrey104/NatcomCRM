@@ -1,6 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Stage} from '../models/stage';
-import {UtilsService} from '../services/utils.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-stage',
@@ -8,20 +6,10 @@ import {UtilsService} from '../services/utils.service';
   styleUrls: ['./stage.component.css']
 })
 export class StageComponent implements OnInit {
-  @Input() stage: Stage;
 
-
-  constructor(private utils: UtilsService) {
-  }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  statusColor(status) {
-    return this.utils.statusStageMount(status).color;
-  }
-  statusIcon(status) {
-    return this.utils.statusStageMount(status).image;
   }
 
 }
