@@ -3,7 +3,6 @@ import { NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
-import { LeadComponent } from './lead/lead.component';
 import { OrderPageComponent } from './orders/order-page/order-page.component';
 import { AppRoutingModule } from './/app-routing.module';
 import {AuthGuard} from './auth.guard';
@@ -28,7 +27,6 @@ import {AdminGuard} from './admin.guard';
 import { AdminPageComponent } from './admin/admin-page/admin-page.component';
 import { OrderRejectComponent } from './orders/order-reject/order-reject.component';
 import { OrderToDealComponent } from './orders/order-to-deal/order-to-deal.component';
-import { ModalComponent } from './modal/modal.component';
 import { ClientComponent } from './client/client.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import {AuthenticationService} from './services/auntification.service';
@@ -50,10 +48,7 @@ import { MountDatePipe } from './pipes/mount-date.pipe';
 import { NonCashPipe } from './pipes/non-cash.pipe';
 import { ContractPipe } from './pipes/contract.pipe';
 import { PreloaderComponent } from './preloader/preloader.component';
-import { ObjectStagesComponent } from './deals/object-stages/object-stages.component';
 import { DealCommentsComponent } from './deals/deal-comments/deal-comments.component';
-import { DealDiscountsComponent } from './deals/deal-discounts/deal-discounts.component';
-import { DealPaymentsComponent } from './deals/deal-payments/deal-payments.component';
 import {MountCardComponent} from './deals/mount-card/mount-card.component';
 import { DealMeasurementComponent } from './deals/deal-measurement/deal-measurement.component';
 import { DealMountComponent } from './deals/deal-mount/deal-mount.component';
@@ -65,7 +60,6 @@ import {DiscountPipe} from './pipes/discount.pipe';
 import {PaymentPipe} from './pipes/payment.pipe';
 import { CommentComponent } from './comment/comment.component';
 import { ColorCompanyDirective } from './directives/color-company.directive';
-import { InputSearchComponent } from './input-search/input-search.component';
 import { SettingsPageComponent } from './admin/settings-page/settings-page.component';
 import { InstallerComponent } from './admin/settings-page/installers/installer/installer.component';
 import {InstallersService} from './services/installers.service';
@@ -74,8 +68,6 @@ import { BrigadesComponent } from './admin/settings-page/brigades/brigades.compo
 import { CompaniesComponent } from './admin/settings-page/companies/companies.component';
 import {InstallerEditComponent} from './admin/settings-page/installers/installer-edit/installer-edit.component';
 import {MountStatusPipe} from './pipes/mountStatus.pipe';
-import { HoverArrowDirective } from './directives/hover-arrow.directive';
-import { CommentFieldComponent } from './comment-field/comment-field.component';
 import { DealClientInfoComponent } from './deals/deal-client-info/deal-client-info.component';
 import {DealContractView} from './pipes/deal-contract-view.pipe';
 import { StageDealComponent } from './stage-deal/stage-deal.component';
@@ -91,7 +83,6 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
   declarations: [
     AppComponent,
     MainComponent,
-    LeadComponent,
     OrderPageComponent,
     LoginComponent,
     OrderComponent,
@@ -106,7 +97,6 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
     AdminPageComponent,
     OrderRejectComponent,
     OrderToDealComponent,
-    ModalComponent,
     ClientComponent,
     UserInfoComponent,
     ClientInfoComponent,
@@ -125,10 +115,7 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
     NonCashPipe,
     ContractPipe,
     PreloaderComponent,
-    ObjectStagesComponent,
     DealCommentsComponent,
-    DealDiscountsComponent,
-    DealPaymentsComponent,
     DealMeasurementComponent,
     DealMountComponent,
     ActionPipe,
@@ -140,7 +127,6 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
     PaymentPipe,
     CommentComponent,
     ColorCompanyDirective,
-    InputSearchComponent,
     SettingsPageComponent,
     InstallerComponent,
     InstallerEditComponent,
@@ -148,8 +134,6 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
     BrigadesComponent,
     CompaniesComponent,
     MountStatusPipe,
-    HoverArrowDirective,
-    CommentFieldComponent,
     StageDealComponent,
     StageMountStatusPipe,
     DealClientInfoComponent,

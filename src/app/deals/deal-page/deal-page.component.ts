@@ -25,8 +25,8 @@ export class DealPageComponent implements OnInit {
   constructor(private dealService: DealService, private activatedRoute: ActivatedRoute,
               private utils: UtilsService) {
     this.term$
-      .debounceTime(900) // задержка запроса в миллисекундах
-      .distinctUntilChanged() // не отправляет запрос повторно, если не было произведено изменений
+      .debounceTime(600) // задержка запроса в миллисекундах
+      // .distinctUntilChanged() // не отправляет запрос повторно, если не было произведено изменений
       .subscribe(() => this.search());
   }
 
