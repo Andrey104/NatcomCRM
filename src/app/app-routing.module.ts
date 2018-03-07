@@ -40,7 +40,7 @@ const orders_routes: Routes = [
 
 const pages_routes: Routes = [
   {path: 'deals/:status', component: DealPageComponent, children: deals_routes},
-  {path: 'deals', component: DealPageComponent, children: deals_routes},
+  {path: 'deals/all', component: DealPageComponent, children: deals_routes},
   {path: 'orders', component: OrderPageComponent, children: orders_routes},
   {path: 'user', component: UserInfoComponent}
 ];
