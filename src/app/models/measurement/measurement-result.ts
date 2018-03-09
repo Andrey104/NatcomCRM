@@ -1,15 +1,16 @@
-import {Worker} from '../worker';
-import {Company} from '../company';
+import {Picture} from '../picture';
 import {Client} from '../client';
+import {Action} from '../action';
 import {Transfer} from '../transfer';
 import {OurComment} from '../comment';
-import {Picture} from '../picture';
+import {Company} from '../company';
+import {Worker} from '../worker';
 
-export class DealMeasurement {
+export class MeasurementResult {
   id: number;
   pictures: Picture[];
   clients: Client[];
-  actions: object;
+  actions: Action[];
   transfers: Transfer[];
   comments: OurComment[];
   address: string;
@@ -20,8 +21,8 @@ export class DealMeasurement {
   date: string;
   status: number;
   time: string;
-  sum: number;
-  prepayment: number;
+  sum: string;
+  prepayment: string;
   worker: Worker;
   deal: number;
   color: number;

@@ -23,9 +23,15 @@ import {CompaniesComponent} from './admin/settings-page/companies/companies.comp
 import {StageComponent} from './stage/stage.component';
 import {MountPageComponent} from './mounts/mount-page/mount-page.component';
 import {MountDetailComponent} from './mounts/mount-detail/mount-detail.component';
+import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
+import {MeasurementDetailComponent} from './measurements/measurement-detail/measurement-detail.component';
 
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts
+
+const measurements_routes: Routes = [
+  {path: ':id_measurement', component: MeasurementDetailComponent}
+];
 
 const mounts_routes: Routes = [
   {path: ':id_mount', component: MountDetailComponent}
@@ -49,6 +55,7 @@ const pages_routes: Routes = [
   {path: 'deals/all', component: DealPageComponent, children: deals_routes},
   {path: 'orders', component: OrderPageComponent, children: orders_routes},
   {path: 'mounts', component: MountPageComponent, children: mounts_routes },
+  {path: 'measurements', component: MeasurementPageComponent, children: measurements_routes},
   {path: 'user', component: UserInfoComponent}
 ];
 

@@ -80,6 +80,9 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
 import { MountPageComponent } from './mounts/mount-page/mount-page.component';
 import { MountComponent } from './mounts/mount/mount.component';
 import { MountDetailComponent } from './mounts/mount-detail/mount-detail.component';
+import { MeasurementPageComponent } from './measurements/measurement-page/measurement-page.component';
+import { MeasurementDetailComponent } from './measurements/measurement-detail/measurement-detail.component';
+import { MeasurementComponent } from './measurements/measurement/measurement.component';
 
 
 @NgModule({
@@ -148,6 +151,9 @@ import { MountDetailComponent } from './mounts/mount-detail/mount-detail.compone
     MountPageComponent,
     MountComponent,
     MountDetailComponent,
+    MeasurementPageComponent,
+    MeasurementDetailComponent,
+    MeasurementComponent,
 ],
   imports: [
     BrowserModule,
