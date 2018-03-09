@@ -77,6 +77,9 @@ import {StageComponent} from './stage/stage.component';
 import {WorkerNamePipe} from './pipes/worker-name.pipe';
 import {MeasurementStatusPipe} from './pipes/measurement-status.pipe';
 import { ImageModalComponent } from './image-modal/image-modal.component';
+import { MountPageComponent } from './mounts/mount-page/mount-page.component';
+import { MountComponent } from './mounts/mount/mount.component';
+import { MountDetailComponent } from './mounts/mount-detail/mount-detail.component';
 
 
 @NgModule({
@@ -142,6 +145,9 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
     WorkerNamePipe,
     MeasurementStatusPipe,
     ImageModalComponent,
+    MountPageComponent,
+    MountComponent,
+    MountDetailComponent,
 ],
   imports: [
     BrowserModule,
