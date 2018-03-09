@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {DealMeasurement} from '../models/deal/deal_measurement';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {catchError, tap} from 'rxjs/operators';
 import {OurComment} from '../models/comment';
 import {MeasurementPage} from '../models/measurement/measurement-page';
 
@@ -38,6 +37,16 @@ export class MeasurementService {
       {'text': comment},
       {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
     );
+  }
+
+  getFilterMeasurements(page: number, text: string): Observable<MeasurementPage> {
+    let params = new HttpParams();
+    params = params.append('page', page.toString());
+    params = params.append('text', text);
+    return this.http.get<MeasurementPage>(this.urlMeasurement + 'search', {
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
+      params: params
+    });
   }
 
   private token() {

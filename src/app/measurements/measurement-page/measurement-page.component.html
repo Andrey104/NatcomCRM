@@ -5,9 +5,9 @@
        [infiniteScrollThrottle]="300"
        [scrollWindow]="false"
        (scrolled)="onScrollMeasurement()">
-    <!--<div class="col s3 input-field white">
-      <input class="col s12" type="search" (input)="term$.next($event.target.value)">
-    </div>-->
+    <div class="col s3 input-field white">
+      <input #input class="col s12" type="search" (input)="term$.next($event.target.value)">
+    </div>
     <app-measurement *ngFor="let measurement of measurements"
                [measurement]="measurement">
     </app-measurement>
