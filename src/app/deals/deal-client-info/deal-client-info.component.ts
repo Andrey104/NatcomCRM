@@ -17,7 +17,6 @@ export class DealClientInfoComponent implements OnInit {
   }
 
   onClose() {
-    console.log('onClose');
     this.close.emit();
   }
 }

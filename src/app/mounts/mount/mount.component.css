@@ -1,0 +1,19 @@
+.mountSuccess {
+  background-color: green;
+}
+
+.mountRejected {
+  background-color: red;
+}
+
+.mountDuring {
+  background-color: orange;
+}
+
+.mountExpectation {
+  background-color: #bdbdbd;
+}
+
+.others {
+  background-color: white;
+}

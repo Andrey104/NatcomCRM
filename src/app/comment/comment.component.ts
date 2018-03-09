@@ -12,25 +12,28 @@ export class CommentComponent implements OnInit {
   commentArea;
   text = '';
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
       commentArea: new FormControl(''),
-  });
+    });
   }
+
   buttonComment(event) {
     if (event.shiftKey && event.keyCode === 13) {
       this.text = this.form.get('commentArea').value + '\n';
-      console.log(this.text);
-    }  else if (event.keyCode === 13) {
-        this.sendComment();
+    } else if (event.keyCode === 13) {
+      this.sendComment();
     }
   }
+
   sendComment() {
     const userComment = this.form.get('commentArea').value;
     if (userComment !== '') {
       this.form.reset();
+      document.getElementById('text').blur();
       this.comment.emit(userComment);
     } else {
       alert('Нельзя отправлять пустой коммент');

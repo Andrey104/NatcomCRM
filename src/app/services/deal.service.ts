@@ -8,6 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { DealPage } from '../models/deal/deals';
 import { MessageService } from './message.service';
 import {DealResult} from '../models/deal/deal_result';
+import {Orders} from '../models/orders/order';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -46,7 +47,18 @@ export class DealService {
       headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
     });
   }
-
+  getFilterDeals(page: number, text: string): Observable<DealPage> {
+    let params = new HttpParams();
+    params = params.append('page', page.toString());
+    params = params.append('text', text);
+    return this.http.get<DealPage>(this.dealsUrl + 'search', {
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
+      params: params
+    }).pipe(
+      tap(( _: DealPage) => this.log(`defered`)),
+      catchError(this.handleError<DealPage>('addHero'))
+    );
+  }
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
     this.messageService.add('HeroService: ' + message);

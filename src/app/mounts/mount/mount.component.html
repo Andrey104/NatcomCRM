@@ -1,0 +1,24 @@
+<div routerLink="{{mount?.id}}" routerLinkActive="active-card"
+     class="card horizontal order hover-element no-border hoverable">
+  <div class="center-align valign-wrapper">
+    <div class="status-image info">
+      <i class="image small material-icons icon {{statusColor(mount?.status)}}">
+        {{statusIcon(mount?.status)}}
+      </i>
+    </div>
+  </div>
+  <div class="card-stacked">
+    <div class="info">
+      <div class="col s12 detail-col">
+        <div class="company col s7 detail-col">{{mount?.company?.name | companyName}}</div>
+        <div class="right-align col s5 time">
+          <i class="tiny material-icons icon">access_time</i> {{mount?.date_mount | dateFormat: 'time'}}
+        </div>
+      </div>
+      <div class="main-info-card">
+        <div class="address">Сделка {{mount?.deal}}</div>
+        <div>{{mount?.status | mountStatus}}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -69,7 +69,9 @@
     <div class="col s5 divider"></div>
   </div>
   <div class="row">
-    <div *ngFor="let measurement of deal?.measurements; let i = index" class="col s12 valign-wrapper forward-block">
+    <div *ngFor="let measurement of deal?.measurements; let i = index"
+         class="col s12 valign-wrapper forward-block hover-element no-border"
+         routerLink="measurement/{{measurement?.id}}">
       <div *ngIf="i!==0">
         <div class="divider"></div>
       </div>
@@ -83,7 +85,9 @@
     <div class="col s5 divider"></div>
   </div>
   <div class="row">
-    <div *ngFor="let mount of deal?.mounts; let i = index" class="col s12 valign-wrapper forward-block">
+    <div *ngFor="let mount of deal?.mounts; let i = index"
+         class="col s12 valign-wrapper forward-block hover-element no-border"
+         routerLink="mount/{{mount?.id}}">
       <div *ngIf="i!==0">
         <div class="row">
           <div class="divider"></div>

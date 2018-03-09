@@ -6,7 +6,7 @@
 
 .modal {
   top: calc((100vh - 400px)/2);
-  left: calc((100vh - 430px)/2);
+  left: 5vw;
 }
 
 .client-name {

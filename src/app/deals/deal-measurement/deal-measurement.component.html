@@ -1,37 +1,111 @@
-<div class="spinner-contener" *ngIf="loader">
+<div class="spinner-contener" *ngIf="!measurement">
   <app-preloader></app-preloader>
 </div>
-<div *ngIf="!loader" class="col s12 scrollable-page">
-  <div class="company-symbol">{{measurement?.company.symbol}}</div>
-  <div>{{measurement?.worker?.first_name}} {{measurement?.worker?.last_name}}</div>
-  <div>{{measurement?.date | dateFormat: 'fullDate'}}</div>
-  <div>{{measurement?.address}}</div>
-  <div>{{measurement?.address_comment}}</div>
-  <div>{{measurement?.status}}</div>
-  <div>Clients</div>
-  <div *ngFor="let client of measurement?.clients">
-    <div>{{client.client.fio}}</div>
-    <div>{{client.client.email}}</div>
-    <div *ngFor="let phone of client.client.phones">
-      <div>{{phone.number}}</div>
-      <div>{{phone.comment}}</div>
+<div *ngIf="measurement" class="col s12 detail-col scrollable-page" id="page">
+  <div class="row main-row valign-wrapper">
+    <div class="col s4 valign-wrapper">
+      <div [style.color]="measurement?.worker ? 'green': 'red'">{{measurement?.worker | workerName}}</div>
+    </div>
+    <div class="col s4 valign-wrapper">
+      <div>{{measurement?.status | measurementStatus}}</div>
+    </div>
+    <div class="col s4">
+      <i class="tiny material-icons icon date-icon">date_range</i>
+      <div class="deal-date">
+        <div>Создана:{{measurement?.date | dateFormat: 'date'}}</div>
+        <div>Изменялась:{{measurement?.auto_date | dateFormat: 'date'}}</div>
+      </div>
     </div>
   </div>
-  <div>Comments</div>
-  <div *ngFor="let comment of measurement?.comments">
-    <div>{{comment.auto_date | dateFormat: 'fullDate'}} {{comment | comment}}</div>
+  <div class="divider"></div>
+  <div class="row main-info">
+    <div class="col s7">
+      <div class="deal">Замер {{measurement?.deal}}</div>
+      <div class="status-container valign-wrapper">
+        <div [appColorCompany]="measurement?.company?.symbol" class="company-symbol">{{measurement?.company?.symbol}}</div>
+        <div class="company-name">{{measurement?.company?.name}}</div>
+      </div>
+      <div class="measurement-info">
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">location_on</i> {{measurement?.address | address}}
+        </div>
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">access_time</i> {{measurement?.address_comment}}
+        </div>
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">attach_money</i> {{measurement?.sum | money}}
+        </div>
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">date_range</i> {{measurement?.non_cash | nonCash}}
+        </div>
+      </div>
+    </div>
+    <div class="col s5">
+      <div class="row main-row">
+        <div class="col s12 valign-wrapper">
+          <hr class="col s4">
+          <div class="col s4 center-align header">Контакты</div>
+          <hr class="col s4">
+        </div>
+      </div>
+      <div class="row">
+        <div *ngFor="let client of measurement?.clients; let i = index" class="col s12">
+          <div (click)="openClientInfo(i)" class="valign-wrapper contact-info forward-block col s12 hover-element">
+            <div class="col s6 valign-wrapper detail-col-right">
+              <i class="small material-icons icon">person</i>
+              {{client.client.fio}}
+            </div>
+            <div class="col s5">{{client.client.phones[0].number | phoneFormat}}</div>
+            <i class="arrow col s1 material-icons detail-col-left">chevron_right</i>
+          </div>
+          <hr class="col s12 black">
+        </div>
+      </div>
+    </div>
   </div>
-  <div>Actions</div>
-  <div *ngFor="let action of measurement?.actions">
-    <div>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'measurement'}}</div>
+  <div class="row valign-wrapper">
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">История</div>
+    <div class="col s5 divider"></div>
   </div>
-  <div>Transfers</div>
-  <div *ngFor="let transfer of measurement?.transfers">
-    <div>{{transfer.auto_date | dateFormat: 'fullDate'}} {{transfer | transfer: 'measurement'}}</div>
+  <div class="history">
+    <div class="col s12 offset-s1">История замера:</div>
+    <div class="row">
+      <div *ngFor="let action of measurement?.actions"  class="col s10 offset-s1">
+        <div>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'measurement'}}</div>
+      </div>
+    </div>
+    <div class="col s12 offset-s1">Переносы замера:</div>
+    <div class="row">
+      <div *ngFor="let transfer of measurement?.transfers" class="col s10 offset-s1">
+        <div>{{transfer.auto_date | dateFormat: 'fullDate'}} {{transfer | transfer: 'measurement'}}</div>
+      </div>
+    </div>
   </div>
-  <div>{{measurement?.non_cash | nonCash}}</div>
-  <div>Pictures</div>
-  <div *ngFor="let picture of measurement?.pictures">
-    <img class="picture" src="{{picture.url}}"/>
+  <div class="row valign-wrapper">
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">Изображения</div>
+    <div class="col s5 divider"></div>
   </div>
+  <div class="row">
+    <div class="col s3" *ngFor="let picture of measurement?.pictures">
+      <img class="col s12 picture" src="{{picture.url}}"/>
+      <div class="col s12 picture-date center-align">{{picture?.auto_date | dateFormat: 'fullDate'}}</div>
+    </div>
+  </div>
+  <div class="row valign-wrapper">
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">Комментарии</div>
+    <div class="col s5 divider"></div>
+  </div>
+  <div class="row">
+    <div *ngFor="let comment of measurement?.comments" class="col s12">
+      <app-deal-comments [comment]="comment"></app-deal-comments>
+    </div>
+  </div>
+  <app-deal-client-info [openClientInfo]="clientInfo" [client]="client" (close)="closeClientInfo()"></app-deal-client-info>
 </div>
+<div *ngIf="measurement" class="col s12 measurement-comment-content valign-wrapper">
+  <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
+</div>
+

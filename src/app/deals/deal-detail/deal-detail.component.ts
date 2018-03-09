@@ -20,17 +20,21 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   deal: DealResult;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private dealService: DealService, private utils: UtilsService) { }
+              private dealService: DealService, private utils: UtilsService) {
+  }
+
   ngOnInit() {
     this.select = 0;
     this.subscribeDealId();
   }
+
   ngAfterViewChecked(): void {
     if (this.flag) {
       document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
       this.flag = false;
     }
   }
+
   subscribeDealId(): void {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
@@ -39,6 +43,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
       });
     });
   }
+
   sendComment(comment: string) {
     this.dealService.dealComment(this.id, comment).subscribe(
       next => {
@@ -48,16 +53,17 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
         console.log(error.error);
       });
   }
+
   getDealStatus(status) {
     return this.utils.statusDeal(status);
   }
+
   openClientInfo(idClient: number) {
     this.clientInfo = true;
     this.client = this.deal.clients[idClient];
-    console.log(this.client);
   }
+
   closeClientInfo() {
-    console.log('closeClientInfo');
     this.clientInfo = false;
     this.client = null;
   }
