@@ -94,7 +94,8 @@
 
 /*Контенер для расположения preloadera*/
 .spinner-contener {
-  height: 91vh;
+  height: 100%;
+  margin: auto 0;
 }
 
 /*Классы для карточек заказов и каточек сделок в списке*/

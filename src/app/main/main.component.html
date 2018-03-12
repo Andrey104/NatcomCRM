@@ -11,7 +11,13 @@
       </div>
       <a class="logo" href="/orders"><img class="logo" src="assets/images/logo.png"/></a>
       <ul class="right hide-on-med-and-down">
-        <li routerLinkActive="active"><a routerLink="/orders">Заявки</a></li>
+        <li routerLinkActive="active"><a routerLink="/orders/all">Замеры</a>
+          <ul>
+            <li routerLinkActive="active"><a routerLink="/orders/processing">Текущие</a></li>
+            <li routerLinkActive="active"><a routerLink="/orders/completed">Завершенные</a></li>
+            <li routerLinkActive="active"><a routerLink="/orders/canceled">Отменненые</a></li>
+          </ul>
+        </li>
         <li routerLinkActive="active"><a routerLink="/deals/all">Сделки</a>
           <ul>
             <li routerLinkActive="active"><a routerLink="/deals/processing">Обработка</a></li>

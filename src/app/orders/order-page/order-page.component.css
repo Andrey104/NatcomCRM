@@ -1,7 +1,13 @@
-.input-form {
+.order-status {
+  padding: 5px 0;
+}
+
+.input-field {
   position: fixed;
+  left: 0!important;
+  top: 50px;
   z-index: 1;
-  height: 84px;
+  height: 65px;
 }
 
 input[type="search"] {
@@ -20,20 +26,11 @@ input[type="search"]:focus {
   outline: 0;
 }
 
-.contener {
-  height: 83px;
+.list-col {
+  margin-top: 70px;
+  position: relative;
+  height: calc(100vh - 134px);
 }
 
-label {
-  width: 30px;
-}
-
-.rectangle {
-  background-color: #ffa726;
-}
-
-.main-page {
-  position: static;
-}
 
 
