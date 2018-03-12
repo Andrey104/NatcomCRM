@@ -33,6 +33,7 @@ export class DealPageComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.status = this.utils.statusUrlDeal(params['status']);
+      this.dealPage = [];
       this.showDeals();
     });
   }
@@ -44,7 +45,6 @@ export class DealPageComponent implements OnInit {
       this.lastPage = false;
       this.dealService.getFilterDeals(this.page, this.searchStr)
         .subscribe(deals => {
-          console.log('я подписался');
           this.dealPage = deals.results;
           if (deals.next === null) {
             this.lastPage = true;

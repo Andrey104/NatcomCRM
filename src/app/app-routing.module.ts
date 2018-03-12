@@ -30,7 +30,7 @@ import {MeasurementDetailComponent} from './measurements/measurement-detail/meas
 // deals/id/mounts
 
 const measurements_routes: Routes = [
-  {path: ':id_measurement', component: MeasurementDetailComponent}
+  {path: ':measurement_id', component: MeasurementDetailComponent}
 ];
 
 const mounts_routes: Routes = [
@@ -53,7 +53,8 @@ const orders_routes: Routes = [
 const pages_routes: Routes = [
   {path: 'deals/:status', component: DealPageComponent, children: deals_routes},
   {path: 'deals/all', component: DealPageComponent, children: deals_routes},
-  {path: 'orders', component: OrderPageComponent, children: orders_routes},
+  {path: 'orders/:status', component: OrderPageComponent, children: orders_routes},
+  {path: 'orders/all', component: OrderPageComponent, children: orders_routes},
   {path: 'mounts', component: MountPageComponent, children: mounts_routes },
   {path: 'measurements', component: MeasurementPageComponent, children: measurements_routes},
   {path: 'user', component: UserInfoComponent}

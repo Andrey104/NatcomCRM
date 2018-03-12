@@ -25,5 +25,10 @@ input[type="search"]:focus {
 
 .list-col {
   margin-top: 50px;
+  position: relative;
+  height: calc(100vh - 114px);
+}
+
+.spinner-contener {
   height: calc(100vh - 114px);
 }

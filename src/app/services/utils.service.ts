@@ -267,6 +267,25 @@ export class UtilsService {
     return status;
   }
 
+  statusUrlOrder(statusStr: string): any {
+    let status: {statusName: string, statusUrl: string};
+    switch (statusStr) {
+      case 'processing': {
+        status = {statusName: 'Заявки в процессе', statusUrl: 'status=0&&status=2'};
+        break;
+      }
+      case 'completed': {
+        status = {statusName: 'Завершенные заявки', statusUrl: 'status=3'};
+        break;
+      }
+      case 'canceled': {
+        status = {statusName: 'Отмененные заявки', statusUrl: 'status=1'};
+        break;
+      }
+    }
+    return status;
+  }
+
   measurementActionDecoder(action: DealAction) {
     let comment = '';
     let type = '';
