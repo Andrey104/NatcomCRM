@@ -1,80 +1,49 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { catchError, map, tap } from 'rxjs/operators';
+import {Observable} from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import {catchError, map, tap} from 'rxjs/operators';
 
-import { Orders } from '../models/orders/order';
-import { MessageService } from './message.service';
+import {Orders} from '../models/orders/order';
+import {MessageService} from './message.service';
 import {OrderResult} from '../models/orders/order_result';
+import {BaseApi} from '../core/base-api';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable()
-export class OrderService {
+export class OrderService extends BaseApi {
 
   private ordersUrl = 'http://188.225.46.31/api/orders';  // URL to web api
 
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
+  constructor(public http: HttpClient,
+              private messageService: MessageService) {
+    super(http);
+  }
 
   /** GET orders from the server */
-  getOrders(page, selector): Observable<Orders> {
-    const url = this.ordersUrl;
-    let  params = new HttpParams();
-    params = params.append('page', page);
-    if (selector === 1) {
-      params = params.append('status', '0');
-      params = params.append('status', '2');
-    } else if (selector === 2) {
-      params = params.append('status', '1');
-    } else {
-      params = params.append('status', '3');
-    }
-    return this.http.get<Orders>(url, {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
-      params: params
-    }).pipe(
-      tap(_ => this.log(`fetched order`)),
-      catchError(this.handleError<Orders>(`getDeals`))
-    );
-  }
-  getOrderById(id: number): Observable<OrderResult> {
-    return this.http.get<OrderResult>(this.ordersUrl + '/' + id, {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
-    }).pipe(
-      tap(_ => this.log(`fetched order`)),
-      catchError(this.handleError<OrderResult>(`getDeals`))
-    );
-  }
-  getFilterOrders(search, page): Observable<Orders> {
-    let  params = new HttpParams();
-    params = params.append('page', page);
-    params = params.append('text', search);
-    return this.http.get<Orders>('http://188.225.46.31/api/orders/search', {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
-      params: params
-    }).pipe(
-      tap(_ => this.log(`fetched order`)),
-      catchError(this.handleError<Orders>(`getOrders`))
-    );
+  getOrders(page: number, status: string): Observable<Orders> {
+    return this.get(`orders/?page${page.toString()}&&${status}`);
   }
 
+  getOrderById(idOrder: number): Observable<OrderResult> {
+    return this.get(`orders/${idOrder}`);
+  }
+
+  getFilterOrders(page: number, text: string): Observable<Orders> {
+    return this.get(`orders/search?page=${page.toString()}&&text=${text}`);
+  }
+
+  // переделать
   deferOrder(cause, comment: string, id: string): Observable<Object> {
-    const defer = {'cause': cause, 'comment': comment};
-    return this.http.post<Object>(this.ordersUrl + '/' + id + '/defer/', defer, {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
-    }).pipe(
-      tap((defer: Object) => this.log(`defered`)),
-      catchError(this.handleError<Object>('addHero'))
-    );
+    const data = {'cause': cause, 'comment': comment};
+    return this.post(`orders/${id}/defer/`, data);
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
@@ -91,10 +60,6 @@ export class OrderService {
 
   private log(message: string) {
     this.messageService.add('HeroService: ' + message);
-  }
-
-  private token() {
-    return localStorage.getItem('token');
   }
 
 }

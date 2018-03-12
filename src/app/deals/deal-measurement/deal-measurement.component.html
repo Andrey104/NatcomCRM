@@ -1,8 +1,8 @@
-<div class="spinner-contener" *ngIf="!measurement">
-  <app-preloader></app-preloader>
-</div>
-<div *ngIf="measurement" class="col s12 detail-col scrollable-page" id="page">
-  <div class="row main-row valign-wrapper">
+<div class="col s12 detail-col scrollable-page" id="page">
+  <div *ngIf="!measurement" class="spinner-contener">
+    <app-preloader></app-preloader>
+  </div>
+  <div *ngIf="measurement" class="row main-row valign-wrapper">
     <div class="col s4 valign-wrapper">
       <div [style.color]="measurement?.worker ? 'green': 'red'">{{measurement?.worker | workerName}}</div>
     </div>
@@ -87,7 +87,10 @@
     <div class="col s2 center-align header">Изображения</div>
     <div class="col s5 divider"></div>
   </div>
-  <div class="row">
+  <div *ngIf="measurement?.pictures.length===0" class="row">
+    <div  class="col s12 offset-s1 history">Нет изображений</div>
+  </div>
+  <div class="row" *ngIf="measurement?.pictures.length!==0">
     <div class="col s3" *ngFor="let picture of measurement?.pictures; let i = index">
       <img class="col s12 picture" (click)="openPicture(i)" src="{{picture.url}}"/>
       <div class="col s12 picture-date center-align">{{picture?.auto_date | dateFormat: 'fullDate'}}</div>
@@ -98,10 +101,13 @@
     <div class="col s2 center-align header">Комментарии</div>
     <div class="col s5 divider"></div>
   </div>
-  <div class="row">
+  <div *ngIf="measurement?.comments.length!==0" class="row">
     <div *ngFor="let comment of measurement?.comments" class="col s12">
       <app-deal-comments [comment]="comment"></app-deal-comments>
     </div>
+  </div>
+  <div *ngIf="measurement?.comments.length===0" class="row">
+    <div  class="col s12 offset-s1 history">Нет комментариев</div>
   </div>
   <app-deal-client-info [openClientInfo]="clientInfo" [client]="client" (close)="closeClientInfo()"></app-deal-client-info>
   <app-image-modal [picture]="picture" (close)="closePicture()"></app-image-modal>

@@ -1,7 +1,3 @@
-.row {
-  margin-bottom: 0;
-}
-
 .icon {
   margin-right: 5px;
 }
@@ -18,6 +14,10 @@
 .header {
   font-size: 14px;
   color: black;
+}
+
+.contacts {
+  margin-bottom: 0;
 }
 
 .avatar {
