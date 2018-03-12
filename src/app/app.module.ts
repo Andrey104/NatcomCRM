@@ -83,6 +83,7 @@ import { MountDetailComponent } from './mounts/mount-detail/mount-detail.compone
 import { MeasurementPageComponent } from './measurements/measurement-page/measurement-page.component';
 import { MeasurementDetailComponent } from './measurements/measurement-detail/measurement-detail.component';
 import { MeasurementComponent } from './measurements/measurement/measurement.component';
+import {BaseApi} from './core/base-api';
 
 
 @NgModule({
@@ -175,7 +176,8 @@ import { MeasurementComponent } from './measurements/measurement/measurement.com
     ClientService,
     MeasurementService,
     MountService,
-    InstallersService
+    InstallersService,
+    BaseApi
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,15 @@
+.open {
+  height: 500px;
+  width: 550px;
+  display: block;
+}
+
+.modal {
+  top: calc((100vh - 400px)/2);
+  left: 5vw;
+}
+
+.picture {
+  height: 450px;
+  width: 500px;
+}

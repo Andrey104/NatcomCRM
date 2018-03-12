@@ -67,6 +67,8 @@ export class MeasurementPageComponent implements OnInit {
             this.measurements = measurementPage.results;
             if (measurementPage.next === null) {
               this.lastPage = true;
+            } else {
+              this.lastPage = false;
             }
             this.load = false;
           }
@@ -90,9 +92,8 @@ export class MeasurementPageComponent implements OnInit {
         });
     }
   }
-  // вопрос!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
   nextFilterPage() {
-    console.log(this.lastPage + ' load: ' + this.load);
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;

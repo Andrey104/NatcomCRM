@@ -4,52 +4,32 @@ import {DealMeasurement} from '../models/deal/deal_measurement';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {OurComment} from '../models/comment';
 import {MeasurementPage} from '../models/measurement/measurement-page';
+import {BaseApi} from '../core/base-api';
 
 @Injectable()
-export class MeasurementService {
-  private urlDealMeasurements = 'http://188.225.46.31/api/deals/';  // URL to web api
-  private urlMeasurement = 'http://188.225.46.31/api/measurements/';
+export class MeasurementService extends BaseApi {
 
-  constructor(private http: HttpClient) {
+  constructor(public http: HttpClient) {
+    super(http);
   }
 
   getAllMeasurements(page: number): Observable<MeasurementPage> {
-    return this.http.get<MeasurementPage>(this.urlMeasurement, {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
-      params: new HttpParams().set('page', page.toString())
-    });
+    return this.get(`measurements/?page=${page.toString()}&&status=0`);
   }
 
   getMeasurements(idDeal): Observable<DealMeasurement[]> {
-    return this.http.get<DealMeasurement[]>(this.urlDealMeasurements + idDeal + '/measurements', {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
-    });
+    return this.get(`deals/${idDeal}/measurements/`);
   }
 
   getMeasurement(idMeasurement): Observable<DealMeasurement> {
-    return this.http.get<DealMeasurement>(this.urlMeasurement + idMeasurement, {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
-    });
+    return this.get(`measurements/${idMeasurement}`);
   }
 
   measurementComment(idMeasurement, comment): Observable<OurComment> {
-    return this.http.post<OurComment>(this.urlMeasurement + idMeasurement + '/comment/',
-      {'text': comment},
-      {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
-    );
+    return this.post(`measurements/${idMeasurement}/comment/`, {'text': comment});
   }
 
   getFilterMeasurements(page: number, text: string): Observable<MeasurementPage> {
-    let params = new HttpParams();
-    params = params.append('page', page.toString());
-    params = params.append('text', text);
-    return this.http.get<MeasurementPage>(this.urlMeasurement + 'search', {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
-      params: params
-    });
-  }
-
-  private token() {
-    return localStorage.getItem('token');
+    return this.get(`measurements/search/?page=${page}&&text=${text}`);
   }
 }
