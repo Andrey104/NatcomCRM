@@ -1,3 +1,101 @@
-<p>
-  stage works!
-</p>
+<div *ngIf="!stage" class="spinner-contener">
+  <app-preloader></app-preloader>
+</div>
+<p class="nothing-show" *ngIf="isNothingToShow">Ничего не найдено по данному запросу</p>
+<div *ngIf="stage&&!isNothingToShow" class="mainDiv col s12 detail-col">
+  <div class="col s12 row header-stage">
+    <div class="col s11 date-stage">
+      <i class="tiny default-icon material-icons icon">date_range</i>
+      {{stage.date | dateFormat: 'date'}}
+    </div>
+    <div class="col s1 date-stage">
+      Стадия
+    </div>
+  </div>
+  <div class="col s12 divider"></div>
+  <div class="row col s12 stage-info valign-wrapper">
+    <div class="image-content">
+      <i class="small material-icons icon image {{statusColor(stage?.status)}}">{{statusIcon(stage?.status)}}</i>
+    </div>
+    <div id="status">
+      {{stage.status | stageStatus}}
+    </div>
+  </div>
+  <div class="row col s12 stage-info valign-wrapper">
+    <i class="tiny default-icon material-icons icon">comment</i>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      Cumque dolorum earum facere inventore labore molestiae velit.
+      Deserunt et magni minima porro recusandae. Culpa deserunt dignissimos hic inventore, iure necessitatibus sunt.
+  </div>
+  <div class="col s12 valign-wrapper detail-col">
+    <div class="col s5 divider "></div>
+    <div class="col s2 center-align">Монтажники</div>
+    <div class="col s5 divider "></div>
+  </div>
+  <div class="row col s12 installer" *ngFor="let installer of stage.installers">
+    <div>
+      <i class="tiny default-icon material-icons icon">person</i>{{installer.installer.fio}}
+    </div>
+    <div>
+      <i class="tiny default-icon material-icons icon">phone</i>{{installer.installer.phone}}
+    </div>
+  </div>
+  <div class="col s12 valign-wrapper detail-col">
+    <div class="col s5 divider "></div>
+    <div class="col s2 center-align">Затраты</div>
+    <div class="col s5 divider "></div>
+  </div>
+  <div class="row col s12 valign-wrapper installer" *ngFor="let cost of stage.costs">
+    <div>
+      <span id="cost">{{cost.sum | money}} - {{cost.comment}}</span>
+    </div>
+  </div>
+  <!--<div class="col s12 valign-wrapper detail-col">-->
+    <!--<div class="col s5 divider "></div>-->
+    <!--<div class="col s2 center-align">Комплектующие</div>-->
+    <!--<div class="col s5 divider "></div>-->
+  <!--</div>-->
+  <div class="col s12 valign-wrapper detail-col">
+    <div class="col s5 divider "></div>
+    <div class="col s2 center-align">История</div>
+    <div class="col s5 divider "></div>
+  </div>
+  <div class="col s10 offset-s1 action" *ngFor="let action of stage.actions">
+   <div>{{action | action: 'stage'}}</div>
+  </div>
+
+  <div class="fixed-action-btn click-to-toggle">
+    <a class="btn-floating btn-large orange">
+      <i class="large material-icons">menu</i>
+    </a>
+    <ul class="my-fab">
+      <li class="hover-element hover-element-menu">
+        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить монтажника</span>
+          <div class="my-icon center-align valign-wrapper"><i class="material-icons">person</i></div>
+        </div>
+      </li>
+      <li class="hover-element hover-element-menu">
+        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить затраты</span>
+          <div class="my-icon center-align valign-wrapper"><i class="material-icons">money</i></div>
+        </div>
+      </li>
+      <li class="hover-element hover-element-menu">
+        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить комплектующие</span>
+          <div class="my-icon center-align valign-wrapper"><i class="material-icons">add</i></div>
+        </div>
+      </li>
+      <li class="hover-element hover-element-menu">
+        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Перенести стадию</span>
+          <div class="my-icon center-align valign-wrapper"><i class="material-icons">event</i></div>
+        </div>
+      </li>
+      <li class="hover-element hover-element-menu">
+        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Завершить стадию</span>
+          <div class="my-icon center-align valign-wrapper"><i class="material-icons">check</i></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!--<p>{{stage.id}}</p>-->
+</div>

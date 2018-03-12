@@ -88,8 +88,8 @@
     <div class="col s5 divider"></div>
   </div>
   <div class="row">
-    <div class="col s3" *ngFor="let picture of measurement?.pictures">
-      <img class="col s12 picture" src="{{picture.url}}"/>
+    <div class="col s3" *ngFor="let picture of measurement?.pictures; let i = index">
+      <img class="col s12 picture" (click)="openPicture(i)" src="{{picture.url}}"/>
       <div class="col s12 picture-date center-align">{{picture?.auto_date | dateFormat: 'fullDate'}}</div>
     </div>
   </div>
@@ -104,6 +104,7 @@
     </div>
   </div>
   <app-deal-client-info [openClientInfo]="clientInfo" [client]="client" (close)="closeClientInfo()"></app-deal-client-info>
+  <app-image-modal [picture]="picture" (close)="closePicture()"></app-image-modal>
 </div>
 <div *ngIf="measurement" class="col s12 measurement-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>

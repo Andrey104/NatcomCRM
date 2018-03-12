@@ -72,11 +72,18 @@ import { DealClientInfoComponent } from './deals/deal-client-info/deal-client-in
 import {DealContractView} from './pipes/deal-contract-view.pipe';
 import { StageDealComponent } from './stage-deal/stage-deal.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
-import {ActionStagePipe} from './pipes/action.stage.pipe';
 import {StageComponent} from './stage/stage.component';
 import {WorkerNamePipe} from './pipes/worker-name.pipe';
 import {MeasurementStatusPipe} from './pipes/measurement-status.pipe';
 import { ImageModalComponent } from './image-modal/image-modal.component';
+import { MountPageComponent } from './mounts/mount-page/mount-page.component';
+import { MountComponent } from './mounts/mount/mount.component';
+import { MountDetailComponent } from './mounts/mount-detail/mount-detail.component';
+import {StageMountService} from './services/stage-mount.service';
+import { MeasurementPageComponent } from './measurements/measurement-page/measurement-page.component';
+import { MeasurementDetailComponent } from './measurements/measurement-detail/measurement-detail.component';
+import { MeasurementComponent } from './measurements/measurement/measurement.component';
+import {BaseApi} from './core/base-api';
 
 
 @NgModule({
@@ -137,11 +144,16 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
     StageDealComponent,
     StageMountStatusPipe,
     DealClientInfoComponent,
-    ActionStagePipe,
     StageComponent,
     WorkerNamePipe,
     MeasurementStatusPipe,
     ImageModalComponent,
+    MountPageComponent,
+    MountComponent,
+    MountDetailComponent,
+    MeasurementPageComponent,
+    MeasurementDetailComponent,
+    MeasurementComponent,
 ],
   imports: [
     BrowserModule,
@@ -163,7 +175,9 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
     ClientService,
     MeasurementService,
     MountService,
-    InstallersService
+    InstallersService,
+    StageMountService,
+    BaseApi
   ],
   bootstrap: [AppComponent]
 })

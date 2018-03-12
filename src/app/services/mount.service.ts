@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {DealMount} from '../models/deal/deal_mount';
 import {OurComment} from '../models/comment';
+import {MountPage} from '../models/mount/mount-page';
 
 @Injectable()
 export class MountService {
@@ -10,6 +11,13 @@ export class MountService {
   private urlMount = 'http://188.225.46.31/api/mounts/';
 
   constructor(private http: HttpClient) {
+  }
+
+  getAllMounts(page: number): Observable<MountPage> {
+    return this.http.get<MountPage>(this.urlMount, {
+      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
+      params: new HttpParams().set('page', page.toString())
+    });
   }
 
   getMounts(idDeal): Observable<DealMount[]> {

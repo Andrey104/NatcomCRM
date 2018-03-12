@@ -5,6 +5,7 @@
 
 .mainDiv {
   border-left: 1px solid #c4c4c4;
+  border-bottom: 1px solid #c4c4c4;
 }
 
 .action {
@@ -145,3 +146,21 @@ hr {
   height: 35px;
 }
 
+.btn-go-deal {
+  cursor: pointer;
+  padding: 0 8px;
+  color: white;
+  min-width: 110px;
+  max-width: 110px;
+  background-color: orange;
+  border-radius: 5px;
+  height: 30px;
+}
+
+.deal-icon {
+  color: white!important;
+  margin-right: 0;
+  position: relative;
+  right: 0px!important;
+  transform: scale(-1, 1);
+}

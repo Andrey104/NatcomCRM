@@ -1,0 +1,24 @@
+<div routerLink="{{measurement?.id}}" routerLinkActive="active-card"
+     class="card horizontal order hover-element no-border hoverable">
+  <div class="center-align valign-wrapper">
+    <div class="status-image info">
+      <div [appColorCompany]="measurement?.company?.symbol" class="image">
+        {{measurement?.company?.symbol}}
+      </div>
+    </div>
+  </div>
+  <div class="card-stacked">
+    <div class="info">
+      <div class="col s12 detail-col">
+        <div class="company col s7 detail-col">{{measurement?.company?.name | companyName}}</div>
+        <div class="right-align col s5 time">
+          <i class="tiny material-icons icon">access_time</i> {{measurement?.auto_date | dateFormat: 'time'}}
+        </div>
+      </div>
+      <div class="main-info-card">
+        <div class="address">{{measurement?.address | address}}</div>
+        <div>{{measurement?.status | measurementStatus}}</div>
+      </div>
+    </div>
+  </div>
+</div>

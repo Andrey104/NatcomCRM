@@ -1,15 +1,15 @@
-import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {StageMountService} from '../../services/stage-mount.service';
 import {MountService} from '../../services/mount.service';
 import {DealMount} from '../../models/deal/deal_mount';
-import {StageMountService} from '../../services/stage-mount.service';
 
 @Component({
-  selector: 'app-deal-mount',
-  templateUrl: './deal-mount.component.html',
-  styleUrls: ['./deal-mount.component.css']
+  selector: 'app-mount-detail',
+  templateUrl: './mount-detail.component.html',
+  styleUrls: ['./mount-detail.component.css']
 })
-export class DealMountComponent implements OnInit, AfterViewChecked {
+export class MountDetailComponent implements OnInit, AfterViewChecked {
   id;
   mount: DealMount;
   dealId;
@@ -25,9 +25,9 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   subscribeMount() {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['mount_id'];
-      this.dealId = params['id'];
       this.mountService.getMount(this.id).subscribe(mount => {
         this.mount = mount;
+        this.dealId = String(mount.deal);
         this.stageMountService.resetStages();
         this.mount.stages.forEach((stage) => {
           this.stageMountService.putStage(stage);
@@ -52,10 +52,4 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
       this.isSend = false;
     }
   }
-
 }
-
-// 0 - в процессе
-// 1 - добавлена стадия
-// 2 - успешно завершен
-// 3 - отклонен

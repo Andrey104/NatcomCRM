@@ -4,8 +4,8 @@
 <div *ngIf="mount" class="mainDiv col s12 detail-col scrollable-page" id="page">
   <div class="col s12 detail-col valign-wrapper left-align">
     <div class="col s4 valign-wrapper">
-      <img  class="avatar" src="{{mount?.user?.type | imageType}}">
-    <div>{{mount?.user?.first_name}} {{mount?.user?.last_name}}</div>
+      <img class="avatar" src="{{mount?.user?.type | imageType}}">
+      <div>{{mount?.user?.first_name}} {{mount?.user?.last_name}}</div>
     </div>
     <div class="col s3"></div>
     <div class="col s8">{{mount?.status | mountStatus}}</div>
@@ -17,12 +17,18 @@
       <div [appColorCompany]="mount?.company?.symbol" class="company-symbol">{{mount?.company?.symbol}}</div>
       <div class="company-name">{{mount?.company?.name}}</div>
     </div>
+    <div class=" col s2 valign-wrapper no-border" routerLink="/deals/all/{{dealId}}">
+      <div class="btn-go-deal valign-wrapper no-border">
+        В сделку<i class="normal default-icon material-icons  deal-icon">reply</i>
+      </div>
+    </div>
   </div>
   <div class="mount-info">
     <div class="col s12 str-info">
-      <i class="tiny default-icon material-icons  icon">date_range</i><span>  {{mount?.date | dateFormat: 'date'}}</span>
+      <i
+        class="tiny default-icon material-icons  icon">date_range</i><span>  {{mount?.date | dateFormat: 'date'}}</span>
     </div>
-    <div class="col s12 str-info">
+    <div class="col s10 str-info">
       <i class="tiny default-icon material-icons icon">assignment</i><span> Номер договора:  {{dealId | dealContractView}}</span>
     </div>
   </div>
@@ -81,7 +87,7 @@
       </div>
     </li>
     <li class="hover-element hover-element-menu">
-      <div class="center-align valign-wrapper menu-li-div" ><span class="fab-text">Завершить монтаж</span>
+      <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Завершить монтаж</span>
         <div class="my-icon center-align valign-wrapper"><i class="material-icons">check</i></div>
       </div>
     </li>

@@ -1,3 +1,8 @@
-<p>
-  image-modal works!
-</p>
+<div id="modal1" class="modal modal-fixed-footer" [ngClass]="{open: picture}">
+    <div class="col s12 right-align detail-col-right">
+      <i (click)="onClose()" class="small material-icons hover-element">close</i>
+    </div>
+    <div class="picture">
+      <img class="picture" src="{{picture?.url}}">
+    </div>
+</div>

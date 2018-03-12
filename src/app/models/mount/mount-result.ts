@@ -1,17 +1,18 @@
+import {Action} from '../action';
+import {OurComment} from '../comment';
 import {Company} from '../company';
 import {User} from '../user';
-import {OurComment} from '../comment';
-import {MountStage} from '../mount/mount-stage';
+import {MountStage} from './mount-stage';
 
-export class DealMount {
+export class MountResult {
   id: number;
-  actions: object;
+  actions: Action[];
   stages: MountStage[];
   comments: OurComment[];
   company: Company;
+  user: User;
   date_mount: string;
   date: string;
   status: number;
   deal: number;
-  user: User;
 }

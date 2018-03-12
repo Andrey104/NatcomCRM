@@ -3,7 +3,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 @Pipe({
   name: 'imageType'
 })
-export class ImageTypePipe implements PipeTransform{
+export class ImageTypePipe implements PipeTransform {
   transform(type: number): string {
     let url: string;
     switch (type) {
@@ -19,7 +19,8 @@ export class ImageTypePipe implements PipeTransform{
         url = 'assets/images/admin.png';
         break;
       }
-      case 4: {
+      case 4:
+      case 5: {
         url = 'assets/images/admin.png';
         break;
       }
