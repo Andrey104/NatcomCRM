@@ -56,10 +56,10 @@ export class InstallerEditComponent implements OnInit, OnChanges {
     const name = this.installerForm.value.name;
     const phone = this.installerForm.value.phone;
     const installer = new Installer();
-    installer.id = this.modalState.installer.id;
     installer.fio = name;
     installer.phone = phone;
     if (this.edit) {
+      installer.id = this.modalState.installer.id;
       this.installerService.editInstaller(installer).subscribe(data => {
         if (data) {
           alert('Монтажник изменен успешно!');

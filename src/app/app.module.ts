@@ -80,6 +80,7 @@ import { DealClientInfoComponent } from './deals/deal-client-info/deal-client-in
 import {DealContractView} from './pipes/deal-contract-view.pipe';
 import { StageComponent } from './stage/stage.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
+import {CompaniesService} from './services/companies.service';
 
 
 @NgModule({
@@ -169,7 +170,8 @@ import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
     ClientService,
     MeasurementService,
     MountService,
-    InstallersService
+    InstallersService,
+    CompaniesService
   ],
   bootstrap: [AppComponent]
 })
