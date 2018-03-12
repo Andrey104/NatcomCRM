@@ -1,0 +1,23 @@
+<div class="row main-row">
+  <div class="col s3 list-col"
+       infinite-scroll
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="300"
+       [scrollWindow]="false"
+       (scrolled)="onScrollMeasurement()">
+    <div class="col s3 input-field white">
+      <input #input class="col s12" type="search" (input)="term$.next($event.target.value)">
+    </div>
+    <app-measurement *ngFor="let measurement of measurements"
+               [measurement]="measurement">
+    </app-measurement>
+    <div *ngIf="!lastPage" class="col s10">
+      <app-preloader></app-preloader>
+    </div>
+  </div>
+  <div class="col s9 detail-col">
+    <div class="detail">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

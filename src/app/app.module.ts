@@ -80,6 +80,10 @@ import { MountPageComponent } from './mounts/mount-page/mount-page.component';
 import { MountComponent } from './mounts/mount/mount.component';
 import { MountDetailComponent } from './mounts/mount-detail/mount-detail.component';
 import {StageMountService} from './services/stage-mount.service';
+import { MeasurementPageComponent } from './measurements/measurement-page/measurement-page.component';
+import { MeasurementDetailComponent } from './measurements/measurement-detail/measurement-detail.component';
+import { MeasurementComponent } from './measurements/measurement/measurement.component';
+import {BaseApi} from './core/base-api';
 
 
 @NgModule({
@@ -147,6 +151,9 @@ import {StageMountService} from './services/stage-mount.service';
     MountPageComponent,
     MountComponent,
     MountDetailComponent,
+    MeasurementPageComponent,
+    MeasurementDetailComponent,
+    MeasurementComponent,
 ],
   imports: [
     BrowserModule,
@@ -169,7 +176,8 @@ import {StageMountService} from './services/stage-mount.service';
     MeasurementService,
     MountService,
     InstallersService,
-    StageMountService
+    StageMountService,
+    BaseApi
   ],
   bootstrap: [AppComponent]
 })

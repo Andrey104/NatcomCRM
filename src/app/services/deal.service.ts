@@ -33,7 +33,6 @@ export class DealService {
    let params = new HttpParams();
     params = params.append('page', page);
     if (status !== undefined) {
-      console.log(status);
       params = params.append('status', status);
     }
     const url = this.dealsUrl;

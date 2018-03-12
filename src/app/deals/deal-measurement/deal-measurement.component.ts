@@ -3,6 +3,7 @@ import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {ActivatedRoute} from '@angular/router';
 import {MeasurementService} from '../../services/measurement.service';
 import {Client} from '../../models/client';
+import {Picture} from '../../models/picture';
 
 @Component({
   selector: 'app-deal-measurement',
@@ -15,6 +16,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   clientInfo = false;
   client: Client;
   flag = false;
+  picture: Picture;
 
   constructor(private activatedRoute: ActivatedRoute, private measurementService: MeasurementService) {
   }
@@ -57,5 +59,12 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
       }, error => {
         console.log(error);
       });
+  }
+
+  openPicture(idPicture: number) {
+    this.picture = this.measurement.pictures[idPicture];
+  }
+  closePicture() {
+    this.picture = null;
   }
 }
