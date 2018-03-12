@@ -236,6 +236,43 @@ export class UtilsService {
       ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
   }
 
+  stageActionDecoder(action: DealAction) {
+    let message: string;
+    let comment: string;
+    switch (action.type) {
+      case 1: {
+        message = ' закрыл(а) стадию ';
+        break;
+      }
+
+      case 2: {
+        message = ' перенес(ла) стадию ';
+        break;
+      }
+
+      case 3: {
+        message = ' добавил(а) затраты ';
+        break;
+      }
+
+      case 4: {
+        message = ' изменил(а) монтажников ';
+        break;
+      }
+      default: {
+        message = ' ';
+        break;
+      }
+    }
+    if (action.comment == null) {
+      comment = '';
+    } else {
+      comment = 'с комментарием ' + action.comment;
+    }
+    return message + comment;
+
+  }
+
   statusUrlDeal(statusStr: string): number {
     let status: number;
     switch (statusStr) {

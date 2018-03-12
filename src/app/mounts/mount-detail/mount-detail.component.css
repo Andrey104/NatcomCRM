@@ -1,0 +1,166 @@
+.namePage {
+  margin: 10px;
+  font-size: 16px
+}
+
+.mainDiv {
+  border-left: 1px solid #c4c4c4;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.action {
+  font-size: 12px;
+  line-height: 1.2rem;
+  color: #9e9e9e;
+  margin: 5px 0;
+}
+
+.forward-block:hover {
+  background-color: #E2E2E2;
+}
+
+.forward-block:hover .arrow {
+  font-size: 40px;
+  opacity: 1;
+  color: #666666;
+}
+
+.arrow {
+  opacity: 0;
+}
+
+.company-name {
+  overflow: hidden;
+  font-size: 24px;
+  line-height: 2.5rem;
+  margin-left: 15px;
+}
+
+.main-info {
+  padding-top: 30px;
+}
+
+.str-info {
+  margin-top: 15px;
+}
+
+.mount-info {
+  margin-left: 20px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.header {
+  font-size: 14px;
+  color: black;
+}
+
+.mount-comment-content {
+  height: 80px;
+  position: fixed;
+  bottom: 0;
+  background-color: #e8e8e8;
+  border: 1px solid #c4c4c4;
+}
+
+.fixed-action-btn {
+  bottom: 90px;
+}
+
+.my-fab {
+  left: -150px;
+  background-color: #f4f4f4;
+  text-align: right;
+  border-radius: 10px;
+}
+
+ul > li > a {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+hr {
+  margin: 0;
+}
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  float: left;
+}
+
+.hover-element-menu {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 0;
+}
+
+.hover-element-menu:hover {
+  background-color: #e2e2e2;
+  border-radius: 10px;
+}
+
+.comment-content {
+  width: calc(100% - 25%);
+}
+
+.scrollable-page {
+  border-left: solid 1px #c4c4c4;
+  height: calc(100vh - 142px);
+}
+
+.my-icon {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #5c6b96;
+  right: 0;
+  margin-right: 10px;
+}
+
+.my-a {
+  float: right;
+}
+
+.default-icon {
+  color: grey !important;
+}
+
+.material-icons {
+  margin: auto;
+  color: white;
+}
+
+.fab-text {
+  padding-right: 5px;
+  padding-left: 5px;
+  position: absolute;
+  right: 55px;
+}
+
+.menu-li-div {
+  position: relative;
+  height: 35px;
+}
+
+.btn-go-deal {
+  cursor: pointer;
+  padding: 0 8px;
+  color: white;
+  min-width: 110px;
+  max-width: 110px;
+  background-color: orange;
+  border-radius: 5px;
+  height: 30px;
+}
+
+.deal-icon {
+  color: white!important;
+  margin-right: 0;
+  position: relative;
+  right: 0px!important;
+  transform: scale(-1, 1);
+}

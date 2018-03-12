@@ -1,3 +1,98 @@
-<p>
-  mount-deal works!
-</p>
+<div *ngIf="!mount" class="spinner-contener">
+  <app-preloader></app-preloader>
+</div>
+<div *ngIf="mount" class="mainDiv col s12 detail-col scrollable-page" id="page">
+  <div class="col s12 detail-col valign-wrapper left-align">
+    <div class="col s4 valign-wrapper">
+      <img class="avatar" src="{{mount?.user?.type | imageType}}">
+      <div>{{mount?.user?.first_name}} {{mount?.user?.last_name}}</div>
+    </div>
+    <div class="col s3"></div>
+    <div class="col s8">{{mount?.status | mountStatus}}</div>
+    <div class="col s1 namePage">Монтаж</div>
+  </div>
+  <div class="col s12 divider detail-col"></div>
+  <div class="col s12 valign-wrapper">
+    <div class="status-container valign-wrapper main-info">
+      <div [appColorCompany]="mount?.company?.symbol" class="company-symbol">{{mount?.company?.symbol}}</div>
+      <div class="company-name">{{mount?.company?.name}}</div>
+    </div>
+    <div class=" col s2 valign-wrapper no-border" routerLink="/deals/all/{{dealId}}">
+      <div class="btn-go-deal valign-wrapper no-border">
+        В сделку<i class="normal default-icon material-icons  deal-icon">reply</i>
+      </div>
+    </div>
+  </div>
+  <div class="mount-info">
+    <div class="col s12 str-info">
+      <i
+        class="tiny default-icon material-icons  icon">date_range</i><span>  {{mount?.date | dateFormat: 'date'}}</span>
+    </div>
+    <div class="col s10 str-info">
+      <i class="tiny default-icon material-icons icon">assignment</i><span> Номер договора:  {{dealId | dealContractView}}</span>
+    </div>
+  </div>
+  <div class="col s12 row valign-wrapper detail-col">
+    <div class="col s5 divider "></div>
+    <div class="col s2 center-align">Cтадии</div>
+    <div class="col s5 divider "></div>
+  </div>
+  <div class="col s12 main-row valign-wrapper forward-block hover-element" routerLink="stage/{{stage?.id}}"
+       *ngFor="let stage of mount?.stages; let i = index">
+    <div *ngIf="i!==0">
+      <div class="row">
+        <div class="divider"></div>
+      </div>
+    </div>
+    <app-stage-deal [stage]="stage" class="col s11"></app-stage-deal>
+    <i class="arrow col s1 material-icons right-align">chevron_right</i>
+  </div>
+  <div class="col s12 row valign-wrapper detail-col">
+    <div class="col s5 divider "></div>
+    <div class="col s2 center-align">История</div>
+    <div class="col s5 divider "></div>
+  </div>
+  <div *ngFor="let action of mount?.actions" class="col s10 offset-s1 action">
+    <div>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'mount'}}</div>
+  </div>
+  <div class="col s12 row valign-wrapper detail-col">
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">Комментарии</div>
+    <div class="col s5 divider"></div>
+  </div>
+  <div class="row">
+    <div *ngFor="let comment of mount?.comments" class="col s12">
+      <app-deal-comments [comment]="comment"></app-deal-comments>
+    </div>
+  </div>
+</div>
+<div class="fixed-action-btn click-to-toggle">
+  <a class="btn-floating btn-large orange">
+    <i class="large material-icons">menu</i>
+  </a>
+  <ul class="my-fab">
+    <li class="hover-element hover-element-menu">
+      <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отклонить монтаж</span>
+        <div class="my-icon center-align valign-wrapper"><i class="material-icons">close</i></div>
+      </div>
+    </li>
+    <li class="hover-element hover-element-menu">
+      <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить стадию</span>
+        <div class="my-icon center-align valign-wrapper"><i class="material-icons">add</i></div>
+      </div>
+    </li>
+    <li class="hover-element hover-element-menu">
+      <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Перенести монтаж</span>
+        <div class="my-icon center-align valign-wrapper"><i class="material-icons">event</i></div>
+      </div>
+    </li>
+    <li class="hover-element hover-element-menu">
+      <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Завершить монтаж</span>
+        <div class="my-icon center-align valign-wrapper"><i class="material-icons">check</i></div>
+      </div>
+    </li>
+  </ul>
+</div>
+<div *ngIf="mount" class="col s12 mount-comment-content valign-wrapper">
+  <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
+</div>

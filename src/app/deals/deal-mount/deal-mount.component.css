@@ -84,6 +84,12 @@ hr {
   margin: 0;
 }
 
+.avatar {
+  height: 50px;
+  width: 50px;
+  float: left;
+}
+
 .hover-element-menu {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -135,6 +141,7 @@ hr {
 }
 
 .menu-li-div {
+  position: relative;
   height: 35px;
 }
 

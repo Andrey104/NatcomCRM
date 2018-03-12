@@ -72,7 +72,6 @@ import { DealClientInfoComponent } from './deals/deal-client-info/deal-client-in
 import {DealContractView} from './pipes/deal-contract-view.pipe';
 import { StageDealComponent } from './stage-deal/stage-deal.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
-import {ActionStagePipe} from './pipes/action.stage.pipe';
 import {StageComponent} from './stage/stage.component';
 import {WorkerNamePipe} from './pipes/worker-name.pipe';
 import {MeasurementStatusPipe} from './pipes/measurement-status.pipe';
@@ -80,6 +79,7 @@ import { ImageModalComponent } from './image-modal/image-modal.component';
 import { MountPageComponent } from './mounts/mount-page/mount-page.component';
 import { MountComponent } from './mounts/mount/mount.component';
 import { MountDetailComponent } from './mounts/mount-detail/mount-detail.component';
+import {StageMountService} from './services/stage-mount.service';
 
 
 @NgModule({
@@ -140,7 +140,6 @@ import { MountDetailComponent } from './mounts/mount-detail/mount-detail.compone
     StageDealComponent,
     StageMountStatusPipe,
     DealClientInfoComponent,
-    ActionStagePipe,
     StageComponent,
     WorkerNamePipe,
     MeasurementStatusPipe,
@@ -169,7 +168,8 @@ import { MountDetailComponent } from './mounts/mount-detail/mount-detail.compone
     ClientService,
     MeasurementService,
     MountService,
-    InstallersService
+    InstallersService,
+    StageMountService
   ],
   bootstrap: [AppComponent]
 })

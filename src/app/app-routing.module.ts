@@ -28,7 +28,8 @@ import {MountDetailComponent} from './mounts/mount-detail/mount-detail.component
 // deals/id/mounts
 
 const mounts_routes: Routes = [
-  {path: ':id_mount', component: MountDetailComponent}
+  {path: ':mount_id', component: MountDetailComponent},
+  {path: ':mount_id/stage/:stage_id', component: StageComponent}
 ];
 
 const deals_routes: Routes = [

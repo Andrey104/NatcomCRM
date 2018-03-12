@@ -2,6 +2,7 @@ import {AfterViewChecked, Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MountService} from '../../services/mount.service';
 import {DealMount} from '../../models/deal/deal_mount';
+import {StageMountService} from '../../services/stage-mount.service';
 
 @Component({
   selector: 'app-deal-mount',
@@ -13,9 +14,8 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   mount: DealMount;
   dealId;
   isSend = false;
-  isOpen = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private mountService: MountService) {
+  constructor(private activatedRoute: ActivatedRoute, private mountService: MountService, private stageMountService: StageMountService) {
   }
 
   ngOnInit() {
@@ -28,6 +28,10 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
       this.dealId = params['id'];
       this.mountService.getMount(this.id).subscribe(mount => {
         this.mount = mount;
+        this.stageMountService.resetStages();
+        this.mount.stages.forEach((stage) => {
+          this.stageMountService.putStage(stage);
+        });
       });
     });
   }
@@ -49,13 +53,6 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  changeStatus() {
-    if (this.isOpen === false) {
-      this.isOpen = true;
-    } else {
-      this.isOpen = false;
-    }
-  }
 }
 
 // 0 - в процессе

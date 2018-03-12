@@ -24,6 +24,10 @@ export class ActionPipe implements PipeTransform {
         message = user + this.utils.mountActionDecoder(action);
         break;
       }
+      case 'stage': {
+        message = user + this.utils.stageActionDecoder(action);
+        break;
+      }
     }
     return message;
   }

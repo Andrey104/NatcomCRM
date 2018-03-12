@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Stage} from '../models/stage';
 import {UtilsService} from '../services/utils.service';
+import {MountStage} from '../models/mount/mount-stage';
 
 @Component({
   selector: 'app-stage-deal',
@@ -8,7 +8,7 @@ import {UtilsService} from '../services/utils.service';
   styleUrls: ['./stage-deal.component.css']
 })
 export class StageDealComponent implements OnInit {
-  @Input() stage: Stage;
+  @Input() stage: MountStage;
 
 
   constructor(private utils: UtilsService) {
