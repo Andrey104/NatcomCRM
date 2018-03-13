@@ -319,6 +319,9 @@ export class UtilsService {
         status = {statusName: 'Отмененные заявки', statusUrl: 'status=1'};
         break;
       }
+      case 'all': {
+        status = {statusName: 'Все заявки', statusUrl: ''};
+      }
     }
     return status;
   }

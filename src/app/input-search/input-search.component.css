@@ -1,0 +1,28 @@
+.order-status {
+  padding: 5px 0;
+}
+
+.input-field {
+  position: fixed;
+  left: 0!important;
+  top: 50px;
+  z-index: 1;
+  height: 65px;
+}
+
+input[type="search"] {
+  margin-bottom: 0;
+  border: 2px solid #ffe0b2;
+  border-radius: 15px;
+  background: #f1f8e9;
+  text-indent: 10px;
+  height: 30px;
+  z-index: 2000;
+}
+
+input[type="search"]:focus {
+  background: white;
+  border: 2px solid grey;
+  color: #333;
+  outline: 0;
+}
