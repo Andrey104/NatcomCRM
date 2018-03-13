@@ -29,7 +29,14 @@
           </ul>
         </li>
         <li routerLinkActive="active"><a routerLink="/measurements">Замеры</a></li>
-        <li routerLinkActive="active"><a routerLink="/mounts">Монтажи</a></li>
+        <li routerLinkActive="active"><a routerLink="/mounts/all">Монтажи</a>
+          <ul>
+            <li routerLinkActive="active"><a routerLink="/mounts/processing">Обработка</a></li>
+            <li routerLinkActive="active"><a routerLink="/mounts/added_stage">В процессе</a></li>
+            <li routerLinkActive="active"><a routerLink="/mounts/completed">Завершенные</a></li>
+            <li routerLinkActive="active"><a routerLink="/mounts/canceled">Отклоненные</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </nav>

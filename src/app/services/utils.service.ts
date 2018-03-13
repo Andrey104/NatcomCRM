@@ -305,7 +305,7 @@ export class UtilsService {
   }
 
   statusUrlOrder(statusStr: string): any {
-    let status: {statusName: string, statusUrl: string};
+    let status: { statusName: string, statusUrl: string };
     switch (statusStr) {
       case 'processing': {
         status = {statusName: 'Заявки в процессе', statusUrl: 'status=0&&status=2'};
@@ -321,6 +321,32 @@ export class UtilsService {
       }
       case 'all': {
         status = {statusName: 'Все заявки', statusUrl: ''};
+      }
+    }
+    return status;
+  }
+
+  statusUrlMount(statusStr: string) {
+    let status: { statusName: string, statusUrl: string };
+    switch (statusStr) {
+      case 'processing': {
+        status = {statusName: 'Монтажи в обработке', statusUrl: 'status=0'};
+        break;
+      }
+      case 'added_stage': {
+        status = {statusName: 'Монтажи в процессе', statusUrl: 'status=1'};
+        break;
+      }
+      case 'completed': {
+        status = {statusName: 'Завершенные монтажи', statusUrl: 'status=2'};
+        break;
+      }
+      case 'canceled': {
+        status = {statusName: 'Отклоненные', statusUrl: 'status=3'};
+        break;
+      }
+      case 'all': {
+        status = {statusName: 'Все монтажи', statusUrl: ''};
       }
     }
     return status;
