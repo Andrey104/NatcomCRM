@@ -5,7 +5,7 @@
 <div *ngIf="stage&&!isNothingToShow" class="mainDiv col s12 detail-col">
   <div class="col s12 row header-stage">
     <div class="col s11 date-stage">
-      <i class="tiny default-icon material-icons icon">date_range</i>
+      <i class="tiny  material-icons icon">date_range</i>
       {{stage.date | dateFormat: 'date'}}
     </div>
     <div class="col s1 date-stage">
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="row col s12 stage-info valign-wrapper">
-    <i class="tiny default-icon material-icons icon">comment</i>
+    <i class="tiny  material-icons icon">comment</i>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit.
       Cumque dolorum earum facere inventore labore molestiae velit.
       Deserunt et magni minima porro recusandae. Culpa deserunt dignissimos hic inventore, iure necessitatibus sunt.
@@ -34,10 +34,10 @@
   </div>
   <div class="row col s12 installer" *ngFor="let installer of stage.installers">
     <div>
-      <i class="tiny default-icon material-icons icon">person</i>{{installer.installer.fio}}
+      <i class="tiny  material-icons icon">person</i>{{installer.installer.fio}}
     </div>
     <div>
-      <i class="tiny default-icon material-icons icon">phone</i>{{installer.installer.phone}}
+      <i class="tiny  material-icons icon">phone</i>{{installer.installer.phone}}
     </div>
   </div>
   <div class="col s12 valign-wrapper detail-col">
@@ -66,36 +66,35 @@
 
   <div class="fixed-action-btn click-to-toggle">
     <a class="btn-floating btn-large orange">
-      <i class="large material-icons">menu</i>
+      <i class="large material-icons color-fab-icon">menu</i>
     </a>
-    <ul class="my-fab">
-      <li class="hover-element hover-element-menu">
+    <ul class="fab-ul">
+      <li class="hover-element li-element-menu-fab">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить монтажника</span>
-          <div class="my-icon center-align valign-wrapper"><i class="material-icons">person</i></div>
+          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">person</i></div>
         </div>
       </li>
-      <li class="hover-element hover-element-menu">
+      <li class="hover-element li-element-menu-fab">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить затраты</span>
-          <div class="my-icon center-align valign-wrapper"><i class="material-icons">money</i></div>
+          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">money</i></div>
         </div>
       </li>
-      <li class="hover-element hover-element-menu">
+      <li class="hover-element li-element-menu-fab">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить комплектующие</span>
-          <div class="my-icon center-align valign-wrapper"><i class="material-icons">add</i></div>
+          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">add</i></div>
         </div>
       </li>
-      <li class="hover-element hover-element-menu">
+      <li class="hover-element li-element-menu-fab">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Перенести стадию</span>
-          <div class="my-icon center-align valign-wrapper"><i class="material-icons">event</i></div>
+          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">event</i></div>
         </div>
       </li>
-      <li class="hover-element hover-element-menu">
+      <li class="hover-element li-element-menu-fab">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Завершить стадию</span>
-          <div class="my-icon center-align valign-wrapper"><i class="material-icons">check</i></div>
+          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">check</i></div>
         </div>
       </li>
     </ul>
   </div>
 
-  <!--<p>{{stage.id}}</p>-->
 </div>

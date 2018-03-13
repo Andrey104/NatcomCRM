@@ -4,7 +4,7 @@
   </div>
   <div *ngIf="deal" class="row main-row valign-wrapper">
     <div class="col s4 valign-wrapper">
-      <img  class="avatar" src="{{deal?.user.type | imageType}}">
+      <img class="avatar" src="{{deal?.user.type | imageType}}">
       <div>{{deal?.user.first_name}} {{deal?.user.last_name}}</div>
     </div>
     <div class="col s3">{{getDealStatus(deal?.status)}}</div>
@@ -41,13 +41,13 @@
       </div>
     </div>
     <div class="col s5">
-        <div class="row contacts">
-          <div class="col s12 valign-wrapper">
-            <hr class="col s4">
-            <div class="col s4 center-align header">Контакты</div>
-            <hr class="col s4">
-          </div>
+      <div class="row contacts">
+        <div class="col s12 valign-wrapper">
+          <hr class="col s4">
+          <div class="col s4 center-align header">Контакты</div>
+          <hr class="col s4">
         </div>
+      </div>
       <div class="row">
         <div *ngFor="let client of deal?.clients; let i = index" class="col s12">
           <div (click)="openClientInfo(i)" class="valign-wrapper contact-info forward-block col s12 hover-element">
@@ -143,10 +143,11 @@
   </div>
   <div class="row">
     <div *ngFor="let comment of deal?.comments" class="col s12">
-        <app-deal-comments [comment]="comment"></app-deal-comments>
+      <app-deal-comments [comment]="comment"></app-deal-comments>
     </div>
   </div>
-  <app-deal-client-info [openClientInfo]="clientInfo" [client]="client" (close)="closeClientInfo()"></app-deal-client-info>
+  <app-deal-client-info [openClientInfo]="clientInfo" [client]="client"
+                        (close)="closeClientInfo()"></app-deal-client-info>
 </div>
 <div *ngIf="deal" class="col s12 deal-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
