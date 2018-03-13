@@ -1,13 +1,11 @@
 <div class="row main-row">
-  <div class="col s3 list-col"
+  <div id="scroll" class="col s3 list-col"
        infinite-scroll
        [infiniteScrollDistance]="2"
        [infiniteScrollThrottle]="300"
        [scrollWindow]="false"
        (scrolled)="onScrollDeal()">
-    <div class="col s3 input-field white">
-      <input class="col s12" type="search" (input)="term$.next()" [(ngModel)]="searchStr">
-    </div>
+    <app-input-search [statusName]="status?.statusName" (out)="term$.next($event)"></app-input-search>
     <app-deal *ngFor="let deal of dealPage"
                [deal]="deal">
     </app-deal>
