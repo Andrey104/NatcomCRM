@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {DealMeasurement} from '../models/deal/deal_measurement';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {OurComment} from '../models/comment';
 import {MeasurementPage} from '../models/measurement/measurement-page';
 import {BaseApi} from '../core/base-api';
@@ -13,8 +13,8 @@ export class MeasurementService extends BaseApi {
     super(http);
   }
 
-  getAllMeasurements(page: number): Observable<MeasurementPage> {
-    return this.get(`measurements/?page=${page.toString()}`);
+  getAllMeasurements(page: number, status: string): Observable<MeasurementPage> {
+    return this.get(`measurements/?page=${page.toString()}&&${status}`);
   }
 
   getMeasurements(idDeal): Observable<DealMeasurement[]> {
@@ -30,6 +30,6 @@ export class MeasurementService extends BaseApi {
   }
 
   getFilterMeasurements(page: number, text: string): Observable<MeasurementPage> {
-    return this.get(`measurements/search/?page=${page}&&text=${text}`);
+    return this.get(`measurements/search?page=${page}&&text=${text}`);
   }
 }

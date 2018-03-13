@@ -25,13 +25,8 @@ export class MountPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params
-      .subscribe((params) => {
-        this.status = this.utils.statusUrlMount(params['status']);
-        this.mounts = [];
-        this.showMounts();
-      });
     this.subscribeOnInputField();
+    this.subscribeOnUrl();
   }
 
   subscribeOnInputField() {
@@ -41,6 +36,15 @@ export class MountPageComponent implements OnInit {
       .subscribe((term) => {
         this.inputText = term;
         this.search(term);
+      });
+  }
+
+  subscribeOnUrl() {
+    this.activatedRoute.params
+      .subscribe((params) => {
+        this.status = this.utils.statusUrlMount(params['status']);
+        this.mounts = [];
+        this.showMounts();
       });
   }
 
@@ -55,6 +59,7 @@ export class MountPageComponent implements OnInit {
           this.lastPage = true;
         }
         this.load = false;
+        document.getElementById('scroll').scrollTop = 0;
       });
   }
 

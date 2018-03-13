@@ -28,7 +28,14 @@
             <li routerLinkActive="active"><a routerLink="/deals/canceled">Отмененные</a></li>
           </ul>
         </li>
-        <li routerLinkActive="active"><a routerLink="/measurements">Замеры</a></li>
+        <li routerLinkActive="active"><a routerLink="/measurements/all">Замеры</a>
+          <ul>
+            <li routerLinkActive="active"><a routerLink="/measurements/undistributed">Нераспределенные</a></li>
+            <li routerLinkActive="active"><a routerLink="/measurements/responsible">Распределенные</a></li>
+            <li routerLinkActive="active"><a routerLink="/measurements/closed">Закрытые</a></li>
+            <li routerLinkActive="active"><a routerLink="/measurements/rejected">Отклоненные</a></li>
+          </ul>
+        </li>
         <li routerLinkActive="active"><a routerLink="/mounts/all">Монтажи</a>
           <ul>
             <li routerLinkActive="active"><a routerLink="/mounts/processing">Обработка</a></li>

@@ -326,6 +326,32 @@ export class UtilsService {
     return status;
   }
 
+  statusUrlMeasurement(statusStr: string) {
+    let status: { statusName: string, statusUrl: string };
+    switch (statusStr) {
+      case 'undistributed': {
+        status = {statusName: 'Нераспределенные замеры', statusUrl: 'status=0'};
+        break;
+      }
+      case 'responsible': {
+        status = {statusName: 'Распределенные замеры', statusUrl: 'status=1'};
+        break;
+      }
+      case 'closed': {
+        status = {statusName: 'Закрытые замеры', statusUrl: 'status=2&&status=3'};
+        break;
+      }
+      case 'rejected': {
+        status = {statusName: 'Отклоненные замеры', statusUrl: 'status=4&&status=5'};
+        break;
+      }
+      case 'all': {
+        status = {statusName: 'Все замеры', statusUrl: ''};
+      }
+    }
+    return status;
+  }
+
   statusUrlMount(statusStr: string) {
     let status: { statusName: string, statusUrl: string };
     switch (statusStr) {
