@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, Renderer2, ViewChild} from '@angular/core';
 
 
 @Component({
@@ -9,12 +9,15 @@ import { Component, EventEmitter, Input, OnChanges, Output} from '@angular/core'
 export class InputSearchComponent implements OnChanges {
   @Input() statusName;
   @Output() out = new EventEmitter<string>();
+  @ViewChild('input') input: ElementRef;
 
-  constructor() {
+  constructor(private renderer: Renderer2) {
   }
 
   ngOnChanges(): void {
-    console.log('ngOnChanges');
+    if (this.input.nativeElement.value !== '') {
+      this.input.nativeElement.value = '';
+    }
   }
 
   textOut(text: string) {

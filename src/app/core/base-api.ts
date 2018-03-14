@@ -29,7 +29,7 @@ export class BaseApi {
     );
   }
 
-  token() {
+  private token() {
     return localStorage.getItem('token');
   }
 }
