@@ -54,8 +54,9 @@ const pages_routes: Routes = [
   {path: 'orders/:status', component: OrderPageComponent, children: orders_routes},
   {path: 'deals/:status', component: DealPageComponent, children: deals_routes},
   {path: 'measurements/:status', component: MeasurementPageComponent, children: measurements_routes},
-  {path: 'mounts/:status', component: MountPageComponent, children: mounts_routes },
-  {path: 'user', component: UserInfoComponent}
+  {path: 'mounts/:status', component: MountPageComponent, children: mounts_routes},
+  {path: 'user', component: UserInfoComponent},
+  {path: '', redirectTo: 'user', pathMatch: 'full'}
 ];
 
 const settings_router: Routes = [

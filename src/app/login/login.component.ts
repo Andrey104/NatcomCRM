@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
   });
   ngOnInit() {
     this.logout();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/orders';
+    this.returnUrl = '/orders';
+    // this.route.snapshot.queryParams['returnUrl'] ||
   }
   login() {
     this.loading = true;
@@ -42,9 +43,10 @@ export class LoginComponent implements OnInit {
       .post('http://188.225.46.31/api/login/', { 'username': this.username, 'password': this.password })
       .subscribe(
         data => {
+          console.log('aasdasdasdasdasd');
           localStorage.setItem('token', data['token']);
           localStorage.setItem('user_type', data['type']);
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate(['/orders']);
         },
         err => {
           console.log('Error:' + err.error);

@@ -5,20 +5,18 @@ import {catchError, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../models/user';
 import {MessageService} from './message.service';
-import { of } from 'rxjs/observable/of';
-
+import {of} from 'rxjs/observable/of';
 
 
 @Injectable()
 export class AuthenticationService {
   constructor(private http: HttpClient, private messageService: MessageService) {
   }
-  private userUrl = 'http://188.225.46.31//api/user_info';
+
+  private userUrl = 'http://188.225.46.31/api/user_info';
 
   login(username: string, password: string) {
     const user = {username: username, password: password};
-
-
     this.http
       .post('/api/login', user)
       // See below - subscribe() is still necessary when using post().
@@ -48,7 +46,7 @@ export class AuthenticationService {
     this.messageService.add('HeroService: ' + message);
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
@@ -68,14 +66,11 @@ export class AuthenticationService {
   }
 
   checkUser() {
-    console.log('start');
-    alert('start');
     this.getUser().subscribe(user => {
       localStorage.setItem('user_name', user.username);
       localStorage.setItem('user_type', user.type.toString());
-      alert('Успех!');
-    }, error => {console.log(error); });
+    }, error => {
+      console.log(error);
+    });
   }
-
-
 }

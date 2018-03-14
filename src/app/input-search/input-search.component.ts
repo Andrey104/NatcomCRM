@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild} from '@angular/core';
 
 
 @Component({
@@ -11,7 +11,7 @@ export class InputSearchComponent implements OnChanges {
   @Output() out = new EventEmitter<string>();
   @ViewChild('input') input: ElementRef;
 
-  constructor(private renderer: Renderer2) {
+  constructor() {
   }
 
   ngOnChanges(): void {
