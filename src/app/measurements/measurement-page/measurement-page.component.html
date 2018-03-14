@@ -9,7 +9,7 @@
     <app-measurement *ngFor="let measurement of measurements"
                [measurement]="measurement">
     </app-measurement>
-    <div *ngIf="!lastPage" class="col s10">
+    <div [class.spinner-contener]="measurements.length===0" *ngIf="!lastPage" class="col s10">
       <app-preloader></app-preloader>
     </div>
   </div>

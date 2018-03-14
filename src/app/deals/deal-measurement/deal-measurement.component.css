@@ -9,6 +9,7 @@
 
 .date-icon {
   float: left;
+  margin-top: 5px;
   margin-right: 5px;
 }
 
@@ -20,6 +21,12 @@
   height: 50px;
   width: 50px;
   float: left;
+}
+
+.history {
+  font-size: 12px;
+  line-height: 1.2rem;
+  color: #9e9e9e;
 }
 
 .deal {
@@ -101,4 +108,6 @@
   width: calc(100% - 25%);
 }
 
-
+.fixed-action-btn {
+  bottom: 90px;
+}

@@ -1,10 +1,8 @@
 <div routerLink="{{measurement?.id}}" routerLinkActive="active-card"
      class="card horizontal order hover-element no-border hoverable">
   <div class="center-align valign-wrapper">
-    <div class="status-image info">
-      <div [appColorCompany]="measurement?.company?.symbol" class="image">
-        {{measurement?.company?.symbol}}
-      </div>
+    <div class="icon status-image">
+      <i ngClass="{{iconInfo.color}}" class="small material-icons icon image">{{iconInfo.icon}}</i>
     </div>
   </div>
   <div class="card-stacked">

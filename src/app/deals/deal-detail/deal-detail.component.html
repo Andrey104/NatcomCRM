@@ -1,8 +1,8 @@
-<div class="col s12 detail-col scrollable-page" id="page">
-  <div *ngIf="!deal" class="spinner-contener">
-    <app-preloader></app-preloader>
-  </div>
-  <div *ngIf="deal" class="row main-row valign-wrapper">
+<div *ngIf="loadPage" class="spinner-page">
+  <app-preloader></app-preloader>
+</div>
+<div *ngIf="!loadPage" class="col s12 detail-col scrollable-page" id="page">
+  <div class="row main-row valign-wrapper">
     <div class="col s4 valign-wrapper">
       <img class="avatar" src="{{deal?.user.type | imageType}}">
       <div>{{deal?.user.first_name}} {{deal?.user.last_name}}</div>
@@ -70,7 +70,10 @@
     <div class="col s2 center-align header">Замеры</div>
     <div class="col s5 divider"></div>
   </div>
-  <div class="row">
+  <div *ngIf="deal?.measurements.length===0" class="row">
+    <div  class="col s12 offset-s1 no-information">Нет замеров</div>
+  </div>
+  <div *ngIf="deal?.measurements.length!==0" class="row">
     <div *ngFor="let measurement of deal?.measurements; let i = index"
          class="col s12 valign-wrapper forward-block hover-element no-border"
          routerLink="measurement/{{measurement?.id}}">
@@ -86,7 +89,10 @@
     <div class="col s2 center-align header">Монтажи</div>
     <div class="col s5 divider"></div>
   </div>
-  <div class="row">
+  <div *ngIf="deal?.mounts.length===0" class="row">
+    <div  class="col s12 offset-s1 no-information">Нет монтажей</div>
+  </div>
+  <div *ngIf="deal?.mounts.length!==0" class="row">
     <div *ngFor="let mount of deal?.mounts; let i = index"
          class="col s12 valign-wrapper forward-block hover-element no-border"
          routerLink="mount/{{mount?.id}}">
@@ -105,7 +111,10 @@
       <div class="col s2 center-align header">Перерасчеты</div>
       <div class="col s5 divider"></div>
     </div>
-    <div class="row">
+    <div *ngIf="deal?.discounts.length===0" class="row">
+      <div  class="col s12 offset-s1 no-information">Нет перерасчетов</div>
+    </div>
+    <div *ngIf="deal?.discounts.length!==0" class="row">
       <div *ngFor="let discount of deal?.discounts" class="col s10 offset-s1">
         <p>{{discount.auto_date | dateFormat: 'fullDate'}} {{discount | discount}}</p>
       </div>
@@ -115,7 +124,10 @@
       <div class="col s2 center-align header">Оплаты</div>
       <div class="col s5 divider"></div>
     </div>
-    <div class="row">
+    <div *ngIf="deal?.payments.length===0" class="row">
+      <div  class="col s12 offset-s1 no-information">Нет оплат</div>
+    </div>
+    <div *ngIf="deal?.payments.length!==0" class="row">
       <div *ngFor="let payment of deal?.payments" class="col s10 offset-s1">
         <p>{{payment.auto_date | dateFormat: 'fullDate'}} {{payment | payment}}</p>
       </div>
@@ -143,15 +155,52 @@
     <div class="col s2 center-align header">Комментарии</div>
     <div class="col s5 divider"></div>
   </div>
-  <div class="row">
+  <div *ngIf="deal?.comments.length===0" class="row">
+    <div  class="col s12 offset-s1 no-information">Нет комментариев</div>
+  </div>
+  <div *ngIf="deal?.comments.length!==0" class="row">
     <div *ngFor="let comment of deal?.comments" class="col s12">
       <app-deal-comments [comment]="comment"></app-deal-comments>
     </div>
   </div>
-  <app-deal-client-info [openClientInfo]="clientInfo" [client]="client"
-                        (close)="closeClientInfo()"></app-deal-client-info>
+  <div class="fixed-action-btn click-to-toggle">
+    <a class="btn-floating btn-large orange">
+      <i class="large material-icons color-fab-icon">menu</i>
+    </a>
+    <ul class="fab-ul">
+      <li class="hover-element li-element-menu-fab">
+        <div class="center-align valign-wrapper menu-li-div">
+          <span class="fab-text">Отложить</span>
+          <div class="icon-fab center-align valign-wrapper">
+            <i class="material-icons color-fab-icon">access_time</i>
+          </div>
+        </div>
+      </li>
+      <li class="hover-element li-element-menu-fab">
+        <div class="center-align valign-wrapper menu-li-div">
+          <span class="fab-text">Отказать</span>
+          <div class="icon-fab center-align valign-wrapper">
+            <i class="material-icons color-fab-icon">close</i>
+          </div>
+        </div>
+      </li>
+      <li class="hover-element li-element-menu-fab">
+        <div class="center-align valign-wrapper menu-li-div">
+          <span class="fab-text">В сделку</span>
+          <div class="icon-fab center-align valign-wrapper">
+            <i class="material-icons color-fab-icon">check</i>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <app-deal-client-info
+    [openClientInfo]="clientInfo"
+    [client]="client"
+    (close)="closeClientInfo()">
+  </app-deal-client-info>
 </div>
-<div *ngIf="deal" class="col s12 deal-comment-content valign-wrapper">
+<div *ngIf="!loadPage" class="col s12 deal-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
 

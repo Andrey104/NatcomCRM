@@ -104,6 +104,10 @@
   margin: auto 0;
 }
 
+.spinner-page {
+  height: calc(100vh - 64px);
+  margin: auto 0;
+}
 /*Классы для карточек заказов и каточек сделок в списке*/
 .card-date-icon {
   margin-right: 3px;
@@ -203,3 +207,9 @@
 }
 
 /*-------конец FAB---------*/
+/* Когда контент пустой */
+.no-information {
+  font-size: 12px;
+  line-height: 1.2rem;
+  color: #9e9e9e;
+}

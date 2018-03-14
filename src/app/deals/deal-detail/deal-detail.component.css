@@ -108,3 +108,7 @@
 .comment-content {
   width: calc(100% - 25%);
 }
+
+.fixed-action-btn {
+  bottom: 90px;
+}

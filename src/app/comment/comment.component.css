@@ -3,10 +3,12 @@ textarea {
   border: 1px solid #c4c4c4;
   background: #ffffff;
   text-indent: 10px;
-  height: 30px;
+  height: 28px;
   margin-left: 20px;
   resize: none;
   overflow: auto;
+  border-radius: 10px;
+  font-size: 16px;
 }
 
 textarea:focus {

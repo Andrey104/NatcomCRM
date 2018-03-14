@@ -12,7 +12,9 @@ import {OrderResult} from '../../models/orders/order_result';
 })
 export class OrderDetailComponent implements OnInit {
 
-  constructor(private orderService: OrderService, private utils: UtilsService, private activatedRoute: ActivatedRoute) {
+  constructor(private orderService: OrderService,
+              private utils: UtilsService,
+              private activatedRoute: ActivatedRoute) {
   }
   private id: number;
   order: OrderResult;

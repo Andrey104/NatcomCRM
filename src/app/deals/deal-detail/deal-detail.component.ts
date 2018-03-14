@@ -18,9 +18,11 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   clientInfo = false;
   client: Client;
   deal: DealResult;
+  loadPage: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private dealService: DealService, private utils: UtilsService) {
+              private dealService: DealService,
+              private utils: UtilsService) {
   }
 
   ngOnInit() {
@@ -38,10 +40,17 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   subscribeDealId(): void {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
-      this.dealService.getDealById(this.id).subscribe(deal => {
-        this.deal = deal;
-      });
+      this.loadPage = true;
+      this.getDealById();
     });
+  }
+
+  getDealById(): void {
+    this.dealService.getDealById(this.id)
+      .subscribe((deal) => {
+        this.deal = deal;
+        this.loadPage = false;
+      });
   }
 
   sendComment(comment: string) {

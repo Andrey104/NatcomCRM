@@ -9,7 +9,7 @@
     <app-mount *ngFor="let mount of mounts"
               [mount]="mount">
     </app-mount>
-    <div *ngIf="!lastPage" class="col s10">
+    <div [class.spinner-contener]="mounts.length===0" *ngIf="!lastPage" class="col s10">
       <app-preloader></app-preloader>
     </div>
   </div>
