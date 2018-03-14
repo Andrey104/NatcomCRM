@@ -9,12 +9,17 @@
 
 .date-icon {
   float: left;
-  margin-top: 5px;
   margin-right: 5px;
 }
 
 .deal-date {
   overflow: hidden;
+}
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  float: left;
 }
 
 .deal {

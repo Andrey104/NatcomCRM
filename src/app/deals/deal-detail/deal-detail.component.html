@@ -9,11 +9,10 @@
     </div>
     <div class="col s3">{{getDealStatus(deal?.status)}}</div>
     <div [style.color]="deal?.contract ? 'green' : 'red'" class="col s2">{{deal?.contract | contract}}</div>
-    <div class="col s3">
+    <div class="col s3 valign-wrapper">
       <i class="tiny material-icons icon date-icon">date_range</i>
       <div class="deal-date">
-        <div>Создана:{{deal?.task_date | dateFormat: 'date'}}</div>
-        <div>Изменялась:{{deal?.auto_date | dateFormat: 'date'}}</div>
+        <div>Дата события: {{deal?.auto_date | dateFormat: 'date'}}</div>
       </div>
     </div>
   </div>
@@ -23,7 +22,10 @@
       <div class="offer">Сделка {{deal?.offer}}</div>
       <div class="status-container valign-wrapper">
         <div [appColorCompany]="deal?.company?.symbol" class="company-symbol">{{deal?.company?.symbol}}</div>
-        <div class="company-name">{{deal?.company?.name}}</div>
+        <div class="deal-detail">
+          <div class="company-name">{{deal?.company?.name}}</div>
+          <div>Создана: {{deal?.task_date | dateFormat: 'date'}}</div>
+        </div>
       </div>
       <div class="deal-info">
         <div class="valign-wrapper">

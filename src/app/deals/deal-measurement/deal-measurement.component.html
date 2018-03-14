@@ -4,17 +4,15 @@
   </div>
   <div *ngIf="measurement" class="row main-row valign-wrapper">
     <div class="col s4 valign-wrapper">
+      <img class="avatar" src="assets/images/worker.png" />
       <div [style.color]="measurement?.worker ? 'green': 'red'">{{measurement?.worker | workerName}}</div>
     </div>
     <div class="col s4 valign-wrapper">
       <div>{{measurement?.status | measurementStatus}}</div>
     </div>
-    <div class="col s4">
+    <div class="col s4 valign-wrapper">
       <i class="tiny material-icons icon date-icon">date_range</i>
-      <div class="deal-date">
-        <div>Создана:{{measurement?.date | dateFormat: 'date'}}</div>
-        <div>Изменялась:{{measurement?.auto_date | dateFormat: 'date'}}</div>
-      </div>
+      <div class="deal-date">Дата замера: {{measurement?.date | dateFormat: 'date'}}</div>
     </div>
   </div>
   <div class="divider"></div>

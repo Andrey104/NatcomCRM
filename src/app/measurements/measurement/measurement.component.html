@@ -11,8 +11,9 @@
     <div class="info">
       <div class="col s12 detail-col">
         <div class="company col s7 detail-col">{{measurement?.company?.name | companyName}}</div>
-        <div class="right-align col s5 time">
-          <i class="tiny material-icons icon">access_time</i> {{measurement?.auto_date | dateFormat: 'time'}}
+        <div class="col s5 detail-col right-align time valign-wrapper">
+          <i class="tiny material-icons icon card-date-icon">date_range</i>
+          <div class="card-date">{{measurement?.date | dateFormat: 'date'}}</div>
         </div>
       </div>
       <div class="main-info-card">

@@ -105,6 +105,12 @@
 }
 
 /*Классы для карточек заказов и каточек сделок в списке*/
+.card-date-icon {
+  margin-right: 3px;
+}
+.card-date {
+  font-size: 12px;
+}
 .status-image {
   min-width: 60px;
 }
