@@ -14,12 +14,15 @@ export class OrderDetailComponent implements OnInit {
 
   constructor(private orderService: OrderService, private utils: UtilsService, private activatedRoute: ActivatedRoute) {
   }
+
   private id: number;
   order: OrderResult;
   deferOpenValue = false;
   rejectOpenValue = false;
   inDealOpenValue = false;
   loader: boolean;
+  showDialog: false;
+
   ngOnInit() {
     this.subscribeOrderId();
   }
@@ -27,6 +30,7 @@ export class OrderDetailComponent implements OnInit {
   openDefer() {
     this.deferOpenValue = true;
   }
+
   closeDefer() {
     this.deferOpenValue = false;
     this.subscribeOrderId();
@@ -35,20 +39,25 @@ export class OrderDetailComponent implements OnInit {
   openReject() {
     this.rejectOpenValue = true;
   }
+
   closeReject() {
     this.rejectOpenValue = false;
     this.subscribeOrderId();
   }
+
   openToDeal() {
     this.inDealOpenValue = true;
   }
+
   closeToDeal() {
     this.inDealOpenValue = false;
     this.subscribeOrderId();
   }
+
   actionDecoder(action: OrderAction) {
     return this.utils.orderActionDecoder(action);
   }
+
   subscribeOrderId(): void {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
@@ -58,5 +67,9 @@ export class OrderDetailComponent implements OnInit {
         this.loader = false;
       });
     });
+  }
+
+  successUpdate(order) {
+    this.order = order;
   }
 }

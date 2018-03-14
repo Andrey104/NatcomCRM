@@ -162,11 +162,11 @@ export class UtilsService {
       causeStr = 'по причине:';
       switch (action.cause) {
         case 1: {
-          cause = 'клиент не взял трубку';
+          cause = 'нецелевая заявка';
           break;
         }
         case 2: {
-          cause = 'другое';
+          cause = 'договорился с конкурентами';
           break;
         }
       }

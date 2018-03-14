@@ -37,10 +37,17 @@ export class OrderService extends BaseApi {
     return this.get(`orders/search?page=${page.toString()}&&text=${text}`);
   }
 
-  // переделать
   deferOrder(cause, comment: string, id: string): Observable<Object> {
     const data = {'cause': cause, 'comment': comment};
     return this.post(`orders/${id}/defer/`, data);
+  }
+
+  rejectOrder(id: number, comment: string, cause: number): Observable<Object> {
+    if (comment === '') {
+      comment = null;
+    }
+    const data = {'cause': cause, 'comment': comment};
+    return this.post(`orders/${id}/reject/`, data);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

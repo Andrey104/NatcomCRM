@@ -22,11 +22,8 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {TabComponent} from './tab/tab.component';
 import {PaginationDirective} from './directives/pagination.directive';
 import {UtilsService} from './services/utils.service';
-import { OrderDeferComponent } from './orders/order-defer/order-defer.component';
 import {AdminGuard} from './admin.guard';
 import { AdminPageComponent } from './admin/admin-page/admin-page.component';
-import { OrderRejectComponent } from './orders/order-reject/order-reject.component';
-import { OrderToDealComponent } from './orders/order-to-deal/order-to-deal.component';
 import { ClientComponent } from './client/client.component';
 import { UserInfoComponent } from './user-info/user-info.component';
 import {AuthenticationService} from './services/auntification.service';
@@ -85,6 +82,9 @@ import { MeasurementDetailComponent } from './measurements/measurement-detail/me
 import { MeasurementComponent } from './measurements/measurement/measurement.component';
 import {BaseApi} from './core/base-api';
 import { InputSearchComponent } from './input-search/input-search.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { OrderModalDealComponent } from './orders/order-dialog-reject/order-dialog-reject.component';
+import {OrderRejectCause} from './pipes/order-cause-reject.pipe';
 
 
 @NgModule({
@@ -101,10 +101,7 @@ import { InputSearchComponent } from './input-search/input-search.component';
     DealDetailComponent,
     TabComponent,
     PaginationDirective,
-    OrderDeferComponent,
     AdminPageComponent,
-    OrderRejectComponent,
-    OrderToDealComponent,
     ClientComponent,
     UserInfoComponent,
     ClientInfoComponent,
@@ -156,6 +153,8 @@ import { InputSearchComponent } from './input-search/input-search.component';
     MeasurementDetailComponent,
     MeasurementComponent,
     InputSearchComponent,
+    OrderModalDealComponent,
+    OrderRejectCause,
 ],
   imports: [
     BrowserModule,
@@ -165,6 +164,7 @@ import { InputSearchComponent } from './input-search/input-search.component';
     InfiniteScrollModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthGuard,

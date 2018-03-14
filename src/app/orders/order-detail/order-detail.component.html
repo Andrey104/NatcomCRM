@@ -58,25 +58,26 @@
         </div>
       </div>
     </div>
-    <app-order-defer [openDefer]="deferOpenValue" (close)="closeDefer()"></app-order-defer>
-    <app-order-reject [openReject]="rejectOpenValue" (close)="closeReject()"></app-order-reject>
-    <app-order-to-deal [order]="order" [openToDeal]="inDealOpenValue" (close)="closeToDeal()"></app-order-to-deal>
-    <div class="fixed-action-btn click-to-toggle">
+    <!--<app-order-defer [openDefer]="deferOpenValue" (close)="closeDefer()"></app-order-defer>-->
+    <!--<app-order-reject [openReject]="rejectOpenValue" (close)="closeReject()"></app-order-reject>-->
+    <!--<app-order-to-deal [order]="order" [openToDeal]="inDealOpenValue" (close)="closeToDeal()"></app-order-to-deal>-->
+    <div class="fixed-action-btn click-to-toggle" *ngIf="!(order?.status==1 || order?.status==3)">
       <a class="btn-floating btn-large orange">
         <i class="large material-icons color-fab-icon">menu</i>
       </a>
       <ul class="fab-ul">
         <li class="hover-element li-element-menu-fab" (click)="openDefer()">
           <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отложить</span>
-            <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">access_time</i></div>
+            <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">access_time</i>
+            </div>
           </div>
         </li>
-        <li class="hover-element li-element-menu-fab" (click)="openReject()">
+        <li class="hover-element li-element-menu-fab" (click)="showDialog = !showDialog">
           <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отказать</span>
             <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">close</i></div>
           </div>
         </li>
-        <li class="hover-element li-element-menu-fab" (click)="openToDeal()">
+        <li class="hover-element li-element-menu-fab">
           <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">В сделку</span>
             <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">check</i></div>
           </div>
@@ -84,4 +85,5 @@
       </ul>
     </div>
   </div>
+  <app-order-reject [order]="order" (successOrder)="successUpdate($event)" [(visible)]="showDialog"></app-order-reject>
 </div>
