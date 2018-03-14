@@ -76,9 +76,14 @@
   color: #666666;
 }
 
+.div-number {
+  padding-right: 0;
+}
+
 .arrow {
   opacity: 0;
   line-height: 0;
+  margin-right: 10px;
 }
 
 .content {

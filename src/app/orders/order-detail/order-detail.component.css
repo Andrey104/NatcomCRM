@@ -2,6 +2,11 @@
   padding-bottom: 20px;
 }
 
+.scrollable-page {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 ul li {
   font-size: 16px;
 }
@@ -10,16 +15,18 @@ ul li {
   margin-top: 20px;
 }
 
-.contacts-no-padding{
+.contacts-no-padding {
   padding: 0;
 }
 
 .main-div {
- border-left: 1px solid #c4c4c4;
+  border-left: 1px solid #c4c4c4;
   padding: 0;
+  margin-bottom: 0;
+  min-height: calc(100vh - 64px);
 }
 
-.company-name{
+.company-name {
   padding-left: 20px;
   font-size: 2em;
   display: inline-block;
@@ -80,9 +87,14 @@ hr {
   margin: 5px 0;
 }
 
+.div-number {
+  padding-right: 0;
+}
+
 .arrow {
   opacity: 0;
   line-height: 0;
+  margin-right: 10px;
 }
 
 .contacts {
@@ -107,7 +119,7 @@ hr {
   background-color: #e2e2e2;
 }
 
-.forward-block:hover .arrow{
+.forward-block:hover .arrow {
   font-size: 40px;
   opacity: 1;
   color: #666666;
