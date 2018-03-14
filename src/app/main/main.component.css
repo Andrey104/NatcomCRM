@@ -34,17 +34,17 @@ ul {
 }
 .menu li:hover ul{
   display: block;
-  width: 130px;
+  width: 145px;
   line-height: 1.3rem;
 }
 .menu li:hover ul li {
   display: block;
-  width: 130px;
+  width: 145px;
   height: 40px;
 }
 .menu li:hover ul li a{
   display: block;
-  width: 130px;
+  width: 145px;
   height: 40px;
   text-align: left;
   line-height: 40px;

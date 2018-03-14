@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {MeasurementService} from '../../services/measurement.service';
 import {MeasurementResult} from '../../models/measurement/measurement-result';
 import {Subject} from 'rxjs/Subject';
-import {inputPropChanged} from 'ngx-infinite-scroll/src/services/ngx-ins-utils';
+import {ActivatedRoute} from '@angular/router';
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: 'app-measurement-page',
@@ -14,14 +15,17 @@ export class MeasurementPageComponent implements OnInit {
   page: number;
   load: boolean;
   lastPage: boolean;
+  status: { statusName: string, statusUrl: string };
   term$ = new Subject<string>();
-  @ViewChild('input') input;
+  inputText = '';
 
-  constructor(private measurementService: MeasurementService) {
+  constructor(private measurementService: MeasurementService,
+              private activatedRoute: ActivatedRoute,
+              private utils: UtilsService) {
   }
 
   ngOnInit() {
-    this.showMeasurements();
+    this.subscribeOnUrl();
     this.subscribeOnInputField();
   }
 
@@ -29,13 +33,23 @@ export class MeasurementPageComponent implements OnInit {
     this.page = 1;
     this.load = true;
     this.lastPage = false;
-    this.measurementService.getAllMeasurements(this.page)
+    this.measurementService.getAllMeasurements(this.page, this.status.statusUrl)
       .subscribe((measurementPage) => {
         this.measurements = measurementPage.results;
         if (measurementPage.next === null) {
           this.lastPage = true;
         }
         this.load = false;
+        document.getElementById('scroll').scrollTop = 0;
+      });
+  }
+
+  subscribeOnUrl() {
+    this.activatedRoute.params
+      .subscribe((params) => {
+        this.status = this.utils.statusUrlMeasurement(params['status']);
+        this.measurements = [];
+        this.showMeasurements();
       });
   }
 
@@ -45,13 +59,14 @@ export class MeasurementPageComponent implements OnInit {
       .distinctUntilChanged()
       .subscribe(
         (term) => {
+          this.inputText = term;
           this.search(term);
         }
       );
   }
 
   onScrollMeasurement() {
-    if (this.input.nativeElement.value === '') {
+    if (this.inputText === '') {
       this.nextPage();
     } else {
       this.nextFilterPage();
@@ -73,6 +88,7 @@ export class MeasurementPageComponent implements OnInit {
             this.load = false;
           }
         );
+      document.getElementById('scroll').scrollTop = 0;
     } else {
       this.showMeasurements();
     }
@@ -82,7 +98,7 @@ export class MeasurementPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.measurementService.getAllMeasurements(this.page)
+      this.measurementService.getAllMeasurements(this.page, this.status.statusUrl)
         .subscribe((measurementPage) => {
           this.measurements = this.measurements.concat(measurementPage.results);
           if (measurementPage.next === null) {
@@ -97,7 +113,7 @@ export class MeasurementPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.measurementService.getFilterMeasurements(this.page, this.input.nativeElement.value)
+      this.measurementService.getFilterMeasurements(this.page, this.inputText)
         .subscribe((measurementPage) => {
           this.measurements = this.measurements.concat(measurementPage.results);
           if (measurementPage.next === null) {

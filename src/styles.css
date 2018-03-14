@@ -1,10 +1,12 @@
 /*Блок, содержащий список карточек(заказы, сделки)*/
 .list-col{
+  margin-top: 70px;
+  position: relative;
   overflow-y: scroll;
   background-color: #ffffff;
   min-width: 200px;
   width: 100%;
-  height: calc(100vh - 64px);
+  height: calc(100vh - 134px);
 }
 /*Классы для отмены прокрутки в list-col*/
 .list-col::-webkit-scrollbar{width: 0;}
@@ -88,6 +90,10 @@
   word-wrap: break-word;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 .no-border:focus {
   outline: none;
 }
@@ -139,3 +145,55 @@
   line-height: 50px;
 }
 /*-------------------------------*/
+
+/*---------FAB----------*/
+/*Все стили для fab(летяющая кнопочка)*/
+/*Чтобы подвинуть кнопку выше или еще куда - переопределить класс fixed-action-btn*/
+.color-fab-icon {
+  color: white;
+  margin: auto;
+}
+
+/*Задает ширину для выпадающего меню*/
+.fab-ul {
+  position: relative;
+  left: -150px!important;
+  background-color: #f4f4f4;
+  text-align: right;
+  border-radius: 10px;
+}
+
+.li-element-menu-fab {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 0!important;
+}
+
+.li-element-menu-fab:hover {
+  background-color: #e2e2e2;
+  border-radius: 10px;
+}
+
+.menu-li-div {
+  position: relative;
+  height: 35px;
+}
+
+.fab-text {
+  padding-right: 5px;
+  padding-left: 5px;
+  position: absolute;
+  right: 55px;
+}
+
+.icon-fab {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #5c6b96;
+  right: 0;
+  margin-right: 10px;
+}
+
+/*-------конец FAB---------*/

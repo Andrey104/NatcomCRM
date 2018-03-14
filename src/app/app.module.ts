@@ -84,6 +84,7 @@ import { MeasurementPageComponent } from './measurements/measurement-page/measur
 import { MeasurementDetailComponent } from './measurements/measurement-detail/measurement-detail.component';
 import { MeasurementComponent } from './measurements/measurement/measurement.component';
 import {BaseApi} from './core/base-api';
+import { InputSearchComponent } from './input-search/input-search.component';
 
 
 @NgModule({
@@ -154,6 +155,7 @@ import {BaseApi} from './core/base-api';
     MeasurementPageComponent,
     MeasurementDetailComponent,
     MeasurementComponent,
+    InputSearchComponent,
 ],
   imports: [
     BrowserModule,

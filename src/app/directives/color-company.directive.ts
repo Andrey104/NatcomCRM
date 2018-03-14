@@ -3,7 +3,7 @@ import {AfterContentChecked, Directive, HostBinding, Input} from '@angular/core'
 @Directive({
   selector: '[appColorCompany]'
 })
-export class ColorCompanyDirective implements  AfterContentChecked {
+export class ColorCompanyDirective implements AfterContentChecked {
   @Input('appColorCompany') symbol;
   @HostBinding('style.backgroundColor') background;
   @HostBinding('style.fontSize') font = '36px';
@@ -24,6 +24,10 @@ export class ColorCompanyDirective implements  AfterContentChecked {
       }
       case 'Н': {
         this.background = 'blue';
+        break;
+      }
+      default: {
+        this.background = 'orange';
       }
     }
   }

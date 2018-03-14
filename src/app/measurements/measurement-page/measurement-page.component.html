@@ -1,13 +1,11 @@
 <div class="row main-row">
-  <div class="col s3 list-col"
+  <div id="scroll" class="col s3 list-col"
        infinite-scroll
        [infiniteScrollDistance]="2"
        [infiniteScrollThrottle]="300"
        [scrollWindow]="false"
        (scrolled)="onScrollMeasurement()">
-    <div class="col s3 input-field white">
-      <input #input class="col s12" type="search" (input)="term$.next($event.target.value)">
-    </div>
+    <app-input-search [statusName]="status?.statusName" (out)="search($event)"></app-input-search>
     <app-measurement *ngFor="let measurement of measurements"
                [measurement]="measurement">
     </app-measurement>

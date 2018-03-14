@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OrderService} from '../../services/order.service';
 import {log} from 'util';
 import {OrderResult} from '../../models/orders/order_result';
@@ -22,7 +22,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   status: { statusName: string, statusUrl: string };
   term$ = new Subject<string>();
   subInputField: Subscription;
-  @ViewChild('input') input;
+  inputText = '';
 
   constructor(private orderService: OrderService,
               private activatedRoute: ActivatedRoute,
@@ -40,6 +40,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       .distinctUntilChanged()
       .subscribe(
         (term) => {
+          this.inputText = term;
           this.search(term);
         }
       );
@@ -96,7 +97,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   }
 
   onScroll() {
-    if (this.input.nativeElement.value === '') {
+    if (this.inputText === '') {
       this.nextPage();
     } else {
       this.nextFilterPage();
@@ -127,7 +128,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.orderService.getFilterOrders(this.page, this.input.nativeElement.value)
+      this.orderService.getFilterOrders(this.page, this.inputText)
         .subscribe(orders => {
           this.orders = this.orders.concat(orders.results);
           this.load = false;

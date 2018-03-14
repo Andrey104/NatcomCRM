@@ -1,50 +1,87 @@
-<div *ngIf="loader" class="spinner-contener">
-  <app-preloader></app-preloader>
-</div>
-<div *ngIf="!loader" class="order-detail col s12 scrollable-page white">
-  <div class="card horizontal info-card grey lighten-5">
-    <div class="card-stacked col s12">
-      <div class="card-content col s12">
-        <div class="text col s7">
-          <h3>{{order?.company?.name | companyName}}</h3>
-          <h5 class="indigo-text text-lighten-2">Данные с заявки:</h5>
-          <ul>
-            <li><i class="tiny material-icons icon">person</i> {{order?.fio | clientName}}</li>
-            <li><i class="tiny material-icons icon">local_phone</i> {{order?.phone | phoneFormat}}</li>
-            <li><i class="tiny material-icons icon">email</i> {{order?.email | email}}</li>
-          </ul>
-        </div>
-        <div class="date-info col s5">
-          <div class="date-icon"> <i class="tiny material-icons icon">date_range</i> </div>
-          <div class="data-detail">
-            <div>Создана: {{order?.auto_date | dateFormat: 'fullDate'}}</div>
-            <div>Последнее изменение: {{order?.task_date | dateFormat: 'fullDate'}}</div>
-          </div>
-          <div class="client no-border" routerLink="client/{{order?.client?.id}}">
-              <app-client [client]="order?.client"></app-client>
-          </div>
-        </div>
+<div class="col s12 scrollable-page white" [class.no-scroll]="loader">
+  <div *ngIf="loader" class="spinner-contener">
+    <app-preloader></app-preloader>
+  </div>
+  <div *ngIf="!loader" class="main-div row col s12">
+    <div class="icon"><i class="tiny material-icons">date_range</i></div>
+    <div class="last-change-text">Дата события: {{order?.task_date | dateFormat: 'fullDate'}}</div>
+    <hr class="header-hr">
+
+    <div class="col s12 detail-col valign-wrapper left-align">
+      <div class="text col s7">
+        <div class="company-name">{{order?.company?.name | companyName}}</div>
+        <div class="create">Создана: {{order?.auto_date | dateFormat: 'fullDate'}}</div>
+        <ul>
+          <li><i class="tiny material-icons icon">person</i> {{order?.fio | clientName}}</li>
+          <li><i class="tiny material-icons icon">local_phone</i> {{order?.phone | phoneFormat}}</li>
+          <li><i class="tiny material-icons icon">email</i> {{order?.email | email}}</li>
+        </ul>
       </div>
-      <div *ngIf="order?.info" class="col s12 text comment-info">
-        <div class="indigo-text text-lighten-2">Комментарий с сайта: </div>
-        <p class="text-black comment">{{order?.info}}</p>
-      </div>
-      <div class="col s12 buttons right-align">
-        <a class="waves-effect waves-light btn-large button" (click)="openDefer()"><i class="material-icons left">clear</i>Отложить</a>
-        <a class="waves-effect waves-light btn-large button" (click)="openReject()"><i class="material-icons left">access_time</i>Отказать</a>
-        <a class="waves-effect waves-light btn-large button" (click)="openToDeal()"><i class="material-icons left">check</i>В сделку</a>
+      <div class="col s5">
+        <div class="row contacts">
+          <div class="col s12 valign-wrapper contacts-no-padding">
+            <hr class="col s4">
+            <div class="col s4 center-align header">Контакты</div>
+            <hr class="col s4">
+          </div>
+        </div>
+        <div class="row">
+          <div routerLink="client/{{order?.client?.id}}"
+               class="valign-wrapper contact-info forward-block col s12 hover-element">
+            <div class="col s6 valign-wrapper detail-col-right">
+              <i class="small material-icons icon">person</i>
+              {{order?.client?.fio}}
+            </div>
+            <div class="col s5">{{order?.client?.phones[0]?.number | phoneFormat}}</div>
+            <i class="arrow col s1 material-icons detail-col-left">chevron_right</i>
+          </div>
+          <hr class="col s12 black">
+        </div>
       </div>
     </div>
-  </div>
-    <div *ngIf="order?.actions.length !== 0" class="col s12 card horizontal info-card grey lighten-5">
-      <div class="card-stacked text col s12">
-        <h5 class="col s12 indigo-text text-lighten-2 history">История:</h5>
+
+    <div *ngIf="order?.info" class="col s12 text comment-info">
+      <div class="indigo-text text-lighten-2">Комментарий с сайта:</div>
+      <p class="text-black comment">{{order?.info}}</p>
+    </div>
+
+
+    <div class="col s12 valign-wrapper detail-col">
+      <div class="col s5 divider "></div>
+      <div class="col s2 center-align">История</div>
+      <div class="col s5 divider "></div>
+    </div>
+    <div *ngIf="order?.actions.length !== 0" class="col s12  horizontal info-card lighten-5">
+      <div class="text col s12 action">
         <div class="col s12" *ngFor="let action of order?.actions">
           <p>{{action.auto_date | dateFormat: 'fullDate'}} {{actionDecoder(action)}}</p>
         </div>
       </div>
     </div>
-  <app-order-defer [openDefer]="deferOpenValue" (close)="closeDefer()"></app-order-defer>
-  <app-order-reject [openReject]="rejectOpenValue" (close)="closeReject()"></app-order-reject>
-  <app-order-to-deal [order]="order" [openToDeal]="inDealOpenValue" (close)="closeToDeal()"></app-order-to-deal>
+    <app-order-defer [openDefer]="deferOpenValue" (close)="closeDefer()"></app-order-defer>
+    <app-order-reject [openReject]="rejectOpenValue" (close)="closeReject()"></app-order-reject>
+    <app-order-to-deal [order]="order" [openToDeal]="inDealOpenValue" (close)="closeToDeal()"></app-order-to-deal>
+    <div class="fixed-action-btn click-to-toggle">
+      <a class="btn-floating btn-large orange">
+        <i class="large material-icons color-fab-icon">menu</i>
+      </a>
+      <ul class="fab-ul">
+        <li class="hover-element li-element-menu-fab" (click)="openDefer()">
+          <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отложить</span>
+            <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">person</i></div>
+          </div>
+        </li>
+        <li class="hover-element li-element-menu-fab" (click)="openReject()">
+          <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отказать</span>
+            <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">close</i></div>
+          </div>
+        </li>
+        <li class="hover-element li-element-menu-fab" (click)="openToDeal()">
+          <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">В сделку</span>
+            <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">check</i></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

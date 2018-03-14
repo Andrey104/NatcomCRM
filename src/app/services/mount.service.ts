@@ -4,41 +4,34 @@ import {Observable} from 'rxjs/Observable';
 import {DealMount} from '../models/deal/deal_mount';
 import {OurComment} from '../models/comment';
 import {MountPage} from '../models/mount/mount-page';
+import {BaseApi} from '../core/base-api';
 
 @Injectable()
-export class MountService {
+export class MountService extends BaseApi {
   private urlDealMounts = 'http://188.225.46.31/api/deals/';
   private urlMount = 'http://188.225.46.31/api/mounts/';
 
-  constructor(private http: HttpClient) {
+  constructor(public http: HttpClient) {
+    super(http);
   }
 
-  getAllMounts(page: number): Observable<MountPage> {
-    return this.http.get<MountPage>(this.urlMount, {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
-      params: new HttpParams().set('page', page.toString())
-    });
+  getAllMounts(page: number, status: string): Observable<MountPage> {
+    return this.get(`mounts/?page=${page.toString()}&&${status}`);
   }
 
-  getMounts(idDeal): Observable<DealMount[]> {
-    return this.http.get<DealMount[]>(this.urlDealMounts + idDeal + '/mounts', {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
-    });
+  getMounts(idDeal: number): Observable<DealMount[]> {
+    return this.get(`deals/${idDeal}/mounts`);
   }
 
-  sendComment(idMount, comment: string): Observable<OurComment> {
-    return this.http.post<OurComment>(this.urlMount + idMount + '/comment/', {text: comment}, {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
-    });
+  sendComment(idMount: number, comment: string): Observable<OurComment> {
+    return this.post(`mounts/${idMount.toString()}/comment/`, {text: comment});
   }
 
-  getMount(idMount): Observable<DealMount> {
-    return this.http.get<DealMount>(this.urlMount + idMount, {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
-    });
+  getMount(idMount: number): Observable<DealMount> {
+    return this.get(`mounts/${idMount}`);
   }
 
-  private token() {
-    return localStorage.getItem('token');
+  getFilterMounts(page: number, text: string) {
+    return this.get(`mounts/search?text=${text}`);
   }
 }

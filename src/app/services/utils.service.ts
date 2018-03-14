@@ -273,31 +273,35 @@ export class UtilsService {
 
   }
 
-  statusUrlDeal(statusStr: string): number {
-    let status: number;
+  statusUrlDeal(statusStr: string) {
+    let status: { statusName: string, statusUrl: string };
     switch (statusStr) {
       case 'processing': {
-        status = 0;
+        status = {statusName: 'Сделки в обработке', statusUrl: 'status=0'};
         break;
       }
       case 'measurement_assigned': {
-        status = 1;
+        status = {statusName: 'В состоянии замера', statusUrl: 'status=1'};
         break;
       }
       case 'unconnected': {
-        status = 2;
+        status = {statusName: 'Незаключенные сделки', statusUrl: 'status=2'};
         break;
       }
       case 'mount_assigned': {
-        status = 3;
+        status = {statusName: 'В состоянии монтажа', statusUrl: 'status=3'};
         break;
       }
       case 'completed': {
-        status = 4;
+        status = {statusName: 'Завершенные сделки', statusUrl: 'status=4'};
         break;
       }
       case 'canceled': {
-        status = 5;
+        status = {statusName: 'Отклоненные сделки', statusUrl: 'status=5'};
+        break;
+      }
+      case 'all': {
+        status = {statusName: 'Все сделки', statusUrl: ''};
         break;
       }
     }
@@ -305,7 +309,7 @@ export class UtilsService {
   }
 
   statusUrlOrder(statusStr: string): any {
-    let status: {statusName: string, statusUrl: string};
+    let status: { statusName: string, statusUrl: string };
     switch (statusStr) {
       case 'processing': {
         status = {statusName: 'Заявки в процессе', statusUrl: 'status=0&&status=2'};
@@ -318,6 +322,61 @@ export class UtilsService {
       case 'canceled': {
         status = {statusName: 'Отмененные заявки', statusUrl: 'status=1'};
         break;
+      }
+      case 'all': {
+        status = {statusName: 'Все заявки', statusUrl: ''};
+      }
+    }
+    return status;
+  }
+
+  statusUrlMeasurement(statusStr: string) {
+    let status: { statusName: string, statusUrl: string };
+    switch (statusStr) {
+      case 'undistributed': {
+        status = {statusName: 'Нераспределенные замеры', statusUrl: 'status=0'};
+        break;
+      }
+      case 'responsible': {
+        status = {statusName: 'Распределенные замеры', statusUrl: 'status=1'};
+        break;
+      }
+      case 'closed': {
+        status = {statusName: 'Закрытые замеры', statusUrl: 'status=2&&status=3'};
+        break;
+      }
+      case 'rejected': {
+        status = {statusName: 'Отклоненные замеры', statusUrl: 'status=4&&status=5'};
+        break;
+      }
+      case 'all': {
+        status = {statusName: 'Все замеры', statusUrl: ''};
+      }
+    }
+    return status;
+  }
+
+  statusUrlMount(statusStr: string) {
+    let status: { statusName: string, statusUrl: string };
+    switch (statusStr) {
+      case 'processing': {
+        status = {statusName: 'Монтажи в обработке', statusUrl: 'status=0'};
+        break;
+      }
+      case 'added_stage': {
+        status = {statusName: 'Монтажи в процессе', statusUrl: 'status=1'};
+        break;
+      }
+      case 'completed': {
+        status = {statusName: 'Завершенные монтажи', statusUrl: 'status=2'};
+        break;
+      }
+      case 'canceled': {
+        status = {statusName: 'Отклоненные', statusUrl: 'status=3'};
+        break;
+      }
+      case 'all': {
+        status = {statusName: 'Все монтажи', statusUrl: ''};
       }
     }
     return status;

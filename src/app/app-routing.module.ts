@@ -16,7 +16,6 @@ import {DealDetailComponent} from './deals/deal-detail/deal-detail.component';
 import {DealMeasurementComponent} from './deals/deal-measurement/deal-measurement.component';
 import {DealMountComponent} from './deals/deal-mount/deal-mount.component';
 import {SettingsPageComponent} from './admin/settings-page/settings-page.component';
-import {InstallersPage} from './models/installers/installers_page';
 import {InstallersComponent} from './admin/settings-page/installers/installers.component';
 import {BrigadesComponent} from './admin/settings-page/brigades/brigades.component';
 import {CompaniesComponent} from './admin/settings-page/companies/companies.component';
@@ -52,12 +51,10 @@ const orders_routes: Routes = [
 
 
 const pages_routes: Routes = [
-  {path: 'deals/:status', component: DealPageComponent, children: deals_routes},
-  {path: 'deals/all', component: DealPageComponent, children: deals_routes},
   {path: 'orders/:status', component: OrderPageComponent, children: orders_routes},
-  {path: 'orders/all', component: OrderPageComponent, children: orders_routes},
-  {path: 'mounts', component: MountPageComponent, children: mounts_routes },
-  {path: 'measurements', component: MeasurementPageComponent, children: measurements_routes},
+  {path: 'deals/:status', component: DealPageComponent, children: deals_routes},
+  {path: 'measurements/:status', component: MeasurementPageComponent, children: measurements_routes},
+  {path: 'mounts/:status', component: MountPageComponent, children: mounts_routes },
   {path: 'user', component: UserInfoComponent}
 ];
 

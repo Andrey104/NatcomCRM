@@ -11,7 +11,7 @@
       </div>
       <a class="logo" href="/orders"><img class="logo" src="assets/images/logo.png"/></a>
       <ul class="right hide-on-med-and-down">
-        <li routerLinkActive="active"><a routerLink="/orders/all">Замеры</a>
+        <li routerLinkActive="active"><a routerLink="/orders/all">Заявки</a>
           <ul>
             <li routerLinkActive="active"><a routerLink="/orders/processing">Текущие</a></li>
             <li routerLinkActive="active"><a routerLink="/orders/completed">Завершенные</a></li>
@@ -28,8 +28,22 @@
             <li routerLinkActive="active"><a routerLink="/deals/canceled">Отмененные</a></li>
           </ul>
         </li>
-        <li routerLinkActive="active"><a routerLink="/measurements">Замеры</a></li>
-        <li routerLinkActive="active"><a routerLink="/mounts">Монтажи</a></li>
+        <li routerLinkActive="active"><a routerLink="/measurements/all">Замеры</a>
+          <ul>
+            <li routerLinkActive="active"><a routerLink="/measurements/undistributed">Нераспределенные</a></li>
+            <li routerLinkActive="active"><a routerLink="/measurements/responsible">Распределенные</a></li>
+            <li routerLinkActive="active"><a routerLink="/measurements/closed">Закрытые</a></li>
+            <li routerLinkActive="active"><a routerLink="/measurements/rejected">Отклоненные</a></li>
+          </ul>
+        </li>
+        <li routerLinkActive="active"><a routerLink="/mounts/all">Монтажи</a>
+          <ul>
+            <li routerLinkActive="active"><a routerLink="/mounts/processing">Обработка</a></li>
+            <li routerLinkActive="active"><a routerLink="/mounts/added_stage">В процессе</a></li>
+            <li routerLinkActive="active"><a routerLink="/mounts/completed">Завершенные</a></li>
+            <li routerLinkActive="active"><a routerLink="/mounts/canceled">Отклоненные</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </nav>

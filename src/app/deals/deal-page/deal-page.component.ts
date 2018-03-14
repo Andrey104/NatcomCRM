@@ -15,22 +15,24 @@ import 'rxjs/add/operator/distinctUntilChanged';
 })
 export class DealPageComponent implements OnInit {
   dealPage: DealResult[];
-  status = 0;
+  status: { statusName: string, statusUrl: string };
   page: number;
   lastPage: boolean;
   load: boolean;
-  searchStr = '';
   term$ = new Subject<string>();
+  inputText = '';
 
-  constructor(private dealService: DealService, private activatedRoute: ActivatedRoute,
+  constructor(private dealService: DealService,
+              private activatedRoute: ActivatedRoute,
               private utils: UtilsService) {
-    this.term$
-      .debounceTime(600) // задержка запроса в миллисекундах
-      // .distinctUntilChanged() // не отправляет запрос повторно, если не было произведено изменений
-      .subscribe(() => this.search());
   }
 
   ngOnInit() {
+    this.subscribeOnUrl();
+    this.subscribeOnInputField();
+  }
+
+  subscribeOnUrl() {
     this.activatedRoute.params.subscribe(params => {
       this.status = this.utils.statusUrlDeal(params['status']);
       this.dealPage = [];
@@ -38,26 +40,53 @@ export class DealPageComponent implements OnInit {
     });
   }
 
-  search() {
-    if (this.searchStr !== '') {
+  subscribeOnInputField() {
+    this.term$
+      .debounceTime(800)
+      .distinctUntilChanged()
+      .subscribe(
+        (term) => {
+          this.inputText = term;
+          this.search(term);
+        }
+      );
+  }
+
+  showDeals(): void {
+    this.page = 1;
+    this.load = true;
+    this.lastPage = false;
+    this.dealService.getDeals(this.page, this.status.statusUrl)
+      .subscribe(dealPage => {
+        this.dealPage = dealPage.results;
+        if (dealPage.next === null) {
+          this.lastPage = true;
+        }
+        this.load = false;
+        document.getElementById('scroll').scrollTop = 0;
+      }, error2 => log(error2));
+  }
+
+  search(text: string) {
+    if (text !== '') {
       this.page = 1;
       this.load = true;
       this.lastPage = false;
-      this.dealService.getFilterDeals(this.page, this.searchStr)
+      this.dealService.getFilterDeals(this.page, text)
         .subscribe(deals => {
           this.dealPage = deals.results;
           if (deals.next === null) {
             this.lastPage = true;
           }
           this.load = false;
-      });
+        });
     } else {
       this.showDeals();
     }
   }
 
   onScrollDeal() {
-    if (this.searchStr === '') {
+    if (this.inputText === '') {
       this.nextPage();
     } else {
       this.nextFilterPage();
@@ -68,12 +97,13 @@ export class DealPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.dealService.getDeals(this.status, this.page).subscribe(dealPage => {
-        this.dealPage = this.dealPage.concat(dealPage.results);
-        if (dealPage.next === null) {
-          this.lastPage = true;
-        }
-        this.load = false;
+      this.dealService.getDeals(this.page, this.status.statusName)
+        .subscribe(dealPage => {
+          this.dealPage = this.dealPage.concat(dealPage.results);
+          if (dealPage.next === null) {
+            this.lastPage = true;
+          }
+          this.load = false;
       });
     }
   }
@@ -82,28 +112,14 @@ export class DealPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.dealService.getFilterDeals(this.page, this.searchStr).subscribe( dealPage => {
-        this.dealPage = this.dealPage.concat(dealPage.results);
-        if (dealPage.next === null) {
-          this.lastPage = true;
-        }
-        this.load = false;
+      this.dealService.getFilterDeals(this.page, this.inputText)
+        .subscribe(dealPage => {
+          this.dealPage = this.dealPage.concat(dealPage.results);
+          if (dealPage.next === null) {
+            this.lastPage = true;
+          }
+          this.load = false;
       });
     }
   }
-
-  showDeals(): void {
-    this.page = 1;
-    this.load = true;
-    this.lastPage = false;
-    this.dealService.getDeals(this.status, this.page)
-      .subscribe(dealPage => {
-        this.dealPage = dealPage.results;
-        if (dealPage.next === null) {
-          this.lastPage = true;
-        }
-        this.load = false;
-      }, error2 => log(error2));
-  }
-
 }

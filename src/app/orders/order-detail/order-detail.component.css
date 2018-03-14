@@ -1,7 +1,4 @@
-.order-detail{
-  padding-top: 15px;
-}
-.buttons{
+.buttons {
   padding-bottom: 20px;
 }
 
@@ -9,21 +6,45 @@ ul li {
   font-size: 16px;
 }
 
-.date-info {
-  font-size: 16px;
-  padding-top: 25px;
-}
-
-.data-detail {
-  margin-left: 18px;
-}
-
 .buttons {
   margin-top: 20px;
 }
 
+.contacts-no-padding{
+  padding: 0;
+}
+
+.main-div {
+ border-left: 1px solid #c4c4c4;
+  padding: 0;
+}
+
+.company-name{
+  padding-left: 20px;
+  font-size: 2em;
+  display: inline-block;
+}
+
+.create {
+  padding-left: 20px;
+}
+
+hr {
+  margin-top: 0;
+}
+
 .icon {
-  margin-top: 5px;
+  margin-left: 10px;
+  display: inline-block;
+  line-height: 40px;
+  position: relative;
+
+}
+
+.last-change-text {
+  position: relative;
+  display: inline-block;
+
 }
 
 .card-content {
@@ -44,12 +65,52 @@ ul li {
 }
 
 .date-icon {
-  float: left;
+  height: 100%;
+  display: inline-block;
 }
 
 .history {
   margin-bottom: 0;
 }
 
+.action {
+  font-size: 12px;
+  line-height: 1.2rem;
+  color: #9e9e9e;
+  margin: 5px 0;
+}
+
+.arrow {
+  opacity: 0;
+  line-height: 0;
+}
+
+.contacts {
+  margin-bottom: 0;
+}
+
+.header {
+  font-size: 14px;
+  color: black;
+}
+
+.fab-ul {
+  left: -100px !important;
+}
+
+.forward-block {
+  padding: 5px 0 5px 0px;
+  margin-bottom: 10px;
+}
+
+.forward-block:hover {
+  background-color: #e2e2e2;
+}
+
+.forward-block:hover .arrow{
+  font-size: 40px;
+  opacity: 1;
+  color: #666666;
+}
 
 
