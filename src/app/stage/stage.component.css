@@ -11,58 +11,6 @@
   border-bottom: 1px solid #c4c4c4;
 }
 
-.default-icon {
-  color: grey !important;
-}
-
-.my-fab {
-  left: -150px;
-  background-color: #f4f4f4;
-  text-align: right;
-  border-radius: 10px;
-}
-
-.hover-element {
-  margin: 0 !important;
-}
-
-.hover-element-menu {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 0;
-}
-
-.hover-element-menu:hover {
-  background-color: #e2e2e2;
-  border-radius: 10px;
-}
-
-.menu-li-div {
-  position: relative;
-  height: 35px;
-}
-
-.fab-text {
-  padding-right: 5px;
-  padding-left: 5px;
-  position: absolute;
-  right: 55px;
-}
-
-.my-icon {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  position: absolute;
-  background-color: #5c6b96;
-  right: 0;
-  margin-right: 10px;
-}
-
-.material-icons {
-  margin: auto;
-  color: white;
-}
 
 .date-stage {
   text-align: left;
