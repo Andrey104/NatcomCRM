@@ -14,26 +14,43 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   mount: DealMount;
   dealId;
   isSend = false;
+  loadPage: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private mountService: MountService, private stageMountService: StageMountService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private mountService: MountService,
+              private stageMountService: StageMountService) {
   }
 
   ngOnInit() {
     this.subscribeMount();
   }
 
+  ngAfterViewChecked(): void {
+    if (this.isSend) {
+      document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
+      this.isSend = false;
+    }
+  }
+
   subscribeMount() {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['mount_id'];
       this.dealId = params['id'];
-      this.mountService.getMount(this.id).subscribe(mount => {
+      this.loadPage = true;
+      this.getMountById();
+    });
+  }
+
+  getMountById() {
+    this.mountService.getMount(this.id)
+      .subscribe((mount) => {
         this.mount = mount;
         this.stageMountService.resetStages();
         this.mount.stages.forEach((stage) => {
           this.stageMountService.putStage(stage);
         });
+        this.loadPage = false;
       });
-    });
   }
 
   sendComment(comment: string) {
@@ -45,17 +62,4 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
         console.log(error.error);
       });
   }
-
-  ngAfterViewChecked(): void {
-    if (this.isSend) {
-      document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
-      this.isSend = false;
-    }
-  }
-
 }
-
-// 0 - в процессе
-// 1 - добавлена стадия
-// 2 - успешно завершен
-// 3 - отклонен

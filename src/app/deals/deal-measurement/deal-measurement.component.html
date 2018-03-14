@@ -1,20 +1,18 @@
-<div class="col s12 detail-col scrollable-page" id="page">
-  <div *ngIf="!measurement" class="spinner-contener">
-    <app-preloader></app-preloader>
-  </div>
-  <div *ngIf="measurement" class="row main-row valign-wrapper">
+<div *ngIf="loadPage" class="spinner-page">
+  <app-preloader></app-preloader>
+</div>
+<div *ngIf="!loadPage" class="col s12 detail-col scrollable-page" id="page">
+  <div class="row main-row valign-wrapper">
     <div class="col s4 valign-wrapper">
+      <img class="avatar" src="assets/images/worker.png" />
       <div [style.color]="measurement?.worker ? 'green': 'red'">{{measurement?.worker | workerName}}</div>
     </div>
     <div class="col s4 valign-wrapper">
       <div>{{measurement?.status | measurementStatus}}</div>
     </div>
-    <div class="col s4">
+    <div class="col s4 valign-wrapper">
       <i class="tiny material-icons icon date-icon">date_range</i>
-      <div class="deal-date">
-        <div>Создана:{{measurement?.date | dateFormat: 'date'}}</div>
-        <div>Изменялась:{{measurement?.auto_date | dateFormat: 'date'}}</div>
-      </div>
+      <div class="deal-date">Дата замера: {{measurement?.date | dateFormat: 'date'}}</div>
     </div>
   </div>
   <div class="divider"></div>
@@ -88,7 +86,7 @@
     <div class="col s5 divider"></div>
   </div>
   <div *ngIf="measurement?.pictures.length===0" class="row">
-    <div  class="col s12 offset-s1 history">Нет изображений</div>
+    <div  class="col s12 offset-s1 no-information">Нет изображений</div>
   </div>
   <div class="row" *ngIf="measurement?.pictures.length!==0">
     <div class="col s3" *ngFor="let picture of measurement?.pictures; let i = index">
@@ -107,12 +105,50 @@
     </div>
   </div>
   <div *ngIf="measurement?.comments.length===0" class="row">
-    <div  class="col s12 offset-s1 history">Нет комментариев</div>
+    <div  class="col s12 offset-s1 no-information">Нет комментариев</div>
   </div>
-  <app-deal-client-info [openClientInfo]="clientInfo" [client]="client" (close)="closeClientInfo()"></app-deal-client-info>
-  <app-image-modal [picture]="picture" (close)="closePicture()"></app-image-modal>
+  <app-deal-client-info
+    [openClientInfo]="clientInfo"
+    [client]="client"
+    (close)="closeClientInfo()">
+  </app-deal-client-info>
+  <app-image-modal
+    [picture]="picture"
+    (close)="closePicture()">
+  </app-image-modal>
+  <div class="fixed-action-btn click-to-toggle">
+    <a class="btn-floating btn-large orange">
+      <i class="large material-icons color-fab-icon">menu</i>
+    </a>
+    <ul class="fab-ul">
+      <li class="hover-element li-element-menu-fab">
+        <div class="center-align valign-wrapper menu-li-div">
+          <span class="fab-text">Отложить</span>
+          <div class="icon-fab center-align valign-wrapper">
+            <i class="material-icons color-fab-icon">access_time</i>
+          </div>
+        </div>
+      </li>
+      <li class="hover-element li-element-menu-fab">
+        <div class="center-align valign-wrapper menu-li-div">
+          <span class="fab-text">Отказать</span>
+          <div class="icon-fab center-align valign-wrapper">
+            <i class="material-icons color-fab-icon">close</i>
+          </div>
+        </div>
+      </li>
+      <li class="hover-element li-element-menu-fab">
+        <div class="center-align valign-wrapper menu-li-div">
+          <span class="fab-text">В сделку</span>
+          <div class="icon-fab center-align valign-wrapper">
+            <i class="material-icons color-fab-icon">check</i>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
-<div *ngIf="measurement" class="col s12 measurement-comment-content valign-wrapper">
+<div *ngIf="!loadPage" class="col s12 measurement-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
 

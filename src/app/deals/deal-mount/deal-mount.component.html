@@ -1,7 +1,7 @@
-<div *ngIf="!mount" class="spinner-contener">
+<div *ngIf="loadPage" class="spinner-page">
   <app-preloader></app-preloader>
 </div>
-<div *ngIf="mount" class="mainDiv col s12 detail-col scrollable-page" id="page" >
+<div *ngIf="!loadPage" class="mainDiv col s12 detail-col scrollable-page" id="page" >
   <div class="col s12 detail-col valign-wrapper left-align">
     <div class="col s4 valign-wrapper">
       <img class="avatar" src="{{mount?.user?.type | imageType}}">
@@ -89,6 +89,6 @@
     </ul>
   </div>
 </div>
-<div *ngIf="mount" class="col s12 mount-comment-content valign-wrapper">
+<div *ngIf="!loadPage" class="col s12 mount-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>

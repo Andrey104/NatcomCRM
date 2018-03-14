@@ -28,7 +28,6 @@
 
 .date-icon {
   float: left;
-  margin-top: 5px;
 }
 
 .offer {
@@ -40,11 +39,14 @@
   padding-top: 30px;
 }
 
-.company-name {
+.deal-detail {
   overflow: hidden;
-  font-size: 24px;
-  line-height: 2.5rem;
   margin-left: 15px;
+}
+
+.company-name {
+  font-size: 24px;
+  line-height: 1.6rem;
 }
 
 .deal-info {
@@ -105,4 +107,8 @@
 
 .comment-content {
   width: calc(100% - 25%);
+}
+
+.fixed-action-btn {
+  bottom: 90px;
 }
