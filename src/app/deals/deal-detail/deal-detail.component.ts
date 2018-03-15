@@ -19,6 +19,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   client: Client;
   deal: DealResult;
   loadPage: boolean;
+  showCompleteDialog = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService,
