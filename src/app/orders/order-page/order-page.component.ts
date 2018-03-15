@@ -23,6 +23,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   term$ = new Subject<string>();
   subInputField: Subscription;
   inputText = '';
+  private subscriptions: Subscription[] = [];
 
   constructor(private orderService: OrderService,
               private activatedRoute: ActivatedRoute,
@@ -62,8 +63,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       this.page = 1;
       this.orderService.getFilterOrders(this.page, text)
         .subscribe((orderPage) => {
-            this.orderService.orders = orderPage.results;
-            this.orders = this.orderService.orders;
+            this.orders = orderPage.results;
             if (orderPage.next === null) {
               this.lastPage = true;
             } else {
@@ -86,8 +86,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
     this.orderService.getOrders(this.page, this.status.statusUrl)
       .subscribe(orders => {
         this.load = false;
-        this.orderService.orders = orders.results;
-        this.orders = this.orderService.orders;
+        this.orders = orders.results;
         if (orders.next === null) {
           this.lastPage = true;
         }
@@ -113,8 +112,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       this.page = this.page + 1;
       this.orderService.getOrders(this.page, this.status.statusUrl)
         .subscribe(orders => {
-          this.orderService.orders = this.orderService.orders.concat(orders.results);
-          this.orders = this.orderService.orders;
+          this.orders = this.orders.concat(orders.results);
           this.load = false;
           if (orders.next === null) {
             this.lastPage = true;
@@ -133,8 +131,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       this.page = this.page + 1;
       this.orderService.getFilterOrders(this.page, this.inputText)
         .subscribe(orders => {
-          this.orderService.orders = this.orderService.orders.concat(orders.results);
-          this.orders = this.orderService.orders;
+          this.orders = this.orders.concat(orders.results);
           this.load = false;
           if (orders.next === null) {
             this.lastPage = true;
@@ -146,6 +143,29 @@ export class OrderPageComponent implements OnInit, OnDestroy {
           this.load = false;
         });
     }
+  }
+
+  onActivate(c) {
+    if (c.needSubscribe === true) {
+      const modal = c.updateList
+        .subscribe(next => {
+          if (next) {
+            this.orders = [];
+            if (this.inputText === '') {
+              this.showOrders();
+              console.log('asdasdasdasfsagkerfpouspjgp;rwjhg;sjgp;sej;ghj');
+            } else {
+              this.search(this.inputText);
+            }
+          }
+        });
+      this.subscriptions.push(modal);
+    }
+  }
+
+  onDeactivate(c) {
+    this.subscriptions
+      .forEach(s => s.unsubscribe());
   }
 
   ngOnDestroy(): void {

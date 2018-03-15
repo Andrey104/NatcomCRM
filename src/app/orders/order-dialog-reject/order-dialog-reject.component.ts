@@ -25,13 +25,13 @@ export class OrderModalDealComponent implements OnInit {
   @Input() closable = true;
   @Input() order;
   @Input() visible: boolean;
-  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() successOrder = new EventEmitter();
   @ViewChild('form') form: NgForm;
   @ViewChild('comment') comment;
   causes = [1, 2];
   isSubmitted = false;
   formData = {};
+  isRequest = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private orderService: OrderService) {
@@ -46,21 +46,22 @@ export class OrderModalDealComponent implements OnInit {
 
   close() {
     this.visible = false;
-    this.visibleChange.emit(this.visible);
   }
 
   submitForm() {
+    this.isRequest = true;
     this.isSubmitted = true;
     console.log(this.form);
     this.formData = this.form.value;
     this.orderService.rejectOrder(this.id, this.comment.nativeElement.value, this.form.form.value.answer)
       .subscribe((response) => {
           this.successOrder.emit(response);
+          this.isRequest = false;
           this.visible = false;
-          this.visibleChange.emit(this.visible);
         },
         (error) => {
-          console.log(error);//добавить хуйню, чтобы пользователь понял, что нихуя не отправилось в самой модалке
+          this.isRequest = false;
+          alert('Произошла ошибка');
         });
   }
 

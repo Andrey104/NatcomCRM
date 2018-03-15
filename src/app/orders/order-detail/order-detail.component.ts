@@ -4,6 +4,7 @@ import {UtilsService} from '../../services/utils.service';
 import {OrderAction} from '../../models/orders/order_action';
 import {ActivatedRoute} from '@angular/router';
 import {OrderResult} from '../../models/orders/order_result';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-order-detail',
@@ -25,6 +26,8 @@ export class OrderDetailComponent implements OnInit {
   loader: boolean;
   showDialogReject: false;
   showDialogDefer: false;
+  needSubscribe = true;
+  updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   ngOnInit() {
     this.subscribeOrderId();
@@ -74,5 +77,6 @@ export class OrderDetailComponent implements OnInit {
 
   successUpdate(order) {
     this.order = order;
+    this.updateList.next(true);
   }
 }

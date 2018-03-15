@@ -16,13 +16,14 @@
     <div class="div-text-area-dialog">
       <textarea #comment class="text-comment-dialog"></textarea>
     </div>
-
     <button class="btn-dialog-submit" type="submit"
             [class.btn-dialog-submit]="form.valid"
-            [disabled]="!form.valid"
-            [class.btn-dialog-disabled]="!form.valid">OK
+            [disabled]="(!form.valid||isRequest)"
+            [class.btn-dialog-disabled]="(!form.valid||isRequest)">OK
     </button>
   </form>
+  <button class="btn-dialog-cancel" (click)="close()">Отмена</button>
   <span class="description-required-dialog"><span [ngStyle]="{'color':'red'}">*</span> помечены обязательные поля</span>
+  <app-preloader *ngIf="isRequest"></app-preloader>
 </div>
 <div *ngIf="visible" class="overlay-dialog" (click)="close()"></div>
