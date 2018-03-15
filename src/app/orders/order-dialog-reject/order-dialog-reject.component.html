@@ -1,0 +1,30 @@
+<div [@dialog] *ngIf="visible" class="dialog">
+  <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
+  <h4>Отказ</h4>
+  <form (ngSubmit)="submitForm()" #form="ngForm">
+    <div class="name-section-dialog required-area-dialog">Причина</div>
+    <div *ngFor="let cause of causes">
+      <label class="radio-text-dialog">
+        <input class="radio-dialog"
+               ngModel
+               required
+               type="radio"
+               [value]="cause"
+               name="answer"> {{cause | rejectOrderCause}}</label>
+    </div>
+    <div class="name-section-dialog">Комментарий</div>
+    <div class="div-text-area-dialog">
+      <textarea #comment class="text-comment-dialog"></textarea>
+    </div>
+
+    <button class="btn-dialog-submit" type="submit"
+            [class.btn-dialog-submit]="form.valid"
+            [disabled]="(!form.valid||isRequest)"
+            [class.btn-dialog-disabled]="(!form.valid||isRequest)">OK
+    </button>
+  </form>
+  <button class="btn-dialog-cancel" (click)="close()">Отмена</button>
+  <span class="description-required-dialog"><span [ngStyle]="{'color':'red'}">*</span> помечены обязательные поля</span>
+  <app-preloader *ngIf="isRequest"></app-preloader>
+</div>
+<div *ngIf="visible" class="overlay-dialog" (click)="close()"></div>

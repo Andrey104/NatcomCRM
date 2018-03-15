@@ -11,7 +11,7 @@
   border-radius: 50%;
 }
 
-.content {
+.content-dialog {
   margin-left: 20px;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .closedNotConcluded {
-  background-color: grey;
+  background-color: green;
 }
 
 .closedContractConcluded {
@@ -45,5 +45,9 @@
 }
 
 .renouncement {
+  background-color: red;
+}
+
+.processFailure {
   background-color: red;
 }

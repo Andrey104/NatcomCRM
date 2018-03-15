@@ -7,6 +7,7 @@ import {UtilsService} from '../../services/utils.service';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-deal-page',
@@ -21,6 +22,7 @@ export class DealPageComponent implements OnInit {
   load: boolean;
   term$ = new Subject<string>();
   inputText = '';
+  private subscriptions: Subscription[] = [];
 
   constructor(private dealService: DealService,
               private activatedRoute: ActivatedRoute,
@@ -104,7 +106,7 @@ export class DealPageComponent implements OnInit {
             this.lastPage = true;
           }
           this.load = false;
-      });
+        });
     }
   }
 
@@ -119,7 +121,30 @@ export class DealPageComponent implements OnInit {
             this.lastPage = true;
           }
           this.load = false;
-      });
+        });
     }
   }
+
+  onActivate(c) {
+    if (c.needSubscribe === true) {
+      const modal = c.updateList
+        .subscribe(next => {
+          if (next) {
+            this.dealPage = [];
+            if (this.inputText === '') {
+              this.showDeals();
+            } else {
+              this.search(this.inputText);
+            }
+          }
+        });
+      this.subscriptions.push(modal);
+    }
+  }
+
+  onDeactivate(c) {
+    this.subscriptions
+      .forEach(s => s.unsubscribe());
+  }
+
 }

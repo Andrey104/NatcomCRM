@@ -8,9 +8,9 @@ export class WorkerNamePipe implements PipeTransform {
   transform(worker: Worker): string {
     let workerStr = '';
     if (!worker) {
-      workerStr = 'Нет ответсвенного';
+      workerStr = 'Нет ответственного';
     } else {
-      workerStr = 'Ответственный ' +  worker.first_name + ' ' + worker.last_name;
+      workerStr = worker.first_name + ' ' + worker.last_name;
     }
     return workerStr;
   }

@@ -4,6 +4,7 @@ import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
 import {UtilsService} from '../../services/utils.service';
 import {Client} from '../../models/client';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-deal-detail',
@@ -18,9 +19,14 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   clientInfo = false;
   client: Client;
   deal: DealResult;
+  loadPage: boolean;
+  showCompleteDialog = false;
+  needSubscribe = true;
+  updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   constructor(private activatedRoute: ActivatedRoute,
-              private dealService: DealService, private utils: UtilsService) {
+              private dealService: DealService,
+              private utils: UtilsService) {
   }
 
   ngOnInit() {
@@ -35,13 +41,26 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  updateDeal() {
+    this.updateList.next(true);
+    this.loadPage = true;
+    this.getDealById();
+  }
+
   subscribeDealId(): void {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
-      this.dealService.getDealById(this.id).subscribe(deal => {
-        this.deal = deal;
-      });
+      this.loadPage = true;
+      this.getDealById();
     });
+  }
+
+  getDealById(): void {
+    this.dealService.getDealById(this.id)
+      .subscribe((deal) => {
+        this.deal = deal;
+        this.loadPage = false;
+      });
   }
 
   sendComment(comment: string) {

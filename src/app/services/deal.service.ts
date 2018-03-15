@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {DealPage} from '../models/deal/deals';
 import {DealResult} from '../models/deal/deal_result';
 import {BaseApi} from '../core/base-api';
+import {CompanyPage} from '../models/company/company-page';
 
 
 @Injectable()
@@ -30,6 +31,27 @@ export class DealService extends BaseApi {
 
   dealComment(idDeal: number, comment: string): Observable<Object> {
     return this.post(`deals/${idDeal}/comment/`, {text: comment});
+  }
+
+  getCompanies(): Observable<CompanyPage> {
+    return this.get(`companies`);
+  }
+
+  newDeal(companyId: number, paymentType: boolean, address: string, addressComment: string): Observable<any> {
+    const data = {
+      company: companyId,
+      non_cash: paymentType,
+      address: address,
+      address_comment: addressComment,
+      clients: [{
+        client: 1
+      }]
+    };
+    return this.post(`deals/`, data);
+  }
+
+  dealComplete(idDeal: number): Observable<Object> {
+    return this.post(`deals/${idDeal}/close/`);
   }
 
   /*dealDiscount(id, after, comment): Observable<Object> {

@@ -15,7 +15,8 @@
   </div>
   <div class="col s9 detail-col">
     <div class="detail">
-      <router-outlet></router-outlet>
+      <router-outlet (activate)='onActivate($event)'
+                     (deactivate)='onDeactivate($event)'></router-outlet>
     </div>
   </div>
 </div>

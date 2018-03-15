@@ -17,6 +17,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   client: Client;
   flag = false;
   picture: Picture;
+  loadPage: boolean;
 
   constructor(private activatedRoute: ActivatedRoute, private measurementService: MeasurementService) {
   }
@@ -33,12 +34,19 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   }
 
   subscribeOnMeasurement() {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.params.subscribe((params) => {
       this.id = params['measurement_id'];
-      this.measurementService.getMeasurement(this.id).subscribe(measurement => {
-        this.measurement = measurement;
-      });
+      this.loadPage = true;
+      this.getMeasurementById();
     });
+  }
+
+  getMeasurementById() {
+    this.measurementService.getMeasurement(this.id)
+      .subscribe((measurement) => {
+        this.measurement = measurement;
+        this.loadPage = false;
+      });
   }
 
   openClientInfo(idClient: number) {
@@ -64,6 +72,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   openPicture(idPicture: number) {
     this.picture = this.measurement.pictures[idPicture];
   }
+
   closePicture() {
     this.picture = null;
   }

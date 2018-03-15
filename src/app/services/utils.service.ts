@@ -146,10 +146,40 @@ export class UtilsService {
       }
       case 1: {
         type = 'отклонил(а)';
+        if (action.cause !== null) {
+          causeStr = 'по причине: ';
+          switch (action.cause) {
+            case 1: {
+              cause = 'нецелевая заявка';
+              break;
+            }
+            case 2: {
+              cause = 'договорился с конкурентами';
+              break;
+            }
+          }
+        }
         break;
       }
       case 2: {
         type = 'временно отложил(а)';
+        if (action.cause !== null) {
+          causeStr = 'по причине: ';
+          switch (action.cause) {
+            case 1: {
+              cause = 'клиент не берет трубку';
+              break;
+            }
+            case 2: {
+              cause = 'слишком высокая цена';
+              break;
+            }
+            case 3: {
+              cause = 'позвонить позже';
+              break;
+            }
+          }
+        }
         break;
       }
       case 3: {
@@ -158,19 +188,6 @@ export class UtilsService {
       }
     }
 
-    if (action.cause !== null) {
-      causeStr = 'по причине:';
-      switch (action.cause) {
-        case 1: {
-          cause = 'клиент не взял трубку';
-          break;
-        }
-        case 2: {
-          cause = 'другое';
-          break;
-        }
-      }
-    }
 
     if (action.comment !== null) {
       commentStr = ', с комментарием: ';

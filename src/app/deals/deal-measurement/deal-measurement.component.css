@@ -17,6 +17,18 @@
   overflow: hidden;
 }
 
+.avatar {
+  height: 50px;
+  width: 50px;
+  float: left;
+}
+
+.history {
+  font-size: 12px;
+  line-height: 1.2rem;
+  color: #9e9e9e;
+}
+
 .deal {
   font-size: 24px;
   padding-left: 55px;
@@ -52,11 +64,15 @@
   color: #666666;
 }
 
+.div-number {
+  padding-right: 0;
+}
+
 .arrow {
   opacity: 0;
   line-height: 0;
+  margin-right: 10px;
 }
-
 .header {
   font-size: 14px;
   color: black;
@@ -92,4 +108,6 @@
   width: calc(100% - 25%);
 }
 
-
+.fixed-action-btn {
+  bottom: 90px;
+}

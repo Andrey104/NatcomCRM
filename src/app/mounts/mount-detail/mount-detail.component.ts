@@ -14,6 +14,7 @@ export class MountDetailComponent implements OnInit, AfterViewChecked {
   mount: DealMount;
   dealId;
   isSend = false;
+  loadPage: boolean;
 
   constructor(private activatedRoute: ActivatedRoute, private mountService: MountService, private stageMountService: StageMountService) {
   }
@@ -22,18 +23,32 @@ export class MountDetailComponent implements OnInit, AfterViewChecked {
     this.subscribeMount();
   }
 
+  ngAfterViewChecked(): void {
+    if (this.isSend) {
+      document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
+      this.isSend = false;
+    }
+  }
+
   subscribeMount() {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['mount_id'];
-      this.mountService.getMount(this.id).subscribe(mount => {
+      this.loadPage = true;
+      this.getMountById();
+    });
+  }
+
+  getMountById() {
+    this.mountService.getMount(this.id)
+      .subscribe((mount) => {
         this.mount = mount;
         this.dealId = String(mount.deal);
         this.stageMountService.resetStages();
         this.mount.stages.forEach((stage) => {
           this.stageMountService.putStage(stage);
         });
+        this.loadPage = false;
       });
-    });
   }
 
   sendComment(comment: string) {
@@ -44,12 +59,5 @@ export class MountDetailComponent implements OnInit, AfterViewChecked {
       }, error => {
         console.log(error.error);
       });
-  }
-
-  ngAfterViewChecked(): void {
-    if (this.isSend) {
-      document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
-      this.isSend = false;
-    }
   }
 }

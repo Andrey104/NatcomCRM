@@ -2,3 +2,27 @@
   padding-right: 5px;
   line-height: 1.3rem;
 }
+
+.undistributedMeasurement {
+  background-color: grey;
+}
+
+.responsibleAppointed {
+  background-color: #ffa726;
+}
+
+.closedNotConcluded {
+  background-color: green;
+}
+
+.closedContractConcluded {
+  background-color: green;
+}
+
+.renouncement {
+  background-color: red;
+}
+
+.processFailure {
+  background-color: red;
+}

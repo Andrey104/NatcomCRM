@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col s7">
+    <form #form="ngForm" (ngSubmit)="submitForm(form)">
+      <div class="row">
+        <div class="col s7">
+          <label>Компания</label>
+          <select #select class="browser-default"
+            ngModel
+            name="company"
+            required>
+            <option *ngFor="let company of companies"
+              [value]="company?.id">
+              {{company?.name}}
+            </option>
+          </select>
+        </div>
+        <div class="col s5">
+          <label>Способ оплаты</label>
+          <select class="browser-default"
+                  ngModel
+                  name="payment"
+                  required>
+            <option value="0">Нал</option>
+            <option value="1">Безнал</option>
+          </select>
+        </div>
+        <div class="col s12">
+          <label>Адрес</label>
+          <textarea class="text-comment-dialog"
+                    ngModel
+                    name="address"
+                    required>
+          </textarea>
+        </div>
+        <div class="col s12">
+        <label>Комментарий к адресу</label>
+        <textarea class="text-comment-dialog"
+                  ngModel
+                  name="addressComment"
+                  required>
+        </textarea>
+      </div>
+      </div>
+      <button class="btn-dialog-submit" type="submit"
+              [disabled]="!form.valid">OK
+      </button>
+    </form>
+  </div>
+  <div class="col s5">
+    <div>Clients</div>
+    <div (click)="showDialog = !showDialog">Add client</div>
+  </div>
+  <app-add-client [(visible)]="showDialog"></app-add-client>
+</div>

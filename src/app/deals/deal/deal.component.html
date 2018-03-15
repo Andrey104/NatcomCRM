@@ -1,4 +1,4 @@
-<div routerLink="{{deal.id}}" routerLinkActive="active-card"
+<div routerLink="{{deal?.id}}" routerLinkActive="active-card"
      class="card horizontal order hover-element no-border hoverable">
   <div class="center-align valign-wrapper">
     <div class="status-image info">
@@ -10,9 +10,10 @@
   <div class="card-stacked">
     <div class="info">
       <div class="col s12 detail-col">
-        <div class="company col s7 detail-col">{{deal?.company?.name | companyName}}</div>
-        <div class="right-align col s5 time">
-          <i class="tiny material-icons icon">access_time</i> {{deal?.auto_date | dateFormat: 'time'}}
+        <div class="col s7 detail-col company">{{deal?.company?.name | companyName}}</div>
+        <div class="col s5 detail-col right-align time valign-wrapper">
+          <i class="tiny material-icons icon card-date-icon">date_range</i>
+          <div class="card-date">{{deal?.task_date | dateFormat: 'date'}}</div>
         </div>
       </div>
       <div class="main-info-card">

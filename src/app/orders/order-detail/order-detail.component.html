@@ -5,7 +5,7 @@
   <div *ngIf="!loader" class="main-div row col s12">
     <div class="icon"><i class="tiny material-icons">date_range</i></div>
     <div class="last-change-text">Дата события: {{order?.task_date | dateFormat: 'fullDate'}}</div>
-    <hr class="header-hr">
+    <div class="divider"></div>
 
     <div class="col s12 detail-col valign-wrapper left-align">
       <div class="text col s7">
@@ -32,7 +32,7 @@
               <i class="small material-icons icon">person</i>
               {{order?.client?.fio}}
             </div>
-            <div class="col s5">{{order?.client?.phones[0]?.number | phoneFormat}}</div>
+            <div class="col s5 div-number">{{order?.client?.phones[0]?.number | phoneFormat}}</div>
             <i class="arrow col s1 material-icons detail-col-left">chevron_right</i>
           </div>
           <hr class="col s12 black">
@@ -58,25 +58,23 @@
         </div>
       </div>
     </div>
-    <app-order-defer [openDefer]="deferOpenValue" (close)="closeDefer()"></app-order-defer>
-    <app-order-reject [openReject]="rejectOpenValue" (close)="closeReject()"></app-order-reject>
-    <app-order-to-deal [order]="order" [openToDeal]="inDealOpenValue" (close)="closeToDeal()"></app-order-to-deal>
-    <div class="fixed-action-btn click-to-toggle">
-      <a class="btn-floating btn-large orange">
+    <div class="fixed-action-btn click-to-toggle" *ngIf="!(order?.status==1 || order?.status==3)">
+      <a class="btn-floating btn-large orange" id="main-btn">
         <i class="large material-icons color-fab-icon">menu</i>
       </a>
       <ul class="fab-ul">
-        <li class="hover-element li-element-menu-fab" (click)="openDefer()">
+        <li class="hover-element li-element-menu-fab" (click)="showDialogDefer = !showDialogDefer;" onclick="$('#main-btn').click();">
           <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отложить</span>
-            <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">person</i></div>
+            <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">access_time</i>
+            </div>
           </div>
         </li>
-        <li class="hover-element li-element-menu-fab" (click)="openReject()">
+        <li class="hover-element li-element-menu-fab" (click)="showDialogReject = !showDialogReject" onclick="$('#main-btn').click();">
           <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отказать</span>
             <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">close</i></div>
           </div>
         </li>
-        <li class="hover-element li-element-menu-fab" (click)="openToDeal()">
+        <li class="hover-element li-element-menu-fab">
           <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">В сделку</span>
             <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">check</i></div>
           </div>
@@ -84,4 +82,8 @@
       </ul>
     </div>
   </div>
+  <app-order-reject [order]="order" (successOrder)="successUpdate($event)"
+                    [(visible)]="showDialogReject"></app-order-reject>
+  <app-order-defer-dialog [order]="order" (successOrder)="successUpdate($event)"
+                          [(visible)]="showDialogDefer"></app-order-defer-dialog>
 </div>

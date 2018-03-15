@@ -1,24 +1,28 @@
-<article>
-  <div class="status-image" [ngSwitch]="user?.type">
-    <img *ngSwitchCase="2" src="assets/images/avatar.png" alt="менеджер" title="менеджер"/>
-    <img *ngSwitchCase="3" src="assets/images/admin.png" alt="старший менеджер" title="старший менеджер"/>
-    <img *ngSwitchCase="1" src="assets/images/worker.png" alt="рабочий" title="рабочий"/>
-    <img *ngSwitchCase="4" src="assets/images/admin.png" alt="админ" title="админ"/>
-  </div>
-  <div class="user-info">
-    <p id="user">{{user?.username}} <br>
-      <span id="name">{{user?.first_name}} {{user?.last_name}}</span></p>
-    <ul>
-      <li id="email"><i class="small material-icons icon">email</i> {{user?.email}}</li>
-      <li><i class="small material-icons icon">local_phone</i> {{user?.phone}}</li>
-      <li><i class="small material-icons icon">email</i> {{user?.telegram}}</li>
-    </ul>
-  </div>
-</article>
-<footer>
-  <a (click)="logOut()" routerLink="/login" class="waves-effect btn-large button"><i class="material-icons left">exit_to_app</i>Выход</a>
-</footer>
-
+<div *ngIf="!user" class="spinner-contener">
+  <app-preloader></app-preloader>
+</div>
+<div *ngIf="user">
+  <article>
+    <div class="status-image" [ngSwitch]="user?.type">
+      <img *ngSwitchCase="2" src="assets/images/avatar.png" alt="менеджер" title="менеджер"/>
+      <img *ngSwitchCase="3" src="assets/images/admin.png" alt="старший менеджер" title="старший менеджер"/>
+      <img *ngSwitchCase="1" src="assets/images/worker.png" alt="рабочий" title="рабочий"/>
+      <img *ngSwitchCase="4" src="assets/images/admin.png" alt="админ" title="админ"/>
+    </div>
+    <div class="user-info">
+      <p id="user">{{user?.username}} <br>
+        <span id="name">{{user?.first_name}} {{user?.last_name}}</span></p>
+      <ul>
+        <li id="email"><i class="small material-icons icon">email</i> {{user?.email}}</li>
+        <li><i class="small material-icons icon">local_phone</i> {{user?.phone}}</li>
+        <li><i class="small material-icons icon">email</i> {{user?.telegram}}</li>
+      </ul>
+    </div>
+  </article>
+  <footer>
+    <a (click)="logOut()" routerLink="/login" class="waves-effect btn-large button"><i class="material-icons left">exit_to_app</i>Выход</a>
+  </footer>
+</div>
 
 
 
