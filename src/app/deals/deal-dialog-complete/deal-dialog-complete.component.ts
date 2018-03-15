@@ -27,8 +27,9 @@ export class DealDialogCompleteComponent implements OnInit {
   @Input() deal;
   @Input() visible: boolean;
   @Output() successDeal = new EventEmitter();
+  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   isSubmitted = false;
-  formData = {};
+  isRequest = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService) {
@@ -43,22 +44,27 @@ export class DealDialogCompleteComponent implements OnInit {
 
   close() {
     this.visible = false;
+    this.visibleChange.emit(this.visible);
   }
 
   submitForm() {
+    this.isRequest = true;
     this.isSubmitted = true;
     this.dealService.dealComplete(this.id).subscribe((result) => {
-      this.visible = false;
+      this.isRequest = false;
+      this.visibleChange.emit(this.visible);
+      this.successDeal.emit();
+      this.close();
+    }, (error) => {
+      this.isRequest = false;
+      if (error.status === 200) {
+        this.visibleChange.emit(this.visible);
+        this.successDeal.emit();
+        this.close();
+      } else {
+        alert('Произошла ошибка');
+      }
     });
-    // this.orderService.rejectOrder(this.id, this.comment.nativeElement.value, this.form.form.value.answer)
-    //   .subscribe((response) => {
-    //       this.successOrder.emit(response);
-    //       this.visible = false;
-    //       this.visibleChange.emit(this.visible);
-    //     },
-    //     (error) => {
-    //       console.log(error);//добавить хуйню, чтобы пользователь понял, что нихуя не отправилось в самой модалке
-    //     });
   }
 
 }

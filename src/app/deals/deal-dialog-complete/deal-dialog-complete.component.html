@@ -3,5 +3,6 @@
   <h4>Завершить сделку?</h4>
   <button class="btn-dialog-submit" (click)="submitForm()">Да</button>
   <button class="btn-dialog-cancel" (click)="close()">Нет</button>
+  <app-preloader *ngIf="isRequest"></app-preloader>
 </div>
 <div *ngIf="visible" class="overlay-dialog" (click)="close()"></div>

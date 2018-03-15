@@ -26,6 +26,7 @@ export class OrderModalDealComponent implements OnInit {
   @Input() order;
   @Input() visible: boolean;
   @Output() successOrder = new EventEmitter();
+  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('form') form: NgForm;
   @ViewChild('comment') comment;
   causes = [1, 2];
@@ -46,6 +47,7 @@ export class OrderModalDealComponent implements OnInit {
 
   close() {
     this.visible = false;
+    this.visibleChange.emit(this.visible);
   }
 
   submitForm() {
@@ -57,7 +59,7 @@ export class OrderModalDealComponent implements OnInit {
       .subscribe((response) => {
           this.successOrder.emit(response);
           this.isRequest = false;
-          this.visible = false;
+          this.close();
         },
         (error) => {
           this.isRequest = false;

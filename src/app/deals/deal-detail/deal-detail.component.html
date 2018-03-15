@@ -204,5 +204,5 @@
 <div *ngIf="!loadPage" class="col s12 deal-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
-<app-deal-complete [deal]="deal" [(visible)]="showCompleteDialog"></app-deal-complete>
+<app-deal-complete [deal]="deal" (successDeal)="updateDeal()" [(visible)]="showCompleteDialog"></app-deal-complete>
 

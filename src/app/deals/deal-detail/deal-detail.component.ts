@@ -4,6 +4,7 @@ import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
 import {UtilsService} from '../../services/utils.service';
 import {Client} from '../../models/client';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-deal-detail',
@@ -20,6 +21,8 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   deal: DealResult;
   loadPage: boolean;
   showCompleteDialog = false;
+  needSubscribe = true;
+  updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService,
@@ -36,6 +39,12 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
       document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
       this.flag = false;
     }
+  }
+
+  updateDeal() {
+    this.updateList.next(true);
+    this.loadPage = true;
+    this.getDealById();
   }
 
   subscribeDealId(): void {
