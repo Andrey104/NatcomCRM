@@ -24,6 +24,7 @@ import {MountPageComponent} from './mounts/mount-page/mount-page.component';
 import {MountDetailComponent} from './mounts/mount-detail/mount-detail.component';
 import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
 import {MeasurementDetailComponent} from './measurements/measurement-detail/measurement-detail.component';
+import {NewDealPageComponent} from './new-deal/new-deal-page/new-deal-page.component';
 
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts
@@ -55,6 +56,7 @@ const pages_routes: Routes = [
   {path: 'deals/:status', component: DealPageComponent, children: deals_routes},
   {path: 'measurements/:status', component: MeasurementPageComponent, children: measurements_routes},
   {path: 'mounts/:status', component: MountPageComponent, children: mounts_routes},
+  {path: 'new_deal', component: NewDealPageComponent},
   {path: 'user', component: UserInfoComponent},
   {path: '', redirectTo: 'user', pathMatch: 'full'}
 ];

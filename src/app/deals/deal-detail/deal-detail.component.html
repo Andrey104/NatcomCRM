@@ -12,7 +12,7 @@
     <div class="col s3 valign-wrapper">
       <i class="tiny material-icons icon date-icon">date_range</i>
       <div class="deal-date">
-        <div>Дата события: {{deal?.auto_date | dateFormat: 'date'}}</div>
+        <div>Дата события: {{deal?.task_date | dateFormat: 'date'}}</div>
       </div>
     </div>
   </div>
@@ -24,7 +24,7 @@
         <div [appColorCompany]="deal?.company?.symbol" class="company-symbol">{{deal?.company?.symbol}}</div>
         <div class="deal-detail">
           <div class="company-name">{{deal?.company?.name}}</div>
-          <div>Создана: {{deal?.task_date | dateFormat: 'date'}}</div>
+          <div>Создана: {{deal?.auto_date | dateFormat: 'date'}}</div>
         </div>
       </div>
       <div class="deal-info">

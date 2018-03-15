@@ -1,0 +1,5 @@
+<div [@dialog] *ngIf="visible" class="dialog">
+  <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="onClose()">close</i>
+  <input type="text">
+</div>
+<div *ngIf="visible" class="overlay-dialog" (click)="close()"></div>
