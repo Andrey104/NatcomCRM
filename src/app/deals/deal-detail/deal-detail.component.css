@@ -112,3 +112,7 @@
 .fixed-action-btn {
   bottom: 90px;
 }
+
+#reject, #complete {
+  right: 91px;
+}

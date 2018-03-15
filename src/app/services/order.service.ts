@@ -9,6 +9,7 @@ import {Orders} from '../models/orders/order';
 import {MessageService} from './message.service';
 import {OrderResult} from '../models/orders/order_result';
 import {BaseApi} from '../core/base-api';
+import {Subject} from 'rxjs/Subject';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -16,7 +17,6 @@ const httpOptions = {
 
 @Injectable()
 export class OrderService extends BaseApi {
-
   private ordersUrl = 'http://188.225.46.31/api/orders';  // URL to web api
 
   constructor(public http: HttpClient,
@@ -26,7 +26,7 @@ export class OrderService extends BaseApi {
 
   /** GET orders from the server */
   getOrders(page: number, status: string): Observable<Orders> {
-    return this.get(`orders/?page${page.toString()}&&${status}`);
+    return this.get(`orders/?page=${page.toString()}&${status}`);
   }
 
   getOrderById(idOrder: number): Observable<OrderResult> {
@@ -34,10 +34,13 @@ export class OrderService extends BaseApi {
   }
 
   getFilterOrders(page: number, text: string): Observable<Orders> {
-    return this.get(`orders/search?page=${page.toString()}&&text=${text}`);
+    return this.get(`orders/search?page=${page.toString()}&text=${text}`);
   }
 
-  deferOrder(cause, comment: string, id: string): Observable<Object> {
+  deferOrder(id: string, comment: string, cause: number): Observable<Object> {
+    if (comment === '') {
+      comment = null;
+    }
     const data = {'cause': cause, 'comment': comment};
     return this.post(`orders/${id}/defer/`, data);
   }

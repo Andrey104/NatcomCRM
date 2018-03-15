@@ -32,6 +32,10 @@ export class DealService extends BaseApi {
     return this.post(`deals/${idDeal}/comment/`, {text: comment});
   }
 
+  dealComplete(idDeal: number): Observable<Object> {
+    return this.post(`deals/${idDeal}/close/`);
+  }
+
   /*dealDiscount(id, after, comment): Observable<Object> {
     const discount = {'after': after, 'comment': comment};
     return this.http.post<Object>(this.dealsUrl + id + '/discount/', discount,

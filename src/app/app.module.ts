@@ -85,6 +85,9 @@ import { InputSearchComponent } from './input-search/input-search.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { OrderModalDealComponent } from './orders/order-dialog-reject/order-dialog-reject.component';
 import {OrderRejectCause} from './pipes/order-cause-reject.pipe';
+import { OrderDeferDialogComponent } from './orders/order-defer-dialog/order-defer-dialog.component';
+import {OrderDeferCause} from './pipes/order-cause-defer.pipe';
+import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dialog-complete.component';
 
 
 @NgModule({
@@ -155,6 +158,9 @@ import {OrderRejectCause} from './pipes/order-cause-reject.pipe';
     InputSearchComponent,
     OrderModalDealComponent,
     OrderRejectCause,
+    OrderDeferDialogComponent,
+    OrderDeferCause,
+    DealDialogCompleteComponent
 ],
   imports: [
     BrowserModule,

@@ -2,12 +2,13 @@ import {DealAction} from './deal_action';
 import {DealMeasurement} from './deal_measurement';
 import {Company} from '../company';
 import {User} from '../user';
+import {DealMount} from './deal_mount';
 
 export class DealResult {
   id: number;
   clients: object; // add class
   measurements: DealMeasurement[];
-  mounts: object;
+  mounts: DealMount[];
   discounts: object;
   comments: object[];
   payments: object; // !!!!!
