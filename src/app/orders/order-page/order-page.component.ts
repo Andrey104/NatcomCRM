@@ -62,7 +62,8 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       this.page = 1;
       this.orderService.getFilterOrders(this.page, text)
         .subscribe((orderPage) => {
-            this.orders = orderPage.results;
+            this.orderService.orders = orderPage.results;
+            this.orders = this.orderService.orders;
             if (orderPage.next === null) {
               this.lastPage = true;
             } else {
@@ -85,7 +86,8 @@ export class OrderPageComponent implements OnInit, OnDestroy {
     this.orderService.getOrders(this.page, this.status.statusUrl)
       .subscribe(orders => {
         this.load = false;
-        this.orders = orders.results;
+        this.orderService.orders = orders.results;
+        this.orders = this.orderService.orders;
         if (orders.next === null) {
           this.lastPage = true;
         }
@@ -111,7 +113,8 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       this.page = this.page + 1;
       this.orderService.getOrders(this.page, this.status.statusUrl)
         .subscribe(orders => {
-          this.orders = this.orders.concat(orders.results);
+          this.orderService.orders = this.orderService.orders.concat(orders.results);
+          this.orders = this.orderService.orders;
           this.load = false;
           if (orders.next === null) {
             this.lastPage = true;
@@ -130,7 +133,8 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       this.page = this.page + 1;
       this.orderService.getFilterOrders(this.page, this.inputText)
         .subscribe(orders => {
-          this.orders = this.orders.concat(orders.results);
+          this.orderService.orders = this.orderService.orders.concat(orders.results);
+          this.orders = this.orderService.orders;
           this.load = false;
           if (orders.next === null) {
             this.lastPage = true;

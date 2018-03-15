@@ -58,21 +58,18 @@
         </div>
       </div>
     </div>
-    <!--<app-order-defer [openDefer]="deferOpenValue" (close)="closeDefer()"></app-order-defer>-->
-    <!--<app-order-reject [openReject]="rejectOpenValue" (close)="closeReject()"></app-order-reject>-->
-    <!--<app-order-to-deal [order]="order" [openToDeal]="inDealOpenValue" (close)="closeToDeal()"></app-order-to-deal>-->
     <div class="fixed-action-btn click-to-toggle" *ngIf="!(order?.status==1 || order?.status==3)">
-      <a class="btn-floating btn-large orange">
+      <a class="btn-floating btn-large orange" id="main-btn">
         <i class="large material-icons color-fab-icon">menu</i>
       </a>
       <ul class="fab-ul">
-        <li class="hover-element li-element-menu-fab" (click)="openDefer()">
+        <li class="hover-element li-element-menu-fab" (click)="showDialogDefer = !showDialogDefer;" onclick="$('#main-btn').click();">
           <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отложить</span>
             <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">access_time</i>
             </div>
           </div>
         </li>
-        <li class="hover-element li-element-menu-fab" (click)="showDialog = !showDialog">
+        <li class="hover-element li-element-menu-fab" (click)="showDialogReject = !showDialogReject" onclick="$('#main-btn').click();">
           <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отказать</span>
             <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">close</i></div>
           </div>
@@ -85,5 +82,8 @@
       </ul>
     </div>
   </div>
-  <app-order-reject [order]="order" (successOrder)="successUpdate($event)" [(visible)]="showDialog"></app-order-reject>
+  <app-order-reject [order]="order" (successOrder)="successUpdate($event)"
+                    [(visible)]="showDialogReject"></app-order-reject>
+  <app-order-defer-dialog [order]="order" (successOrder)="successUpdate($event)"
+                          [(visible)]="showDialogDefer"></app-order-defer-dialog>
 </div>

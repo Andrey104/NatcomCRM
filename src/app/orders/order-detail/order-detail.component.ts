@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OrderService} from '../../services/order.service';
 import {UtilsService} from '../../services/utils.service';
 import {OrderAction} from '../../models/orders/order_action';
@@ -23,7 +23,8 @@ export class OrderDetailComponent implements OnInit {
   rejectOpenValue = false;
   inDealOpenValue = false;
   loader: boolean;
-  showDialog: false;
+  showDialogReject: false;
+  showDialogDefer: false;
 
   ngOnInit() {
     this.subscribeOrderId();
