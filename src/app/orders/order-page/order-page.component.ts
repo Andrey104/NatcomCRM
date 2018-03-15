@@ -23,6 +23,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   term$ = new Subject<string>();
   subInputField: Subscription;
   inputText = '';
+  private subscriptions: Subscription[] = [];
 
   constructor(private orderService: OrderService,
               private activatedRoute: ActivatedRoute,
@@ -142,6 +143,29 @@ export class OrderPageComponent implements OnInit, OnDestroy {
           this.load = false;
         });
     }
+  }
+
+  onActivate(c) {
+    if (c.needSubscribe === true) {
+      const modal = c.updateList
+        .subscribe(next => {
+          if (next) {
+            this.orders = [];
+            if (this.inputText === '') {
+              this.showOrders();
+              console.log('asdasdasdasfsagkerfpouspjgp;rwjhg;sjgp;sej;ghj');
+            } else {
+              this.search(this.inputText);
+            }
+          }
+        });
+      this.subscriptions.push(modal);
+    }
+  }
+
+  onDeactivate(c) {
+    this.subscriptions
+      .forEach(s => s.unsubscribe());
   }
 
   ngOnDestroy(): void {
