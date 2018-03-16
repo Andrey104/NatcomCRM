@@ -1,12 +1,13 @@
 .side-nav-item{
-  padding: 5px;
+  padding: 5px 5px 5px 15px;
+  margin: 0 0 5px 5px;
 }
 .navigation{
   height: calc(100vh - 64px);
   width: 100%;
   margin-left: 0;
   margin-right: 0;
-  padding: 0;
+  padding: 5px 5px 0 0;
   background-color: #dddddd;
 }
 .float-action-btn{
@@ -47,8 +48,8 @@
 
 
 .active{
-  background-color: #5c6b96 !important;
+  background-color: #9e9e9e !important;
 }
 .hovered{
-  background-color: #9e9e9e;
+  background-color: #bdbdbd;
 }
