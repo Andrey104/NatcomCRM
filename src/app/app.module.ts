@@ -69,6 +69,10 @@ import {DealClientInfoComponent} from './deals/deal-client-info/deal-client-info
 import {DealContractView} from './pipes/deal-contract-view.pipe';
 import {StageDealComponent} from './stage-deal/stage-deal.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
+import {CompaniesService} from './services/companies.service';
+import {CompanyComponent} from './admin/settings-page/companies/company/company.component';
+import {CompanyEditComponent} from './admin/settings-page/companies/company-edit/company-edit.component';
+import {BrigadeComponent} from './admin/settings-page/brigades/brigade/brigade.component';
 import {StageComponent} from './stage/stage.component';
 import {WorkerNamePipe} from './pipes/worker-name.pipe';
 import {MeasurementStatusPipe} from './pipes/measurement-status.pipe';
@@ -164,8 +168,11 @@ import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dia
     AddClientComponent,
     OrderDeferDialogComponent,
     OrderDeferCause,
-    DealDialogCompleteComponent
-  ],
+    DealDialogCompleteComponent,
+    CompanyComponent,
+    CompanyEditComponent,
+    BrigadeComponent,
+],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -176,22 +183,33 @@ import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dia
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers:
-    [
-      AuthGuard,
-      AdminGuard,
-      OrderService,
-      DealService,
-      MessageService,
-      UtilsService,
-      AuthenticationService,
-      ClientService,
-      MeasurementService,
-      MountService,
-      InstallersService,
-      StageMountService,
-      BaseApi
-    ],
+  providers: [
+    AuthGuard,
+    AdminGuard,
+    OrderService,
+    DealService,
+    MessageService,
+    UtilsService,
+    AuthenticationService,
+    ClientService,
+    MeasurementService,
+    MountService,
+    InstallersService,
+    CompaniesService,
+    AuthGuard,
+    AdminGuard,
+    OrderService,
+    DealService,
+    MessageService,
+    UtilsService,
+    AuthenticationService,
+    ClientService,
+    MeasurementService,
+    MountService,
+    InstallersService,
+    StageMountService,
+    BaseApi
+  ],
   bootstrap:
     [AppComponent],
 })

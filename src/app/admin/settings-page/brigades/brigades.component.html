@@ -1,3 +1,11 @@
-<p>
-  brigades works!
-</p>
+<h5 class="header">Бригады</h5>
+<div class="col s2"></div>
+<div class="col s6 scroll-container">
+  <app-brigade *ngFor="let company of companies"
+               [company]="company" (onEdit)="openModal($event)">
+  </app-brigade>
+</div>
+<div class="col s4"></div>
+<a class="btn-floating btn-large waves-effect waves-light red float-action-btn" (click)="openModal(null)"><i class="material-icons">add</i></a>
+
+<app-company-edit [modalState]="modalState" (onClose)="modalClose($event)"></app-company-edit>
