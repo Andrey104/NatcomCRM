@@ -50,17 +50,6 @@ const orders_routes: Routes = [
   {path: ':id/client/:client_id', component: ClientInfoComponent}
 ];
 
-
-const pages_routes: Routes = [
-  {path: 'orders/:status', component: OrderPageComponent, children: orders_routes},
-  {path: 'deals/:status', component: DealPageComponent, children: deals_routes},
-  {path: 'measurements/:status', component: MeasurementPageComponent, children: measurements_routes},
-  {path: 'mounts/:status', component: MountPageComponent, children: mounts_routes},
-  {path: 'new_deal', component: NewDealPageComponent},
-  {path: 'user', component: UserInfoComponent},
-  {path: '', redirectTo: 'user', pathMatch: 'full'}
-];
-
 const settings_router: Routes = [
   {path: 'installers', component: InstallersComponent},
   {path: 'brigades', component: BrigadesComponent},
@@ -69,15 +58,22 @@ const settings_router: Routes = [
 ];
 
 const admin_routes: Routes = [
-  {path: 'deals', component: DealPageComponent, children: deals_routes},
-  {path: 'orders', component: OrderPageComponent, children: orders_routes},
-  {path: 'user', component: UserInfoComponent},
   {path: 'settings', component: SettingsPageComponent, children: settings_router}
+];
+
+const pages_routes: Routes = [
+  {path: 'orders/:status', component: OrderPageComponent, children: orders_routes},
+  {path: 'deals/:status', component: DealPageComponent, children: deals_routes},
+  {path: 'measurements/:status', component: MeasurementPageComponent, children: measurements_routes},
+  {path: 'mounts/:status', component: MountPageComponent, children: mounts_routes},
+  {path: 'new_deal', component: NewDealPageComponent},
+  {path: 'user', component: UserInfoComponent},
+  {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard], children: admin_routes},
+  {path: '', redirectTo: 'user', pathMatch: 'full'}
 ];
 
 const routes: Routes = [
   {path: '', component: MainComponent, canActivate: [AuthGuard], children: pages_routes},
-  {path: 'admin', component: AdminPageComponent, canActivate: [AuthGuard, AdminGuard], children: admin_routes},
   {path: 'login', component: LoginComponent},
   {path: '**', redirectTo: ''}
 ];

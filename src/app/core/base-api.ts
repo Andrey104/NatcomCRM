@@ -8,7 +8,6 @@ export class BaseApi {
 
   constructor(public http: HttpClient) {
   }
-
   private getUrl(url: string = '') {
     return this.baseUrl + url;
   }
@@ -26,6 +25,12 @@ export class BaseApi {
       this.getUrl(url),
       data,
       {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
+    );
+  }
+
+  getByParams(url: string, params: Object): Observable<any> {
+    return this.http.get(
+      this.getUrl(url), {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
     );
   }
 
