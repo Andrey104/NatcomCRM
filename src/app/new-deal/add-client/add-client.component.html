@@ -1,5 +1,44 @@
 <div [@dialog] *ngIf="visible" class="dialog">
   <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="onClose()">close</i>
-  <input type="text">
+  <div class="row">
+    <form #form="ngForm" (ngSubmit)="submitForm(form)">
+      <div class="browser-default col s12">
+        <div class="col s2">Client</div>
+        <input
+          id="client"
+          type="text"
+          class="col s10 validate"
+          ngModel
+          name="clientName">
+      </div>
+      <div class="row">
+        <div class="browser-default col s12">
+          <div class="col s2">Phone</div>
+          <input
+            id="phone"
+            type="text"
+            class="col s10 validate"
+            ngModel
+            name="phone">
+        </div>
+      </div>
+      <div class="row">
+        <div class="browser-default col s12">
+          <div class="col s2">Comment</div>
+          <input
+            type="text"
+            class="col s10 validate"
+            ngModel
+            name="comment">
+        </div>
+      </div>
+
+      <button class="btn-dialog-submit" type="submit"
+              [class.btn-dialog-submit]="form.valid"
+              [disabled]="(!form.valid||isRequest)"
+              [class.btn-dialog-disabled]="(!form.valid||isRequest)">OK
+      </button>
+    </form>
+  </div>
 </div>
 <div *ngIf="visible" class="overlay-dialog" (click)="close()"></div>

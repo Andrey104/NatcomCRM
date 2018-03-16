@@ -5,11 +5,11 @@
         <div class="col s7">
           <label>Компания</label>
           <select #select class="browser-default"
-            ngModel
-            name="company"
-            required>
+                  ngModel
+                  name="company"
+                  required>
             <option *ngFor="let company of companies"
-              [value]="company?.id">
+                    [value]="company?.id">
               {{company?.name}}
             </option>
           </select>
@@ -33,13 +33,28 @@
           </textarea>
         </div>
         <div class="col s12">
-        <label>Комментарий к адресу</label>
-        <textarea class="text-comment-dialog"
-                  ngModel
-                  name="addressComment"
-                  required>
+          <label>Комментарий к адресу</label>
+          <textarea class="text-comment-dialog"
+                    ngModel
+                    name="addressComment"
+                    required>
         </textarea>
+        </div>
       </div>
+      <i class="large material-icons" (click)="showMeasurement()">{{visibleMeasurement.icon}}</i>
+      <div *ngIf="visibleMeasurement.show" class="row">
+        <p>Выберите дату: <input type="date"
+                                 ngModel
+                                 name="calendar"
+                                 required>
+        </p>
+        <div class="input-field col s12">
+          <label>Комментарий ко времени</label>
+          <input type="text"
+                 ngModel
+                 name="commentTime"
+                 required>
+        </div>
       </div>
       <button class="btn-dialog-submit" type="submit"
               [disabled]="!form.valid">OK

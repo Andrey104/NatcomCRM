@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
+import {NgForm} from '@angular/forms';
+import {ClientService} from '../../services/client.service';
 
 @Component({
   selector: 'app-add-client',
@@ -22,10 +24,19 @@ export class AddClientComponent implements OnInit {
   @Output() successClient = new EventEmitter();
   closable = true;
 
-  constructor() {
+  constructor(private clientService: ClientService) {
   }
 
   ngOnInit() {
+  }
+
+  submitForm(form: NgForm) {
+    const name = form.form.value.clientName;
+    const phone = form.form.value.phone;
+    this.clientService.addClient(name, phone)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
   onClose() {
