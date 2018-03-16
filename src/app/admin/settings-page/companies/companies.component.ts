@@ -1,27 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {log} from "util";
+import {log} from 'util';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Installer} from '../../../models/installers/installer';
 import {CompaniesService} from '../../../services/companies.service';
 import {Company} from '../../../models/company';
 
 @Component({
   selector: 'app-companies',
   templateUrl: './companies.component.html',
-  styleUrls: ['./companies.component.css']
+  styleUrls: ['../settings-page.component.css']
 })
 export class CompaniesComponent implements OnInit {
   companies: Company[];
-  companyModalState: { open: Boolean, companies?: Company } = {open: false, companies: null};
+  companyModalState: { open: Boolean, company?: Company } = {open: false, company: null};
   modal: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   constructor(private installerService: CompaniesService) {
   }
 
   ngOnInit() {
-    this.showCompanies();
+    this.show();
   }
-  showCompanies() {
+  show() {
     this.loadCompanies(null);
   }
 
@@ -51,13 +50,13 @@ export class CompaniesComponent implements OnInit {
   }
 
   openCompanyModal(company?: Company) {
-    this.companyModalState = {open: true, companies: company};
+    this.companyModalState = {open: true, company: company};
     this.openModal(true);
   }
 
   editCompanyModalClose(successfully) {
     if (successfully) {
-      this.showCompanies();
+      this.show();
     }
     this.companyModalState.open = false;
     this.openModal(false);

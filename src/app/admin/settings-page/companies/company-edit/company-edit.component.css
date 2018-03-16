@@ -1,0 +1,10 @@
+.open{
+  display: block;
+}
+
+.modal {
+  width: 500px;
+  height: 500px;
+  top: calc((100vh - 500px)/2);
+  left: 5vw;
+}

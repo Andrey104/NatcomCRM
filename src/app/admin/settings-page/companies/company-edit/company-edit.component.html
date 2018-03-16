@@ -1,0 +1,19 @@
+<div class="modal modal-fixed-footer" [ngClass]="{open: modalState.open}">
+  <div class="modal-content">
+    <h5>{{header}}</h5>
+    <form [formGroup]="companyForm">
+      <div class="input-field">
+        <input name="name" type="text" id="name" class="validate" formControlName="name">
+        <label for="name" [ngClass]="{active: nameInputActive}">Имя</label>
+      </div>
+      <div class="input-field">
+        <input id="symbol" type="text" class="validate" formControlName="symbol">
+        <label for="symbol" [ngClass]="{active: symbolInputActive}">Символ</label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="close(false)">Отмена</a>
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="ok()">ОК</a>
+  </div>
+</div>

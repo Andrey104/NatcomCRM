@@ -2,10 +2,10 @@
 <div class="col s2"></div>
 <div class="col s6 scroll-container">
   <app-installer *ngFor="let installer of installers"
-                 [installer]="installer" (onEdit)="openInstallerModal($event)">
+                 [installer]="installer" (onEdit)="openModal($event)">
   </app-installer>
 </div>
 <div class="col s4"></div>
-<a class="btn-floating btn-large waves-effect waves-light red float-action-btn" (click)="openInstallerModal(null)"><i class="material-icons">add</i></a>
+<a class="btn-floating btn-large waves-effect waves-light red float-action-btn" (click)="openModal(null)"><i class="material-icons">add</i></a>
 
-<app-installer-edit [modalState]="installerModalState" (onClose)="editInstallerModalClose($event)"></app-installer-edit>
+<app-installer-edit [modalState]="modalState" (onClose)="editModalClose($event)"></app-installer-edit>

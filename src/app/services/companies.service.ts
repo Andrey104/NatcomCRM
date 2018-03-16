@@ -27,13 +27,13 @@ export class CompaniesService {
       params: params
     });
   }
-  addCompanies (company: Company): Observable<Company> {
+  addCompany (company: Company): Observable<Company> {
     return this.http.post<Company>(this.urlCompany, company, this.httpOptions).pipe(
       tap((returnCompany: Company) => this.log(`added installer w/ id=${returnCompany.id}`)),
       catchError(this.handleError<Company>('addInstaller'))
     );
   }
-  editCompanies (company: Company): Observable<Company> {
+  editCompany (company: Company): Observable<Company> {
     return this.http.put<Company>(this.urlCompany + company.id + '/', company, this.httpOptions).pipe(
       tap((returnCompany: Company) => this.log(`edited installer w/ id=${returnCompany.id}`)),
       catchError(this.handleError<Company>('editInstaller'))

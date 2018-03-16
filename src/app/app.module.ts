@@ -81,6 +81,9 @@ import {DealContractView} from './pipes/deal-contract-view.pipe';
 import { StageComponent } from './stage/stage.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
 import {CompaniesService} from './services/companies.service';
+import { CompanyComponent } from './admin/settings-page/companies/company/company.component';
+import { CompanyEditComponent } from './admin/settings-page/companies/company-edit/company-edit.component';
+import { BrigadeComponent } from './admin/settings-page/brigades/brigade/brigade.component';
 
 
 @NgModule({
@@ -149,6 +152,9 @@ import {CompaniesService} from './services/companies.service';
     StageComponent,
     StageMountStatusPipe,
     DealClientInfoComponent,
+    CompanyComponent,
+    CompanyEditComponent,
+    BrigadeComponent,
 ],
   imports: [
     BrowserModule,
