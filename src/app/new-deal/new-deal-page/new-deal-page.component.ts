@@ -16,7 +16,7 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   subOnCompanies: Subscription;
   subOnDeal: Subscription;
   subOnMeasurement: Subscription;
-  showDialog: false;
+  showDialog = false;
   visibleMeasurement = {show: false, icon: 'add', message: 'Добавить замер'};
 
   constructor(private dealService: DealService,
