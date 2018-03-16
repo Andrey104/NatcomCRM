@@ -1,20 +1,30 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { Client } from '../models/client';
-
+import {Observable} from 'rxjs/Observable';
+import {Client} from '../models/client';
+import {BaseApi} from '../core/base-api';
 
 
 @Injectable()
-export class ClientService {
-  private url = 'http://188.225.46.31/api/clients';
-  constructor(private http: HttpClient) { }
-  getClient(id: number): Observable<Client> {
-    return this.http.get<Client>(this.url + '/' + id, {
-      headers: new HttpHeaders().set('Authorization', 'token ' + this.token())
-    });
+export class ClientService extends BaseApi {
+  constructor(public http: HttpClient) {
+    super(http);
   }
-  token(): string {
-    return localStorage.getItem('token');
+
+  getClient(clientId: number): Observable<Client> {
+    return this.get(`clients/${clientId}`);
+  }
+
+  addClient(clientName: string, clientPhone: string): Observable<Client> {
+    const data = {
+      fio: clientName,
+      phones: [{
+        number: clientPhone
+      },
+        {
+          number: '21312312'
+        }]
+    };
+    return this.post(`clients/`, data);
   }
 }

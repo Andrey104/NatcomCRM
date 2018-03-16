@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {OurComment} from '../models/comment';
 import {MeasurementPage} from '../models/measurement/measurement-page';
 import {BaseApi} from '../core/base-api';
+import {MeasurementResult} from '../models/measurement/measurement-result';
 
 @Injectable()
 export class MeasurementService extends BaseApi {
@@ -31,5 +32,14 @@ export class MeasurementService extends BaseApi {
 
   getFilterMeasurements(page: number, text: string): Observable<MeasurementPage> {
     return this.get(`measurements/search?page=${page}&&text=${text}`);
+  }
+
+  newMeasurement(dealId: number, non_cash: boolean, date: string, time: string): Observable<MeasurementResult> {
+    const data = {
+      non_cash: non_cash,
+      date: date,
+      time: time
+    };
+    return this.post(`deals/${dealId}/measurement/`, data);
   }
 }
