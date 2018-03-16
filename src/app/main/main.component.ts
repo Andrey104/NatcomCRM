@@ -11,5 +11,11 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
   }
+  adminCheck() {
+    if ((this.type === '4' ) || (this.type === '5' ) ||
+      (this.type === '3' )) {
+      return true;
+    }
+  }
 
 }
