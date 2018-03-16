@@ -17,7 +17,7 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   subOnDeal: Subscription;
   subOnMeasurement: Subscription;
   showDialog: false;
-  visibleMeasurement = {show: false, icon: 'add'};
+  visibleMeasurement = {show: false, icon: 'add', message: 'Добавить замер'};
 
   constructor(private dealService: DealService,
               private measurementService: MeasurementService) {
@@ -38,8 +38,10 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
     this.visibleMeasurement.show = !this.visibleMeasurement.show;
     if (this.visibleMeasurement.icon === 'add') {
       this.visibleMeasurement.icon = 'remove';
+      this.visibleMeasurement.message = 'Удалить замер';
     } else {
       this.visibleMeasurement.icon = 'add';
+      this.visibleMeasurement.message = 'Добавить замер';
     }
   }
 
@@ -50,8 +52,10 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
     const payment = Boolean(form.form.value.payment);
     const date = form.form.value.calendar;
     const commentTime = form.form.value.commentTime;
+    console.log(form);
     this.subOnDeal = this.dealService.newDeal(companyId, payment, address, comment)
       .subscribe((deal) => {
+        console.log(deal);
         if (deal !== null && date !== undefined && commentTime !== undefined) {
           this.subOnMeasurement =
             this.measurementService.newMeasurement(deal.id, deal.non_cash, date, commentTime)
@@ -60,8 +64,9 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
               });
         }
       });
+    this.showMeasurement();
     form.reset();
-    this.unSub();
+    // this.unSub();
   }
 
   unSub() {

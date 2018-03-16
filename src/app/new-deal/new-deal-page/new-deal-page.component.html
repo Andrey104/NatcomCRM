@@ -41,7 +41,10 @@
         </textarea>
         </div>
       </div>
-      <i class="large material-icons" (click)="showMeasurement()">{{visibleMeasurement.icon}}</i>
+      <div class="valign-wrapper" (click)="showMeasurement()">
+        <i class="small material-icons">{{visibleMeasurement.icon}}</i>
+        <span>{{visibleMeasurement.message}}</span>
+      </div>
       <div *ngIf="visibleMeasurement.show" class="row">
         <p>Выберите дату: <input type="date"
                                  ngModel
