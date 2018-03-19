@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {StageMountService} from '../../services/stage-mount.service';
 import {MountService} from '../../services/mount.service';
 import {DealMount} from '../../models/deal/deal_mount';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-mount-detail',
@@ -15,6 +16,12 @@ export class MountDetailComponent implements OnInit, AfterViewChecked {
   dealId;
   isSend = false;
   loadPage: boolean;
+  showRejectMount = false;
+  showCompleteMount = false;
+  showTransferMount = false;
+  showAddStage = false;
+  needSubscribe = true;
+  updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   constructor(private activatedRoute: ActivatedRoute, private mountService: MountService, private stageMountService: StageMountService) {
   }
@@ -28,6 +35,12 @@ export class MountDetailComponent implements OnInit, AfterViewChecked {
       document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
       this.isSend = false;
     }
+  }
+
+  successMountUpdate() {
+    this.updateList.next(true);
+    this.loadPage = true;
+    this.getMountById();
   }
 
   subscribeMount() {

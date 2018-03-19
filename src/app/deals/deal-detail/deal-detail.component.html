@@ -224,7 +224,7 @@
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
 <app-deal-complete [deal]="deal" (successDeal)="updateDeal()" [(visible)]="showCompleteDialog"></app-deal-complete>
-<app-deal-defer [deal]="deal" (successDeal)="updateDeal()" [(visible)]="showRejectDialog"></app-deal-defer>
+<app-deal-reject [deal]="deal" (successDeal)="updateDeal()" [(visible)]="showRejectDialog"></app-deal-reject>
 <app-dialog-deal-measurement [deal]="deal" (successDealMeasurement)="successMeasurementAdded($event)"
                              [(visible)]="showMeasurementDialog"></app-dialog-deal-measurement>
 <app-dialog-deal-payment [deal]="deal" (successDealPayment)="successPaymentAdded($event)"

@@ -15,6 +15,10 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   dealId;
   isSend = false;
   loadPage: boolean;
+  showRejectMount = false;
+  showCompleteMount = false;
+  showTransferMount = false;
+  showAddStage = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private mountService: MountService,
@@ -30,6 +34,11 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
       document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
       this.isSend = false;
     }
+  }
+
+  successMountUpdate() {
+    this.loadPage = true;
+    this.getMountById();
   }
 
   subscribeMount() {

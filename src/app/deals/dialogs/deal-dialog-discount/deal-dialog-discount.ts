@@ -1,8 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../../services/deal.service';
 import {NgForm} from '@angular/forms';
-import {MeasurementService} from '../../../services/measurement.service';
 
 @Component({
   selector: 'app-dialog-deal-discount',

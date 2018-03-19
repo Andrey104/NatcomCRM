@@ -34,4 +34,22 @@ export class MountService extends BaseApi {
   getFilterMounts(page: number, text: string) {
     return this.get(`mounts/search?text=${text}`);
   }
+
+  mountReject(idMount: string, cause: number, comment: string): Observable<OurComment> {
+    if (comment === '') {
+      comment = null;
+    }
+    return this.post(`mounts/${idMount}/reject/`, {cause, comment});
+  }
+
+  mountComplete(idMount: string): Observable<OurComment> {
+    return this.post(`mounts/${idMount}/close/`);
+  }
+
+  mountDateTransfer(idMount: string, date: string, comment: string): Observable<OurComment> {
+    if (comment === '') {
+      comment = null;
+    }
+    return this.post(`mounts/${idMount}/date/`, {date, comment});
+  }
 }

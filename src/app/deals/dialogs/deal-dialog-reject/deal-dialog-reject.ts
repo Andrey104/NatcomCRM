@@ -1,15 +1,14 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {animate, style, transition, trigger} from '@angular/animations';
+import {Component, EventEmitter, Input,  OnInit, Output,  ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../../services/deal.service';
 import {NgForm} from '@angular/forms';
 
 @Component({
-  selector: 'app-deal-defer',
+  selector: 'app-deal-reject',
   templateUrl: './deal-dialog-reject.html',
   styleUrls: ['./deal-dialog-reject.css'],
 })
-export class DealDialogDeferComponent implements OnInit {
+export class DealDialogRejectComponent implements OnInit {
   id;
   @Input() closable = true;
   @Input() deal;

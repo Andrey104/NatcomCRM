@@ -1,6 +1,6 @@
 <div *ngIf="visible" class="dialog">
   <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
-  <h4>Завершить сделку?</h4>
+  <h4>Завершить монтаж?</h4>
   <button class="btn-dialog-submit" (click)="submitForm()">Да</button>
   <button class="btn-dialog-cancel" (click)="close()">Нет</button>
   <app-preloader *ngIf="isRequest"></app-preloader>

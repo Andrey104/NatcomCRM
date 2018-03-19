@@ -493,13 +493,14 @@ export class UtilsService {
   mountActionDecoder(action: DealAction) {
     let comment = '';
     let type = '';
+    let cause = '';
     switch (action.type) {
       case 1: {
         type = ' добавил(а) стадию ';
         break;
       }
       case 2: {
-        type = ' добавил(а) дату ';
+        type = ' изменил(а) дату ';
         break;
       }
       case 3: {
@@ -508,6 +509,16 @@ export class UtilsService {
       }
       case 4: {
         type = ' отказался(лась) от монтажа ';
+        if (action.cause) {
+          switch (action.cause) {
+            case 1:
+              cause = 'из-за ошибки клиента';
+              break;
+            case 2:
+              cause = 'из-за ошибки монтажника';
+              break;
+          }
+        }
         break;
       }
     }
@@ -515,6 +526,6 @@ export class UtilsService {
       comment = ', с комментарием: ' + action.comment;
     }
 
-    return type + comment;
+    return type + cause + comment;
   }
 }

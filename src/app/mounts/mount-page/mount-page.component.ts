@@ -4,6 +4,7 @@ import {MountResult} from '../../models/mount/mount-result';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-mount-page',
@@ -18,6 +19,7 @@ export class MountPageComponent implements OnInit {
   page: number;
   term$ = new Subject<string>();
   inputText = '';
+  private subscriptions: Subscription[] = [];
 
   constructor(private mountService: MountService,
               private activatedRoute: ActivatedRoute,
@@ -124,5 +126,27 @@ export class MountPageComponent implements OnInit {
           this.load = false;
         });
     }
+  }
+
+  onActivate(c) {
+    if (c.needSubscribe === true) {
+      const modal = c.updateList
+        .subscribe(next => {
+          if (next) {
+            this.mounts = [];
+            if (this.inputText === '') {
+              this.showMounts();
+            } else {
+              this.search(this.inputText);
+            }
+          }
+        });
+      this.subscriptions.push(modal);
+    }
+  }
+
+  onDeactivate(c) {
+    this.subscriptions
+      .forEach(s => s.unsubscribe());
   }
 }

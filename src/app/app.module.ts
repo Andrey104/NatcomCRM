@@ -94,11 +94,15 @@ import {AddClientComponent} from './new-deal/add-client/add-client.component';
 import {OrderDeferDialogComponent} from './orders/order-defer-dialog/order-defer-dialog.component';
 import {OrderDeferCause} from './pipes/order-cause-defer.pipe';
 import {DealDialogCompleteComponent} from './deals/dialogs/deal-dialog-complete/deal-dialog-complete.component';
-import {DealDialogDeferComponent} from './deals/dialogs/deal-dialog-defer/deal-dialog-reject';
+import {DealDialogRejectComponent} from './deals/dialogs/deal-dialog-reject/deal-dialog-reject';
 import {DealRejectCausePipe} from './pipes/deal-reject-cause.pipe';
 import {DealDialogMeasurementComponent} from './deals/dialogs/deal-dialog-measurement/deal-dialog-measurement';
 import {DealDialogPaymentComponent} from './deals/dialogs/deal-dialog-payment/deal-dialog-payment';
 import {DealDialogDiscountComponent} from './deals/dialogs/deal-dialog-discount/deal-dialog-discount';
+import {MountRejectCausePipe} from './pipes/mount-reject-cause.pipe';
+import {MountDialogRejectComponent} from './mounts/dialogs/mount-dialog-reject/mount-dialog-reject';
+import {MountDialogCompleteComponent} from './mounts/dialogs/mount-dialog-complete/mount-dialog-complete';
+import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transfer/mount-dialog-transfer';
 
 
 @NgModule({
@@ -177,11 +181,15 @@ import {DealDialogDiscountComponent} from './deals/dialogs/deal-dialog-discount/
     CompanyComponent,
     CompanyEditComponent,
     BrigadeComponent,
-    DealDialogDeferComponent,
+    DealDialogRejectComponent,
     DealRejectCausePipe,
     DealDialogMeasurementComponent,
     DealDialogPaymentComponent,
-    DealDialogDiscountComponent
+    DealDialogDiscountComponent,
+    MountRejectCausePipe,
+    MountDialogRejectComponent,
+    MountDialogCompleteComponent,
+    MountDialogTransferComponent
 ],
   imports: [
     BrowserModule,
