@@ -3,6 +3,7 @@ import {Company} from '../../../models/company';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {log} from 'util';
 import {BrigadesService} from '../../../services/brigades.service';
+import {Brigade} from '../../../models/brigades/brigade';
 
 @Component({
   selector: 'app-brigades',
@@ -11,7 +12,7 @@ import {BrigadesService} from '../../../services/brigades.service';
 })
 export class BrigadesComponent implements OnInit {
   brigades: Object[];
-  modalState: { open: Boolean, brigade?: Company } = {open: false, brigade: null};
+  modalState: { open: Boolean, brigade?: Brigade } = {open: false, brigade: null};
   modal: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   constructor(private brigadesService: BrigadesService) {
@@ -48,7 +49,7 @@ export class BrigadesComponent implements OnInit {
     }
   }
 
-  openModal(brigade?: Company) {
+  openModal(brigade?: Brigade) {
     this.modalState = {open: true, brigade: brigade};
     this.modal.next(true);
   }

@@ -12,7 +12,6 @@ export class BaseApi {
   private getUrl(url: string = '') {
     return this.baseUrl + url;
   }
-
   get(url: string = ''): Observable<any> {
     return this.http.get(
       this.getUrl(url), {
@@ -20,15 +19,20 @@ export class BaseApi {
       }
     );
   }
-
-  post(url: string = '', data: any = {}): Observable<any> {
+  post(url: string = '', data?: any): Observable<any> {
     return this.http.post(
       this.getUrl(url),
       data,
       {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
     );
   }
-
+  put(url: string, data: any): Observable<any> {
+    return this.http.post(
+      this.getUrl(url),
+      data,
+      {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
+    );
+  }
   getPage(url: string, page: string): Observable<any> {
     if (page == null) {
       page = '1';
@@ -41,7 +45,6 @@ export class BaseApi {
         params: params
     });
   }
-
   private token() {
     return localStorage.getItem('token');
   }

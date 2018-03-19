@@ -4,6 +4,8 @@ import {BaseApi} from '../core/base-api';
 import {Observable} from 'rxjs/Observable';
 import {DealPage} from '../models/deal/deals';
 import {InstallersPage} from '../models/installers/installers_page';
+import {BrigadesPage} from '../models/brigades/brigades-page';
+import {Brigade} from '../models/brigades/brigade';
 
 @Injectable()
 export class BrigadesService extends BaseApi {
@@ -12,7 +14,13 @@ export class BrigadesService extends BaseApi {
     super(http);
   }
 
-  getBrigades(page?: string): Observable<DealPage> {
+  getBrigades(page?: string): Observable<BrigadesPage> {
     return this.getPage(`installer_groups`, page);
+  }
+  editBrigade(brigade: Brigade): Observable<Brigade> {
+    return this.post(`installer_group`, brigade);
+  }
+  addBrigade(brigade: Brigade): Observable<Brigade> {
+    return this.put(`installer_group/${brigade.id}`, brigade);
   }
 }

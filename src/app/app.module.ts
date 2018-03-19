@@ -96,6 +96,7 @@ import {OrderDeferCause} from './pipes/order-cause-defer.pipe';
 import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dialog-complete.component';
 import {BrigadesService} from './services/brigades.service';
 import { BrigadeEditComponent } from './admin/settings-page/brigades/brigade-edit/brigade-edit.component';
+import { BrigadeInstallerComponent } from './admin/settings-page/brigades/brigade-installer/brigade-installer.component';
 
 
 @NgModule({
@@ -175,6 +176,7 @@ import { BrigadeEditComponent } from './admin/settings-page/brigades/brigade-edi
     CompanyEditComponent,
     BrigadeComponent,
     BrigadeEditComponent,
+    BrigadeInstallerComponent,
 ],
   imports: [
     BrowserModule,
