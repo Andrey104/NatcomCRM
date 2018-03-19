@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Client} from '../models/client';
 import {BaseApi} from '../core/base-api';
+import {Phone} from '../models/phone';
 
 
 @Injectable()
@@ -15,16 +16,11 @@ export class ClientService extends BaseApi {
     return this.get(`clients/${clientId}`);
   }
 
-  addClient(clientName: string, clientPhone: string): Observable<Client> {
-    const data = {
-      fio: clientName,
-      phones: [{
-        number: clientPhone
-      },
-        {
-          number: '21312312'
-        }]
-    };
-    return this.post(`clients/`, data);
+  addClient(clientName: string, email: string, phones: Phone[]): Observable<Client> {
+    const client = new Client();
+    client.fio = clientName;
+    client.email = email;
+    client.phones = phones;
+    return this.post(`clients/`, client);
   }
 }

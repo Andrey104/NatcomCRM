@@ -6,6 +6,7 @@ import {DealPage} from '../models/deal/deals';
 import {DealResult} from '../models/deal/deal_result';
 import {BaseApi} from '../core/base-api';
 import {CompanyPage} from '../models/company/company-page';
+import {NewDeal} from '../models/deal/new_deal';
 
 
 @Injectable()
@@ -37,17 +38,8 @@ export class DealService extends BaseApi {
     return this.get(`companies`);
   }
 
-  newDeal(companyId: number, paymentType: boolean, address: string, addressComment: string): Observable<any> {
-    const data = {
-      company: companyId,
-      non_cash: paymentType,
-      address: address,
-      address_comment: addressComment,
-      clients: [{
-        client: 1
-      }]
-    };
-    return this.post(`deals/`, data);
+  newDeal(newDeal: NewDeal): Observable<DealResult> {
+    return this.post(`deals/`, newDeal);
   }
 
   dealComplete(idDeal: number): Observable<Object> {
