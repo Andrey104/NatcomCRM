@@ -54,6 +54,15 @@ export class DealService extends BaseApi {
     return this.post(`deals/${idDeal}/close/`);
   }
 
+  dealReject(idDeal: number, cause: number, comment: string): Observable<Object> {
+    if (comment === '') {
+      comment = null;
+    }
+    console.log(comment);
+    console.log(cause);
+    return this.post(`deals/${idDeal}/reject/`, {cause: cause, comment: comment});
+  }
+
   /*dealDiscount(id, after, comment): Observable<Object> {
     const discount = {'after': after, 'comment': comment};
     return this.http.post<Object>(this.dealsUrl + id + '/discount/', discount,

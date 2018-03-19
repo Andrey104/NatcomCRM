@@ -1,0 +1,39 @@
+<div *ngIf="visible" class="dialog">
+  <div class="content-dialog">
+    <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
+    <h4>Добавить замер</h4>
+    <form (ngSubmit)="submitForm()" #form="ngForm">
+      <label class="required-area-dialog">Способ оплаты</label>
+      <select class="browser-default"
+              ngModel
+              name="payment"
+              required>
+        <option value="0">Наличная оплата</option>
+        <option value="1">Безналичная оплата</option>
+      </select>
+      <p><span class="required-area-dialog">Дата замера</span> <input type="date"
+                                                                      ngModel
+                                                                      name="calendar"
+                                                                      required>
+      </p>
+      <div>
+        <label class="required-area-dialog">Комментарий ко времени</label>
+        <textarea type="text"
+                  ngModel
+                  name="commentTime"
+                  class="text-comment-dialog"
+                  required></textarea>
+      </div>
+      <button class="btn-dialog-submit" type="submit"
+              [class.btn-dialog-submit]="form.valid"
+              [disabled]="(!form.valid||isRequest)"
+              [class.btn-dialog-disabled]="(!form.valid||isRequest)">OK
+      </button>
+    </form>
+    <button class="btn-dialog-cancel" (click)="close()">Отмена</button>
+    <span class="description-required-dialog"><span
+      [ngStyle]="{'color':'red'}">*</span> помечены обязательные поля</span>
+    <app-preloader *ngIf="isRequest"></app-preloader>
+  </div>
+</div>
+<div *ngIf="visible" class="overlay-dialog" (click)="close()"></div>

@@ -67,7 +67,13 @@
   </div>
   <div class="row valign-wrapper">
     <div class="col s5 divider"></div>
-    <div class="col s2 center-align header">Замеры</div>
+    <div class="col s2 center-align header">
+      <div class="valign-wrapper" style="display: inline-block">
+        <span class="center-dialog-title">Замеры</span>
+        <i (click)="showMeasurementDialog = !showMeasurementDialog"
+           class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+      </div>
+    </div>
     <div class="col s5 divider"></div>
   </div>
   <div *ngIf="deal?.measurements.length===0" class="row">
@@ -176,7 +182,8 @@
           </div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab" onclick="$('#main-btn').click()">
+      <li class="hover-element li-element-menu-fab" (click)="showRejectDialog = !showRejectDialog"
+          onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div">
           <span class="fab-text" id="reject">Отклонить</span>
           <div class="icon-fab center-align valign-wrapper">
@@ -205,4 +212,7 @@
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
 <app-deal-complete [deal]="deal" (successDeal)="updateDeal()" [(visible)]="showCompleteDialog"></app-deal-complete>
+<app-deal-defer [deal]="deal" (successDeal)="updateDeal()" [(visible)]="showRejectDialog"></app-deal-defer>
+<app-dialog-deal-measurement [deal]="deal" (successDealMeasurement)="successMeasurementAdded($event)"
+                             [(visible)]="showMeasurementDialog"></app-dialog-deal-measurement>
 

@@ -24,8 +24,8 @@ export class OrderDetailComponent implements OnInit {
   rejectOpenValue = false;
   inDealOpenValue = false;
   loader: boolean;
-  showDialogReject: false;
-  showDialogDefer: false;
+  showDialogReject = false;
+  showDialogDefer = false;
   needSubscribe = true;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 

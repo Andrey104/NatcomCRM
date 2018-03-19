@@ -5,6 +5,7 @@ import {DealResult} from '../../models/deal/deal_result';
 import {UtilsService} from '../../services/utils.service';
 import {Client} from '../../models/client';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {DealMeasurement} from '../../models/deal/deal_measurement';
 
 @Component({
   selector: 'app-deal-detail',
@@ -21,6 +22,8 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   deal: DealResult;
   loadPage: boolean;
   showCompleteDialog = false;
+  showRejectDialog = false;
+  showMeasurementDialog = false;
   needSubscribe = true;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
@@ -39,6 +42,10 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
       document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
       this.flag = false;
     }
+  }
+
+  successMeasurementAdded(measurement: DealMeasurement) {
+    this.deal.measurements.push(measurement);
   }
 
   updateDeal() {

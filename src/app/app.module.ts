@@ -93,7 +93,10 @@ import {NewDealPageComponent} from './new-deal/new-deal-page/new-deal-page.compo
 import {AddClientComponent} from './new-deal/add-client/add-client.component';
 import {OrderDeferDialogComponent} from './orders/order-defer-dialog/order-defer-dialog.component';
 import {OrderDeferCause} from './pipes/order-cause-defer.pipe';
-import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dialog-complete.component';
+import {DealDialogCompleteComponent} from './deals/dialogs/deal-dialog-complete/deal-dialog-complete.component';
+import {DealDialogDeferComponent} from './deals/dialogs/deal-dialog-defer/deal-dialog-reject';
+import {DealRejectCausePipe} from './pipes/deal-reject-cause.pipe';
+import {DealDialogMeasurementComponent} from './deals/dialogs/deal-dialog-measurement/deal-dialog-measurement';
 
 
 @NgModule({
@@ -172,6 +175,9 @@ import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dia
     CompanyComponent,
     CompanyEditComponent,
     BrigadeComponent,
+    DealDialogDeferComponent,
+    DealRejectCausePipe,
+    DealDialogMeasurementComponent
 ],
   imports: [
     BrowserModule,

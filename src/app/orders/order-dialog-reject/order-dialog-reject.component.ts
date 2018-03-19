@@ -8,17 +8,6 @@ import {OrderService} from '../../services/order.service';
   selector: 'app-order-reject',
   templateUrl: './order-dialog-reject.component.html',
   styleUrls: ['./order-dialog-reject.component.css'],
-  animations: [
-    trigger('dialog', [
-      transition('void => *', [
-        style({transform: 'scale3d(.3, .3, .3)'}),
-        animate(100)
-      ]),
-      transition('* => void', [
-        animate(100, style({transform: 'scale3d(.0, .0, .0)'}))
-      ])
-    ])
-  ]
 })
 export class OrderModalDealComponent implements OnInit {
   id;

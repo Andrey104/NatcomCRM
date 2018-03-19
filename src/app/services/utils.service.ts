@@ -207,6 +207,28 @@ export class UtilsService {
     switch (action.type) {
       case 0: {
         type = 'отказал(а) в сделке';
+
+        if (action.cause !== null) {
+          causeStr = 'по причине:';
+          switch (action.cause) {
+            case 1: {
+              cause = ' заключились с конкурентами';
+              break;
+            }
+            case 2: {
+              cause = ' неадекватный клиент';
+              break;
+            }
+            case 3: {
+              cause = ' нет возможности монтажа';
+              break;
+            }
+            case 4: {
+              cause = ' ошибка сотрудника';
+              break;
+            }
+          }
+        }
         break;
       }
       case 1: {
@@ -228,20 +250,6 @@ export class UtilsService {
       case 5: {
         type = 'добавил(а) обсуждение в сделку';
         break;
-      }
-    }
-
-    if (action.cause !== null) {
-      causeStr = 'по причине:';
-      switch (action.cause) {
-        case 1: {
-          cause = 'клиент не взял трубку';
-          break;
-        }
-        case 2: {
-          cause = 'другое';
-          break;
-        }
       }
     }
 

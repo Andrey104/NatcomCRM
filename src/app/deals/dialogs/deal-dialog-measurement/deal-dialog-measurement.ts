@@ -1,38 +1,29 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {animate, style, transition, trigger} from '@angular/animations';
 import {ActivatedRoute} from '@angular/router';
+import {DealService} from '../../../services/deal.service';
 import {NgForm} from '@angular/forms';
-import {OrderService} from '../../services/order.service';
-import {DealService} from '../../services/deal.service';
+import {MeasurementService} from '../../../services/measurement.service';
 
 @Component({
-  selector: 'app-deal-complete',
-  templateUrl: './deal-dialog-complete.component.html',
-  styleUrls: ['./deal-dialog-complete.component.css'],
-  animations: [
-    trigger('dialog', [
-      transition('void => *', [
-        style({transform: 'scale3d(.3, .3, .3)'}),
-        animate(100)
-      ]),
-      transition('* => void', [
-        animate(100, style({transform: 'scale3d(.0, .0, .0)'}))
-      ])
-    ])
-  ]
+  selector: 'app-dialog-deal-measurement',
+  templateUrl: './deal-dialog-measurement.html',
+  styleUrls: ['./deal-dialog-measurement.css'],
 })
-export class DealDialogCompleteComponent implements OnInit {
+export class DealDialogMeasurementComponent implements OnInit {
   id;
   @Input() closable = true;
   @Input() deal;
   @Input() visible: boolean;
-  @Output() successDeal = new EventEmitter();
+  @ViewChild('form') form: NgForm;
+  @Output() successDealMeasurement = new EventEmitter();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   isSubmitted = false;
   isRequest = false;
+  formData = {};
 
   constructor(private activatedRoute: ActivatedRoute,
-              private dealService: DealService) {
+              private dealService: DealService,
+              private measurementService: MeasurementService) {
   }
 
 
@@ -50,16 +41,20 @@ export class DealDialogCompleteComponent implements OnInit {
   submitForm() {
     this.isRequest = true;
     this.isSubmitted = true;
-    this.dealService.dealComplete(this.id).subscribe((result) => {
+    this.formData = this.form.value;
+    this.measurementService.newMeasurement(this.id, this.form.form.value.payment,
+                                            this.form.form.value.calendar,
+                                            this.form.form.value.commentTime)
+                                            .subscribe((result) => {
       this.isRequest = false;
       this.visibleChange.emit(this.visible);
-      this.successDeal.emit();
+      this.successDealMeasurement.emit(result);
       this.close();
     }, (error) => {
       this.isRequest = false;
       if (error.status === 200) {
         this.visibleChange.emit(this.visible);
-        this.successDeal.emit();
+        this.successDealMeasurement.emit();
         this.close();
       } else {
         alert('Произошла ошибка');
@@ -68,3 +63,5 @@ export class DealDialogCompleteComponent implements OnInit {
   }
 
 }
+
+
