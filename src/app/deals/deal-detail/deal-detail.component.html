@@ -114,7 +114,13 @@
   <div class="deal-action">
     <div class="row valign-wrapper">
       <div class="col s5 divider"></div>
-      <div class="col s2 center-align header">Перерасчеты</div>
+      <div class="col s2 center-align header">
+        <div class="valign-wrapper" style="display: inline-block">
+          <span class="center-dialog-title">Перерасчеты</span>
+          <i (click)="showDiscountDialog = !showDiscountDialog"
+             class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+        </div>
+      </div>
       <div class="col s5 divider"></div>
     </div>
     <div *ngIf="deal?.discounts.length===0" class="row">
@@ -127,7 +133,13 @@
     </div>
     <div class="row valign-wrapper">
       <div class="col s5 divider"></div>
-      <div class="col s2 center-align header">Оплаты</div>
+      <div class="col s2 center-align header">
+        <div class="valign-wrapper" style="display: inline-block">
+          <span class="center-dialog-title">Оплаты</span>
+          <i (click)="showPaymentDialog = !showPaymentDialog"
+             class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+        </div>
+      </div>
       <div class="col s5 divider"></div>
     </div>
     <div *ngIf="deal?.payments.length===0" class="row">
@@ -135,7 +147,7 @@
     </div>
     <div *ngIf="deal?.payments.length!==0" class="row">
       <div *ngFor="let payment of deal?.payments" class="col s10 offset-s1">
-        <p>{{payment.auto_date | dateFormat: 'fullDate'}} {{payment | payment}}</p>
+        <p>{{payment.date | dateFormat: 'fullDate'}} {{payment | payment}}</p>
       </div>
     </div>
     <div class="row valign-wrapper">
@@ -215,4 +227,7 @@
 <app-deal-defer [deal]="deal" (successDeal)="updateDeal()" [(visible)]="showRejectDialog"></app-deal-defer>
 <app-dialog-deal-measurement [deal]="deal" (successDealMeasurement)="successMeasurementAdded($event)"
                              [(visible)]="showMeasurementDialog"></app-dialog-deal-measurement>
-
+<app-dialog-deal-payment [deal]="deal" (successDealPayment)="successPaymentAdded($event)"
+                         [(visible)]="showPaymentDialog"></app-dialog-deal-payment>
+<app-dialog-deal-discount [deal]="deal" (successDealDiscount)="successDiscountAdded($event)"
+                         [(visible)]="showDiscountDialog"></app-dialog-deal-discount>

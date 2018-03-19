@@ -25,8 +25,9 @@
   </div>
   <div class="mount-info">
     <div class="col s12 str-info">
-      <i
-        class="tiny  material-icons  icon">date_range</i><span>  {{mount?.date | dateFormat: 'date'}}</span>
+      <i class="tiny  material-icons  icon">date_range</i>
+      <span *ngIf="mount.date">  {{mount?.date | dateFormat: 'date'}}</span>
+      <span *ngIf="!mount.date">По звонку</span>
     </div>
     <div class="col s10 str-info">
       <i class="tiny  material-icons icon">assignment</i><span> Номер договора:  {{dealId | dealContractView}}</span>

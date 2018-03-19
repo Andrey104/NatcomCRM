@@ -6,6 +6,8 @@ import {UtilsService} from '../../services/utils.service';
 import {Client} from '../../models/client';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {DealMeasurement} from '../../models/deal/deal_measurement';
+import {Payment} from '../../models/payment';
+import {DealDiscount} from '../../models/deal/deal_discount';
 
 @Component({
   selector: 'app-deal-detail',
@@ -24,6 +26,8 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   showCompleteDialog = false;
   showRejectDialog = false;
   showMeasurementDialog = false;
+  showPaymentDialog = false;
+  showDiscountDialog = false;
   needSubscribe = true;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
@@ -46,6 +50,14 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
 
   successMeasurementAdded(measurement: DealMeasurement) {
     this.deal.measurements.push(measurement);
+  }
+
+  successPaymentAdded(payment: Payment) {
+    this.deal.payments.push(payment);
+  }
+
+  successDiscountAdded(discount: DealDiscount) {
+    this.deal.discounts.push(discount);
   }
 
   updateDeal() {

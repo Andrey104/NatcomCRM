@@ -97,6 +97,8 @@ import {DealDialogCompleteComponent} from './deals/dialogs/deal-dialog-complete/
 import {DealDialogDeferComponent} from './deals/dialogs/deal-dialog-defer/deal-dialog-reject';
 import {DealRejectCausePipe} from './pipes/deal-reject-cause.pipe';
 import {DealDialogMeasurementComponent} from './deals/dialogs/deal-dialog-measurement/deal-dialog-measurement';
+import {DealDialogPaymentComponent} from './deals/dialogs/deal-dialog-payment/deal-dialog-payment';
+import {DealDialogDiscountComponent} from './deals/dialogs/deal-dialog-discount/deal-dialog-discount';
 
 
 @NgModule({
@@ -177,7 +179,9 @@ import {DealDialogMeasurementComponent} from './deals/dialogs/deal-dialog-measur
     BrigadeComponent,
     DealDialogDeferComponent,
     DealRejectCausePipe,
-    DealDialogMeasurementComponent
+    DealDialogMeasurementComponent,
+    DealDialogPaymentComponent,
+    DealDialogDiscountComponent
 ],
   imports: [
     BrowserModule,

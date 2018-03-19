@@ -5,25 +5,24 @@ import {NgForm} from '@angular/forms';
 import {MeasurementService} from '../../../services/measurement.service';
 
 @Component({
-  selector: 'app-dialog-deal-measurement',
-  templateUrl: './deal-dialog-measurement.html',
-  styleUrls: ['./deal-dialog-measurement.css'],
+  selector: 'app-dialog-deal-payment',
+  templateUrl: './deal-dialog-payment.html',
+  styleUrls: ['./deal-dialog-payment.css'],
 })
-export class DealDialogMeasurementComponent implements OnInit {
+export class DealDialogPaymentComponent implements OnInit {
   id;
   @Input() closable = true;
   @Input() deal;
   @Input() visible: boolean;
   @ViewChild('form') form: NgForm;
-  @Output() successDealMeasurement = new EventEmitter();
+  @Output() successDealPayment = new EventEmitter();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   isSubmitted = false;
   isRequest = false;
   formData = {};
 
   constructor(private activatedRoute: ActivatedRoute,
-              private dealService: DealService,
-              private measurementService: MeasurementService) {
+              private dealService: DealService) {
   }
 
 
@@ -42,16 +41,16 @@ export class DealDialogMeasurementComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    this.measurementService.newMeasurement(this.id, this.form.form.value.payment,
+    console.log(this.form.form.value.sum);
+    this.dealService.dealPayment(this.id, this.form.form.value.payment,
       this.form.form.value.calendar,
-      this.form.form.value.commentTime)
+      this.form.form.value.receiver, Number(this.form.form.value.sum))
       .subscribe((result) => {
         this.isRequest = false;
         this.visibleChange.emit(this.visible);
-        this.successDealMeasurement.emit(result);
+        this.successDealPayment.emit(result);
         this.close();
       }, (error) => {
-        this.isRequest = false;
         alert('Произошла ошибка');
       });
   }

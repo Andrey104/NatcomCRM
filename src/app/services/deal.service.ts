@@ -63,14 +63,20 @@ export class DealService extends BaseApi {
     return this.post(`deals/${idDeal}/reject/`, {cause: cause, comment: comment});
   }
 
-  /*dealDiscount(id, after, comment): Observable<Object> {
-    const discount = {'after': after, 'comment': comment};
-    return this.http.post<Object>(this.dealsUrl + id + '/discount/', discount,
-      {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
-    ).pipe(
-      tap((_: Object) => this.log(`defered`)),
-      catchError(this.handleError<Object>('addHero'))
-    );
-  }*/
+  dealPayment(idDeal: number, nonCash: string, date: string, receiver: string, sum: number): Observable<Object> {
+    console.log(nonCash);
+    let non_cash: boolean;
+    if (nonCash == '0') {
+      non_cash = false;
+    } else {
+      non_cash = true;
+    }
+    return this.post(`deals/${idDeal}/payment/`, {sum: sum, date: date, receiver: receiver, non_cash: non_cash});
+  }
+
+  dealDiscount(idDeal: number, after: number, comment: string): Observable<Object> {
+    return this.post(`deals/${idDeal}/discount/`, {after, comment});
+  }
+
 
 }

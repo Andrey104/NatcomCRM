@@ -1,21 +1,21 @@
 <div *ngIf="visible" class="dialog">
   <div class="content-dialog">
     <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
-    <h4>Отклонить сделку</h4>
+    <h4>Добавить перерасчет</h4>
     <form (ngSubmit)="submitForm()" #form="ngForm">
-      <div class="name-section-dialog required-area-dialog">Причина</div>
-      <div *ngFor="let cause of causes">
-        <label class="radio-text-dialog">
-          <input class="radio-dialog"
-                 ngModel
-                 required
-                 type="radio"
-                 [value]="cause"
-                 name="answer"> {{cause | rejectDealCause}}</label>
-      </div>
-      <div class="name-section-dialog">Комментарий</div>
-      <div class="div-text-area-dialog">
-        <textarea ngModel name="comment" class="text-comment-dialog"></textarea>
+        <label class="required-area-dialog">Сумма после перерасчета</label>
+        <input type="text" pattern="^[ 0-9]+$"
+               ngModel
+               name="after"
+               class="text-comment-dialog"
+               required />
+      <div>
+        <label class="required-area-dialog">Комментарий</label>
+        <textarea type="text"
+                  ngModel
+                  name="comment"
+                  class="text-comment-dialog"
+                  required></textarea>
       </div>
       <button class="btn-dialog-submit" type="submit"
               [class.btn-dialog-submit]="form.valid"
