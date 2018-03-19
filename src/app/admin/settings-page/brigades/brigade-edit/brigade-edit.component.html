@@ -1,0 +1,5 @@
+<div *ngIf="brigade?.installers">
+  <div class="instaler-list-item" *ngFor="let position of brigade?.installers">
+    {{position.installer.fio}}
+  </div>
+</div>

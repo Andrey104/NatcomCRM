@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import {InstallersPage} from '../models/installers/installers_page';
 
 @Injectable()
 export class BaseApi {
@@ -28,10 +29,17 @@ export class BaseApi {
     );
   }
 
-  getByParams(url: string, params: Object): Observable<any> {
+  getPage(url: string, page: string): Observable<any> {
+    if (page == null) {
+      page = '1';
+    }
+    let  params = new HttpParams();
+    params = params.append('page', page);
     return this.http.get(
-      this.getUrl(url), {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
-    );
+      this.getUrl(url), {
+        headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
+        params: params
+    });
   }
 
   private token() {

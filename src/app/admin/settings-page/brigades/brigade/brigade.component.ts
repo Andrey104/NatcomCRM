@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Company} from '../../../../models/company';
+import {Brigade} from '../../../../models/brigades/brigade';
 
 @Component({
   selector: 'app-brigade',
@@ -9,13 +9,13 @@ import {Company} from '../../../../models/company';
 export class BrigadeComponent implements OnInit {
 
   constructor() { }
-  @Input() company;
-  @Output() onEdit = new EventEmitter<Company>();
+  @Input() brigade;
+  @Output() onEdit = new EventEmitter<Brigade>();
 
   ngOnInit() {
   }
   edit() {
-    this.onEdit.emit(this.company);
+    this.onEdit.emit(this.brigade);
   }
 
 }

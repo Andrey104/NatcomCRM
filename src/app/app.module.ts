@@ -94,6 +94,8 @@ import {AddClientComponent} from './new-deal/add-client/add-client.component';
 import {OrderDeferDialogComponent} from './orders/order-defer-dialog/order-defer-dialog.component';
 import {OrderDeferCause} from './pipes/order-cause-defer.pipe';
 import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dialog-complete.component';
+import {BrigadesService} from './services/brigades.service';
+import { BrigadeEditComponent } from './admin/settings-page/brigades/brigade-edit/brigade-edit.component';
 
 
 @NgModule({
@@ -172,6 +174,7 @@ import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dia
     CompanyComponent,
     CompanyEditComponent,
     BrigadeComponent,
+    BrigadeEditComponent,
 ],
   imports: [
     BrowserModule,
@@ -208,6 +211,7 @@ import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dia
     MountService,
     InstallersService,
     StageMountService,
+    BrigadesService,
     BaseApi
   ],
   bootstrap:

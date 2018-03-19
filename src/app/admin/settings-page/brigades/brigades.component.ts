@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Company} from '../../../models/company';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {CompaniesService} from '../../../services/companies.service';
 import {log} from 'util';
+import {BrigadesService} from '../../../services/brigades.service';
 
 @Component({
   selector: 'app-brigades',
@@ -10,13 +10,12 @@ import {log} from 'util';
   styleUrls: ['../settings-page.component.css']
 })
 export class BrigadesComponent implements OnInit {
-  companies: Object[];
-  modalState: { open: Boolean, company?: Company } = {open: false, company: null};
+  brigades: Object[];
+  modalState: { open: Boolean, brigade?: Company } = {open: false, brigade: null};
   modal: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
-  constructor(private installerService: CompaniesService) {
+  constructor(private brigadesService: BrigadesService) {
   }
-
   ngOnInit() {
     this.show();
   }
@@ -27,20 +26,20 @@ export class BrigadesComponent implements OnInit {
   load(page?: number): void {
     if (page == null) {
       page = 1;
-      this.installerService.getCompanies()
-        .subscribe(companies => {
-          this.companies = companies.results;
-          if (companies.next != null) {
+      this.brigadesService.getBrigades()
+        .subscribe(brigades => {
+          this.brigades = brigades.results;
+          if (brigades.next != null) {
             this.load(page + 1);
           }
         }, error2 => {
           log(error2);
         });
     } else {
-      this.installerService.getCompanies(page.toString())
-        .subscribe(companies => {
-          this.companies = this.companies.concat(companies.results);
-          if (companies.next != null) {
+      this.brigadesService.getBrigades(page.toString())
+        .subscribe(brigades => {
+          this.brigades = this.brigades.concat(brigades.results);
+          if (brigades.next != null) {
             this.load(page + 1);
           }
         }, error2 => {
@@ -49,8 +48,8 @@ export class BrigadesComponent implements OnInit {
     }
   }
 
-  openModal(company?: Company) {
-    this.modalState = {open: true, company: company};
+  openModal(brigade?: Company) {
+    this.modalState = {open: true, brigade: brigade};
     this.modal.next(true);
   }
 

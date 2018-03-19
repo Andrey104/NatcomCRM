@@ -11,4 +11,8 @@ export class BrigadesService extends BaseApi {
   constructor(public http: HttpClient) {
     super(http);
   }
+
+  getBrigades(page?: string): Observable<DealPage> {
+    return this.getPage(`installer_groups`, page);
+  }
 }

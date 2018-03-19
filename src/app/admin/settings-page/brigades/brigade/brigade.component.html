@@ -1,6 +1,9 @@
 <div class="card">
-  <div class="name">{{company.name}}</div>
-  <div class="phone">{{company.symbol}}</div>
+  <div class="name">{{brigade.id}}</div>
+  <div class="phone">{{brigade.symbol}}</div>
+  <div class="instaler-list-item" *ngFor="let position of brigade.installers">
+    {{position.installer.fio}}
+  </div>
   <div class="edit-btn" (click)="edit()"><i class="material-icons">edit</i></div>
 </div>
 
