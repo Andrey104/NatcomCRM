@@ -9,9 +9,10 @@
   height: calc(100vh - 134px);
 }
 /*Классы для отмены прокрутки в list-col*/
-.list-col::-webkit-scrollbar{width: 0;}
-.list-col { -ms-overflow-style: none;}
-.list-col { overflow: -moz-scrollbars-none; }
+.list-col::-webkit-scrollbar-track {border-radius: 4px;}
+.list-col::-webkit-scrollbar {width: 6px;}
+.list-col::-webkit-scrollbar-thumb {border-radius: 4px;background: #f0f2f5;}
+.list-col:hover::-webkit-scrollbar-thumb {background: #6a7d9b;}
 /*---------------------------------------*/
 /*Классы для отмены встроенных padding, margin*/
 .main-row{

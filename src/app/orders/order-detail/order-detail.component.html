@@ -74,9 +74,12 @@
             <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">close</i></div>
           </div>
         </li>
-        <li class="hover-element li-element-menu-fab">
-          <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">В сделку</span>
-            <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">check</i></div>
+        <li routerLink="to_deal" class="hover-element li-element-menu-fab" (click)="onNewDeal()">
+          <div class="center-align valign-wrapper menu-li-div">
+            <span class="fab-text">В сделку</span>
+            <div class="icon-fab center-align valign-wrapper">
+              <i class="material-icons color-fab-icon">check</i>
+            </div>
           </div>
         </li>
       </ul>

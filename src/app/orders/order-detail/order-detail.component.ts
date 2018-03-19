@@ -79,4 +79,8 @@ export class OrderDetailComponent implements OnInit {
     this.order = order;
     this.updateList.next(true);
   }
+
+  onNewDeal() {
+    this.orderService.setOrder(this.order);
+  }
 }

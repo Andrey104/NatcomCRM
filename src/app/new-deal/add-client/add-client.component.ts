@@ -1,7 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {NgForm} from '@angular/forms';
 import {ClientService} from '../../services/client.service';
+import {Phone} from '../../models/phone';
+import {Client} from '../../models/client';
 
 @Component({
   selector: 'app-add-client',
@@ -19,27 +21,49 @@ import {ClientService} from '../../services/client.service';
     ])
   ]
 })
-export class AddClientComponent implements OnInit {
+export class AddClientComponent implements OnChanges {
   @Input() visible: boolean;
-  @Output() successClient = new EventEmitter();
+  @Output() successClient = new EventEmitter<Client>();
+  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  phones: Phone[] = [];
   closable = true;
 
   constructor(private clientService: ClientService) {
   }
 
-  ngOnInit() {
+  ngOnChanges(): void {
+    this.phones.push(new Phone('', ''));
   }
 
   submitForm(form: NgForm) {
     const name = form.form.value.clientName;
-    const phone = form.form.value.phone;
-    this.clientService.addClient(name, phone)
-      .subscribe((response) => {
-        console.log(response);
+    const email = form.form.value.email;
+    this.clientService.addClient(name, email, this.phones)
+      .subscribe((client) => {
+        this.successClient.emit(client);
+        this.visible = false;
       });
   }
 
+  addPhone() {
+    this.phones.push(new Phone('', ''));
+  }
+
+  phoneNumber(phoneId: number, phone: string) {
+    this.phones[phoneId].number = phone;
+  }
+
+  phoneComment(phoneId: number, comment: string) {
+    this.phones[phoneId].comment = comment;
+  }
+
+  removePhone(phoneId: number) {
+    this.phones.splice(phoneId, 1);
+  }
+
   onClose() {
+    this.phones = [];
     this.visible = false;
+    this.visibleChange.emit(this.visible);
   }
 }

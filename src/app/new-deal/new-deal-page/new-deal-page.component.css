@@ -1,3 +1,16 @@
 .text-comment-dialog {
   height: 50px;
 }
+
+.date-container {
+  display: inline-block;
+}
+
+.measurement-container {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.calendar {
+  width: 300px!important;
+}

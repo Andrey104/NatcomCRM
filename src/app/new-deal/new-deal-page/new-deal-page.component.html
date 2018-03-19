@@ -3,11 +3,12 @@
     <form #form="ngForm" (ngSubmit)="submitForm(form)">
       <div class="row">
         <div class="col s7">
-          <label>Компания</label>
-          <select #select class="browser-default"
-                  ngModel
+          <label class="required-area-dialog">Компания</label>
+          <select class="browser-default"
+                  [ngModel]="defaultCompany"
                   name="company"
-                  required>
+                  required
+                  #select="ngModel">
             <option *ngFor="let company of companies"
                     [value]="company?.id">
               {{company?.name}}
@@ -15,7 +16,7 @@
           </select>
         </div>
         <div class="col s5">
-          <label>Способ оплаты</label>
+          <label class="required-area-dialog">Способ оплаты</label>
           <select class="browser-default"
                   ngModel
                   name="payment"
@@ -25,7 +26,7 @@
           </select>
         </div>
         <div class="col s12">
-          <label>Адрес</label>
+          <label class="required-area-dialog">Адрес</label>
           <textarea class="text-comment-dialog"
                     ngModel
                     name="address"
@@ -33,7 +34,7 @@
           </textarea>
         </div>
         <div class="col s12">
-          <label>Комментарий к адресу</label>
+          <label class="required-area-dialog">Комментарий к адресу</label>
           <textarea class="text-comment-dialog"
                     ngModel
                     name="addressComment"
@@ -41,18 +42,21 @@
         </textarea>
         </div>
       </div>
-      <div class="valign-wrapper" (click)="showMeasurement()">
+      <div class="measurement-container" (click)="showMeasurement()">
         <i class="small material-icons">{{visibleMeasurement.icon}}</i>
         <span>{{visibleMeasurement.message}}</span>
       </div>
       <div *ngIf="visibleMeasurement.show" class="row">
-        <p>Выберите дату: <input type="date"
-                                 ngModel
-                                 name="calendar"
-                                 required>
-        </p>
+        <div>
+          <span>Выберите дату:</span>
+          <input type="date"
+                 class="calendar"
+                 ngModel
+                 name="calendar"
+                 required>
+        </div>
         <div class="input-field col s12">
-          <label>Комментарий ко времени</label>
+          <label class="required-area-dialog">Комментарий ко времени</label>
           <input type="text"
                  ngModel
                  name="commentTime"
@@ -67,6 +71,12 @@
   <div class="col s5">
     <div>Clients</div>
     <div (click)="showDialog = !showDialog">Add client</div>
+    <div *ngFor="let client of clients">
+      <span>{{client.fio}}</span>
+      <div *ngFor="let phone of client.phones">
+        <span>{{phone.number}}</span>
+      </div>
+    </div>
   </div>
-  <app-add-client [(visible)]="showDialog"></app-add-client>
+  <app-add-client [(visible)]="showDialog" (successClient)="addNewClient($event)"></app-add-client>
 </div>

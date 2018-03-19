@@ -47,6 +47,7 @@ const deals_routes: Routes = [
 
 const orders_routes: Routes = [
   {path: ':id', component: OrderDetailComponent},
+  {path: ':id/to_deal', component: NewDealPageComponent},
   {path: ':id/client/:client_id', component: ClientInfoComponent}
 ];
 
