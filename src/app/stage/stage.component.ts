@@ -5,6 +5,7 @@ import {MountStage} from '../models/mount/mount-stage';
 import {DealMount} from '../models/deal/deal_mount';
 import {MountService} from '../services/mount.service';
 import {UtilsService} from '../services/utils.service';
+import {Cost} from '../models/cost';
 
 @Component({
   selector: 'app-stage',
@@ -17,6 +18,10 @@ export class StageComponent implements OnInit {
   stage: MountStage;
   mount: DealMount;
   isNothingToShow = false;
+  showCompleteStage = false;
+  showTransferStage = false;
+  showAddCost = false;
+  showAddInstaller = false;
 
   constructor(private activatedRoute: ActivatedRoute, private stageMountService: StageMountService, private mountService: MountService,
               private utils: UtilsService) {
@@ -25,6 +30,20 @@ export class StageComponent implements OnInit {
   ngOnInit() {
     console.log(typeof this.stage);
     this.getStage();
+  }
+
+  successStageUpdate() {
+    this.stage = null;
+    this.stageMountService.getStage(this.id)
+      .subscribe(result => {
+        this.stage = result;
+      }, error2 => {
+        alert('Произошла ошибка');
+      });
+  }
+
+  successStageCost(cost: Cost) {
+    this.stage.costs.push(cost);
   }
 
   getStage() {
@@ -74,6 +93,7 @@ export class StageComponent implements OnInit {
   statusColor(status) {
     return this.utils.statusStageMount(status).color;
   }
+
   statusIcon(status) {
     return this.utils.statusStageMount(status).image;
   }

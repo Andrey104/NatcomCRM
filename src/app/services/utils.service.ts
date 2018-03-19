@@ -207,7 +207,6 @@ export class UtilsService {
     switch (action.type) {
       case 0: {
         type = 'отказал(а) в сделке';
-
         if (action.cause !== null) {
           causeStr = 'по причине:';
           switch (action.cause) {
@@ -232,23 +231,23 @@ export class UtilsService {
         break;
       }
       case 1: {
-        type = 'добавил(а) монтаж в сделку';
+        type = 'добавил(а) замер в сделку';
         break;
       }
       case 2: {
-        type = 'успешно завершил(а) сделку';
+        type = 'добавил(а) монтаж в сделку';
         break;
       }
       case 3: {
-        type = 'добавил(а) клиента в сделку';
+        type = 'завершил(а) сделку';
         break;
       }
       case 4: {
-        type = 'изменил(а) сделку';
+        type = 'добавил(а) клиента';
         break;
       }
       case 5: {
-        type = 'добавил(а) обсуждение в сделку';
+        type = 'установил(а) менеджера';
         break;
       }
     }
@@ -264,6 +263,7 @@ export class UtilsService {
   stageActionDecoder(action: DealAction) {
     let message: string;
     let comment: string;
+    let cause = '';
     switch (action.type) {
       case 1: {
         message = ' закрыл(а) стадию ';
@@ -272,6 +272,16 @@ export class UtilsService {
 
       case 2: {
         message = ' перенес(ла) стадию ';
+        switch (action.cause) {
+          case 1: {
+            cause = 'по ошибке клиента ';
+            break;
+          }
+          case 2: {
+            cause = 'по ошибке монтажников ';
+            break;
+          }
+        }
         break;
       }
 
@@ -292,9 +302,9 @@ export class UtilsService {
     if (action.comment == null) {
       comment = '';
     } else {
-      comment = 'с комментарием ' + action.comment;
+      comment = 'с комментарием: \'' + action.comment + '\'';
     }
-    return message + comment;
+    return message + cause + comment;
 
   }
 

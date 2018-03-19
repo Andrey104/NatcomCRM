@@ -103,6 +103,10 @@ import {MountRejectCausePipe} from './pipes/mount-reject-cause.pipe';
 import {MountDialogRejectComponent} from './mounts/dialogs/mount-dialog-reject/mount-dialog-reject';
 import {MountDialogCompleteComponent} from './mounts/dialogs/mount-dialog-complete/mount-dialog-complete';
 import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transfer/mount-dialog-transfer';
+import {StageDialogCompleteComponent} from './stage/dialogs/stage-dialog-complete/stage-dialog-complete';
+import {StageDialogCostComponent} from './stage/dialogs/stage-dialog-cost/stage-dialog-cost';
+import {StageDialogTransferComponent} from './stage/dialogs/stage-dialog-transfer/stage-dialog-transfer';
+import {DealDialogMountComponent} from './deals/dialogs/deal-dialog-add-mount/deal-dialog-add-mount';
 
 
 @NgModule({
@@ -189,7 +193,11 @@ import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transf
     MountRejectCausePipe,
     MountDialogRejectComponent,
     MountDialogCompleteComponent,
-    MountDialogTransferComponent
+    MountDialogTransferComponent,
+    StageDialogCompleteComponent,
+    StageDialogCostComponent,
+    StageDialogTransferComponent,
+    DealDialogMountComponent
 ],
   imports: [
     BrowserModule,

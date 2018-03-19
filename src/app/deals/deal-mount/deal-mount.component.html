@@ -28,6 +28,11 @@
     <div class="col s12 str-info">
       <i class="tiny  material-icons icon">assignment</i><span> Номер договора:  {{dealId | dealContractView}}</span>
     </div>
+    <div class="col s12 str-info" *ngIf="mount.description">
+      <i
+        class="tiny  material-icons  icon">comment</i>
+      <span > {{mount?.description}}</span>
+    </div>
   </div>
   <div class="col s12 row valign-wrapper detail-col">
     <div class="col s5 divider "></div>

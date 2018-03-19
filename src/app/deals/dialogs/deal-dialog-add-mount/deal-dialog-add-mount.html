@@ -1,15 +1,14 @@
 <div *ngIf="visible" class="dialog">
   <div class="content-dialog">
     <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
-    <h4>Добавить замер</h4>
+    <h4>Добавить монтаж</h4>
     <form (ngSubmit)="submitForm()" #form="ngForm">
-      <p><span class="required-area-dialog">Дата монтажа</span> <input type="date"
-                                                                       ngModel
-                                                                       name="calendar"
-                                                                       required>
+      <p>Дата монтажа <input type="date"
+                             ngModel
+                             name="calendar">
       </p>
       <div>
-        <label class="required-area-dialog">Комментарий</label>
+        <label>Комментарий к монтажу</label>
         <textarea type="text"
                   ngModel
                   name="comment"

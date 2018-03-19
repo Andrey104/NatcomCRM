@@ -42,4 +42,15 @@ export class MeasurementService extends BaseApi {
     };
     return this.post(`deals/${dealId}/measurement/`, data);
   }
+
+  newMount(dealId: number, date: string, description: string) {
+    if (date === undefined || date === '') {
+      date = null;
+    }
+    if (description === undefined || description === '') {
+      description = null;
+    }
+
+    return this.post(`deals/${dealId}/mount/`, {date, description});
+  }
 }

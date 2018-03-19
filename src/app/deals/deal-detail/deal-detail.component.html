@@ -92,7 +92,13 @@
   </div>
   <div class="row valign-wrapper">
     <div class="col s5 divider"></div>
-    <div class="col s2 center-align header">Монтажи</div>
+    <div class="col s2 center-align header">
+      <div class="valign-wrapper" style="display: inline-block">
+        <span class="center-dialog-title">Монтажи</span>
+        <i (click)="showMountDialog = !showMountDialog"
+           class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+      </div>
+    </div>
     <div class="col s5 divider"></div>
   </div>
   <div *ngIf="deal?.mounts.length===0" class="row">
@@ -231,3 +237,5 @@
                          [(visible)]="showPaymentDialog"></app-dialog-deal-payment>
 <app-dialog-deal-discount [deal]="deal" (successDealDiscount)="successDiscountAdded($event)"
                          [(visible)]="showDiscountDialog"></app-dialog-deal-discount>
+<app-dialog-add-mount [deal]="deal" (successDealMount)="successMountAdded($event)"
+                          [(visible)]="showMountDialog"></app-dialog-add-mount>

@@ -8,6 +8,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {Payment} from '../../models/payment';
 import {DealDiscount} from '../../models/deal/deal_discount';
+import {DealMount} from '../../models/deal/deal_mount';
 
 @Component({
   selector: 'app-deal-detail',
@@ -28,6 +29,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   showMeasurementDialog = false;
   showPaymentDialog = false;
   showDiscountDialog = false;
+  showMountDialog = false;
   needSubscribe = true;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
@@ -48,8 +50,14 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  successMountAdded(mount: DealMount) {
+    this.deal.mounts.push(mount);
+    this.updateList.next(true);
+  }
+
   successMeasurementAdded(measurement: DealMeasurement) {
     this.deal.measurements.push(measurement);
+    this.updateList.next(true);
   }
 
   successPaymentAdded(payment: Payment) {

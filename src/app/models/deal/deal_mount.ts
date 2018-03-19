@@ -12,6 +12,7 @@ export class DealMount {
   date_mount: string;
   date: string;
   status: number;
+  description: string;
   deal: number;
   user: User;
 }

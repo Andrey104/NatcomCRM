@@ -1,4 +1,4 @@
-<div *ngIf="!stage" class="spinner-contener">
+<div *ngIf="!stage" class="spinner-page">
   <app-preloader></app-preloader>
 </div>
 <p class="nothing-show" *ngIf="isNothingToShow">Ничего не найдено по данному запросу</p>
@@ -21,11 +21,9 @@
       {{stage.status | stageStatus}}
     </div>
   </div>
-  <div class="row col s12 stage-info valign-wrapper">
+  <div class="row col s12 stage-info valign-wrapper" *ngIf="stage.description">
     <i class="tiny  material-icons icon">comment</i>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      Cumque dolorum earum facere inventore labore molestiae velit.
-      Deserunt et magni minima porro recusandae. Culpa deserunt dignissimos hic inventore, iure necessitatibus sunt.
+    {{stage.description}}
   </div>
   <div class="col s12 valign-wrapper detail-col">
     <div class="col s5 divider "></div>
@@ -51,9 +49,9 @@
     </div>
   </div>
   <!--<div class="col s12 valign-wrapper detail-col">-->
-    <!--<div class="col s5 divider "></div>-->
-    <!--<div class="col s2 center-align">Комплектующие</div>-->
-    <!--<div class="col s5 divider "></div>-->
+  <!--<div class="col s5 divider "></div>-->
+  <!--<div class="col s2 center-align">Комплектующие</div>-->
+  <!--<div class="col s5 divider "></div>-->
   <!--</div>-->
   <div class="col s12 valign-wrapper detail-col">
     <div class="col s5 divider "></div>
@@ -61,40 +59,53 @@
     <div class="col s5 divider "></div>
   </div>
   <div class="col s10 offset-s1 action" *ngFor="let action of stage.actions">
-   <div>{{action | action: 'stage'}}</div>
+    <div>{{action | action: 'stage'}}</div>
   </div>
 
-  <div class="fixed-action-btn click-to-toggle">
-    <a class="btn-floating btn-large orange">
+  <div class="fixed-action-btn click-to-toggle" *ngIf="stage.status==0">
+    <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
     <ul class="fab-ul">
-      <li class="hover-element li-element-menu-fab">
+      <li class="hover-element li-element-menu-fab"
+          (click)="showAddInstaller = !showAddInstaller"
+          onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить монтажника</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">person</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab">
+      <li class="hover-element li-element-menu-fab"
+          (click)="showAddCost = !showAddCost"
+          onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить затраты</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">money</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab">
-        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить комплектующие</span>
-          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">add</i></div>
-        </div>
-      </li>
-      <li class="hover-element li-element-menu-fab">
+      <!--<li class="hover-element li-element-menu-fab">-->
+      <!--<div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить комплектующие</span>-->
+      <!--<div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">add</i></div>-->
+      <!--</div>-->
+      <!--</li>-->
+      <li class="hover-element li-element-menu-fab"
+          (click)="showTransferStage = !showTransferStage"
+          onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Перенести стадию</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">event</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab">
+      <li class="hover-element li-element-menu-fab"
+          (click)="showCompleteStage = !showCompleteStage"
+          onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Завершить стадию</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">check</i></div>
         </div>
       </li>
     </ul>
   </div>
-
 </div>
+<app-stage-dialog-complete [stage]="stage" (successStageComplete)="successStageUpdate()"
+                           [(visible)]="showCompleteStage"></app-stage-dialog-complete>
+<app-dialog-stage-cost [stage]="stage" (successCost)="successStageCost($event)"
+                           [(visible)]="showAddCost"></app-dialog-stage-cost>
+<app-stage-dialog-transfer [stage]="stage" (successStageTransfer)="successStageUpdate()"
+                       [(visible)]="showTransferStage"></app-stage-dialog-transfer>
