@@ -21,7 +21,6 @@ export class BrigadeEditComponent implements OnInit, OnChanges {
 
   constructor(private brigadesService: BrigadesService) {
   }
-
   // installerForm: FormGroup = new FormGroup({
   //   name: new FormControl('', Validators.required),
   //   phone: new FormControl('', Validators.required),
@@ -36,9 +35,34 @@ export class BrigadeEditComponent implements OnInit, OnChanges {
   // }
   ngOnInit() {
   }
+  cloneObject(object: Object): any {
+    // Такой вот костыль для полного глубокого копирования объекта
+    let newObject = {};
+    newObject = JSON.parse(JSON.stringify(object));
+    return newObject;
+    // Попытка самому написать функцию глубокого копирования
+    // for (const key in object) {
+    //   if (object.hasOwnProperty(key)) {
+    //     if (typeof object[key] === 'object') {
+    //
+    //
+    //
+    //       newObject[key] = this.cloneObject(object[key]); Эта конструкция не работает;
+    //
+    //
+    //     } else {
+    //       newObject[key] = object[key];
+    //     }
+    //     // newObject[key] = object[key];
+    //   }
+    // }
+    // return newObject;
+  }
   ngOnChanges() {
     if (this.modalState.brigade != null) {
-      this.brigade = this.modalState.brigade;
+      // Клонируем объект brigade
+      this.brigade = this.cloneObject(this.modalState.brigade);
+      // ------------------------
       this.header = 'Редактировать бригаду';
       this.edit = true;
     } else {
@@ -48,28 +72,35 @@ export class BrigadeEditComponent implements OnInit, OnChanges {
   }
 
   deleteInstaller(installerPosition?: InstallerPosition) {
-    alert(installerPosition.installer.fio);
     this.brigade.installers = this.brigade.installers.filter(installer => installer.installer.id !== installerPosition.installer.id);
   }
+
   close(successfully: Boolean) {
     this.onClose.emit(successfully);
   }
+
   // addInstaller(installerPosition: InstallerPosition) {
   //   this.brigade.installers.concat(installerPosition);
   // }
-  // delInstaller(isntallerPosition: InstallerPosition) {
-  // }
-
+  brigadeMinMap(position: InstallerPosition) {
+    position.installer = position.installer.id;
+    return position;
+  }
   ok() {
     // const name = this.installerForm.value.name;
     // const phone = this.installerForm.value.phone;
     // const installer = new Installer();
     // installer.fio = name;
     // installer.phone = phone;
+    let brigadeMin;
+    brigadeMin = this.cloneObject(this.brigade);
+    // for (const key in this.brigade) {
+    //   if (this.brigade.hasOwnProperty(key)) {
+    //     brigadeMin[key] = this.brigade[key];
+    //   }
+    // }
+    brigadeMin.installers = brigadeMin.installers.map(this.brigadeMinMap);
     if (this.edit) {
-      let brigadeMin: Brigade;
-      brigadeMin = this.brigade;
-      brigadeMin.installers = brigadeMin.installers.map(position => position.installer = position.installer.id);
       this.brigadesService.editBrigade(brigadeMin).subscribe(data => {
         if (data) {
           alert('Бригада изменена успешно!');
@@ -79,14 +110,14 @@ export class BrigadeEditComponent implements OnInit, OnChanges {
         }
       });
     } else {
-    //   this.brigadesService.addInstaller(installer).subscribe(data => {
-    //     if (data) {
-    //       alert('Монтажник добавлен успешно!');
-    //       this.close(true);
-    //     } else {
-    //       alert('Ошибка при добавлении монтажника! Попробуйте снова!');
-    //     }
-    //   });
+        this.brigadesService.addBrigade(brigadeMin).subscribe(data => {
+          if (data) {
+            alert('Бригада добавлена успешно!');
+            this.close(true);
+          } else {
+            alert('Ошибка при добавлении бригады! Попробуйте снова!');
+          }
+        });
     }
   }
 }
