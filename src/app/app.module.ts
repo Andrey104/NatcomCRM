@@ -108,6 +108,10 @@ import {StageDialogCostComponent} from './stage/dialogs/stage-dialog-cost/stage-
 import {StageDialogTransferComponent} from './stage/dialogs/stage-dialog-transfer/stage-dialog-transfer';
 import {DealDialogMountComponent} from './deals/dialogs/deal-dialog-add-mount/deal-dialog-add-mount';
 import {DealDialogManagerComponent} from './deals/dialogs/deal-dialog-add-manager/deal-dialog-add-manager';
+import {MeasurementRejectCausePipe} from './pipes/measurement-cause-reject';
+import {MeasurementDialogRejectComponent} from './measurements/dialogs/measurement-dialog-reject/measurement-dialog-reject';
+import {MeasurementDialogEditComponent} from './measurements/dialogs/measurement-dialog-edit/measurement-dialog-edit';
+import {MeasurementDialogTransferComponent} from './measurements/dialogs/measurement-dialog-transfer/measurement-dialog-transfer';
 
 
 @NgModule({
@@ -199,7 +203,11 @@ import {DealDialogManagerComponent} from './deals/dialogs/deal-dialog-add-manage
     StageDialogCostComponent,
     StageDialogTransferComponent,
     DealDialogMountComponent,
-    DealDialogManagerComponent
+    DealDialogManagerComponent,
+    MeasurementRejectCausePipe,
+    MeasurementDialogRejectComponent,
+    MeasurementDialogEditComponent,
+    MeasurementDialogTransferComponent
 ],
   imports: [
     BrowserModule,
