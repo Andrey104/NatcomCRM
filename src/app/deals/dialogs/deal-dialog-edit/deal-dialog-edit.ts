@@ -2,21 +2,19 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../../services/deal.service';
 import {NgForm} from '@angular/forms';
-import {MeasurementService} from '../../../services/measurement.service';
 
 @Component({
-  selector: 'app-dialog-add-mount',
-  templateUrl: './deal-dialog-add-mount.html',
-  styleUrls: ['./deal-dialog-add-mount.css'],
+  selector: 'app-dialog-deal-edit',
+  templateUrl: './deal-dialog-edit.html',
+  styleUrls: ['./deal-dialog-edit.css'],
 })
-
-export class DealDialogMountComponent implements OnInit {
+export class DealDialogEditComponent implements OnInit {
   id;
   @Input() closable = true;
   @Input() deal;
   @Input() visible: boolean;
   @ViewChild('form') form: NgForm;
-  @Output() successDealMount = new EventEmitter();
+  @Output() successDealEdit = new EventEmitter();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   isSubmitted = false;
   isRequest = false;
@@ -42,21 +40,20 @@ export class DealDialogMountComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    console.log(this.form.form.value.comment);
-    this.dealService.newMount(this.id,
-      this.form.form.value.calendar,
+    console.log(this.form.form.value.sum);
+    this.dealService.dealDiscount(this.id, Number(this.form.form.value.after),
       this.form.form.value.comment)
       .subscribe((result) => {
         this.isRequest = false;
         this.visibleChange.emit(this.visible);
-        this.successDealMount.emit(result);
+        this.successDealEdit.emit(result);
         this.close();
       }, (error) => {
         this.isRequest = false;
         alert('Произошла ошибка');
-        // });
       });
   }
+
 }
 
 

@@ -10,6 +10,7 @@ export class DealResult {
   id: number;
   clients: object; // add class
   measurements: DealMeasurement[];
+  description: string;
   mounts: DealMount[];
   discounts: DealDiscount[];
   comments: object[];
