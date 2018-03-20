@@ -49,6 +49,7 @@ export class BrigadeEditComponent implements OnInit, OnChanges {
 
   deleteInstaller(installerPosition?: InstallerPosition) {
     alert(installerPosition.installer.fio);
+    this.brigade.installers = this.brigade.installers.filter(installer => installer.installer.id !== installerPosition.installer.id);
   }
   close(successfully: Boolean) {
     this.onClose.emit(successfully);
@@ -66,15 +67,17 @@ export class BrigadeEditComponent implements OnInit, OnChanges {
     // installer.fio = name;
     // installer.phone = phone;
     if (this.edit) {
-    //   installer.id = this.modalState.installer.id;
-    //   this.brigadesService.editInstaller(installer).subscribe(data => {
-    //     if (data) {
-    //       alert('Монтажник изменен успешно!');
-    //       this.close(true);
-    //     } else {
-    //       alert('Ошибка при изменении монтажника! Попробуйте снова!');
-    //     }
-    //   });
+      let brigadeMin: Brigade;
+      brigadeMin = this.brigade;
+      brigadeMin.installers = brigadeMin.installers.map(position => position.installer = position.installer.id);
+      this.brigadesService.editBrigade(brigadeMin).subscribe(data => {
+        if (data) {
+          alert('Бригада изменена успешно!');
+          this.close(true);
+        } else {
+          alert('Ошибка при изменении бригады! Попробуйте снова!');
+        }
+      });
     } else {
     //   this.brigadesService.addInstaller(installer).subscribe(data => {
     //     if (data) {

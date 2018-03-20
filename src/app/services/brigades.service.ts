@@ -17,10 +17,10 @@ export class BrigadesService extends BaseApi {
   getBrigades(page?: string): Observable<BrigadesPage> {
     return this.getPage(`installer_groups`, page);
   }
-  editBrigade(brigade: Brigade): Observable<Brigade> {
-    return this.post(`installer_group`, brigade);
-  }
   addBrigade(brigade: Brigade): Observable<Brigade> {
-    return this.put(`installer_group/${brigade.id}`, brigade);
+    return this.post(`installer_groups/`, brigade);
+  }
+  editBrigade(brigade: Brigade): Observable<Brigade> {
+    return this.put(`installer_groups/${brigade.id}/`, brigade);
   }
 }

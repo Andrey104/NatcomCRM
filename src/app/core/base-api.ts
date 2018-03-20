@@ -27,7 +27,7 @@ export class BaseApi {
     );
   }
   put(url: string, data: any): Observable<any> {
-    return this.http.post(
+    return this.http.put(
       this.getUrl(url),
       data,
       {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
