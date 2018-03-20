@@ -20,6 +20,14 @@ export class BaseApi {
     );
   }
 
+  patch(url: string = '', data: any = {}): Observable<any> {
+    return this.http.patch(
+      this.getUrl(url),
+      data,
+      {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
+    );
+  }
+
   post(url: string = '', data: any = {}): Observable<any> {
     return this.http.post(
       this.getUrl(url),

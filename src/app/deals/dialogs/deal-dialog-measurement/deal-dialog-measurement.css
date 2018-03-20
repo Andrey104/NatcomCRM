@@ -15,3 +15,7 @@ h4 {
     top: calc(50% - 225px);
   }
 }
+
+.text-comment-dialog{
+  height: 60px;
+}

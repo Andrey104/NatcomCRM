@@ -13,16 +13,23 @@
       </select>
       <p><span class="required-area-dialog">Дата замера</span> <input type="date"
                                                                       ngModel
-                                                                      name="calendar"
+                                                                      name="date"
                                                                       required>
       </p>
       <div>
         <label class="required-area-dialog">Комментарий ко времени</label>
         <textarea type="text"
                   ngModel
-                  name="commentTime"
+                  name="time"
                   class="text-comment-dialog"
                   required></textarea>
+      </div>
+      <div>
+        <label>Дополнительная информация о замере</label>
+        <textarea type="text"
+                  ngModel
+                  name="description"
+                  class="text-comment-dialog"></textarea>
       </div>
       <button class="btn-dialog-submit" type="submit"
               [class.btn-dialog-submit]="form.valid"

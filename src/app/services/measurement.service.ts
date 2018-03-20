@@ -34,13 +34,41 @@ export class MeasurementService extends BaseApi {
     return this.get(`measurements/search?page=${page}&&text=${text}`);
   }
 
-  newMeasurement(dealId: number, non_cash: boolean, date: string, time: string): Observable<MeasurementResult> {
+  newMeasurement(dealId: number, non_cash: boolean, date: string, time: string, description: string): Observable<MeasurementResult> {
+    if (description === '') {
+      description = null;
+    }
     const data = {
       non_cash: non_cash,
-      date: date,
-      time: time
+      date,
+      time,
+      description
     };
     return this.post(`deals/${dealId}/measurement/`, data);
   }
 
+  editMeasurement(idMeasurement: number, time: string, description: string): Observable<Object> {
+    if (description === '') {
+      description = null;
+    }
+
+    const data = {
+      time,
+      description
+    };
+    return this.patch(`measurements/${idMeasurement}/`, data);
+  }
+
+  transferMeasurement(idMeasurement: number, cause: number, new_date: string, comment: string): Observable<OurComment> {
+    if (comment === '') {
+      comment = null;
+    }
+    console.log(cause +'   это в трансфере');
+    const data = {
+      cause,
+      new_date,
+      comment
+    };
+    return this.post(`measurements/${idMeasurement}/transfer/`, data);
+  }
 }

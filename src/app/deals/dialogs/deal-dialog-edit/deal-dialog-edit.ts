@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../../services/deal.service';
 import {NgForm} from '@angular/forms';
+import {DealResult} from '../../../models/deal/deal_result';
 
 @Component({
   selector: 'app-dialog-deal-edit',
@@ -11,7 +12,7 @@ import {NgForm} from '@angular/forms';
 export class DealDialogEditComponent implements OnInit {
   id;
   @Input() closable = true;
-  @Input() deal;
+  @Input() deal: DealResult;
   @Input() visible: boolean;
   @ViewChild('form') form: NgForm;
   @Output() successDealEdit = new EventEmitter();
@@ -40,9 +41,9 @@ export class DealDialogEditComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    console.log(this.form.form.value.sum);
-    this.dealService.dealDiscount(this.id, Number(this.form.form.value.after),
-      this.form.form.value.comment)
+    console.log(this.form.form.value.address);
+    this.dealService.editDeal(this.id, this.form.form.value.address,
+      this.form.form.value.address_comment, this.form.form.value.description)
       .subscribe((result) => {
         this.isRequest = false;
         this.visibleChange.emit(this.visible);

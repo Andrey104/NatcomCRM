@@ -37,7 +37,7 @@ export class DealDialogManagerComponent implements OnInit {
 
   getManagers() {
     this.dealService.getManagers().subscribe((result) => {
-      this.managers = result.results;
+      this.managers = result;
       console.log(this.managers);
     });
   }
