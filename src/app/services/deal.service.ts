@@ -7,6 +7,8 @@ import {DealResult} from '../models/deal/deal_result';
 import {BaseApi} from '../core/base-api';
 import {CompanyPage} from '../models/company/company-page';
 import {NewDeal} from '../models/deal/new_deal';
+import {User} from '../models/user';
+import {Managers} from '../models/managers/managers';
 
 
 @Injectable()
@@ -70,5 +72,23 @@ export class DealService extends BaseApi {
     return this.post(`deals/${idDeal}/discount/`, {after, comment});
   }
 
+  newMount(dealId: number, date: string, description: string) {
+    if (date === undefined || date === '') {
+      date = null;
+    }
+    if (description === undefined || description === '') {
+      description = null;
+    }
+
+    return this.post(`deals/${dealId}/mount/`, {date, description});
+  }
+
+  getManagers(): Observable<Managers> {
+    return this.get(`managers`);
+  }
+
+  setManager(idDeal: number, manager: number): Observable<Object> {
+    return this.post(`deals/${idDeal}/set_manager/`, {manager});
+  }
 
 }

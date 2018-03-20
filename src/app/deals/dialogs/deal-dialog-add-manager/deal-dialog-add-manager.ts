@@ -5,22 +5,23 @@ import {NgForm} from '@angular/forms';
 import {MeasurementService} from '../../../services/measurement.service';
 
 @Component({
-  selector: 'app-dialog-add-mount',
-  templateUrl: './deal-dialog-add-mount.html',
-  styleUrls: ['./deal-dialog-add-mount.css'],
+  selector: 'app-dialog-add-manager',
+  templateUrl: './deal-dialog-add-manager.html',
+  styleUrls: ['./deal-dialog-add-manager.css'],
 })
 
-export class DealDialogMountComponent implements OnInit {
+export class DealDialogManagerComponent implements OnInit {
   id;
   @Input() closable = true;
   @Input() deal;
   @Input() visible: boolean;
   @ViewChild('form') form: NgForm;
-  @Output() successDealMount = new EventEmitter();
+  @Output() successManagerAdd = new EventEmitter();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   isSubmitted = false;
   isRequest = false;
   formData = {};
+  managers;
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService) {
@@ -30,6 +31,14 @@ export class DealDialogMountComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
+    });
+    this.getManagers();
+  }
+
+  getManagers() {
+    this.dealService.getManagers().subscribe((result) => {
+      this.managers = result.results;
+      console.log(this.managers);
     });
   }
 
@@ -42,19 +51,22 @@ export class DealDialogMountComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    console.log(this.form.form.value.comment);
-    this.dealService.newMount(this.id,
-      this.form.form.value.calendar,
-      this.form.form.value.comment)
+    console.log(this.form.form.value.manager);
+    this.dealService.setManager(this.id, this.form.form.value.manager)
       .subscribe((result) => {
         this.isRequest = false;
         this.visibleChange.emit(this.visible);
-        this.successDealMount.emit(result);
+        this.successManagerAdd.emit();
         this.close();
       }, (error) => {
         this.isRequest = false;
-        alert('Произошла ошибка');
-        // });
+        if (error.status === 200) {
+          this.visibleChange.emit(this.visible);
+          this.successManagerAdd.emit();
+          this.close();
+        } else {
+          alert('Произошла ошибка');
+        }
       });
   }
 }

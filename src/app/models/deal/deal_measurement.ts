@@ -17,6 +17,7 @@ export class DealMeasurement {
   company: Company;
   non_cash: boolean;
   auto_date: string;
+  description: string;
   date: string;
   status: number;
   time: string;

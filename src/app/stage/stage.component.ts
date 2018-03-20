@@ -43,7 +43,7 @@ export class StageComponent implements OnInit {
   }
 
   successStageCost(cost: Cost) {
-    this.stage.costs.push(cost);
+    this.successStageUpdate();
   }
 
   getStage() {

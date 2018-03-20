@@ -40,6 +40,9 @@
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}
         </div>
+        <div class="valign-wrapper" *ngIf="deal.description">
+          <i class="tiny material-icons icon">comment</i> {{deal?.description | nonCash}}
+        </div>
       </div>
     </div>
     <div class="col s5">
@@ -192,7 +195,8 @@
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
     <ul class="fab-ul">
-      <li class="hover-element li-element-menu-fab" onclick="$('#main-btn').click()">
+      <li class="hover-element li-element-menu-fab" onclick="$('#main-btn').click()"
+          (click)="showManagerDialog = !showManagerDialog">
         <div class="center-align valign-wrapper menu-li-div">
           <span class="fab-text">Установить менеджера</span>
           <div class="icon-fab center-align valign-wrapper">
@@ -236,6 +240,9 @@
 <app-dialog-deal-payment [deal]="deal" (successDealPayment)="successPaymentAdded($event)"
                          [(visible)]="showPaymentDialog"></app-dialog-deal-payment>
 <app-dialog-deal-discount [deal]="deal" (successDealDiscount)="successDiscountAdded($event)"
-                         [(visible)]="showDiscountDialog"></app-dialog-deal-discount>
+                          [(visible)]="showDiscountDialog"></app-dialog-deal-discount>
 <app-dialog-add-mount [deal]="deal" (successDealMount)="successMountAdded($event)"
-                          [(visible)]="showMountDialog"></app-dialog-add-mount>
+                      [(visible)]="showMountDialog"></app-dialog-add-mount>
+
+<app-dialog-add-manager [deal]="deal" (successManagerAdd)="successManagerAdded()"
+                        [(visible)]="showManagerDialog"></app-dialog-add-manager>

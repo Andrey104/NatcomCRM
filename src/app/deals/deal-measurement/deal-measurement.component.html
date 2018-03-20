@@ -36,6 +36,9 @@
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">date_range</i> {{measurement?.non_cash | nonCash}}
         </div>
+        <div class="valign-wrapper" *ngIf="measurement.description">
+          <i class="tiny material-icons icon">date_range</i> {{measurement.description}}
+        </div>
       </div>
     </div>
     <div class="col s5">

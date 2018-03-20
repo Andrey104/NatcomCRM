@@ -107,6 +107,7 @@ import {StageDialogCompleteComponent} from './stage/dialogs/stage-dialog-complet
 import {StageDialogCostComponent} from './stage/dialogs/stage-dialog-cost/stage-dialog-cost';
 import {StageDialogTransferComponent} from './stage/dialogs/stage-dialog-transfer/stage-dialog-transfer';
 import {DealDialogMountComponent} from './deals/dialogs/deal-dialog-add-mount/deal-dialog-add-mount';
+import {DealDialogManagerComponent} from './deals/dialogs/deal-dialog-add-manager/deal-dialog-add-manager';
 
 
 @NgModule({
@@ -197,7 +198,8 @@ import {DealDialogMountComponent} from './deals/dialogs/deal-dialog-add-mount/de
     StageDialogCompleteComponent,
     StageDialogCostComponent,
     StageDialogTransferComponent,
-    DealDialogMountComponent
+    DealDialogMountComponent,
+    DealDialogManagerComponent
 ],
   imports: [
     BrowserModule,

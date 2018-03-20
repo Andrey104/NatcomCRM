@@ -30,6 +30,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   showPaymentDialog = false;
   showDiscountDialog = false;
   showMountDialog = false;
+  showManagerDialog = false;
   needSubscribe = true;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
@@ -50,22 +51,32 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  successManagerAdded() {
+    this.loadPage = true;
+    this.getDealById();
+    this.updateList.next(true);
+  }
+
   successMountAdded(mount: DealMount) {
-    this.deal.mounts.push(mount);
+    this.loadPage = true;
+    this.getDealById();
     this.updateList.next(true);
   }
 
   successMeasurementAdded(measurement: DealMeasurement) {
-    this.deal.measurements.push(measurement);
+    this.loadPage = true;
+    this.getDealById();
     this.updateList.next(true);
   }
 
   successPaymentAdded(payment: Payment) {
-    this.deal.payments.push(payment);
+    this.loadPage = true;
+    this.getDealById();
   }
 
   successDiscountAdded(discount: DealDiscount) {
-    this.deal.discounts.push(discount);
+    this.loadPage = true;
+    this.getDealById();
   }
 
   updateDeal() {
