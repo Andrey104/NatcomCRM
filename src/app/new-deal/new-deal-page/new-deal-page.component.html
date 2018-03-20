@@ -69,12 +69,29 @@
     </form>
   </div>
   <div class="col s5">
-    <div>Clients</div>
-    <div (click)="showDialog = !showDialog">Add client</div>
-    <div *ngFor="let client of clients">
-      <span>{{client.fio}}</span>
-      <div *ngFor="let phone of client.phones">
-        <span>{{phone.number}}</span>
+    <div (click)="showDialog = !showDialog" class="new-client-block">
+      <span class="hover-element">Добавить клиента</span>
+      <i class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+    </div>
+    <div class="row contacts">
+      <div class="col s12 valign-wrapper">
+        <hr class="col s4">
+        <div class="col s4 center-align header">Клиенты</div>
+        <hr class="col s4">
+      </div>
+    </div>
+    <div *ngIf="clients.length===0" class="center-align">У сделки нет клиентов</div>
+    <div class="row">
+      <div *ngFor="let client of clients; let i = index" class="col s12">
+        <div class="col s12 valign-wrapper">
+          <div class="col s6 valign-wrapper detail-col-right">
+            <i class="small material-icons icon">person</i>
+            {{client.fio}}
+          </div>
+          <div class="col s5 div-number">{{client.phones[0].number | phoneFormat}}</div>
+          <i class="col s1 material-icons detail-col-left">chevron_right</i>
+        </div>
+        <hr class="col s12 black">
       </div>
     </div>
   </div>

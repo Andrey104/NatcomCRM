@@ -1,61 +1,69 @@
-<div [@dialog] *ngIf="visible" class="dialog">
+<div *ngIf="visible" class="dialog">
   <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="onClose()">close</i>
-  <div class="row">
-    <form #form="ngForm" (ngSubmit)="submitForm(form)">
-      <div class="browser-default col s12 valign-wrapper">
-        <div class="col s10 valign-wrapper">
-          <label>ФИО</label>
-          <input
-            id="client"
-            type="text"
-            class="validate"
-            ngModel
-            name="clientName"
-            required>
+  <div class="row main-row">
+    <form class="form" #form="ngForm" (ngSubmit)="submitForm(form)">
+      <div class="row main-row valign-wrapper">
+        <div class="col s10">
+          <div class="input-field col s12">
+            <input id="client"
+                   type="text"
+                   class="validate"
+                   ngModel
+                   name="clientName"
+                   required>
+            <label for="client" data-error="wrong" data-success="right">ФИО</label>
+          </div>
         </div>
         <i class="col s2 small material-icons hover-element" (click)="addPhone()">add</i>
       </div>
-      <div class="row">
-        <div class="browser-default col s12 valign-wrapper">
-          <div class="col s10 valign-wrapper">
-            <label>Email</label>
-            <input
-              id="email"
-              type="text"
-              class="validate"
-              ngModel
-              name="email">
+      <div class="row main-row">
+        <div class="col s10">
+          <div class="input-field col s12">
+            <input id="email"
+                   type="email"
+                   class="validate"
+                   ngModel
+                   name="email"
+                   required>
+            <label for="email" data-error="wrong" data-success="right">Email</label>
           </div>
         </div>
       </div>
-        <div *ngFor="let phone of phones; let i = index" class="browser-default col s12 valign-wrapper">
-          <div class="col 12">
-            <div class="col s10 valign-wrapper">
-              <label>Телефон</label>
-              <input (input)="phoneNumber(i, $event.target.value)"
-                     type="text"
-                     [value]="phone.number"
-                     name="phone"
-                     ngModel
-                     required>
+      <div *ngFor="let phone of phones; let i = index" class="valign-wrapper">
+        <div class="col s12">
+          <div class="row main-row valign-wrapper">
+            <div class="col s10 detail-col valign-wrapper">
+              <div class="input-field col s12">
+                <input type="text"
+                       class="validate"
+                       (input)="phoneNumber(i, $event.target.value)">
+                <label data-error="wrong" data-success="right">Номер телефона</label>
+              </div>
             </div>
             <i class="col s2 small material-icons hover-element" (click)="removePhone(i)">remove</i>
           </div>
-            <div class="col s12 browser-default valign-wrapper">
-              <div class="col s10 valign-wrapper">
-                <label>Комментарий к телефону</label>
-                <input (input)="phoneComment(i, $event.target.value)"
-                       type="text"
-                       name="comment"
-                       required>
+          <div class="row main-row">
+            <div class="col s10 detail-col valign-wrapper">
+              <div class="input-field col s12">
+                <input type="text"
+                       class="validate"
+                       (input)="phoneComment(i, $event.target.value)">
+                <label data-error="wrong" data-success="right">Комментарий к телефону</label>
               </div>
             </div>
+          </div>
         </div>
-      <button class="btn-dialog-submit" type="submit"
-              [class.btn-dialog-submit]="form.valid"
-              [disabled]="(!form.valid||isRequest)"
-              [class.btn-dialog-disabled]="(!form.valid||isRequest)">OK
-      </button>
+      </div>
+      <div *ngIf="errorForm" style="width: 100px; height: 100px; background-color: red">
+        <span>{{errorForm.message}}</span>
+      </div>
+      <div style="height: 100px; width: 100px; position:relative;">
+        <button class="btn-dialog-submit" type="submit"
+                [class.btn-dialog-submit]="form.valid"
+                [disabled]="(!form.valid||isRequest)"
+                [class.btn-dialog-disabled]="(!form.valid||isRequest)">OK
+        </button>
+      </div>
     </form>
   </div>
 </div>

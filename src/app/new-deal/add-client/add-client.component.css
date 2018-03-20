@@ -1,0 +1,22 @@
+.dialog {
+  height: 450px;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .dialog {
+    top: calc(50% - 225px);
+  }
+}
+
+.btn-dialog-disabled {
+  position: fixed;
+  left: 5px;
+  right: 5px;
+}
+
+.btn-dialog-submit {
+  position: fixed;
+  left: 5px;
+  right: 5px;
+}

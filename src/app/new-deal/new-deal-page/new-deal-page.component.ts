@@ -10,6 +10,7 @@ import {OrderResult} from '../../models/orders/order_result';
 import {Client} from '../../models/client';
 import {Phone} from '../../models/phone';
 import {NewDeal} from '../../models/deal/new_deal';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-deal-page',
@@ -26,10 +27,12 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   defaultCompany: number;
   visibleMeasurement = {show: false, icon: 'add', message: 'Добавить замер'};
   order: OrderResult;
+  dealId: number;
 
   constructor(private dealService: DealService,
               private measurementService: MeasurementService,
-              private orderService: OrderService) {
+              private orderService: OrderService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -74,22 +77,24 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
     const comment = form.form.value.addressComment;
     const date = form.form.value.calendar;
     const commentTime = form.form.value.commentTime;
-    console.log(this.clients);
     const newDeal = new NewDeal(companyId, payment, address, comment, this.clients);
     this.subOnDeal = this.dealService.newDeal(newDeal)
       .subscribe((deal) => {
-        console.log(deal);
+        this.dealId = deal.id;
         if (deal !== null && date !== undefined && commentTime !== undefined) {
           this.subOnMeasurement =
             this.measurementService.newMeasurement(deal.id, deal.non_cash, date, commentTime)
               .subscribe((measurement) => {
                 this.showMeasurement();
-                console.log(measurement);
+                this.unSub();
+                this.router.navigate(['/deals/all/' + this.dealId.toString()]);
               });
+        } else {
+          this.unSub();
+          this.router.navigate(['/deals/all/' + this.dealId.toString()]);
         }
       });
     form.reset();
-    // this.unSub();
   }
 
   addNewClient(client: Client) {

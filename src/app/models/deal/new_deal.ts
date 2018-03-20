@@ -12,6 +12,8 @@ export class NewDeal {
     this.payment = payment;
     this.address = address;
     this.address_comment = addressComment;
-    this.clients.push({client: clients[0].id});
+    for (const client of clients) {
+      this.clients.push({client: client.id});
+    }
   }
 }

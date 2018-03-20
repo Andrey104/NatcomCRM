@@ -14,3 +14,14 @@
 .calendar {
   width: 300px!important;
 }
+
+.center-dialog-title {
+  line-height: normal;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.new-client-block {
+  display: inline-block;
+  margin: 20px 0;
+}
