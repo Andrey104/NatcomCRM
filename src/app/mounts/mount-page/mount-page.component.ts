@@ -44,6 +44,7 @@ export class MountPageComponent implements OnInit {
   subscribeOnUrl() {
     this.activatedRoute.params
       .subscribe((params) => {
+        this.inputText = '';
         this.status = this.utils.statusUrlMount(params['status']);
         this.mounts = [];
         this.showMounts();

@@ -1,3 +1,7 @@
+form {
+ margin-top: 10px;
+}
+
 .text-comment-dialog {
   height: 50px;
 }
@@ -11,8 +15,17 @@
   cursor: pointer;
 }
 
-.calendar {
-  width: 300px!important;
+.measurement-container:hover i.center-dialog-title {
+  transform: scale(1.1, 1.1);
+}
+
+.new-client-block {
+  display: inline-block;
+  margin: 15px 0;
+}
+
+.new-client-block:hover i.center-dialog-title {
+  transform: scale(1.1, 1.1);
 }
 
 .center-dialog-title {
@@ -21,7 +34,16 @@
   vertical-align: middle;
 }
 
-.new-client-block {
-  display: inline-block;
-  margin: 20px 0;
+.btn-dialog-submit {
+  right: 40px;
+  bottom: 40px;
+  height: 45px;
+  width: 120px;
+}
+
+.btn-dialog-disabled {
+  right: 40px;
+  bottom: 40px;
+  height: 45px;
+  width: 120px;
 }

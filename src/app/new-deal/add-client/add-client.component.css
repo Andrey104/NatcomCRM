@@ -1,6 +1,18 @@
 .dialog {
-  height: 450px;
+  height: 449px;
   overflow-y: auto;
+}
+
+.dialog::-webkit-scrollbar {
+  width: 0;
+}
+
+.dialog {
+  overflow: -moz-scrollbars-none;
+}
+
+.dialog {
+  -ms-overflow-style: none;
 }
 
 @media (min-width: 768px) {
@@ -9,14 +21,19 @@
   }
 }
 
-.btn-dialog-disabled {
-  position: fixed;
-  left: 5px;
-  right: 5px;
+h4 {
+  margin: 5px auto;
+  padding-right: 40px;
+  padding-left: 40px;
+  text-align: center;
 }
 
-.btn-dialog-submit {
-  position: fixed;
-  left: 5px;
-  right: 5px;
+.text-comment-dialog {
+  height: 50px;
+}
+
+.button-container {
+  position: relative;
+  height: 70px;
+  margin-right: 10px;
 }

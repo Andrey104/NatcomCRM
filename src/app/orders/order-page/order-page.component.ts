@@ -31,7 +31,6 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.inputText = '';
     this.subscribeOnInputField();
     this.subscribeOnOrderStatus();
   }
@@ -51,6 +50,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   subscribeOnOrderStatus() {
     this.activatedRoute.params
       .subscribe((params) => {
+        this.inputText = '';
         this.status = this.utils.statusUrlOrder(params['status']);
         this.orders = [];
         this.showOrders();

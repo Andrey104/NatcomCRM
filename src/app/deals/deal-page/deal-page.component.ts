@@ -36,6 +36,7 @@ export class DealPageComponent implements OnInit {
 
   subscribeOnUrl() {
     this.activatedRoute.params.subscribe(params => {
+      this.inputText = '';
       this.status = this.utils.statusUrlDeal(params['status']);
       this.dealPage = [];
       this.showDeals();

@@ -1,31 +1,35 @@
 <div *ngIf="visible" class="dialog">
   <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="onClose()">close</i>
+  <h4>Добавить клиента</h4>
   <div class="row main-row">
     <form class="form" #form="ngForm" (ngSubmit)="submitForm(form)">
       <div class="row main-row valign-wrapper">
         <div class="col s10">
-          <div class="input-field col s12">
+          <div class="col s12">
+            <label for="client"
+                   data-error="wrong"
+                   data-success="right"
+                   class="required-area-dialog">ФИО
+            </label>
             <input id="client"
                    type="text"
                    class="validate"
                    ngModel
                    name="clientName"
                    required>
-            <label for="client" data-error="wrong" data-success="right">ФИО</label>
           </div>
         </div>
         <i class="col s2 small material-icons hover-element" (click)="addPhone()">add</i>
       </div>
       <div class="row main-row">
         <div class="col s10">
-          <div class="input-field col s12">
+          <div class="col s12">
+            <label data-error="wrong" data-success="right">Email</label>
             <input id="email"
                    type="email"
                    class="validate"
                    ngModel
-                   name="email"
-                   required>
-            <label for="email" data-error="wrong" data-success="right">Email</label>
+                   name="email">
           </div>
         </div>
       </div>
@@ -33,35 +37,40 @@
         <div class="col s12">
           <div class="row main-row valign-wrapper">
             <div class="col s10 detail-col valign-wrapper">
-              <div class="input-field col s12">
+              <div class="col s12">
+                <label class="required-area-dialog">Номер телефона</label>
                 <input type="text"
-                       class="validate"
                        (input)="phoneNumber(i, $event.target.value)">
-                <label data-error="wrong" data-success="right">Номер телефона</label>
               </div>
             </div>
-            <i class="col s2 small material-icons hover-element" (click)="removePhone(i)">remove</i>
+            <div class="col s2">
+              <i *ngIf="phones.length>1" class="small material-icons hover-element"
+                 (click)="removePhone(i)">remove
+              </i>
+            </div>
           </div>
           <div class="row main-row">
             <div class="col s10 detail-col valign-wrapper">
-              <div class="input-field col s12">
-                <input type="text"
-                       class="validate"
-                       (input)="phoneComment(i, $event.target.value)">
-                <label data-error="wrong" data-success="right">Комментарий к телефону</label>
+              <div class="col s12">
+                <label>Комментарий к телефону</label>
+                <textarea type="text"
+                          (input)="phoneComment(i, $event.target.value)"
+                          name="comment"
+                          class="text-comment-dialog">
+                </textarea>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div *ngIf="errorForm" style="width: 100px; height: 100px; background-color: red">
-        <span>{{errorForm.message}}</span>
-      </div>
-      <div style="height: 100px; width: 100px; position:relative;">
+      <div class="button-container">
+        <span class="description-required-dialog">
+          <span [ngStyle]="{'color':'red'}">*</span> помечены обязательные поля</span>
+        <button class="btn-dialog-cancel" (click)="close()">Отмена</button>
         <button class="btn-dialog-submit" type="submit"
                 [class.btn-dialog-submit]="form.valid"
-                [disabled]="(!form.valid||isRequest)"
-                [class.btn-dialog-disabled]="(!form.valid||isRequest)">OK
+                [disabled]="(!form.valid||!successPhones)"
+                [class.btn-dialog-disabled]="(!form.valid||!successPhones)">OK
         </button>
       </div>
     </form>

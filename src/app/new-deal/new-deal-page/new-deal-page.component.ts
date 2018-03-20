@@ -25,9 +25,10 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   subOnMeasurement: Subscription;
   showDialog = false;
   defaultCompany: number;
-  visibleMeasurement = {show: false, icon: 'add', message: 'Добавить замер'};
+  visibleMeasurement = {show: false, icon: 'add_circle_outline', message: 'Добавить замер'};
   order: OrderResult;
   dealId: number;
+  isRequest = true;
 
   constructor(private dealService: DealService,
               private measurementService: MeasurementService,
@@ -61,16 +62,17 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
 
   showMeasurement() {
     this.visibleMeasurement.show = !this.visibleMeasurement.show;
-    if (this.visibleMeasurement.icon === 'add') {
-      this.visibleMeasurement.icon = 'remove';
+    if (this.visibleMeasurement.icon === 'add_circle_outline') {
+      this.visibleMeasurement.icon = 'remove_circle_outline';
       this.visibleMeasurement.message = 'Удалить замер';
     } else {
-      this.visibleMeasurement.icon = 'add';
+      this.visibleMeasurement.icon = 'add_circle_outline';
       this.visibleMeasurement.message = 'Добавить замер';
     }
   }
 
   submitForm(form: NgForm) {
+    this.isRequest = false;
     const companyId = Number(form.form.value.company);
     const payment = Boolean(form.form.value.payment);
     const address = form.form.value.address;

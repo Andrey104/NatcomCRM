@@ -19,6 +19,7 @@ export class AddClientComponent implements OnInit {
   phones: Phone[] = [];
   closable = true;
   errorForm: ErrorForm = null;
+  successPhones = false;
 
   constructor(private clientService: ClientService) {
   }
@@ -38,6 +39,7 @@ export class AddClientComponent implements OnInit {
   }
 
   addPhone() {
+    this.successPhones = false;
     const lastPhone = this.phones.length - 1;
     if (this.phones[lastPhone].number !== '') {
       this.phones.push(new Phone('', ''));
@@ -48,6 +50,11 @@ export class AddClientComponent implements OnInit {
 
   phoneNumber(phoneId: number, phone: string) {
     this.phones[phoneId].number = phone;
+    if (phone !== '') {
+      this.successPhones = true;
+    } else {
+      this.successPhones = false;
+    }
   }
 
   phoneComment(phoneId: number, comment: string) {
@@ -55,6 +62,7 @@ export class AddClientComponent implements OnInit {
   }
 
   removePhone(phoneId: number) {
+    this.checkPhones();
     if (this.phones.length !== 1) {
       this.phones.splice(phoneId, 1);
     } else {
@@ -70,6 +78,15 @@ export class AddClientComponent implements OnInit {
         this.errorForm = null;
       }
     }, 5000);
+  }
+
+  checkPhones() {
+    for (const phone of this.phones) {
+      if (phone.number === '') {
+        this.successPhones = false;
+        break;
+      }
+    }
   }
 
   onClose() {

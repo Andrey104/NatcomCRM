@@ -21,8 +21,8 @@
                   ngModel
                   name="payment"
                   required>
-            <option value="0">Нал</option>
-            <option value="1">Безнал</option>
+            <option value="0">Наличными</option>
+            <option value="1">Безналичный</option>
           </select>
         </div>
         <div class="col s12">
@@ -39,32 +39,36 @@
                     ngModel
                     name="addressComment"
                     required>
-        </textarea>
+          </textarea>
         </div>
       </div>
       <div class="measurement-container" (click)="showMeasurement()">
-        <i class="small material-icons">{{visibleMeasurement.icon}}</i>
+        <i class="small material-icons center-dialog-title">{{visibleMeasurement.icon}}</i>
         <span>{{visibleMeasurement.message}}</span>
       </div>
       <div *ngIf="visibleMeasurement.show" class="row">
-        <div>
-          <span>Выберите дату:</span>
+        <div class="col s12">
+          <label class="required-area-dialog">Дата замера</label>
           <input type="date"
                  class="calendar"
                  ngModel
                  name="calendar"
                  required>
         </div>
-        <div class="input-field col s12">
+        <div class="col s12">
           <label class="required-area-dialog">Комментарий ко времени</label>
-          <input type="text"
-                 ngModel
-                 name="commentTime"
-                 required>
+          <textarea class="text-comment-dialog"
+                    ngModel
+                    name="commentTime"
+                    required>
+          </textarea>
         </div>
       </div>
       <button class="btn-dialog-submit" type="submit"
-              [disabled]="!form.valid">OK
+              [class.btn-dialog-submit]="form.valid"
+              [disabled]="(!form.valid||clients.length===0||!isRequest)"
+              [class.btn-dialog-disabled]="(!form.valid||clients.length===0||!isRequest)"
+              >Добавить сделку
       </button>
     </form>
   </div>
