@@ -31,6 +31,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   showDiscountDialog = false;
   showMountDialog = false;
   showManagerDialog = false;
+  showEditDialog = false;
   needSubscribe = true;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
@@ -49,6 +50,12 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
       document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
       this.flag = false;
     }
+  }
+
+  successEdit() {
+    this.loadPage = true;
+    this.getDealById();
+    this.updateList.next(true);
   }
 
   successManagerAdded() {

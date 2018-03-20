@@ -222,6 +222,15 @@
           </div>
         </div>
       </li>
+      <li class="hover-element li-element-menu-fab" (click)="showEditDialog = !showEditDialog"
+          onclick="$('#main-btn').click()">
+        <div class="center-align valign-wrapper menu-li-div">
+          <span class="fab-text">Редактировать</span>
+          <div class="icon-fab center-align valign-wrapper">
+            <i class="material-icons color-fab-icon">edit</i>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
   <app-deal-client-info
@@ -246,3 +255,5 @@
 
 <app-dialog-add-manager [deal]="deal" (successManagerAdd)="successManagerAdded()"
                         [(visible)]="showManagerDialog"></app-dialog-add-manager>
+<app-dialog-deal-edit [deal]="deal" (successDealEdit)="successEdit()"
+                        [(visible)]="showEditDialog"></app-dialog-deal-edit>
