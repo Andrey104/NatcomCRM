@@ -76,16 +76,18 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
     const companyId = Number(form.form.value.company);
     const payment = Boolean(form.form.value.payment);
     const address = form.form.value.address;
+    const description = form.form.value.description;
     const comment = form.form.value.addressComment;
     const date = form.form.value.calendar;
     const commentTime = form.form.value.commentTime;
-    const newDeal = new NewDeal(companyId, payment, address, comment, this.clients);
+    const descriptionMeasurement = form.form.value.descriptionMeasurement;
+    const newDeal = new NewDeal(companyId, payment, description, address, comment, this.clients);
     this.subOnDeal = this.dealService.newDeal(newDeal)
       .subscribe((deal) => {
         this.dealId = deal.id;
         if (deal !== null && date !== undefined && commentTime !== undefined) {
           this.subOnMeasurement =
-            this.measurementService.newMeasurement(deal.id, deal.non_cash, date, commentTime)
+            this.measurementService.newMeasurement(deal.id, deal.non_cash, date, commentTime, descriptionMeasurement)
               .subscribe((measurement) => {
                 this.showMeasurement();
                 this.unSub();

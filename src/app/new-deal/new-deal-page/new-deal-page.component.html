@@ -26,6 +26,13 @@
           </select>
         </div>
         <div class="col s12">
+          <label>Дополнительная информация о сделке</label>
+          <textarea class="text-comment-dialog"
+                    ngModel
+                    name="description">
+          </textarea>
+        </div>
+        <div class="col s12">
           <label class="required-area-dialog">Адрес</label>
           <textarea class="text-comment-dialog"
                     ngModel
@@ -34,11 +41,10 @@
           </textarea>
         </div>
         <div class="col s12">
-          <label class="required-area-dialog">Комментарий к адресу</label>
+          <label>Комментарий к адресу</label>
           <textarea class="text-comment-dialog"
                     ngModel
-                    name="addressComment"
-                    required>
+                    name="addressComment">
           </textarea>
         </div>
       </div>
@@ -54,6 +60,13 @@
                  ngModel
                  name="calendar"
                  required>
+        </div>
+        <div class="col s12">
+          <label>Дополнительная информация о замере</label>
+          <textarea class="text-comment-dialog"
+                    ngModel
+                    name="descriptionMeasurement">
+          </textarea>
         </div>
         <div class="col s12">
           <label class="required-area-dialog">Комментарий ко времени</label>

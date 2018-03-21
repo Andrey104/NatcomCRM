@@ -100,7 +100,7 @@ export class DealPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.dealService.getDeals(this.page, this.status.statusName)
+      this.dealService.getDeals(this.page, this.status.statusUrl)
         .subscribe(dealPage => {
           this.dealPage = this.dealPage.concat(dealPage.results);
           if (dealPage.next === null) {
