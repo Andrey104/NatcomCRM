@@ -1,0 +1,39 @@
+.dialog {
+  height: 449px;
+  overflow-y: auto;
+}
+
+.dialog::-webkit-scrollbar {
+  width: 0;
+}
+
+.dialog {
+  overflow: -moz-scrollbars-none;
+}
+
+.dialog {
+  -ms-overflow-style: none;
+}
+
+@media (min-width: 768px) {
+  .dialog {
+    top: calc(50% - 225px);
+  }
+}
+
+h4 {
+  margin: 5px auto;
+  padding-right: 40px;
+  padding-left: 40px;
+  text-align: center;
+}
+
+.text-comment-dialog {
+  height: 50px;
+}
+
+.button-container {
+  position: relative;
+  height: 70px;
+  margin-right: 10px;
+}

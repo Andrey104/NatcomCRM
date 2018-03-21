@@ -31,6 +31,19 @@ export class UtilsService {
     return months[numberMonth];
   }
 
+  showEditButtons(id: string) {
+    console.log('user_type ' + localStorage.getItem('user_type'));
+    if (localStorage.getItem('id_manager') === id) {
+      return true;
+    }
+    if (localStorage.getItem('user_type') === '4' ||
+      localStorage.getItem('user_type') === '5' ||
+      localStorage.getItem('user_type') === '3') {
+      return true;
+    }
+    return false;
+  }
+
   statusOrder(status: number) {
     let icon: { image, color };
     switch (status) {
@@ -207,41 +220,48 @@ export class UtilsService {
     switch (action.type) {
       case 0: {
         type = 'отказал(а) в сделке';
+        if (action.cause !== null) {
+          causeStr = 'по причине:';
+          switch (action.cause) {
+            case 1: {
+              cause = ' заключились с конкурентами';
+              break;
+            }
+            case 2: {
+              cause = ' неадекватный клиент';
+              break;
+            }
+            case 3: {
+              cause = ' нет возможности монтажа';
+              break;
+            }
+            case 4: {
+              cause = ' ошибка сотрудника';
+              break;
+            }
+          }
+        }
         break;
       }
       case 1: {
-        type = 'добавил(а) монтаж в сделку';
+        type = 'добавил(а) замер в сделку';
         break;
       }
       case 2: {
-        type = 'успешно завершил(а) сделку';
+        type = 'добавил(а) монтаж в сделку';
         break;
       }
       case 3: {
-        type = 'добавил(а) клиента в сделку';
+        type = 'завершил(а) сделку';
         break;
       }
       case 4: {
-        type = 'изменил(а) сделку';
+        type = 'добавил(а) клиента';
         break;
       }
       case 5: {
-        type = 'добавил(а) обсуждение в сделку';
+        type = 'установил(а) менеджера';
         break;
-      }
-    }
-
-    if (action.cause !== null) {
-      causeStr = 'по причине:';
-      switch (action.cause) {
-        case 1: {
-          cause = 'клиент не взял трубку';
-          break;
-        }
-        case 2: {
-          cause = 'другое';
-          break;
-        }
       }
     }
 
@@ -256,6 +276,7 @@ export class UtilsService {
   stageActionDecoder(action: DealAction) {
     let message: string;
     let comment: string;
+    let cause = '';
     switch (action.type) {
       case 1: {
         message = ' закрыл(а) стадию ';
@@ -264,6 +285,16 @@ export class UtilsService {
 
       case 2: {
         message = ' перенес(ла) стадию ';
+        switch (action.cause) {
+          case 1: {
+            cause = 'по ошибке клиента ';
+            break;
+          }
+          case 2: {
+            cause = 'по ошибке монтажников ';
+            break;
+          }
+        }
         break;
       }
 
@@ -284,9 +315,9 @@ export class UtilsService {
     if (action.comment == null) {
       comment = '';
     } else {
-      comment = 'с комментарием ' + action.comment;
+      comment = 'с комментарием: \'' + action.comment + '\'';
     }
-    return message + comment;
+    return message + cause + comment;
 
   }
 
@@ -485,13 +516,14 @@ export class UtilsService {
   mountActionDecoder(action: DealAction) {
     let comment = '';
     let type = '';
+    let cause = '';
     switch (action.type) {
       case 1: {
         type = ' добавил(а) стадию ';
         break;
       }
       case 2: {
-        type = ' добавил(а) дату ';
+        type = ' изменил(а) дату ';
         break;
       }
       case 3: {
@@ -500,6 +532,16 @@ export class UtilsService {
       }
       case 4: {
         type = ' отказался(лась) от монтажа ';
+        if (action.cause) {
+          switch (action.cause) {
+            case 1:
+              cause = 'из-за ошибки клиента';
+              break;
+            case 2:
+              cause = 'из-за ошибки монтажника';
+              break;
+          }
+        }
         break;
       }
     }
@@ -507,6 +549,6 @@ export class UtilsService {
       comment = ', с комментарием: ' + action.comment;
     }
 
-    return type + comment;
+    return type + cause + comment;
   }
 }

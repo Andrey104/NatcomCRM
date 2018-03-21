@@ -22,7 +22,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   status: { statusName: string, statusUrl: string };
   term$ = new Subject<string>();
   subInputField: Subscription;
-  inputText = '';
+  inputText: string;
   private subscriptions: Subscription[] = [];
 
   constructor(private orderService: OrderService,
@@ -50,6 +50,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   subscribeOnOrderStatus() {
     this.activatedRoute.params
       .subscribe((params) => {
+        this.inputText = '';
         this.status = this.utils.statusUrlOrder(params['status']);
         this.orders = [];
         this.showOrders();
@@ -153,7 +154,6 @@ export class OrderPageComponent implements OnInit, OnDestroy {
             this.orders = [];
             if (this.inputText === '') {
               this.showOrders();
-              console.log('asdasdasdasfsagkerfpouspjgp;rwjhg;sjgp;sej;ghj');
             } else {
               this.search(this.inputText);
             }

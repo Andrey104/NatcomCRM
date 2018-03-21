@@ -5,6 +5,7 @@ import {MountStage} from '../models/mount/mount-stage';
 import {DealMount} from '../models/deal/deal_mount';
 import {MountService} from '../services/mount.service';
 import {UtilsService} from '../services/utils.service';
+import {Cost} from '../models/cost';
 
 @Component({
   selector: 'app-stage',
@@ -16,7 +17,12 @@ export class StageComponent implements OnInit {
   idMount: number;
   stage: MountStage;
   mount: DealMount;
+  showEditButtons = false;
   isNothingToShow = false;
+  showCompleteStage = false;
+  showTransferStage = false;
+  showAddCost = false;
+  showAddInstaller = false;
 
   constructor(private activatedRoute: ActivatedRoute, private stageMountService: StageMountService, private mountService: MountService,
               private utils: UtilsService) {
@@ -27,12 +33,27 @@ export class StageComponent implements OnInit {
     this.getStage();
   }
 
+  successStageUpdate() {
+    this.stage = null;
+    this.stageMountService.getStage(this.id)
+      .subscribe(result => {
+        this.stage = result;
+      }, error2 => {
+        alert('Произошла ошибка');
+      });
+  }
+
+  successStageCost(cost: Cost) {
+    this.successStageUpdate();
+  }
+
   getStage() {
     this.activatedRoute.params.subscribe(params => {
       this.id = Number(params['stage_id']);
       if (this.stageMountService.stages.length !== 0) {
         this.stageMountService.stages.forEach((stage) => {
           if (stage.id === this.id) {
+            this.showEditButtons = this.utils.showEditButtons(String(this.stageMountService.mount.user.id));
             this.stage = stage;
           }
         });
@@ -49,6 +70,7 @@ export class StageComponent implements OnInit {
   updateStages(idMount: number) {
     this.mountService.getMount(idMount).subscribe(mount => {
       this.mount = mount;
+      this.stageMountService.mount = mount;
       this.stageMountService.resetStages();
       this.mount.stages.forEach((stage) => {
         this.stageMountService.putStage(stage);
@@ -58,6 +80,7 @@ export class StageComponent implements OnInit {
         this.stageMountService.stages.forEach((stage) => {
           if (stage.id === this.id) {
             this.stage = stage;
+            this.showEditButtons = this.utils.showEditButtons(String(this.stageMountService.mount.user.id));
           }
         });
         if (typeof this.stage === 'undefined') {
@@ -74,6 +97,7 @@ export class StageComponent implements OnInit {
   statusColor(status) {
     return this.utils.statusStageMount(status).color;
   }
+
   statusIcon(status) {
     return this.utils.statusStageMount(status).image;
   }

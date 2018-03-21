@@ -1,0 +1,34 @@
+<div *ngIf="visible" class="dialog">
+  <div class="content-dialog">
+    <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
+    <h4>Добавить затраты</h4>
+    <form (ngSubmit)="submitForm()" #form="ngForm">
+      <div>
+        <label class="required-area-dialog">Сумма</label>
+        <input type="number"
+               ngModel
+               name="sum"
+               class="text-comment-dialog"
+               required />
+      </div>
+      <div>
+        <label class="required-area-dialog">Комментарий</label>
+        <textarea type="text"
+                  ngModel
+                  name="comment"
+                  class="text-comment-dialog"
+                  required></textarea>
+      </div>
+      <button class="btn-dialog-submit" type="submit"
+              [class.btn-dialog-submit]="form.valid"
+              [disabled]="(!form.valid||isRequest)"
+              [class.btn-dialog-disabled]="(!form.valid||isRequest)">OK
+      </button>
+    </form>
+    <button class="btn-dialog-cancel" (click)="close()">Отмена</button>
+    <span class="description-required-dialog"><span
+      [ngStyle]="{'color':'red'}">*</span> помечены обязательные поля</span>
+    <app-preloader *ngIf="isRequest"></app-preloader>
+  </div>
+</div>
+<div *ngIf="visible" class="overlay-dialog" (click)="close()"></div>

@@ -25,17 +25,26 @@
   </div>
   <div class="mount-info">
     <div class="col s12 str-info">
-      <i
-        class="tiny  material-icons  icon">date_range</i><span>  {{mount?.date | dateFormat: 'date'}}</span>
+      <i class="tiny  material-icons  icon">date_range</i>
+      <span *ngIf="mount.date">  {{mount?.date | dateFormat: 'date'}}</span>
+      <span *ngIf="!mount.date">По звонку</span>
     </div>
     <div class="col s10 str-info">
       <i class="tiny  material-icons icon">assignment</i><span> Номер договора:  {{dealId | dealContractView}}</span>
+    </div>
+    <div class="col s12 str-info" *ngIf="mount.description">
+      <i
+        class="tiny  material-icons  icon">comment</i>
+      <span> {{mount?.description}}</span>
     </div>
   </div>
   <div class="col s12 row valign-wrapper detail-col">
     <div class="col s5 divider "></div>
     <div class="col s2 center-align">Cтадии</div>
     <div class="col s5 divider "></div>
+  </div>
+  <div *ngIf="mount?.stages.length===0" class="row">
+    <div class="col s12 offset-s1 no-information">Нет стадий</div>
   </div>
   <div class="col s12 main-row valign-wrapper forward-block hover-element" routerLink="stage/{{stage?.id}}"
        *ngFor="let stage of mount?.stages; let i = index">
@@ -65,27 +74,32 @@
       <app-deal-comments [comment]="comment"></app-deal-comments>
     </div>
   </div>
-  <div class="fixed-action-btn click-to-toggle">
-    <a class="btn-floating btn-large orange">
+  <div class="fixed-action-btn click-to-toggle"
+       *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons">
+    <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
     <ul class="fab-ul">
-      <li class="hover-element li-element-menu-fab">
+      <li class="hover-element li-element-menu-fab" (click)="showRejectMount = !showRejectMount"
+          onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отклонить монтаж</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">close</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab">
+      <li class="hover-element li-element-menu-fab" (click)="showAddStage = !showAddStage"
+          onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить стадию</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">add</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab">
+      <li class="hover-element li-element-menu-fab" (click)="showTransferMount = !showTransferMount"
+          onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Перенести монтаж</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">event</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab">
+      <li class="hover-element li-element-menu-fab" (click)="showCompleteMount = !showCompleteMount"
+          onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Завершить монтаж</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">check</i></div>
         </div>
@@ -96,3 +110,9 @@
 <div *ngIf="!loadPage" class="col s12 mount-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
+<app-mount-dialog-reject [mount]="mount" (successMountReject)="successMountUpdate()"
+                         [(visible)]="showRejectMount"></app-mount-dialog-reject>
+<app-mount-dialog-complete [mount]="mount" (successMountComplete)="successMountUpdate()"
+                           [(visible)]="showCompleteMount"></app-mount-dialog-complete>
+<app-mount-dialog-transfer [mount]="mount" (successMountTransfer)="successMountUpdate()"
+                           [(visible)]="showTransferMount"></app-mount-dialog-transfer>

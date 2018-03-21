@@ -3,15 +3,18 @@ import {DealMeasurement} from './deal_measurement';
 import {Company} from '../company';
 import {User} from '../user';
 import {DealMount} from './deal_mount';
+import {Payment} from '../payment';
+import {DealDiscount} from './deal_discount';
 
 export class DealResult {
   id: number;
   clients: object; // add class
   measurements: DealMeasurement[];
+  description: string;
   mounts: DealMount[];
-  discounts: object;
+  discounts: DealDiscount[];
   comments: object[];
-  payments: object; // !!!!!
+  payments: Payment[];
   order_actions: DealAction[]; // !!!!!!!!!!!!!!!!!!!!add class
   actions: DealAction[];
   user: User;

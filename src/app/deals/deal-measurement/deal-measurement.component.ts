@@ -18,6 +18,9 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   flag = false;
   picture: Picture;
   loadPage: boolean;
+  showMeasurementReject = false;
+  showMeasurementTransfer = false;
+  showMeasurementEdit = false;
 
   constructor(private activatedRoute: ActivatedRoute, private measurementService: MeasurementService) {
   }
@@ -31,6 +34,11 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
       document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
       this.flag = false;
     }
+  }
+
+  successMeasurementUpdate() {
+    this.loadPage = true;
+    this.getMeasurementById();
   }
 
   subscribeOnMeasurement() {

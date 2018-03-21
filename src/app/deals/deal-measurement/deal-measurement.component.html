@@ -27,14 +27,20 @@
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">location_on</i> {{measurement?.address | address}}
         </div>
-        <div class="valign-wrapper">
-          <i class="tiny material-icons icon">access_time</i> {{measurement?.address_comment}}
+        <div class="valign-wrapper" *ngIf="measurement.address_comment">
+          <i class="tiny material-icons icon">announcement</i> {{measurement?.address_comment}}
+        </div>
+        <div class="valign-wrapper" *ngIf="measurement.time">
+          <i class="tiny material-icons icon">access_time</i> {{measurement?.time}}
         </div>
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">attach_money</i> {{measurement?.sum | money}}
         </div>
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">date_range</i> {{measurement?.non_cash | nonCash}}
+        </div>
+        <div class="valign-wrapper" *ngIf="measurement.description">
+          <i class="tiny material-icons icon">comment</i> {{measurement.description}}
         </div>
       </div>
     </div>
@@ -117,32 +123,26 @@
     (close)="closePicture()">
   </app-image-modal>
   <div class="fixed-action-btn click-to-toggle">
-    <a class="btn-floating btn-large orange">
+    <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
     <ul class="fab-ul">
-      <li class="hover-element li-element-menu-fab">
-        <div class="center-align valign-wrapper menu-li-div">
-          <span class="fab-text">Отложить</span>
-          <div class="icon-fab center-align valign-wrapper">
-            <i class="material-icons color-fab-icon">access_time</i>
-          </div>
+      <li class="hover-element li-element-menu-fab" (click)="showMeasurementReject = !showMeasurementReject"
+          onclick="$('#main-btn').click()">
+        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отклонить замер</span>
+          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">close</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab">
-        <div class="center-align valign-wrapper menu-li-div">
-          <span class="fab-text">Отказать</span>
-          <div class="icon-fab center-align valign-wrapper">
-            <i class="material-icons color-fab-icon">close</i>
-          </div>
+      <li class="hover-element li-element-menu-fab" (click)="showMeasurementEdit = !showMeasurementEdit"
+          onclick="$('#main-btn').click()">
+        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Редактировать замер</span>
+          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">edit</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab">
-        <div class="center-align valign-wrapper menu-li-div">
-          <span class="fab-text">В сделку</span>
-          <div class="icon-fab center-align valign-wrapper">
-            <i class="material-icons color-fab-icon">check</i>
-          </div>
+      <li class="hover-element li-element-menu-fab" (click)="showMeasurementTransfer = !showMeasurementTransfer"
+          onclick="$('#main-btn').click()">
+        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Перенести замер</span>
+          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">event</i></div>
         </div>
       </li>
     </ul>
@@ -151,4 +151,9 @@
 <div *ngIf="!loadPage" class="col s12 measurement-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
-
+<app-measurement-reject [measurement]="measurement" (successMeasurementReject)="successMeasurementUpdate()"
+                        [(visible)]="showMeasurementReject"></app-measurement-reject>
+<app-measurement-transfer [measurement]="measurement" (successTransferMeasurement)="successMeasurementUpdate()"
+                        [(visible)]="showMeasurementTransfer"></app-measurement-transfer>
+<app-measurement-edit [measurement]="measurement" (successMeasurementEdit)="successMeasurementUpdate()"
+                        [(visible)]="showMeasurementEdit"></app-measurement-edit>

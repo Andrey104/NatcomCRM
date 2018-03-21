@@ -43,9 +43,10 @@ export class LoginComponent implements OnInit {
       .post('http://188.225.46.31/api/login/', { 'username': this.username, 'password': this.password })
       .subscribe(
         data => {
-          console.log('aasdasdasdasdasd');
           localStorage.setItem('token', data['token']);
           localStorage.setItem('user_type', data['type']);
+          localStorage.setItem('id_manager', data['id']);
+          console.log(localStorage.getItem('id_manager'));
           this.router.navigate(['/orders']);
         },
         err => {
@@ -60,6 +61,8 @@ export class LoginComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('type');
   }
 
   private token() {

@@ -3,11 +3,12 @@
     <form #form="ngForm" (ngSubmit)="submitForm(form)">
       <div class="row">
         <div class="col s7">
-          <label>Компания</label>
-          <select #select class="browser-default"
-                  ngModel
+          <label class="required-area-dialog">Компания</label>
+          <select class="browser-default"
+                  [ngModel]="defaultCompany"
                   name="company"
-                  required>
+                  required
+                  #select="ngModel">
             <option *ngFor="let company of companies"
                     [value]="company?.id">
               {{company?.name}}
@@ -15,17 +16,24 @@
           </select>
         </div>
         <div class="col s5">
-          <label>Способ оплаты</label>
+          <label class="required-area-dialog">Способ оплаты</label>
           <select class="browser-default"
                   ngModel
                   name="payment"
                   required>
-            <option value="0">Нал</option>
-            <option value="1">Безнал</option>
+            <option value="0">Наличными</option>
+            <option value="1">Безналичный</option>
           </select>
         </div>
         <div class="col s12">
-          <label>Адрес</label>
+          <label>Дополнительная информация о сделке</label>
+          <textarea class="text-comment-dialog"
+                    ngModel
+                    name="description">
+          </textarea>
+        </div>
+        <div class="col s12">
+          <label class="required-area-dialog">Адрес</label>
           <textarea class="text-comment-dialog"
                     ngModel
                     name="address"
@@ -36,37 +44,73 @@
           <label>Комментарий к адресу</label>
           <textarea class="text-comment-dialog"
                     ngModel
-                    name="addressComment"
-                    required>
-        </textarea>
+                    name="addressComment">
+          </textarea>
         </div>
       </div>
-      <div class="valign-wrapper" (click)="showMeasurement()">
-        <i class="small material-icons">{{visibleMeasurement.icon}}</i>
+      <div class="measurement-container" (click)="showMeasurement()">
+        <i class="small material-icons center-dialog-title">{{visibleMeasurement.icon}}</i>
         <span>{{visibleMeasurement.message}}</span>
       </div>
       <div *ngIf="visibleMeasurement.show" class="row">
-        <p>Выберите дату: <input type="date"
-                                 ngModel
-                                 name="calendar"
-                                 required>
-        </p>
-        <div class="input-field col s12">
-          <label>Комментарий ко времени</label>
-          <input type="text"
+        <div class="col s12">
+          <label class="required-area-dialog">Дата замера</label>
+          <input type="date"
+                 class="calendar"
                  ngModel
-                 name="commentTime"
+                 name="calendar"
                  required>
+        </div>
+        <div class="col s12">
+          <label>Дополнительная информация о замере</label>
+          <textarea class="text-comment-dialog"
+                    ngModel
+                    name="descriptionMeasurement">
+          </textarea>
+        </div>
+        <div class="col s12">
+          <label class="required-area-dialog">Комментарий ко времени</label>
+          <textarea class="text-comment-dialog"
+                    ngModel
+                    name="commentTime"
+                    required>
+          </textarea>
         </div>
       </div>
       <button class="btn-dialog-submit" type="submit"
-              [disabled]="!form.valid">OK
+              [class.btn-dialog-submit]="form.valid"
+              [disabled]="(!form.valid||clients.length===0||!isRequest)"
+              [class.btn-dialog-disabled]="(!form.valid||clients.length===0||!isRequest)"
+              >Добавить сделку
       </button>
     </form>
   </div>
   <div class="col s5">
-    <div>Clients</div>
-    <div (click)="showDialog = !showDialog">Add client</div>
+    <div (click)="showDialog = !showDialog" class="new-client-block">
+      <span class="hover-element">Добавить клиента</span>
+      <i class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+    </div>
+    <div class="row contacts">
+      <div class="col s12 valign-wrapper">
+        <hr class="col s4">
+        <div class="col s4 center-align header">Клиенты</div>
+        <hr class="col s4">
+      </div>
+    </div>
+    <div *ngIf="clients.length===0" class="center-align">У сделки нет клиентов</div>
+    <div class="row">
+      <div *ngFor="let client of clients; let i = index" class="col s12">
+        <div class="col s12 valign-wrapper">
+          <div class="col s6 valign-wrapper detail-col-right">
+            <i class="small material-icons icon">person</i>
+            {{client.fio}}
+          </div>
+          <div class="col s5 div-number">{{client.phones[0].number | phoneFormat}}</div>
+          <i class="col s1 material-icons detail-col-left">chevron_right</i>
+        </div>
+        <hr class="col s12 black">
+      </div>
+    </div>
   </div>
-  <app-add-client [(visible)]="showDialog"></app-add-client>
+  <app-add-client [(visible)]="showDialog" (successClient)="addNewClient($event)"></app-add-client>
 </div>

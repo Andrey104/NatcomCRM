@@ -72,7 +72,7 @@
   background-color: #e2e2e2;
 }
 
-.forward-block:hover .arrow{
+.forward-block:hover .arrow {
   font-size: 40px;
   opacity: 1;
   color: #666666;
@@ -115,4 +115,14 @@
 
 #reject, #complete {
   right: 91px;
+}
+
+.center-dialog-title {
+  line-height: normal;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+i.center-dialog-title:hover {
+  transform: scale(1.1, 1.1);
 }

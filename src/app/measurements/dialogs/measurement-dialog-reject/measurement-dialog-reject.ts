@@ -1,35 +1,25 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {animate, style, transition, trigger} from '@angular/animations';
+import {Component, EventEmitter, Input,  OnInit, Output,  ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {DealService} from '../../../services/deal.service';
 import {NgForm} from '@angular/forms';
-import {OrderService} from '../../services/order.service';
-import {DealService} from '../../services/deal.service';
 
 @Component({
-  selector: 'app-deal-complete',
-  templateUrl: './deal-dialog-complete.component.html',
-  styleUrls: ['./deal-dialog-complete.component.css'],
-  animations: [
-    trigger('dialog', [
-      transition('void => *', [
-        style({transform: 'scale3d(.3, .3, .3)'}),
-        animate(100)
-      ]),
-      transition('* => void', [
-        animate(100, style({transform: 'scale3d(.0, .0, .0)'}))
-      ])
-    ])
-  ]
+  selector: 'app-measurement-reject',
+  templateUrl: './measurement-dialog-reject.html',
+  styleUrls: ['./measurement-dialog-reject.css'],
 })
-export class DealDialogCompleteComponent implements OnInit {
+export class MeasurementDialogRejectComponent implements OnInit {
   id;
   @Input() closable = true;
-  @Input() deal;
+  @Input() measurement;
   @Input() visible: boolean;
+  @ViewChild('form') form: NgForm;
   @Output() successDeal = new EventEmitter();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  causes = [1, 2, 3];
   isSubmitted = false;
   isRequest = false;
+  formData = {};
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService) {
@@ -50,7 +40,8 @@ export class DealDialogCompleteComponent implements OnInit {
   submitForm() {
     this.isRequest = true;
     this.isSubmitted = true;
-    this.dealService.dealComplete(this.id).subscribe((result) => {
+    this.formData = this.form.value;
+    this.dealService.dealReject(this.id, this.form.form.value.answer, this.form.form.value.comment).subscribe((result) => {
       this.isRequest = false;
       this.visibleChange.emit(this.visible);
       this.successDeal.emit();

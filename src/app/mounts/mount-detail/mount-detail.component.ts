@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {StageMountService} from '../../services/stage-mount.service';
 import {MountService} from '../../services/mount.service';
 import {DealMount} from '../../models/deal/deal_mount';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: 'app-mount-detail',
@@ -14,9 +16,19 @@ export class MountDetailComponent implements OnInit, AfterViewChecked {
   mount: DealMount;
   dealId;
   isSend = false;
+  showEditButtons = false;
   loadPage: boolean;
+  showRejectMount = false;
+  showCompleteMount = false;
+  showTransferMount = false;
+  showAddStage = false;
+  needSubscribe = true;
+  updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
-  constructor(private activatedRoute: ActivatedRoute, private mountService: MountService, private stageMountService: StageMountService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private mountService: MountService,
+              private stageMountService: StageMountService,
+              private utils: UtilsService) {
   }
 
   ngOnInit() {
@@ -28,6 +40,12 @@ export class MountDetailComponent implements OnInit, AfterViewChecked {
       document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
       this.isSend = false;
     }
+  }
+
+  successMountUpdate() {
+    this.updateList.next(true);
+    this.loadPage = true;
+    this.getMountById();
   }
 
   subscribeMount() {
@@ -42,6 +60,8 @@ export class MountDetailComponent implements OnInit, AfterViewChecked {
     this.mountService.getMount(this.id)
       .subscribe((mount) => {
         this.mount = mount;
+        this.showEditButtons = this.utils.showEditButtons(String(this.mount.user.id));
+        this.stageMountService.mount = mount;
         this.dealId = String(mount.deal);
         this.stageMountService.resetStages();
         this.mount.stages.forEach((stage) => {

@@ -11,6 +11,6 @@ export class MountStage {
   auto_date: string;
   date: string;
   status: number;
-  comment: string;
+  description: string;
   mount: number;
 }

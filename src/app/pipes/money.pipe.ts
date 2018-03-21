@@ -8,7 +8,7 @@ export class MoneyPipe implements PipeTransform {
     if (money === null || money === '') {
       money = 'Сумма не указана';
     } else {
-      money = money.substring(0, money.length - 3) + ' рублей';
+      money = money + ' р';
     }
     return money;
   }

@@ -8,17 +8,6 @@ import {NgForm} from '@angular/forms';
   selector: 'app-order-defer-dialog',
   templateUrl: './order-defer-dialog.component.html',
   styleUrls: ['./order-defer-dialog.component.css'],
-  animations: [
-    trigger('dialog', [
-      transition('void => *', [
-        style({transform: 'scale3d(.3, .3, .3)'}),
-        animate(100)
-      ]),
-      transition('* => void', [
-        animate(100, style({transform: 'scale3d(.0, .0, .0)'}))
-      ])
-    ])
-  ]
 })
 export class OrderDeferDialogComponent implements OnInit {
   id;

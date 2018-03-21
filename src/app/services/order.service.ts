@@ -17,11 +17,19 @@ const httpOptions = {
 
 @Injectable()
 export class OrderService extends BaseApi {
-  private ordersUrl = 'http://188.225.46.31/api/orders';  // URL to web api
+  private order: OrderResult;
 
   constructor(public http: HttpClient,
               private messageService: MessageService) {
     super(http);
+  }
+
+  getOrder(): OrderResult {
+    return this.order;
+  }
+
+  setOrder(order: OrderResult) {
+    this.order = order;
   }
 
   /** GET orders from the server */

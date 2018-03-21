@@ -31,14 +31,17 @@
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}
         </div>
-        <div class="valign-wrapper">
-          <i class="tiny material-icons icon">access_time</i> {{deal?.address_comment}}
+        <div class="valign-wrapper" *ngIf="deal.address_comment">
+          <i class="tiny material-icons icon">announcement</i> {{deal?.address_comment}}
         </div>
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}
         </div>
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}
+        </div>
+        <div class="valign-wrapper" *ngIf="deal.description">
+          <i class="tiny material-icons icon">comment</i> {{deal?.description}}
         </div>
       </div>
     </div>
@@ -67,7 +70,14 @@
   </div>
   <div class="row valign-wrapper">
     <div class="col s5 divider"></div>
-    <div class="col s2 center-align header">Замеры</div>
+    <div class="col s2 center-align header">
+      <div class="valign-wrapper" style="display: inline-block">
+        <span class="center-dialog-title">Замеры</span>
+        <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+           (click)="showMeasurementDialog = !showMeasurementDialog"
+           class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+      </div>
+    </div>
     <div class="col s5 divider"></div>
   </div>
   <div *ngIf="deal?.measurements.length===0" class="row">
@@ -86,7 +96,14 @@
   </div>
   <div class="row valign-wrapper">
     <div class="col s5 divider"></div>
-    <div class="col s2 center-align header">Монтажи</div>
+    <div class="col s2 center-align header">
+      <div class="valign-wrapper" style="display: inline-block">
+        <span class="center-dialog-title">Монтажи</span>
+        <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+           (click)="showMountDialog = !showMountDialog"
+           class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+      </div>
+    </div>
     <div class="col s5 divider"></div>
   </div>
   <div *ngIf="deal?.mounts.length===0" class="row">
@@ -108,7 +125,14 @@
   <div class="deal-action">
     <div class="row valign-wrapper">
       <div class="col s5 divider"></div>
-      <div class="col s2 center-align header">Перерасчеты</div>
+      <div class="col s2 center-align header">
+        <div class="valign-wrapper" style="display: inline-block">
+          <span class="center-dialog-title">Перерасчеты</span>
+          <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+             (click)="showDiscountDialog = !showDiscountDialog"
+             class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+        </div>
+      </div>
       <div class="col s5 divider"></div>
     </div>
     <div *ngIf="deal?.discounts.length===0" class="row">
@@ -121,7 +145,14 @@
     </div>
     <div class="row valign-wrapper">
       <div class="col s5 divider"></div>
-      <div class="col s2 center-align header">Оплаты</div>
+      <div class="col s2 center-align header">
+        <div class="valign-wrapper" style="display: inline-block">
+          <span class="center-dialog-title">Оплаты</span>
+          <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+             (click)="showPaymentDialog = !showPaymentDialog"
+             class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+        </div>
+      </div>
       <div class="col s5 divider"></div>
     </div>
     <div *ngIf="deal?.payments.length===0" class="row">
@@ -129,7 +160,7 @@
     </div>
     <div *ngIf="deal?.payments.length!==0" class="row">
       <div *ngFor="let payment of deal?.payments" class="col s10 offset-s1">
-        <p>{{payment.auto_date | dateFormat: 'fullDate'}} {{payment | payment}}</p>
+        <p>{{payment.date | dateFormat: 'fullDate'}} {{payment | payment}}</p>
       </div>
     </div>
     <div class="row valign-wrapper">
@@ -163,12 +194,14 @@
       <app-deal-comments [comment]="comment"></app-deal-comments>
     </div>
   </div>
-  <div *ngIf="!(deal?.status == 4 || deal?.status == 5)" class="fixed-action-btn click-to-toggle">
+  <div *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+       class="fixed-action-btn click-to-toggle">
     <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
     <ul class="fab-ul">
-      <li class="hover-element li-element-menu-fab" onclick="$('#main-btn').click()">
+      <li class="hover-element li-element-menu-fab" onclick="$('#main-btn').click()"
+          (click)="showManagerDialog = !showManagerDialog">
         <div class="center-align valign-wrapper menu-li-div">
           <span class="fab-text">Установить менеджера</span>
           <div class="icon-fab center-align valign-wrapper">
@@ -176,7 +209,8 @@
           </div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab" onclick="$('#main-btn').click()">
+      <li class="hover-element li-element-menu-fab" (click)="showRejectDialog = !showRejectDialog"
+          onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div">
           <span class="fab-text" id="reject">Отклонить</span>
           <div class="icon-fab center-align valign-wrapper">
@@ -193,6 +227,15 @@
           </div>
         </div>
       </li>
+      <li class="hover-element li-element-menu-fab" (click)="showEditDialog = !showEditDialog"
+          onclick="$('#main-btn').click()">
+        <div class="center-align valign-wrapper menu-li-div">
+          <span class="fab-text">Редактировать</span>
+          <div class="icon-fab center-align valign-wrapper">
+            <i class="material-icons color-fab-icon">edit</i>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
   <app-deal-client-info
@@ -205,4 +248,16 @@
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
 <app-deal-complete [deal]="deal" (successDeal)="updateDeal()" [(visible)]="showCompleteDialog"></app-deal-complete>
-
+<app-deal-reject [deal]="deal" (successDeal)="updateDeal()" [(visible)]="showRejectDialog"></app-deal-reject>
+<app-dialog-deal-measurement [deal]="deal" (successDealMeasurement)="successMeasurementAdded($event)"
+                             [(visible)]="showMeasurementDialog"></app-dialog-deal-measurement>
+<app-dialog-deal-payment [deal]="deal" (successDealPayment)="successPaymentAdded($event)"
+                         [(visible)]="showPaymentDialog"></app-dialog-deal-payment>
+<app-dialog-deal-discount [deal]="deal" (successDealDiscount)="successDiscountAdded($event)"
+                          [(visible)]="showDiscountDialog"></app-dialog-deal-discount>
+<app-dialog-add-mount [deal]="deal" (successDealMount)="successMountAdded($event)"
+                      [(visible)]="showMountDialog"></app-dialog-add-mount>
+<app-dialog-add-manager [deal]="deal" (successManagerAdd)="successManagerAdded()"
+                        [(visible)]="showManagerDialog"></app-dialog-add-manager>
+<app-dialog-deal-edit [deal]="deal" (successDealEdit)="successEdit()"
+                      [(visible)]="showEditDialog"></app-dialog-deal-edit>

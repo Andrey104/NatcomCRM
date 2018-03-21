@@ -1,0 +1,33 @@
+<div *ngIf="visible" class="dialog">
+  <div class="content-dialog">
+    <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
+    <h4>Редактирование замера</h4>
+    <form (ngSubmit)="submitForm()" #form="ngForm">
+      <div>
+        <label class="required-area-dialog">Комментарий ко времени</label>
+        <textarea type="text" [ngModel]="measurement?.time"
+                  name="time"
+                  required
+                  class="text-comment-dialog"></textarea>
+      </div>
+      <div>
+        <label>Дополнительная информация</label>
+        <textarea type="text"
+                  [ngModel]="measurement?.description"
+                  name="description"
+                  class="text-comment-dialog"
+        ></textarea>
+      </div>
+      <button class="btn-dialog-submit" type="submit"
+              [class.btn-dialog-submit]="form.valid"
+              [disabled]="(!form.valid||isRequest)"
+              [class.btn-dialog-disabled]="(!form.valid||isRequest)">OK
+      </button>
+    </form>
+    <button class="btn-dialog-cancel" (click)="close()">Отмена</button>
+    <span class="description-required-dialog"><span
+      [ngStyle]="{'color':'red'}">*</span> помечены обязательные поля</span>
+    <app-preloader *ngIf="isRequest"></app-preloader>
+  </div>
+</div>
+<div *ngIf="visible" class="overlay-dialog" (click)="close()"></div>

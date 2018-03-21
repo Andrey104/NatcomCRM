@@ -93,7 +93,27 @@ import {NewDealPageComponent} from './new-deal/new-deal-page/new-deal-page.compo
 import {AddClientComponent} from './new-deal/add-client/add-client.component';
 import {OrderDeferDialogComponent} from './orders/order-defer-dialog/order-defer-dialog.component';
 import {OrderDeferCause} from './pipes/order-cause-defer.pipe';
-import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dialog-complete.component';
+import {DealDialogCompleteComponent} from './deals/dialogs/deal-dialog-complete/deal-dialog-complete.component';
+import {DealDialogRejectComponent} from './deals/dialogs/deal-dialog-reject/deal-dialog-reject';
+import {DealRejectCausePipe} from './pipes/deal-reject-cause.pipe';
+import {DealDialogMeasurementComponent} from './deals/dialogs/deal-dialog-measurement/deal-dialog-measurement';
+import {DealDialogPaymentComponent} from './deals/dialogs/deal-dialog-payment/deal-dialog-payment';
+import {DealDialogDiscountComponent} from './deals/dialogs/deal-dialog-discount/deal-dialog-discount';
+import {MountRejectCausePipe} from './pipes/mount-reject-cause.pipe';
+import {MountDialogRejectComponent} from './mounts/dialogs/mount-dialog-reject/mount-dialog-reject';
+import {MountDialogCompleteComponent} from './mounts/dialogs/mount-dialog-complete/mount-dialog-complete';
+import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transfer/mount-dialog-transfer';
+import {StageDialogCompleteComponent} from './stage/dialogs/stage-dialog-complete/stage-dialog-complete';
+import {StageDialogCostComponent} from './stage/dialogs/stage-dialog-cost/stage-dialog-cost';
+import {StageDialogTransferComponent} from './stage/dialogs/stage-dialog-transfer/stage-dialog-transfer';
+import {DealDialogMountComponent} from './deals/dialogs/deal-dialog-add-mount/deal-dialog-add-mount';
+import {DealDialogManagerComponent} from './deals/dialogs/deal-dialog-add-manager/deal-dialog-add-manager';
+import {MeasurementRejectCausePipe} from './pipes/measurement-cause-reject';
+import {MeasurementDialogRejectComponent} from './measurements/dialogs/measurement-dialog-reject/measurement-dialog-reject';
+import {MeasurementDialogEditComponent} from './measurements/dialogs/measurement-dialog-edit/measurement-dialog-edit';
+import {MeasurementDialogTransferComponent} from './measurements/dialogs/measurement-dialog-transfer/measurement-dialog-transfer';
+import {DealDialogEditComponent} from './deals/dialogs/deal-dialog-edit/deal-dialog-edit';
+import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
 
 
 @NgModule({
@@ -172,6 +192,26 @@ import {DealDialogCompleteComponent} from './deals/deal-dialog-complete/deal-dia
     CompanyComponent,
     CompanyEditComponent,
     BrigadeComponent,
+    DealDialogRejectComponent,
+    DealRejectCausePipe,
+    DealDialogMeasurementComponent,
+    DealDialogPaymentComponent,
+    DealDialogDiscountComponent,
+    MountRejectCausePipe,
+    MountDialogRejectComponent,
+    MountDialogCompleteComponent,
+    MountDialogTransferComponent,
+    StageDialogCompleteComponent,
+    StageDialogCostComponent,
+    StageDialogTransferComponent,
+    DealDialogMountComponent,
+    DealDialogManagerComponent,
+    MeasurementRejectCausePipe,
+    MeasurementDialogRejectComponent,
+    MeasurementDialogEditComponent,
+    MeasurementDialogTransferComponent,
+    DealDialogEditComponent,
+    MeasurementTransferCausePipe
 ],
   imports: [
     BrowserModule,
