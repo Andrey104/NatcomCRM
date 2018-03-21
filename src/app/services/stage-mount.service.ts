@@ -3,14 +3,14 @@ import {MountStage} from '../models/mount/mount-stage';
 import {MountService} from './mount.service';
 import {BaseApi} from '../core/base-api';
 import {HttpClient} from '@angular/common/http';
-import {OurComment} from '../models/comment';
 import {Observable} from 'rxjs/Observable';
-import {DealPage} from '../models/deal/deals';
 import {Cost} from '../models/cost';
+import {DealMount} from '../models/deal/deal_mount';
 
 @Injectable()
 export class StageMountService extends BaseApi {
   stages: MountStage[] = [];
+  mount: DealMount;
 
   constructor(private mountService: MountService, public http: HttpClient) {
     super(http);

@@ -23,6 +23,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   clientInfo = false;
   client: Client;
   deal: DealResult;
+  showEditButtons = false;
   loadPage: boolean;
   showCompleteDialog = false;
   showRejectDialog = false;
@@ -104,6 +105,8 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     this.dealService.getDealById(this.id)
       .subscribe((deal) => {
         this.deal = deal;
+        this.showEditButtons = this.utils.showEditButtons(String(this.deal.user.id));
+        console.log(this.showEditButtons + ' - show edit');
         this.loadPage = false;
       });
   }

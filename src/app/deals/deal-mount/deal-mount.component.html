@@ -68,7 +68,8 @@
     </div>
   </div>
 
-  <div class="fixed-action-btn click-to-toggle" *ngIf="!(mount.status==2 || mount.status==3)">
+  <div class="fixed-action-btn click-to-toggle"
+       *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons">
     <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>

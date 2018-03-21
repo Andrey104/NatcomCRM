@@ -3,7 +3,7 @@
     <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
     <h4>Добавить монтаж</h4>
     <form (ngSubmit)="submitForm()" #form="ngForm">
-      <p>Дата монтажа <input type="date"
+      <p><label>Дата монтажа</label><input type="date"
                              ngModel
                              name="calendar">
       </p>

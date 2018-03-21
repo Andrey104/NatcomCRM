@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {MountService} from '../../services/mount.service';
 import {DealMount} from '../../models/deal/deal_mount';
 import {StageMountService} from '../../services/stage-mount.service';
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: 'app-deal-mount',
@@ -14,6 +15,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   mount: DealMount;
   dealId;
   isSend = false;
+  showEditButtons = false;
   loadPage: boolean;
   showRejectMount = false;
   showCompleteMount = false;
@@ -22,7 +24,8 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
 
   constructor(private activatedRoute: ActivatedRoute,
               private mountService: MountService,
-              private stageMountService: StageMountService) {
+              private stageMountService: StageMountService,
+              private utils: UtilsService) {
   }
 
   ngOnInit() {
@@ -54,6 +57,8 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
     this.mountService.getMount(this.id)
       .subscribe((mount) => {
         this.mount = mount;
+        this.stageMountService.mount = mount;
+        this.showEditButtons = this.utils.showEditButtons(String(this.mount.user.id));
         this.stageMountService.resetStages();
         this.mount.stages.forEach((stage) => {
           this.stageMountService.putStage(stage);

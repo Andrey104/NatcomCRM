@@ -35,7 +35,7 @@
     <div class="col s12 str-info" *ngIf="mount.description">
       <i
         class="tiny  material-icons  icon">comment</i>
-      <span > {{mount?.description}}</span>
+      <span> {{mount?.description}}</span>
     </div>
   </div>
   <div class="col s12 row valign-wrapper detail-col">
@@ -74,7 +74,8 @@
       <app-deal-comments [comment]="comment"></app-deal-comments>
     </div>
   </div>
-  <div class="fixed-action-btn click-to-toggle" *ngIf="!(mount.status==2 || mount.status==3)">
+  <div class="fixed-action-btn click-to-toggle"
+       *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons">
     <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
@@ -112,6 +113,6 @@
 <app-mount-dialog-reject [mount]="mount" (successMountReject)="successMountUpdate()"
                          [(visible)]="showRejectMount"></app-mount-dialog-reject>
 <app-mount-dialog-complete [mount]="mount" (successMountComplete)="successMountUpdate()"
-                         [(visible)]="showCompleteMount"></app-mount-dialog-complete>
+                           [(visible)]="showCompleteMount"></app-mount-dialog-complete>
 <app-mount-dialog-transfer [mount]="mount" (successMountTransfer)="successMountUpdate()"
                            [(visible)]="showTransferMount"></app-mount-dialog-transfer>

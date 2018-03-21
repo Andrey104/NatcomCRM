@@ -68,7 +68,7 @@
     <div>{{action | action: 'stage'}}</div>
   </div>
 
-  <div class="fixed-action-btn click-to-toggle" *ngIf="stage.status==0">
+  <div class="fixed-action-btn click-to-toggle" *ngIf="stage.status==0&&showEditButtons">
     <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
@@ -112,6 +112,6 @@
 <app-stage-dialog-complete [stage]="stage" (successStageComplete)="successStageUpdate()"
                            [(visible)]="showCompleteStage"></app-stage-dialog-complete>
 <app-dialog-stage-cost [stage]="stage" (successCost)="successStageCost($event)"
-                           [(visible)]="showAddCost"></app-dialog-stage-cost>
+                       [(visible)]="showAddCost"></app-dialog-stage-cost>
 <app-stage-dialog-transfer [stage]="stage" (successStageTransfer)="successStageUpdate()"
-                       [(visible)]="showTransferStage"></app-stage-dialog-transfer>
+                           [(visible)]="showTransferStage"></app-stage-dialog-transfer>
