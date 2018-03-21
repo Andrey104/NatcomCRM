@@ -26,7 +26,7 @@ export class SettingsPageComponent implements OnInit {
       });
     this.subscriptions.push(modal);
   }
-  onDeactivate() {
+  onDeactivate(с) {
     this.subscriptions
       .forEach(s => s.unsubscribe());
   }
