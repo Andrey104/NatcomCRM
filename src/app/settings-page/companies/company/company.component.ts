@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Company} from '../../../../models/company';
+import {Company} from '../../../models/company';
 
 @Component({
-  selector: 'app-brigade',
-  templateUrl: './brigade.component.html',
-  styleUrls: ['./brigade.component.css']
+  selector: 'app-company',
+  templateUrl: './company.component.html',
+  styleUrls: ['./company.component.css']
 })
-export class BrigadeComponent implements OnInit {
+export class CompanyComponent implements OnInit {
 
   constructor() { }
   @Input() company;
