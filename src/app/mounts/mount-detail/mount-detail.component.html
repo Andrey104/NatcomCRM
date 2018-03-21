@@ -43,6 +43,9 @@
     <div class="col s2 center-align">Cтадии</div>
     <div class="col s5 divider "></div>
   </div>
+  <div *ngIf="mount?.stages.length===0" class="row">
+    <div class="col s12 offset-s1 no-information">Нет стадий</div>
+  </div>
   <div class="col s12 main-row valign-wrapper forward-block hover-element" routerLink="stage/{{stage?.id}}"
        *ngFor="let stage of mount?.stages; let i = index">
     <div *ngIf="i!==0">

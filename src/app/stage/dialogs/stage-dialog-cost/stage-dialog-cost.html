@@ -5,7 +5,7 @@
     <form (ngSubmit)="submitForm()" #form="ngForm">
       <div>
         <label class="required-area-dialog">Сумма</label>
-        <input type="text" pattern="^[ 0-9]+$"
+        <input type="number"
                ngModel
                name="sum"
                class="text-comment-dialog"
