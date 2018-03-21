@@ -52,4 +52,11 @@ export class MountService extends BaseApi {
     }
     return this.post(`mounts/${idMount}/date/`, {date, comment});
   }
+
+  mountStageAdd(idMount: string, date: string, description: string): Observable<OurComment> {
+    if (description === '') {
+      description = null;
+    }
+    return this.post(`mounts/${idMount}/stage/`, {date, installers: [], description});
+  }
 }

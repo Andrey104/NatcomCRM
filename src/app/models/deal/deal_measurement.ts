@@ -4,9 +4,12 @@ import {Client} from '../client';
 import {Transfer} from '../transfer';
 import {OurComment} from '../comment';
 import {Picture} from '../picture';
+import {User} from '../user';
 
 export class DealMeasurement {
   id: number;
+  deal_user: User;
+  reject_id: number;
   pictures: Picture[];
   clients: Client[];
   actions: object;

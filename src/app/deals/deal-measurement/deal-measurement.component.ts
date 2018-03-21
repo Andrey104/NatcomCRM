@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {MeasurementService} from '../../services/measurement.service';
 import {Client} from '../../models/client';
 import {Picture} from '../../models/picture';
+import {UtilsService} from '../../services/utils.service';
 
 @Component({
   selector: 'app-deal-measurement',
@@ -14,6 +15,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   measurement: DealMeasurement;
   id: number;
   clientInfo = false;
+  showEditButtons = false;
   client: Client;
   flag = false;
   picture: Picture;
@@ -22,7 +24,8 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   showMeasurementTransfer = false;
   showMeasurementEdit = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private measurementService: MeasurementService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private measurementService: MeasurementService, private utils: UtilsService) {
   }
 
   ngOnInit() {
@@ -53,6 +56,8 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
     this.measurementService.getMeasurement(this.id)
       .subscribe((measurement) => {
         this.measurement = measurement;
+        this.showEditButtons = this.utils.showEditButtons(String(this.measurement.deal_user.id));
+        console.log(this.showEditButtons + ' фыаывфпаыфвп');
         this.loadPage = false;
       });
   }
