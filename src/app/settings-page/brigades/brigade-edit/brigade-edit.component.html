@@ -1,0 +1,25 @@
+<div class="modal modal-fixed-footer" [ngClass]="{open: modalState.open}">
+  <div class="modal-content">
+      <h5>{{header}}</h5>
+    <form [formGroup]="brigadeForm">
+      <div class="input-field">
+        <input name="name" type="text" id="name" class="validate" formControlName="name">
+        <label for="name" [ngClass]="{active: nameInputActive}">Имя</label>
+      </div>
+    </form>
+    <div class="row add-installer-btn">
+    <a class="modal-action waves-red btn left" (click)="openInstallerList()">+</a>
+  </div>
+    <div class="installers-list">
+      <app-brigade-installer *ngFor="let position of brigade?.installers"
+                             [installerPosition]="position" (onDel)="deleteInstaller($event)"></app-brigade-installer>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action waves-red btn red left" (click)="deleteBrigade()">Удалить!</a>
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="close(false)">Отмена</a>
+    <a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="ok()">ОК</a>
+  </div>
+</div>
+
+<app-installer-select-list [open]="installerListIsOpen" (onClose)="closeInstallerList($event)"></app-installer-select-list>

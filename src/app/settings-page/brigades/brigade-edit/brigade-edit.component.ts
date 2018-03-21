@@ -1,38 +1,38 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {Brigade} from '../../../../models/brigades/brigade';
-import {BrigadesService} from '../../../../services/brigades.service';
-import {Installer} from '../../../../models/installers/installer';
-import {InstallerPosition} from '../../../../models/installers/installer_position';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Modal } from 'angular2-modal/plugins/bootstrap';
+import {Brigade} from '../../../models/brigades/brigade';
+import {InstallerPosition} from '../../../models/installers/installer_position';
+import {Installer} from '../../../models/installers/installer';
+import {BrigadesService} from '../../../services/brigades.service';
 
 @Component({
   selector: 'app-brigade-edit',
   templateUrl: './brigade-edit.component.html',
-  styleUrls: ['./brigade-edit.component.css']
+  styleUrls: ['./brigade-edit.component.css'],
+  providers: [Modal]
 })
 export class BrigadeEditComponent implements OnInit, OnChanges {
   brigade = new Brigade();
   header = 'Добавить монтажника';
   edit = false;
-  // nameInputActive = false;
-  // phoneInputActive = false;
+  nameInputActive = false;
+  installerListIsOpen = false;
   @Input() modalState;
   @Output() onClose = new EventEmitter<Boolean>(); // false - отмена, true - успешное выполнение
 
 
   constructor(private brigadesService: BrigadesService) {
   }
-  // installerForm: FormGroup = new FormGroup({
-  //   name: new FormControl('', Validators.required),
-  //   phone: new FormControl('', Validators.required),
-  // });
-  // formInputSetActive() {
-  //   this.nameInputActive = true;
-  //   this.phoneInputActive = true;
-  // }
-  // formInputReset() {
-  //   this.nameInputActive = false;
-  //   this.phoneInputActive = false;
-  // }
+  brigadeForm: FormGroup = new FormGroup({
+     name: new FormControl('', Validators.required),
+  });
+  formInputSetActive() {
+    this.nameInputActive = true;
+  }
+  formInputReset() {
+    this.nameInputActive = false;
+  }
   ngOnInit() {
   }
   cloneObject(object: Object): any {
@@ -65,41 +65,78 @@ export class BrigadeEditComponent implements OnInit, OnChanges {
       // ------------------------
       this.header = 'Редактировать бригаду';
       this.edit = true;
+      this.brigadeForm.setValue({name: this.modalState.brigade.name});
+      this.formInputSetActive();
     } else {
+      this.brigade = new Brigade();
       this.header = 'Создать бригаду';
       this.edit = false;
+      this.brigadeForm.reset();
+      this.formInputReset();
     }
   }
-
   deleteInstaller(installerPosition?: InstallerPosition) {
     this.brigade.installers = this.brigade.installers.filter(installer => installer.installer.id !== installerPosition.installer.id);
   }
-
+  deleteBrigade() {
+    if (confirm('Удалить бригаду?')) {
+      this.brigadesService.deleteBrigade(this.brigade).subscribe(data => {
+        if (data) {
+          alert('Бригада удалена!');
+          this.close(true);
+        } else {
+          alert('Ошибка удалении бригады! Попробуйте снова!');
+        }
+      });
+    }
+  }
   close(successfully: Boolean) {
     this.onClose.emit(successfully);
   }
-
-  // addInstaller(installerPosition: InstallerPosition) {
-  //   this.brigade.installers.concat(installerPosition);
-  // }
+  checkInstallerId(id: number, brigade: Brigade) {
+    for (const position of brigade.installers) {
+      if (position.installer.id === id) {
+        return true;
+      }
+    }
+    return false;
+  }
+  addInstaller(installer) {
+    let installerPosition;
+    installerPosition = new InstallerPosition();
+    installerPosition.installer = this.cloneObject(installer);
+    this.brigade.installers = this.brigade.installers.concat(installerPosition);
+    this.installerListIsOpen = false;
+  }
+  closeInstallerList(installer: Installer) {
+    if (installer != null) {
+      if (this.brigade.installers !== undefined) {
+        if (this.checkInstallerId(installer.id, this.brigade)) {
+          alert('Такой монтажник уже есть!');
+        } else {
+          this.addInstaller(installer);
+        }
+      } else {
+        this.brigade.installers = [];
+        this.addInstaller(installer);
+      }
+    } else {
+      this.installerListIsOpen = false;
+    }
+  }
   brigadeMinMap(position: InstallerPosition) {
     position.installer = position.installer.id;
     return position;
   }
+  openInstallerList() {
+    this.installerListIsOpen = true;
+  }
   ok() {
-    // const name = this.installerForm.value.name;
-    // const phone = this.installerForm.value.phone;
-    // const installer = new Installer();
-    // installer.fio = name;
-    // installer.phone = phone;
+    const name = this.brigadeForm.value.name;
     let brigadeMin;
     brigadeMin = this.cloneObject(this.brigade);
-    // for (const key in this.brigade) {
-    //   if (this.brigade.hasOwnProperty(key)) {
-    //     brigadeMin[key] = this.brigade[key];
-    //   }
-    // }
     brigadeMin.installers = brigadeMin.installers.map(this.brigadeMinMap);
+    brigadeMin.name = name;
     if (this.edit) {
       this.brigadesService.editBrigade(brigadeMin).subscribe(data => {
         if (data) {

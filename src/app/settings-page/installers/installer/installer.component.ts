@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Installer} from '../../../../models/installers/installer';
+import {Installer} from '../../../models/installers/installer';
 
 @Component({
   selector: 'app-installer',

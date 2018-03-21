@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CompaniesService} from '../../../../services/companies.service';
-import {Company} from '../../../../models/company';
+import {CompaniesService} from '../../../services/companies.service';
+import {Company} from '../../../models/company';
 
 @Component({
   selector: 'app-company-edit',

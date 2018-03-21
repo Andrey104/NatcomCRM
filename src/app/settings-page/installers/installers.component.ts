@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {log} from 'util';
-import {InstallersService} from '../../../services/installers.service';
-import {Installer} from '../../../models/installers/installer';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {InstallersService} from '../../services/installers.service';
+import {Installer} from '../../models/installers/installer';
 
 @Component({
   selector: 'app-installers',

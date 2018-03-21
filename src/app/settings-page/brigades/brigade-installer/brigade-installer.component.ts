@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {InstallerPosition} from '../../../models/installers/installer_position';
 
-import {InstallerPosition} from '../../../../models/installers/installer_position';
 
 @Component({
   selector: 'app-brigade-installer',

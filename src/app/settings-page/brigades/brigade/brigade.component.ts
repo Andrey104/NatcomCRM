@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Brigade} from '../../../../models/brigades/brigade';
+import {Brigade} from '../../../models/brigades/brigade';
+
 
 @Component({
   selector: 'app-brigade',

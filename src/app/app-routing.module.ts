@@ -15,16 +15,16 @@ import {OrderDetailComponent} from './orders/order-detail/order-detail.component
 import {DealDetailComponent} from './deals/deal-detail/deal-detail.component';
 import {DealMeasurementComponent} from './deals/deal-measurement/deal-measurement.component';
 import {DealMountComponent} from './deals/deal-mount/deal-mount.component';
-import {SettingsPageComponent} from './admin/settings-page/settings-page.component';
-import {InstallersComponent} from './admin/settings-page/installers/installers.component';
-import {BrigadesComponent} from './admin/settings-page/brigades/brigades.component';
-import {CompaniesComponent} from './admin/settings-page/companies/companies.component';
 import {StageComponent} from './stage/stage.component';
 import {MountPageComponent} from './mounts/mount-page/mount-page.component';
 import {MountDetailComponent} from './mounts/mount-detail/mount-detail.component';
 import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
 import {MeasurementDetailComponent} from './measurements/measurement-detail/measurement-detail.component';
 import {NewDealPageComponent} from './new-deal/new-deal-page/new-deal-page.component';
+import {InstallersComponent} from './settings-page/installers/installers.component';
+import {BrigadesComponent} from './settings-page/brigades/brigades.component';
+import {CompaniesComponent} from './settings-page/companies/companies.component';
+import {SettingsPageComponent} from './settings-page/settings-page.component';
 
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts

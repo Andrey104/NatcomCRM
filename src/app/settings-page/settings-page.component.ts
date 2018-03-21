@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
@@ -27,7 +26,7 @@ export class SettingsPageComponent implements OnInit {
       });
     this.subscriptions.push(modal);
   }
-  onDeactivate(c) {
+  onDeactivate() {
     this.subscriptions
       .forEach(s => s.unsubscribe());
   }

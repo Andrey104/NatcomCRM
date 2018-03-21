@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
-import {InstallersPage} from '../models/installers/installers_page';
 
 @Injectable()
 export class BaseApi {
@@ -30,6 +29,12 @@ export class BaseApi {
     return this.http.put(
       this.getUrl(url),
       data,
+      {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
+    );
+  }
+  del(url: string = ''): Observable<any> {
+    return this.http.delete(
+      this.getUrl(url),
       {headers: new HttpHeaders().set('Authorization', 'token ' + this.token())}
     );
   }

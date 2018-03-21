@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Company} from '../../../models/company';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {log} from 'util';
-import {BrigadesService} from '../../../services/brigades.service';
-import {Brigade} from '../../../models/brigades/brigade';
+import {Brigade} from '../../models/brigades/brigade';
+import {BrigadesService} from '../../services/brigades.service';
 
 @Component({
   selector: 'app-brigades',
@@ -50,8 +49,13 @@ export class BrigadesComponent implements OnInit {
   }
 
   openModal(brigade?: Brigade) {
-    this.modalState = {open: true, brigade: brigade};
-    this.modal.next(true);
+    if (brigade === null) {
+      this.modalState = {open: true, brigade: null};
+      this.modal.next(true);
+    } else {
+      this.modalState = {open: true, brigade: brigade};
+      this.modal.next(true);
+    }
   }
 
   modalClose(successfully) {
