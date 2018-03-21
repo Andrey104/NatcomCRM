@@ -43,8 +43,9 @@ export class DealDialogMeasurementComponent implements OnInit {
     this.isSubmitted = true;
     this.formData = this.form.value;
     this.measurementService.newMeasurement(this.id, this.form.form.value.payment,
-      this.form.form.value.calendar,
-      this.form.form.value.commentTime)
+      this.form.form.value.date,
+      this.form.form.value.time,
+      this.form.form.value.description)
       .subscribe((result) => {
         this.isRequest = false;
         this.visibleChange.emit(this.visible);

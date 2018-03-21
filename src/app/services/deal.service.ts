@@ -83,12 +83,28 @@ export class DealService extends BaseApi {
     return this.post(`deals/${dealId}/mount/`, {date, description});
   }
 
-  getManagers(): Observable<Managers> {
+  getManagers(): Observable<Object> {
     return this.get(`managers`);
   }
 
   setManager(idDeal: number, manager: number): Observable<Object> {
     return this.post(`deals/${idDeal}/set_manager/`, {manager});
+  }
+
+  editDeal(idDeal: number, address: string, address_comment: string, description: string): Observable<Object> {
+    if (description === '') {
+      description = null;
+    }
+    if (address_comment === '') {
+      address_comment = null;
+    }
+    const data = {
+      address_comment,
+      address,
+      description
+    };
+    console.log(data.address_comment , 'edit deal');
+    return this.patch(`deals/${idDeal}/`, data);
   }
 
 }

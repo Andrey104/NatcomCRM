@@ -3,19 +3,27 @@
     <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
     <h4>Редактирование сделки</h4>
     <form (ngSubmit)="submitForm()" #form="ngForm">
-      <label class="required-area-dialog">Сумма после перерасчета</label>
-      <input type="text" pattern="^[ 0-9]+$"
-             ngModel
-             name="after"
-             class="text-comment-dialog"
-             required />
       <div>
-        <label class="required-area-dialog">Комментарий</label>
+        <label class="required-area-dialog">Адрес</label>
         <textarea type="text"
-                  ngModel
-                  name="comment"
+                  [ngModel]="deal?.address"
+                  name="address"
+                  required
+                  class="text-comment-dialog">жопа</textarea>
+      </div>
+      <div>
+        <label>Комментарий к адресу</label>
+        <textarea type="text" [ngModel]="deal?.address_comment"
+                  name="address_comment"
+                  class="text-comment-dialog"></textarea>
+      </div>
+      <div>
+        <label>Дополнительная информация</label>
+        <textarea type="text"
+                  [ngModel]="deal?.description"
+                  name="description"
                   class="text-comment-dialog"
-                  required></textarea>
+                  ></textarea>
       </div>
       <button class="btn-dialog-submit" type="submit"
               [class.btn-dialog-submit]="form.valid"

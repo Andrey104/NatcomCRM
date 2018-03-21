@@ -113,6 +113,7 @@ import {MeasurementDialogRejectComponent} from './measurements/dialogs/measureme
 import {MeasurementDialogEditComponent} from './measurements/dialogs/measurement-dialog-edit/measurement-dialog-edit';
 import {MeasurementDialogTransferComponent} from './measurements/dialogs/measurement-dialog-transfer/measurement-dialog-transfer';
 import {DealDialogEditComponent} from './deals/dialogs/deal-dialog-edit/deal-dialog-edit';
+import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
 
 
 @NgModule({
@@ -209,7 +210,8 @@ import {DealDialogEditComponent} from './deals/dialogs/deal-dialog-edit/deal-dia
     MeasurementDialogRejectComponent,
     MeasurementDialogEditComponent,
     MeasurementDialogTransferComponent,
-    DealDialogEditComponent
+    DealDialogEditComponent,
+    MeasurementTransferCausePipe
 ],
   imports: [
     BrowserModule,

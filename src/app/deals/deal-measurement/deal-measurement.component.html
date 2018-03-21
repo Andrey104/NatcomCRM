@@ -27,8 +27,11 @@
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">location_on</i> {{measurement?.address | address}}
         </div>
-        <div class="valign-wrapper">
-          <i class="tiny material-icons icon">access_time</i> {{measurement?.address_comment}}
+        <div class="valign-wrapper" *ngIf="measurement.address_comment">
+          <i class="tiny material-icons icon">announcement</i> {{measurement?.address_comment}}
+        </div>
+        <div class="valign-wrapper" *ngIf="measurement.time">
+          <i class="tiny material-icons icon">access_time</i> {{measurement?.time}}
         </div>
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">attach_money</i> {{measurement?.sum | money}}
@@ -37,7 +40,7 @@
           <i class="tiny material-icons icon">date_range</i> {{measurement?.non_cash | nonCash}}
         </div>
         <div class="valign-wrapper" *ngIf="measurement.description">
-          <i class="tiny material-icons icon">date_range</i> {{measurement.description}}
+          <i class="tiny material-icons icon">comment</i> {{measurement.description}}
         </div>
       </div>
     </div>
@@ -150,7 +153,7 @@
 </div>
 <app-measurement-reject [measurement]="measurement" (successMeasurementReject)="successMeasurementUpdate()"
                         [(visible)]="showMeasurementReject"></app-measurement-reject>
-<app-measurement-transfer [measurement]="measurement" (successMeasurementTransfer)="successMeasurementUpdate()"
+<app-measurement-transfer [measurement]="measurement" (successTransferMeasurement)="successMeasurementUpdate()"
                         [(visible)]="showMeasurementTransfer"></app-measurement-transfer>
 <app-measurement-edit [measurement]="measurement" (successMeasurementEdit)="successMeasurementUpdate()"
                         [(visible)]="showMeasurementEdit"></app-measurement-edit>

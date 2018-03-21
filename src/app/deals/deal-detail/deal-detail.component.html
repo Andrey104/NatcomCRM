@@ -31,8 +31,8 @@
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}
         </div>
-        <div class="valign-wrapper">
-          <i class="tiny material-icons icon">access_time</i> {{deal?.address_comment}}
+        <div class="valign-wrapper" *ngIf="deal.address_comment">
+          <i class="tiny material-icons icon">announcement</i> {{deal?.address_comment}}
         </div>
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}
@@ -41,7 +41,7 @@
           <i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}
         </div>
         <div class="valign-wrapper" *ngIf="deal.description">
-          <i class="tiny material-icons icon">comment</i> {{deal?.description | nonCash}}
+          <i class="tiny material-icons icon">comment</i> {{deal?.description}}
         </div>
       </div>
     </div>
