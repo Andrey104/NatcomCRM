@@ -114,6 +114,8 @@ import {MeasurementDialogEditComponent} from './measurements/dialogs/measurement
 import {MeasurementDialogTransferComponent} from './measurements/dialogs/measurement-dialog-transfer/measurement-dialog-transfer';
 import {DealDialogEditComponent} from './deals/dialogs/deal-dialog-edit/deal-dialog-edit';
 import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
+import {TextMaskModule} from 'angular2-text-mask';
+
 
 
 @NgModule({
@@ -211,7 +213,7 @@ import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
     MeasurementDialogEditComponent,
     MeasurementDialogTransferComponent,
     DealDialogEditComponent,
-    MeasurementTransferCausePipe
+    MeasurementTransferCausePipe,
 ],
   imports: [
     BrowserModule,
@@ -221,7 +223,8 @@ import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
     InfiniteScrollModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TextMaskModule
   ],
   providers: [
     AuthGuard,

@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Client} from '../models/client';
 import {BaseApi} from '../core/base-api';
 import {Phone} from '../models/phone';
+import {ClientPage} from '../models/clients/client-page';
 
 
 @Injectable()
@@ -16,11 +17,16 @@ export class ClientService extends BaseApi {
     return this.get(`clients/${clientId}`);
   }
 
-  addClient(clientName: string, email: string, phones: Phone[]): Observable<Client> {
-    const client = new Client();
-    client.fio = clientName;
-    client.email = email;
-    client.phones = phones;
+  addClient(client: Client): Observable<Client> {
     return this.post(`clients/`, client);
+  }
+
+  refreshClient(client: Client): Observable<Client> {
+    console.log(client);
+    return this.patch(`clients/`, client);
+  }
+
+  getClientByPhone(text: string): Observable<ClientPage> {
+    return this.get(`clients?text=${text}`);
   }
 }
