@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {InstallersService} from '../../../../services/installers.service';
-import {Installer} from '../../../../models/installers/installer';
-
+import {InstallersService} from '../../../services/installers.service';
+import {Installer} from '../../../models/installers/installer';
 @Component({
   selector: 'app-installer-edit',
   templateUrl: './installer-edit.component.html',

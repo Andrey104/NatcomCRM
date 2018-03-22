@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
 import {OrderPageComponent} from './orders/order-page/order-page.component';
-import {AppRoutingModule} from './/app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 import {AuthGuard} from './auth.guard';
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -56,23 +56,12 @@ import {ImageTypePipe} from './pipes/image-type.pipe';
 import {DiscountPipe} from './pipes/discount.pipe';
 import {PaymentPipe} from './pipes/payment.pipe';
 import {CommentComponent} from './comment/comment.component';
-import {ColorCompanyDirective} from './directives/color-company.directive';
-import {SettingsPageComponent} from './admin/settings-page/settings-page.component';
-import {InstallerComponent} from './admin/settings-page/installers/installer/installer.component';
-import {InstallersService} from './services/installers.service';
-import {InstallersComponent} from './admin/settings-page/installers/installers.component';
-import {BrigadesComponent} from './admin/settings-page/brigades/brigades.component';
-import {CompaniesComponent} from './admin/settings-page/companies/companies.component';
-import {InstallerEditComponent} from './admin/settings-page/installers/installer-edit/installer-edit.component';
 import {MountStatusPipe} from './pipes/mountStatus.pipe';
 import {DealClientInfoComponent} from './deals/deal-client-info/deal-client-info.component';
 import {DealContractView} from './pipes/deal-contract-view.pipe';
 import {StageDealComponent} from './stage-deal/stage-deal.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
 import {CompaniesService} from './services/companies.service';
-import {CompanyComponent} from './admin/settings-page/companies/company/company.component';
-import {CompanyEditComponent} from './admin/settings-page/companies/company-edit/company-edit.component';
-import {BrigadeComponent} from './admin/settings-page/brigades/brigade/brigade.component';
 import {StageComponent} from './stage/stage.component';
 import {WorkerNamePipe} from './pipes/worker-name.pipe';
 import {MeasurementStatusPipe} from './pipes/measurement-status.pipe';
@@ -93,6 +82,22 @@ import {NewDealPageComponent} from './new-deal/new-deal-page/new-deal-page.compo
 import {AddClientComponent} from './new-deal/add-client/add-client.component';
 import {OrderDeferDialogComponent} from './orders/order-defer-dialog/order-defer-dialog.component';
 import {OrderDeferCause} from './pipes/order-cause-defer.pipe';
+import {BrigadesService} from './services/brigades.service';
+import {BrigadeEditComponent} from './settings-page/brigades/brigade-edit/brigade-edit.component';
+import {BrigadeInstallerComponent} from './settings-page/brigades/brigade-installer/brigade-installer.component';
+import {InstallerSelectListComponent} from './settings-page/installers/installer-list/installer-select-list.component';
+import {InstallerListItemComponent} from './settings-page/installers/installer-list/installer-list-item/installer-list-item.component';
+import {ColorCompanyDirective} from './directives/color-company.directive';
+import {SettingsPageComponent} from './settings-page/settings-page.component';
+import {InstallerComponent} from './settings-page/installers/installer/installer.component';
+import {InstallerEditComponent} from './settings-page/installers/installer-edit/installer-edit.component';
+import {InstallersComponent} from './settings-page/installers/installers.component';
+import {BrigadesComponent} from './settings-page/brigades/brigades.component';
+import {CompaniesComponent} from './settings-page/companies/companies.component';
+import {CompanyComponent} from './settings-page/companies/company/company.component';
+import {CompanyEditComponent} from './settings-page/companies/company-edit/company-edit.component';
+import {BrigadeComponent} from './settings-page/brigades/brigade/brigade.component';
+import {InstallersService} from './services/installers.service';
 import {DealDialogCompleteComponent} from './deals/dialogs/deal-dialog-complete/deal-dialog-complete.component';
 import {DealDialogRejectComponent} from './deals/dialogs/deal-dialog-reject/deal-dialog-reject';
 import {DealRejectCausePipe} from './pipes/deal-reject-cause.pipe';
@@ -193,6 +198,10 @@ import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-st
     CompanyComponent,
     CompanyEditComponent,
     BrigadeComponent,
+    BrigadeEditComponent,
+    BrigadeInstallerComponent,
+    InstallerSelectListComponent,
+    InstallerListItemComponent,
     DealDialogRejectComponent,
     DealRejectCausePipe,
     DealDialogMeasurementComponent,
@@ -248,8 +257,8 @@ import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-st
     ClientService,
     MeasurementService,
     MountService,
-    InstallersService,
     StageMountService,
+    BrigadesService,
     BaseApi
   ],
   bootstrap:

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {log} from 'util';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {CompaniesService} from '../../../services/companies.service';
-import {Company} from '../../../models/company';
+import {Company} from '../../models/company';
+import {CompaniesService} from '../../services/companies.service';
 
 @Component({
   selector: 'app-companies',
