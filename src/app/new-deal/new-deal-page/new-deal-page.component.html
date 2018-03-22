@@ -1,8 +1,12 @@
 <div class="row main-row scrollable-page">
   <div class="col s7">
-    <div style="height: 30px; width: 30px; background-color: red"
-         *ngIf="orderId"
-          routerLink="/orders/{{orderStatus}}/{{orderId}}">back</div>
+    <div routerLink="/orders/{{orderStatus}}/{{orderId}}"
+         class="row-back valign-wrapper hover-element no-border">
+      <i class="small material-icons no-border icon-arrow-back">
+        keyboard_arrow_left
+      </i>
+      <span class="back icon-arrow-back">Назад к заявке</span>
+    </div>
     <form #form="ngForm" (ngSubmit)="submitForm(form)">
       <div class="row">
         <div class="col s7">
@@ -84,7 +88,7 @@
               [class.btn-dialog-submit]="form.valid"
               [disabled]="(!form.valid||clients.length===0||!isRequest)"
               [class.btn-dialog-disabled]="(!form.valid||clients.length===0||!isRequest)"
-              >Добавить сделку
+      >Добавить сделку
       </button>
     </form>
   </div>

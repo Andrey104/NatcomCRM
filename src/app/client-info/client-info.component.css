@@ -7,11 +7,11 @@
   margin-bottom: 0;
 }
 
-.row-back i:hover {
-  transform: scale(1.1, 1.1);
+.row-back {
+  color: white;
 }
 
-.row-back i:hover + .back {
+i:hover + .back {
   opacity: 1;
 }
 
