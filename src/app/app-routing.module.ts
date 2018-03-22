@@ -35,6 +35,7 @@ const measurements_routes: Routes = [
 
 const mounts_routes: Routes = [
   {path: ':mount_id', component: MountDetailComponent},
+  {path: ':mount_id/deal/:id', component: MountDetailComponent},
   {path: ':mount_id/stage/:stage_id', component: StageComponent}
 ];
 
