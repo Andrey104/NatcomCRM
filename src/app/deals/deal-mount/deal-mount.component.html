@@ -68,7 +68,8 @@
     </div>
   </div>
 
-  <div class="fixed-action-btn click-to-toggle" *ngIf="!(mount.status==2 || mount.status==3)">
+  <div class="fixed-action-btn click-to-toggle"
+       *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons">
     <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
@@ -79,7 +80,7 @@
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">close</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab" (click)="showAddStage = !showAddStage"
+      <li class="hover-element li-element-menu-fab" (click)="showMountStageAdd = !showMountStageAdd"
           onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить стадию</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">add</i></div>
@@ -109,3 +110,5 @@
                            [(visible)]="showCompleteMount"></app-mount-dialog-complete>
 <app-mount-dialog-transfer [mount]="mount" (successMountTransfer)="successMountUpdate()"
                            [(visible)]="showTransferMount"></app-mount-dialog-transfer>
+<app-mount-dialog-add-stage [mount]="mount" (successMountStageAdd)="successMountUpdate()"
+                            [(visible)]="showMountStageAdd"></app-mount-dialog-add-stage>

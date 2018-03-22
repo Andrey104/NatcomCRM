@@ -115,7 +115,7 @@ import {MeasurementDialogTransferComponent} from './measurements/dialogs/measure
 import {DealDialogEditComponent} from './deals/dialogs/deal-dialog-edit/deal-dialog-edit';
 import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
 import {TextMaskModule} from 'angular2-text-mask';
-
+import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-stage/mount-dialog-add-stage';
 
 
 @NgModule({
@@ -214,7 +214,8 @@ import {TextMaskModule} from 'angular2-text-mask';
     MeasurementDialogTransferComponent,
     DealDialogEditComponent,
     MeasurementTransferCausePipe,
-],
+    MountDialogAddStageComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -17,6 +17,7 @@ export class StageComponent implements OnInit {
   idMount: number;
   stage: MountStage;
   mount: DealMount;
+  showEditButtons = false;
   isNothingToShow = false;
   showCompleteStage = false;
   showTransferStage = false;
@@ -52,6 +53,7 @@ export class StageComponent implements OnInit {
       if (this.stageMountService.stages.length !== 0) {
         this.stageMountService.stages.forEach((stage) => {
           if (stage.id === this.id) {
+            this.showEditButtons = this.utils.showEditButtons(String(this.stageMountService.mount.user.id));
             this.stage = stage;
           }
         });
@@ -68,6 +70,7 @@ export class StageComponent implements OnInit {
   updateStages(idMount: number) {
     this.mountService.getMount(idMount).subscribe(mount => {
       this.mount = mount;
+      this.stageMountService.mount = mount;
       this.stageMountService.resetStages();
       this.mount.stages.forEach((stage) => {
         this.stageMountService.putStage(stage);
@@ -77,6 +80,7 @@ export class StageComponent implements OnInit {
         this.stageMountService.stages.forEach((stage) => {
           if (stage.id === this.id) {
             this.stage = stage;
+            this.showEditButtons = this.utils.showEditButtons(String(this.stageMountService.mount.user.id));
           }
         });
         if (typeof this.stage === 'undefined') {

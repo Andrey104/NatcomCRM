@@ -13,13 +13,13 @@
       </select>
       <div>
         <label class="required-area-dialog">Сумма</label>
-        <input type="text" pattern="^[ 0-9]+$"
+        <input type="number"
                   ngModel
                   name="sum"
                   class="text-comment-dialog"
                   required />
       </div>
-      <p><span class="required-area-dialog">Дата получения оплаты</span>
+      <p><label class="required-area-dialog">Дата получения оплаты</label>
         <input type="date"
                ngModel
                name="calendar"

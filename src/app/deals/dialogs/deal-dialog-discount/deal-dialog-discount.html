@@ -4,7 +4,7 @@
     <h4>Добавить перерасчет</h4>
     <form (ngSubmit)="submitForm()" #form="ngForm">
         <label class="required-area-dialog">Сумма после перерасчета</label>
-        <input type="text" pattern="^[ 0-9]+$"
+        <input type="number"
                ngModel
                name="after"
                class="text-comment-dialog"

@@ -77,7 +77,8 @@
     <div class="col s2 center-align header">
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Замеры</span>
-        <i (click)="showMeasurementDialog = !showMeasurementDialog"
+        <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+           (click)="showMeasurementDialog = !showMeasurementDialog"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
     </div>
@@ -102,7 +103,8 @@
     <div class="col s2 center-align header">
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Монтажи</span>
-        <i (click)="showMountDialog = !showMountDialog"
+        <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+           (click)="showMountDialog = !showMountDialog"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
     </div>
@@ -130,7 +132,8 @@
       <div class="col s2 center-align header">
         <div class="valign-wrapper" style="display: inline-block">
           <span class="center-dialog-title">Перерасчеты</span>
-          <i (click)="showDiscountDialog = !showDiscountDialog"
+          <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+             (click)="showDiscountDialog = !showDiscountDialog"
              class="material-icons hover-element center-dialog-title">add_circle_outline</i>
         </div>
       </div>
@@ -149,7 +152,8 @@
       <div class="col s2 center-align header">
         <div class="valign-wrapper" style="display: inline-block">
           <span class="center-dialog-title">Оплаты</span>
-          <i (click)="showPaymentDialog = !showPaymentDialog"
+          <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+             (click)="showPaymentDialog = !showPaymentDialog"
              class="material-icons hover-element center-dialog-title">add_circle_outline</i>
         </div>
       </div>
@@ -194,7 +198,8 @@
       <app-deal-comments [comment]="comment"></app-deal-comments>
     </div>
   </div>
-  <div *ngIf="!(deal?.status == 4 || deal?.status == 5)" class="fixed-action-btn click-to-toggle">
+  <div *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+       class="fixed-action-btn click-to-toggle">
     <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
@@ -256,10 +261,10 @@
                           [(visible)]="showDiscountDialog"></app-dialog-deal-discount>
 <app-dialog-add-mount [deal]="deal" (successDealMount)="successMountAdded($event)"
                       [(visible)]="showMountDialog"></app-dialog-add-mount>
-
 <app-dialog-add-manager [deal]="deal" (successManagerAdd)="successManagerAdded()"
                         [(visible)]="showManagerDialog"></app-dialog-add-manager>
 <app-dialog-deal-edit [deal]="deal" (successDealEdit)="successEdit()"
                       [(visible)]="showEditDialog"></app-dialog-deal-edit>
 <app-add-client [(visible)]="showEditClient"
                 (successClient)="successDealClient($event)"></app-add-client>
+

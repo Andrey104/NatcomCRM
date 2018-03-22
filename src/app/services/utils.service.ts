@@ -31,6 +31,21 @@ export class UtilsService {
     return months[numberMonth];
   }
 
+  showEditButtons(id: string) {
+    // console.log('user_type ' + localStorage.getItem('user_type'));
+    // console.log('id_manager ' + localStorage.getItem('id_manager'));
+    // console.log('id ' + id);
+    if (localStorage.getItem('id_manager') === id) {
+      return true;
+    }
+    if (localStorage.getItem('user_type') === '4' ||
+      localStorage.getItem('user_type') === '5' ||
+      localStorage.getItem('user_type') === '3') {
+      return true;
+    }
+    return false;
+  }
+
   statusOrder(status: number) {
     let icon: { image, color };
     switch (status) {

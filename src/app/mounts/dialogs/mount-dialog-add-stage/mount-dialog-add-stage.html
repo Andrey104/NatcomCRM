@@ -1,21 +1,19 @@
 <div *ngIf="visible" class="dialog">
   <div class="content-dialog">
     <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
-    <h4>Отклонить монтаж</h4>
+    <h4>Добавить стадию</h4>
     <form (ngSubmit)="submitForm()" #form="ngForm">
-      <label class="required-area-dialog">Причина</label>
-      <div *ngFor="let cause of causes">
-        <label class="radio-text-dialog">
-          <input class="radio-dialog"
-                 ngModel
-                 required
-                 type="radio"
-                 [value]="cause"
-                 name="answer"> {{cause | rejectMountCause}}</label>
-      </div>
-      <label>Комментарий</label>
-      <div class="div-text-area-dialog">
-        <textarea ngModel name="comment" class="text-comment-dialog"></textarea>
+      <p><label class="required-area-dialog">Дата стадии</label> <input type="date"
+                                                                         ngModel
+                                                                         name="calendar"
+                                                                         required>
+      </p>
+      <div>
+        <label>Комментарий</label>
+        <textarea type="text"
+                  ngModel
+                  name="comment"
+                  class="text-comment-dialog"></textarea>
       </div>
       <button class="btn-dialog-submit" type="submit"
               [class.btn-dialog-submit]="form.valid"
