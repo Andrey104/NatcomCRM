@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Picture} from '../models/picture';
+import {Client} from '../models/client';
 
 @Component({
   selector: 'app-image-modal',
@@ -8,7 +9,9 @@ import {Picture} from '../models/picture';
 })
 export class ImageModalComponent implements OnInit {
   @Input() picture: Picture;
-  @Output() close = new EventEmitter();
+  @Input() visible: boolean;
+  @Output() successClient = new EventEmitter<Client>();
+  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {
   }
@@ -18,7 +21,7 @@ export class ImageModalComponent implements OnInit {
   }
 
   onClose() {
-    this.close.emit();
+    this.visibleChange.emit();
   }
 
 }

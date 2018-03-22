@@ -63,12 +63,33 @@ export class MeasurementService extends BaseApi {
     if (comment === '') {
       comment = null;
     }
-    console.log(cause +'   это в трансфере');
     const data = {
       cause,
       new_date,
       comment
     };
     return this.post(`measurements/${idMeasurement}/transfer/`, data);
+  }
+
+  rejectMeasurement(idMeasurement: number, cause: number, comment: string): Observable<OurComment> {
+    if (comment === '') {
+      comment = null;
+    }
+    const data = {
+      cause,
+      comment
+    };
+    return this.post(`measurements/${idMeasurement}/reject/`, data);
+  }
+
+  reviewRejectMeasurement(idReview: number, cause: number, comment: string): Observable<OurComment> {
+    if (comment === '') {
+      comment = null;
+    }
+    const data = {
+      cause,
+      comment
+    };
+    return this.post(`rejects/${idReview}/review/`, data);
   }
 }

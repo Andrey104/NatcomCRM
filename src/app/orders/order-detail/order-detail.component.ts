@@ -20,9 +20,6 @@ export class OrderDetailComponent implements OnInit {
 
   private id: number;
   order: OrderResult;
-  deferOpenValue = false;
-  rejectOpenValue = false;
-  inDealOpenValue = false;
   loader: boolean;
   showDialogReject = false;
   showDialogDefer = false;
@@ -30,33 +27,6 @@ export class OrderDetailComponent implements OnInit {
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   ngOnInit() {
-    this.subscribeOrderId();
-  }
-
-  openDefer() {
-    this.deferOpenValue = true;
-  }
-
-  closeDefer() {
-    this.deferOpenValue = false;
-    this.subscribeOrderId();
-  }
-
-  openReject() {
-    this.rejectOpenValue = true;
-  }
-
-  closeReject() {
-    this.rejectOpenValue = false;
-    this.subscribeOrderId();
-  }
-
-  openToDeal() {
-    this.inDealOpenValue = true;
-  }
-
-  closeToDeal() {
-    this.inDealOpenValue = false;
     this.subscribeOrderId();
   }
 
@@ -68,7 +38,8 @@ export class OrderDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
       this.loader = true;
-      this.orderService.getOrderById(this.id).subscribe(order => {
+      this.orderService.getOrderById(this.id)
+        .subscribe(order => {
         this.order = order;
         this.loader = false;
       });

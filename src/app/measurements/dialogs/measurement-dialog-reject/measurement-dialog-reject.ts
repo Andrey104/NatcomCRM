@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input,  OnInit, Output,  ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {DealService} from '../../../services/deal.service';
 import {NgForm} from '@angular/forms';
+import {DealMeasurement} from '../../../models/deal/deal_measurement';
+import {MeasurementService} from '../../../services/measurement.service';
 
 @Component({
   selector: 'app-measurement-reject',
@@ -11,10 +12,10 @@ import {NgForm} from '@angular/forms';
 export class MeasurementDialogRejectComponent implements OnInit {
   id;
   @Input() closable = true;
-  @Input() measurement;
+  @Input() measurement: DealMeasurement;
   @Input() visible: boolean;
   @ViewChild('form') form: NgForm;
-  @Output() successDeal = new EventEmitter();
+  @Output() successRejectMeasurement = new EventEmitter();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   causes = [1, 2, 3];
   isSubmitted = false;
@@ -22,14 +23,11 @@ export class MeasurementDialogRejectComponent implements OnInit {
   formData = {};
 
   constructor(private activatedRoute: ActivatedRoute,
-              private dealService: DealService) {
+              private measurementService: MeasurementService) {
   }
 
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.id = params['id'];
-    });
   }
 
   close() {
@@ -41,21 +39,42 @@ export class MeasurementDialogRejectComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    this.dealService.dealReject(this.id, this.form.form.value.answer, this.form.form.value.comment).subscribe((result) => {
-      this.isRequest = false;
-      this.visibleChange.emit(this.visible);
-      this.successDeal.emit();
-      this.close();
-    }, (error) => {
-      this.isRequest = false;
-      if (error.status === 200) {
+    if (this.measurement.status === 5) {
+      this.measurementService.reviewRejectMeasurement(this.measurement.reject_id, this.form.form.value.answer,
+        this.form.form.value.comment).subscribe((result) => {
+        this.isRequest = false;
         this.visibleChange.emit(this.visible);
-        this.successDeal.emit();
+        this.successRejectMeasurement.emit();
         this.close();
-      } else {
-        alert('Произошла ошибка');
-      }
-    });
+      }, (error) => {
+        this.isRequest = false;
+        if (error.status === 200) {
+          this.visibleChange.emit(this.visible);
+          this.successRejectMeasurement.emit();
+          this.close();
+        } else {
+          alert('Произошла ошибка');
+        }
+      });
+    } else {
+      this.measurementService.rejectMeasurement(this.measurement.id, this.form.form.value.answer,
+        this.form.form.value.comment).subscribe((result) => {
+        this.isRequest = false;
+        this.visibleChange.emit(this.visible);
+        this.successRejectMeasurement.emit();
+        this.close();
+      }, (error) => {
+        this.isRequest = false;
+        if (error.status === 200) {
+          this.visibleChange.emit(this.visible);
+          this.successRejectMeasurement.emit();
+          this.close();
+        } else {
+          alert('Произошла ошибка');
+        }
+      });
+    }
+
   }
 
 }

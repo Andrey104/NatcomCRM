@@ -9,6 +9,7 @@ import {CompanyPage} from '../models/company/company-page';
 import {NewDeal} from '../models/deal/new_deal';
 import {User} from '../models/user';
 import {Managers} from '../models/managers/managers';
+import {Client} from '../models/client';
 
 
 @Injectable()
@@ -105,6 +106,11 @@ export class DealService extends BaseApi {
     };
     console.log(data.address_comment , 'edit deal');
     return this.patch(`deals/${idDeal}/`, data);
+  }
+
+  newClientToDeal(dealId: number, clientId: number): Observable<Client> {
+    const data = {client: clientId};
+    return this.post(`deals/${dealId.toString()}/add_client/`, data);
   }
 
 }

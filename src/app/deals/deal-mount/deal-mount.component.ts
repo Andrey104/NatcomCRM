@@ -19,8 +19,8 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   loadPage: boolean;
   showRejectMount = false;
   showCompleteMount = false;
+  showMountStageAdd = false;
   showTransferMount = false;
-  showAddStage = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private mountService: MountService,

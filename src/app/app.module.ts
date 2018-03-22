@@ -36,8 +36,6 @@ import {EmailPipe} from './pipes/email.pipe';
 import {DateFormatPipe} from './pipes/dateFormat.pipe';
 import {AddressPipe} from './pipes/address.pipe';
 import {MoneyPipe} from './pipes/money.pipe';
-import {MountsComponent} from './deals/mounts/mounts.component';
-import {MeasurementsComponent} from './deals/measurements/measurements.component';
 import {MeasurementService} from './services/measurement.service';
 import {MountService} from './services/mount.service';
 import {MeasurementCardComponent} from './deals/measurement-card/measurement-card.component';
@@ -71,7 +69,6 @@ import {MountComponent} from './mounts/mount/mount.component';
 import {MountDetailComponent} from './mounts/mount-detail/mount-detail.component';
 import {StageMountService} from './services/stage-mount.service';
 import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
-import {MeasurementDetailComponent} from './measurements/measurement-detail/measurement-detail.component';
 import {MeasurementComponent} from './measurements/measurement/measurement.component';
 import {BaseApi} from './core/base-api';
 import {InputSearchComponent} from './input-search/input-search.component';
@@ -119,6 +116,8 @@ import {MeasurementDialogEditComponent} from './measurements/dialogs/measurement
 import {MeasurementDialogTransferComponent} from './measurements/dialogs/measurement-dialog-transfer/measurement-dialog-transfer';
 import {DealDialogEditComponent} from './deals/dialogs/deal-dialog-edit/deal-dialog-edit';
 import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
+import {TextMaskModule} from 'angular2-text-mask';
+import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-stage/mount-dialog-add-stage';
 
 
 @NgModule({
@@ -146,8 +145,6 @@ import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
     DateFormatPipe,
     AddressPipe,
     MoneyPipe,
-    MountsComponent,
-    MeasurementsComponent,
     MeasurementCardComponent,
     MountCardComponent,
     MountDatePipe,
@@ -184,7 +181,6 @@ import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
     MountComponent,
     MountDetailComponent,
     MeasurementPageComponent,
-    MeasurementDetailComponent,
     MeasurementComponent,
     InputSearchComponent,
     OrderModalDealComponent,
@@ -220,8 +216,9 @@ import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
     MeasurementDialogEditComponent,
     MeasurementDialogTransferComponent,
     DealDialogEditComponent,
-    MeasurementTransferCausePipe
-],
+    MeasurementTransferCausePipe,
+    MountDialogAddStageComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -230,7 +227,8 @@ import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
     InfiniteScrollModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TextMaskModule
   ],
   providers: [
     AuthGuard,

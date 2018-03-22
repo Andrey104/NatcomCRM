@@ -21,7 +21,7 @@ export class MountDetailComponent implements OnInit, AfterViewChecked {
   showRejectMount = false;
   showCompleteMount = false;
   showTransferMount = false;
-  showAddStage = false;
+  showMountStageAdd = false;
   needSubscribe = true;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 

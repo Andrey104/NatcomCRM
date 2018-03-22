@@ -32,7 +32,9 @@ export class UtilsService {
   }
 
   showEditButtons(id: string) {
-    console.log('user_type ' + localStorage.getItem('user_type'));
+    // console.log('user_type ' + localStorage.getItem('user_type'));
+    // console.log('id_manager ' + localStorage.getItem('id_manager'));
+    // console.log('id ' + id);
     if (localStorage.getItem('id_manager') === id) {
       return true;
     }

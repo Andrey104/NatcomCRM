@@ -4,7 +4,7 @@
 <div *ngIf="!loadPage" class="col s12 detail-col scrollable-page" id="page">
   <div class="row main-row valign-wrapper">
     <div class="col s4 valign-wrapper">
-      <img class="avatar" src="assets/images/worker.png" />
+      <img class="avatar" src="assets/images/worker.png"/>
       <div [style.color]="measurement?.worker ? 'green': 'red'">{{measurement?.worker | workerName}}</div>
     </div>
     <div class="col s4 valign-wrapper">
@@ -20,7 +20,8 @@
     <div class="col s7">
       <div class="deal">Замер {{measurement?.deal}}</div>
       <div class="status-container valign-wrapper">
-        <div [appColorCompany]="measurement?.company?.symbol" class="company-symbol">{{measurement?.company?.symbol}}</div>
+        <div [appColorCompany]="measurement?.company?.symbol" class="company-symbol">{{measurement?.company?.symbol}}
+        </div>
         <div class="company-name">{{measurement?.company?.name}}</div>
       </div>
       <div class="measurement-info">
@@ -75,7 +76,7 @@
   <div class="history">
     <div class="col s12 offset-s1">История замера:</div>
     <div class="row">
-      <div *ngFor="let action of measurement?.actions"  class="col s10 offset-s1">
+      <div *ngFor="let action of measurement?.actions" class="col s10 offset-s1">
         <div>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'measurement'}}</div>
       </div>
     </div>
@@ -92,7 +93,7 @@
     <div class="col s5 divider"></div>
   </div>
   <div *ngIf="measurement?.pictures.length===0" class="row">
-    <div  class="col s12 offset-s1 no-information">Нет изображений</div>
+    <div class="col s12 offset-s1 no-information">Нет изображений</div>
   </div>
   <div class="row" *ngIf="measurement?.pictures.length!==0">
     <div class="col s3" *ngFor="let picture of measurement?.pictures; let i = index">
@@ -111,7 +112,7 @@
     </div>
   </div>
   <div *ngIf="measurement?.comments.length===0" class="row">
-    <div  class="col s12 offset-s1 no-information">Нет комментариев</div>
+    <div class="col s12 offset-s1 no-information">Нет комментариев</div>
   </div>
   <app-deal-client-info
     [openClientInfo]="clientInfo"
@@ -122,7 +123,7 @@
     [picture]="picture"
     (close)="closePicture()">
   </app-image-modal>
-  <div class="fixed-action-btn click-to-toggle">
+  <div class="fixed-action-btn click-to-toggle" *ngIf="(measurement?.status==0||measurement?.status==1)&&showEditButtons">
     <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
@@ -151,9 +152,9 @@
 <div *ngIf="!loadPage" class="col s12 measurement-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
-<app-measurement-reject [measurement]="measurement" (successMeasurementReject)="successMeasurementUpdate()"
+<app-measurement-reject [measurement]="measurement" (successRejectMeasurement)="successMeasurementUpdate()"
                         [(visible)]="showMeasurementReject"></app-measurement-reject>
 <app-measurement-transfer [measurement]="measurement" (successTransferMeasurement)="successMeasurementUpdate()"
-                        [(visible)]="showMeasurementTransfer"></app-measurement-transfer>
+                          [(visible)]="showMeasurementTransfer"></app-measurement-transfer>
 <app-measurement-edit [measurement]="measurement" (successMeasurementEdit)="successMeasurementUpdate()"
-                        [(visible)]="showMeasurementEdit"></app-measurement-edit>
+                      [(visible)]="showMeasurementEdit"></app-measurement-edit>

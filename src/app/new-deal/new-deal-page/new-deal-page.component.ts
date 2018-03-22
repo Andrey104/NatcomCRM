@@ -10,7 +10,7 @@ import {OrderResult} from '../../models/orders/order_result';
 import {Client} from '../../models/client';
 import {Phone} from '../../models/phone';
 import {NewDeal} from '../../models/deal/new_deal';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-deal-page',
@@ -29,15 +29,19 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   order: OrderResult;
   dealId: number;
   isRequest = true;
+  orderId: number;
+  orderStatus;
+  subOnOrder: Subscription;
 
   constructor(private dealService: DealService,
               private measurementService: MeasurementService,
               private orderService: OrderService,
+              private activatedRoute: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit() {
-    if (this.orderService.getOrder()) {
+    if (this.activatedRoute.snapshot.params['id']) {
       this.getOrder();
     } else {
       this.subscribeOnGetCompanies();
@@ -45,6 +49,23 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   }
 
   getOrder() {
+    this.orderStatus = this.orderService.getOrderStatus();
+    this.orderId = this.activatedRoute.snapshot.params['id'];
+    if (this.orderService.getOrder() === undefined) {
+      this.subOnOrder = this.orderService.getOrderById(this.orderId)
+        .subscribe((orderPage) => {
+          this.order = orderPage;
+        }, (err) => {
+          console.log(err.message);
+        }, () => {
+          this.subOnOrder.unsubscribe();
+        });
+    } else {
+      this.getOrderByService();
+    }
+  }
+
+  getOrderByService() {
     this.order = this.orderService.getOrder();
     this.companies.push(this.order.company);
     this.defaultCompany = this.companies[0].id;

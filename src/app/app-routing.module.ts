@@ -19,7 +19,6 @@ import {StageComponent} from './stage/stage.component';
 import {MountPageComponent} from './mounts/mount-page/mount-page.component';
 import {MountDetailComponent} from './mounts/mount-detail/mount-detail.component';
 import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
-import {MeasurementDetailComponent} from './measurements/measurement-detail/measurement-detail.component';
 import {NewDealPageComponent} from './new-deal/new-deal-page/new-deal-page.component';
 import {InstallersComponent} from './settings-page/installers/installers.component';
 import {BrigadesComponent} from './settings-page/brigades/brigades.component';
@@ -30,11 +29,12 @@ import {SettingsPageComponent} from './settings-page/settings-page.component';
 // deals/id/mounts
 
 const measurements_routes: Routes = [
-  {path: ':measurement_id', component: MeasurementDetailComponent}
+  {path: ':measurement_id', component: DealMeasurementComponent}
 ];
 
 const mounts_routes: Routes = [
   {path: ':mount_id', component: MountDetailComponent},
+  {path: ':mount_id/deal/:id', component: MountDetailComponent},
   {path: ':mount_id/stage/:stage_id', component: StageComponent}
 ];
 

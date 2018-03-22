@@ -1,5 +1,8 @@
-<div class="row">
+<div class="row main-row scrollable-page">
   <div class="col s7">
+    <div style="height: 30px; width: 30px; background-color: red"
+         *ngIf="orderId"
+          routerLink="/orders/{{orderStatus}}/{{orderId}}">back</div>
     <form #form="ngForm" (ngSubmit)="submitForm(form)">
       <div class="row">
         <div class="col s7">
@@ -112,5 +115,6 @@
       </div>
     </div>
   </div>
-  <app-add-client [(visible)]="showDialog" (successClient)="addNewClient($event)"></app-add-client>
+  <app-add-client [(visible)]="showDialog"
+                  (successClient)="addNewClient($event)"></app-add-client>
 </div>

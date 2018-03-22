@@ -24,6 +24,7 @@ export class DealResult {
   address_comment: string;
   address: string;
   auto_date: string;
+  auto_change_date: string;
   contract: boolean;
   task_date: string;
   non_cash: boolean;

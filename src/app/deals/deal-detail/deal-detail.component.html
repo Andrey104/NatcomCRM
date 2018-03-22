@@ -48,9 +48,13 @@
     <div class="col s5">
       <div class="row contacts">
         <div class="col s12 valign-wrapper">
-          <hr class="col s4">
-          <div class="col s4 center-align header">Контакты</div>
-          <hr class="col s4">
+          <hr class="col s3">
+          <div class="col s6 center-align" style="display: inline-block">
+            <span class="center-dialog-title">Контакты</span>
+            <i (click)="showEditClient = !showEditClient"
+               class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+          </div>
+          <hr class="col s3">
         </div>
       </div>
       <div class="row">
@@ -261,3 +265,6 @@
                         [(visible)]="showManagerDialog"></app-dialog-add-manager>
 <app-dialog-deal-edit [deal]="deal" (successDealEdit)="successEdit()"
                       [(visible)]="showEditDialog"></app-dialog-deal-edit>
+<app-add-client [(visible)]="showEditClient"
+                (successClient)="successDealClient($event)"></app-add-client>
+

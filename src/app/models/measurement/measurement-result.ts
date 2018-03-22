@@ -5,6 +5,7 @@ import {Transfer} from '../transfer';
 import {OurComment} from '../comment';
 import {Company} from '../company';
 import {Worker} from '../worker';
+import {User} from '../user';
 
 export class MeasurementResult {
   id: number;
@@ -22,6 +23,8 @@ export class MeasurementResult {
   status: number;
   time: string;
   sum: string;
+  reject_id: string;
+  deal_user: User;
   prepayment: string;
   worker: Worker;
   deal: number;

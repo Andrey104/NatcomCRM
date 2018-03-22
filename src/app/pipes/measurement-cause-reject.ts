@@ -8,15 +8,15 @@ export class MeasurementRejectCausePipe implements PipeTransform {
     let cause: string;
     switch (type) {
       case 1: {
-        cause = 'Ошибка менеджера';
-        break;
-      }
-      case 2: {
         cause = 'Выбрали другую компанию';
         break;
       }
-      case 3: {
+      case 2: {
         cause = 'Ошибка замерщика';
+        break;
+      }
+      case 3: {
+        cause = 'Ошибка менеджера';
         break;
       }
     }
