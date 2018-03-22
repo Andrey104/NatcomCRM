@@ -21,7 +21,7 @@ export class AddClientComponent implements OnInit {
   successPhones = false;
   subOnClientPhone: Subscription;
   subOnAddClient: Subscription;
-  regularClient: Client;
+  regularClient: Client = null;
   regularClientNumber: number;
   visibleRegularClient = false;
   public mask = ['+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
@@ -45,6 +45,7 @@ export class AddClientComponent implements OnInit {
     let clientForServer = this.getClientFromTheForm();
     this.subOnAddClient = this.clientService.addClient(clientForServer)
       .subscribe((client) => {
+        console.log(client);
         this.successClient.emit(client);
         this.onClose();
       }, (err) => {
