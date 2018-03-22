@@ -23,14 +23,13 @@ import {StageComponent} from './stage/stage.component';
 import {MountPageComponent} from './mounts/mount-page/mount-page.component';
 import {MountDetailComponent} from './mounts/mount-detail/mount-detail.component';
 import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
-import {MeasurementDetailComponent} from './measurements/measurement-detail/measurement-detail.component';
 import {NewDealPageComponent} from './new-deal/new-deal-page/new-deal-page.component';
 
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts
 
 const measurements_routes: Routes = [
-  {path: ':measurement_id', component: MeasurementDetailComponent}
+  {path: ':measurement_id', component: DealMeasurementComponent}
 ];
 
 const mounts_routes: Routes = [

@@ -36,8 +36,6 @@ import {EmailPipe} from './pipes/email.pipe';
 import {DateFormatPipe} from './pipes/dateFormat.pipe';
 import {AddressPipe} from './pipes/address.pipe';
 import {MoneyPipe} from './pipes/money.pipe';
-import {MountsComponent} from './deals/mounts/mounts.component';
-import {MeasurementsComponent} from './deals/measurements/measurements.component';
 import {MeasurementService} from './services/measurement.service';
 import {MountService} from './services/mount.service';
 import {MeasurementCardComponent} from './deals/measurement-card/measurement-card.component';
@@ -82,7 +80,6 @@ import {MountComponent} from './mounts/mount/mount.component';
 import {MountDetailComponent} from './mounts/mount-detail/mount-detail.component';
 import {StageMountService} from './services/stage-mount.service';
 import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
-import {MeasurementDetailComponent} from './measurements/measurement-detail/measurement-detail.component';
 import {MeasurementComponent} from './measurements/measurement/measurement.component';
 import {BaseApi} from './core/base-api';
 import {InputSearchComponent} from './input-search/input-search.component';
@@ -143,8 +140,6 @@ import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-st
     DateFormatPipe,
     AddressPipe,
     MoneyPipe,
-    MountsComponent,
-    MeasurementsComponent,
     MeasurementCardComponent,
     MountCardComponent,
     MountDatePipe,
@@ -181,7 +176,6 @@ import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-st
     MountComponent,
     MountDetailComponent,
     MeasurementPageComponent,
-    MeasurementDetailComponent,
     MeasurementComponent,
     InputSearchComponent,
     OrderModalDealComponent,
