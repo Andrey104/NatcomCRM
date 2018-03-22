@@ -1,6 +1,7 @@
 .dialog {
-  height: 449px;
+  height: 460px;
   overflow-y: auto;
+  width: 560px;
 }
 
 .dialog::-webkit-scrollbar {
@@ -17,7 +18,7 @@
 
 @media (min-width: 768px) {
   .dialog {
-    top: calc(50% - 225px);
+    top: calc(50% - 230px);
   }
 }
 
@@ -26,6 +27,20 @@ h4 {
   padding-right: 40px;
   padding-left: 40px;
   text-align: center;
+}
+
+.button-phone-block {
+  position: relative;
+  height: 70px;
+}
+
+.remove-button {
+  right: 0;
+}
+
+.regular-client-container {
+  border-radius: 10px;
+  background-color: #cccccc;
 }
 
 .text-comment-dialog {

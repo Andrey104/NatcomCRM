@@ -9,6 +9,7 @@ import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {Payment} from '../../models/payment';
 import {DealDiscount} from '../../models/deal/deal_discount';
 import {DealMount} from '../../models/deal/deal_mount';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-deal-detail',
@@ -33,7 +34,9 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   showMountDialog = false;
   showManagerDialog = false;
   showEditDialog = false;
+  showEditClient = false;
   needSubscribe = true;
+  subOnNewClientToDeal: Subscription;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -91,6 +94,21 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     this.updateList.next(true);
     this.loadPage = true;
     this.getDealById();
+  }
+
+  successDealClient(client: Client) {
+    this.subOnNewClientToDeal = this.dealService.newClientToDeal(this.id, client.id)
+      .subscribe((responseClient) => {
+        if (responseClient) {
+          this.getDealById();
+        }
+      }, (err) => {
+        if (err.status === 200) {
+          this.getDealById();
+        }
+      }, () => {
+        this.subOnNewClientToDeal.unsubscribe();
+      });
   }
 
   subscribeDealId(): void {

@@ -8,6 +8,7 @@ export class BaseApi {
 
   constructor(public http: HttpClient) {
   }
+
   private getUrl(url: string = '') {
     return this.baseUrl + url;
   }

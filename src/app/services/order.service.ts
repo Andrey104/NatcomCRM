@@ -18,6 +18,7 @@ const httpOptions = {
 @Injectable()
 export class OrderService extends BaseApi {
   private order: OrderResult;
+  private orderStatus;
 
   constructor(public http: HttpClient,
               private messageService: MessageService) {
@@ -30,6 +31,14 @@ export class OrderService extends BaseApi {
 
   setOrder(order: OrderResult) {
     this.order = order;
+  }
+
+  getOrderStatus() {
+    return this.orderStatus;
+  }
+
+  setOrderStatus(status: string) {
+    this.orderStatus = status;
   }
 
   /** GET orders from the server */

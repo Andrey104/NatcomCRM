@@ -50,6 +50,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   subscribeOnOrderStatus() {
     this.activatedRoute.params
       .subscribe((params) => {
+        this.orderService.setOrderStatus(params['status']);
         this.inputText = '';
         this.status = this.utils.statusUrlOrder(params['status']);
         this.orders = [];
