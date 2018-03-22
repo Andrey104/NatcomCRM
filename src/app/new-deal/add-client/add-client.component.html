@@ -4,7 +4,7 @@
   </i>
   <h4>Добавить клиента</h4>
   <div class="row main-row">
-    <form class="form" #form="ngForm" (ngSubmit)="submitForm()">
+    <form id="form" class="form" #form="ngForm" (ngSubmit)="submitForm()">
       <div class="row main-row valign-wrapper">
         <div class="col s10">
           <div class="col s12">
@@ -35,11 +35,13 @@
         <div class="col s10">
           <div class="col s12">
             <label data-error="wrong" data-success="right">Email</label>
-            <input id="email"
-                   type="email"
+            <input type="email"
                    class="validate"
                    ngModel
-                   name="email">
+                   name="email"
+                   email
+                   #email="ngModel">
+            <span *ngIf="email.invalid && email.touched">Некоректный email</span>
           </div>
         </div>
       </div>
@@ -60,6 +62,8 @@
               <div class="col s12">
                 <label class="required-area-dialog">Номер телефона</label>
                 <input type="text"
+                       [ngClass]="{invalid: regularClient&&regularClientNumber===i}"
+                       class="validate"
                        [textMask]="{mask: mask}"
                        [value]="phone.number"
                        (input)="phoneNumber(i, $event.target.value)">

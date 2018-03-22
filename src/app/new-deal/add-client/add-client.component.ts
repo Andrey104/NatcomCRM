@@ -3,7 +3,6 @@ import {NgForm} from '@angular/forms';
 import {ClientService} from '../../services/client.service';
 import {Phone} from '../../models/phone';
 import {Client} from '../../models/client';
-import {ErrorForm} from '../../models/error-form';
 import {Subscription} from 'rxjs/Subscription';
 
 
@@ -35,7 +34,7 @@ export class AddClientComponent implements OnInit {
 
   submitForm() {
     console.log(this.regularClient);
-    if (this.regularClient === null) {
+    if (this.regularClient === undefined) {
       this.addClient();
     } else {
       this.changeClient();
@@ -47,7 +46,7 @@ export class AddClientComponent implements OnInit {
     this.subOnAddClient = this.clientService.addClient(clientForServer)
       .subscribe((client) => {
         this.successClient.emit(client);
-        this.visible = false;
+        this.onClose();
       }, (err) => {
         console.log(err);
       }, () => {
@@ -62,7 +61,7 @@ export class AddClientComponent implements OnInit {
     this.subOnAddClient = this.clientService.refreshClient(clientForServer)
       .subscribe((client) => {
         this.successClient.emit(client);
-        this.visible = false;
+        this.onClose();
       }, (err) => {
         console.log(err);
       }, () => {
@@ -94,21 +93,23 @@ export class AddClientComponent implements OnInit {
 
   phoneNumber(phoneId: number, phone: string) {
     let newPhone = '';
-    this.regularClient = null;
     this.phones[phoneId].number = phone;
     newPhone = this.phoneMaskOff(phone);
     if (newPhone.length === 10) {
-      this.successPhones = true;
-      this.subOnClientPhone = this.clientService.getClientByPhone(newPhone)
-        .subscribe((clientPage) => {
-          this.regularClient = clientPage.results[0];
-          this.regularClientNumber = phoneId;
-        }, (err) => {
-          console.log(err);
-        }, () => {
-          this.subOnClientPhone.unsubscribe();
-        });
+      if (!this.successPhones) {
+        this.successPhones = true;
+        this.subOnClientPhone = this.clientService.getClientByPhone(newPhone)
+          .subscribe((clientPage) => {
+            this.regularClient = clientPage.results[0];
+            this.regularClientNumber = phoneId;
+          }, (err) => {
+            console.log(err);
+          }, () => {
+            this.subOnClientPhone.unsubscribe();
+          });
+      }
     } else {
+      this.regularClient = null;
       this.successPhones = false;
     }
   }

@@ -1,5 +1,5 @@
 .dialog {
-  height: 449px;
+  height: 460px;
   overflow-y: auto;
   width: 560px;
 }
@@ -18,7 +18,7 @@
 
 @media (min-width: 768px) {
   .dialog {
-    top: calc(50% - 225px);
+    top: calc(50% - 230px);
   }
 }
 
