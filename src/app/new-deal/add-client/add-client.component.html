@@ -48,7 +48,7 @@
       <div *ngFor="let phone of phones; let i = index" class="valign-wrapper">
         <div class="col s12">
           <div class="regular-client-container"
-               *ngIf="regularClient&&regularClientNumber===i"
+               *ngIf="visibleRegularClient&&regularClientNumber===i"
                (click)="addRegularClient()">
             <div>ФИО: {{regularClient.fio}}</div>
             <div>Email: {{regularClient.email | email}}
@@ -62,7 +62,7 @@
               <div class="col s12">
                 <label class="required-area-dialog">Номер телефона</label>
                 <input type="text"
-                       [ngClass]="{invalid: regularClient&&regularClientNumber===i}"
+                       [ngClass]="{invalid: visibleRegularClient&&regularClientNumber===i}"
                        class="validate"
                        [textMask]="{mask: mask}"
                        [value]="phone.number"

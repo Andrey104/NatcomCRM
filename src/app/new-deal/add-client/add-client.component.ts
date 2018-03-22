@@ -23,6 +23,7 @@ export class AddClientComponent implements OnInit {
   subOnAddClient: Subscription;
   regularClient: Client;
   regularClientNumber: number;
+  visibleRegularClient = false;
   public mask = ['+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
 
   constructor(private clientService: ClientService) {
@@ -33,8 +34,7 @@ export class AddClientComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.regularClient);
-    if (this.regularClient === undefined) {
+    if (this.regularClient === null) {
       this.addClient();
     } else {
       this.changeClient();
@@ -57,6 +57,7 @@ export class AddClientComponent implements OnInit {
 
   changeClient() {
     let clientForServer = this.getClientFromTheForm();
+    clientForServer.id = this.regularClient.id;
     console.log(clientForServer);
     this.subOnAddClient = this.clientService.refreshClient(clientForServer)
       .subscribe((client) => {
@@ -96,12 +97,16 @@ export class AddClientComponent implements OnInit {
     this.phones[phoneId].number = phone;
     newPhone = this.phoneMaskOff(phone);
     if (newPhone.length === 10) {
-      if (!this.successPhones) {
+      if (!this.visibleRegularClient) {
         this.successPhones = true;
         this.subOnClientPhone = this.clientService.getClientByPhone(newPhone)
           .subscribe((clientPage) => {
-            this.regularClient = clientPage.results[0];
-            this.regularClientNumber = phoneId;
+            console.log(clientPage.results[0]);
+            if (clientPage.results[0] !== undefined) {
+              this.regularClient = clientPage.results[0];
+              this.regularClientNumber = phoneId;
+              this.visibleRegularClient = true;
+            }
           }, (err) => {
             console.log(err);
           }, () => {
@@ -109,7 +114,8 @@ export class AddClientComponent implements OnInit {
           });
       }
     } else {
-      this.regularClient = null;
+      // this.regularClient = null;
+      this.visibleRegularClient = false;
       this.successPhones = false;
     }
   }
@@ -144,9 +150,7 @@ export class AddClientComponent implements OnInit {
     this.form.reset();
     this.phones = [];
     for (let i = 0; i < this.regularClient.phones.length; i++) {
-      if (this.phones[i] === undefined) {
-        this.phones.push(new Phone('', null));
-      }
+      this.phones.push(new Phone('', null));
       this.phones[i].number = this.phoneMaskOn(this.regularClient.phones[i].number);
       this.phones[i].comment = this.regularClient.phones[i].comment;
     }
@@ -155,6 +159,7 @@ export class AddClientComponent implements OnInit {
         email: this.regularClient.email
       }
     );
+    this.visibleRegularClient = false;
   }
 
   phoneMaskOn(phoneNumber: string) {
