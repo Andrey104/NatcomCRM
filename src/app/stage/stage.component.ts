@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {StageMountService} from '../services/stage-mount.service';
 import {MountStage} from '../models/mount/mount-stage';
@@ -6,6 +6,8 @@ import {DealMount} from '../models/deal/deal_mount';
 import {MountService} from '../services/mount.service';
 import {UtilsService} from '../services/utils.service';
 import {Cost} from '../models/cost';
+import {DOCUMENT} from '@angular/common';
+import {DealService} from '../services/deal.service';
 
 @Component({
   selector: 'app-stage',
@@ -15,6 +17,10 @@ import {Cost} from '../models/cost';
 export class StageComponent implements OnInit {
   id: number;
   idMount: number;
+  idDeal: number;
+  statusMount;
+  statusDeal;
+  url;
   stage: MountStage;
   mount: DealMount;
   showEditButtons = false;
@@ -23,14 +29,41 @@ export class StageComponent implements OnInit {
   showTransferStage = false;
   showAddCost = false;
   showAddInstaller = false;
+  backRouter = '';
 
-  constructor(private activatedRoute: ActivatedRoute, private stageMountService: StageMountService, private mountService: MountService,
-              private utils: UtilsService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private stageMountService: StageMountService,
+              private mountService: MountService,
+              private utils: UtilsService,
+              private dealService: DealService,
+              @Inject(DOCUMENT) private document: Document) {
+    this.url = this.document.location.href;
   }
 
   ngOnInit() {
-    console.log(typeof this.stage);
+    this.getRouter();
     this.getStage();
+  }
+
+  getRouter() {
+    this.activatedRoute.params.subscribe(params => {
+        this.idMount = params['mount_id'];
+      if (params['mount_id'] && params['id']) {
+        this.idDeal = params['id'];
+        const index = this.url.indexOf('mounts');
+        console.log(index + 'index авыпщфыпхыопз');
+        if (index === -1) {
+          this.statusDeal = this.dealService.statusDeal;
+          this.backRouter = `/deals/${this.statusDeal}/${this.idDeal}/mount/${this.idMount}`;
+        } else {
+          this.statusMount = this.mountService.statusMount;
+          this.backRouter = `/mounts/${this.statusMount}/${this.idMount}/deal/${this.idDeal}/mount/${this.idMount}`;
+        }
+      } else {
+        this.statusMount = this.mountService.statusMount;
+        this.backRouter = `/mounts/${this.statusMount}/${this.idMount}`;
+      }
+    });
   }
 
   successStageUpdate() {

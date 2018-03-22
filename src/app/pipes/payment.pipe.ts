@@ -13,7 +13,7 @@ export class PaymentPipe implements PipeTransform {
       comment = ', с комментарием: ';
     }
 
-    return user + ' добавил(а) ' + sum + 'р' + (payment.non_cash ? ' (безналичные)' : ' (наличные)') + ', получатель ' + payment.receiver + comment;
+    return user + ' добавил(а) ' + sum + 'р' + (payment.non_cash ? ' (безналичные)' : ' (наличные)') + ', получатель ' + payment.receiver + comment + ' дата получения - ';
   }
 
 }
