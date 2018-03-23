@@ -23,15 +23,15 @@ export class DealService extends BaseApi {
 
   /** GET deals from the server */
   getDeals(page: number, status: string): Observable<DealPage> {
-    return this.get(`deals?page=${page.toString()}&&${status}`);
+    return this.get(`deals/?page=${page.toString()}&${status}`);
   }
 
   getDealById(idDeal: number): Observable<DealResult> {
-    return this.get(`deals/${idDeal.toString()}`);
+    return this.get(`deals/${idDeal.toString()}/`);
   }
 
   getFilterDeals(page: number, text: string): Observable<DealPage> {
-    return this.get(`deals/search?page=${page.toString()}&&text=${text}`);
+    return this.get(`deals/search?page=${page.toString()}&text=${text}`);
   }
 
   dealComment(idDeal: number, comment: string): Observable<Object> {
@@ -39,7 +39,7 @@ export class DealService extends BaseApi {
   }
 
   getCompanies(): Observable<CompanyPage> {
-    return this.get(`companies`);
+    return this.get(`companies/`);
   }
 
   newDeal(newDeal: NewDeal): Observable<DealResult> {
