@@ -10,10 +10,12 @@
   <div class="card-stacked">
     <div class="info">
       <div class="col s12 detail-col">
-        <div class="col s7 detail-col company">{{deal?.company?.name | companyName}}</div>
-        <div class="col s5 detail-col right-align time valign-wrapper">
-          <i class="tiny material-icons icon card-date-icon">date_range</i>
-          <div class="card-date">{{deal?.auto_change_date | dateFormat: 'date'}}</div>
+        <div class="col s6 detail-col company">{{deal?.company?.name | companyName}}</div>
+        <div class="col s6 detail-col right-align time valign-wrapper">
+          <div style="display: inline-block">
+            <i class="tiny material-icons icon card-date-icon">date_range</i>
+            <span class="card-date">{{deal?.auto_change_date | dateFormat: 'date'}}</span>
+          </div>
         </div>
       </div>
       <div class="main-info-card">
