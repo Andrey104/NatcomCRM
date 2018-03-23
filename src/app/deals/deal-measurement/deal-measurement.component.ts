@@ -24,6 +24,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   showMeasurementReject = false;
   showMeasurementTransfer = false;
   showMeasurementEdit = false;
+  showPicture = false;
   statusDeal: string;
   backUrl: string;
 
@@ -95,6 +96,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
 
   openPicture(idPicture: number) {
     this.picture = this.measurement.pictures[idPicture];
+    this.showPicture = true;
   }
 
   closePicture() {

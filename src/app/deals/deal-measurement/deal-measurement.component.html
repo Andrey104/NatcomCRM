@@ -103,9 +103,11 @@
     <div class="col s12 offset-s1 no-information">Нет изображений</div>
   </div>
   <div class="row" *ngIf="measurement?.pictures.length!==0">
-    <div class="col s3" *ngFor="let picture of measurement?.pictures; let i = index">
+    <div class="col s3 picture-container" *ngFor="let picture of measurement?.pictures; let i = index">
       <img class="col s12 picture" (click)="openPicture(i)" src="{{picture.url}}"/>
-      <div class="col s12 picture-date center-align">{{picture?.auto_date | dateFormat: 'fullDate'}}</div>
+      <div class="col s12 picture-date center-align">
+        {{picture?.auto_date | dateFormat: 'fullDate'}}
+      </div>
     </div>
   </div>
   <div class="row valign-wrapper">
@@ -126,10 +128,6 @@
     [client]="client"
     (close)="closeClientInfo()">
   </app-deal-client-info>
-  <app-image-modal
-    [picture]="picture"
-    (close)="closePicture()">
-  </app-image-modal>
   <div class="fixed-action-btn click-to-toggle" *ngIf="(measurement?.status==0||measurement?.status==1)&&showEditButtons">
     <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
@@ -159,9 +157,19 @@
 <div *ngIf="!loadPage" class="col s12 measurement-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
 </div>
-<app-measurement-reject [measurement]="measurement" (successRejectMeasurement)="successMeasurementUpdate()"
-                        [(visible)]="showMeasurementReject"></app-measurement-reject>
-<app-measurement-transfer [measurement]="measurement" (successTransferMeasurement)="successMeasurementUpdate()"
-                          [(visible)]="showMeasurementTransfer"></app-measurement-transfer>
-<app-measurement-edit [measurement]="measurement" (successMeasurementEdit)="successMeasurementUpdate()"
-                      [(visible)]="showMeasurementEdit"></app-measurement-edit>
+<app-image-modal [picture]="picture"
+                 [(visible)]="showPicture"
+                 (close)="closePicture()">
+</app-image-modal>
+<app-measurement-reject [measurement]="measurement"
+                        (successRejectMeasurement)="successMeasurementUpdate()"
+                        [(visible)]="showMeasurementReject">
+</app-measurement-reject>
+<app-measurement-transfer [measurement]="measurement"
+                          (successTransferMeasurement)="successMeasurementUpdate()"
+                          [(visible)]="showMeasurementTransfer">
+</app-measurement-transfer>
+<app-measurement-edit [measurement]="measurement"
+                      (successMeasurementEdit)="successMeasurementUpdate()"
+                      [(visible)]="showMeasurementEdit">
+</app-measurement-edit>

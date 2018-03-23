@@ -78,9 +78,14 @@
   color: black;
 }
 
+.picture-container {
+  height: auto;
+}
+
 .picture {
   max-height: 300px;
   max-width: 300px;
+  cursor: zoom-in;
 }
 
 .picture-date {

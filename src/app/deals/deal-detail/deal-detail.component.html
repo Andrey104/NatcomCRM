@@ -71,7 +71,7 @@
       </div>
       <div class="row">
         <div *ngFor="let client of deal?.clients; let i = index" class="col s12">
-          <div (click)="openClientInfo(i)" class="valign-wrapper contact-info forward-block col s12 hover-element">
+          <div class="valign-wrapper contact-info forward-block col s12 hover-element">
             <div class="col s6 valign-wrapper detail-col-right">
               <i class="small material-icons icon">person</i>
               {{client.client.fio}}

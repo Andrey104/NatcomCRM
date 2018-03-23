@@ -1,15 +1,13 @@
-.open {
-  height: 500px;
-  width: 550px;
-  display: block;
-}
-
-.modal {
-  top: calc((100vh - 400px)/2);
-  left: 5vw;
-}
-
-.picture {
-  height: 450px;
-  width: 500px;
+img {
+  position: fixed;
+  z-index: 5000;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: auto;
+  height: auto;
+  max-width: 70%;
+  max-height: 70%;
+  margin: auto;
 }
