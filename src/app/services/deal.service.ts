@@ -54,13 +54,10 @@ export class DealService extends BaseApi {
     if (comment === '') {
       comment = null;
     }
-    console.log(comment);
-    console.log(cause);
     return this.post(`deals/${idDeal}/reject/`, {cause: cause, comment: comment});
   }
 
   dealPayment(idDeal: number, nonCash: string, date: string, receiver: string, sum: number): Observable<Object> {
-    console.log(nonCash);
     let non_cash: boolean;
     if (nonCash == '0') {
       non_cash = false;
