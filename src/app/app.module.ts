@@ -116,6 +116,8 @@ import {MeasurementDialogEditComponent} from './measurements/dialogs/measurement
 import {MeasurementDialogTransferComponent} from './measurements/dialogs/measurement-dialog-transfer/measurement-dialog-transfer';
 import {DealDialogEditComponent} from './deals/dialogs/deal-dialog-edit/deal-dialog-edit';
 import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
+import { AddStageComponent } from './mounts/add-stage/add-stage.component';
+import { ReviewComponent } from './admin/review/review.component';
 import {TextMaskModule} from 'angular2-text-mask';
 import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-stage/mount-dialog-add-stage';
 
@@ -218,6 +220,9 @@ import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-st
     DealDialogEditComponent,
     MeasurementTransferCausePipe,
     MountDialogAddStageComponent,
+    MeasurementTransferCausePipe,
+    AddStageComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,

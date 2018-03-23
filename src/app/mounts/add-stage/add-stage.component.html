@@ -1,0 +1,35 @@
+<div class="modal modal-fixed-footer" [ngClass]="{open: true}">
+  <!--<div class="modal-content">-->
+    <!--<h5>{{header}}</h5>-->
+    <form [formGroup]="stageForm">
+      <div class="input-field">
+        <input name="date" type="text" id="date" class="datepicker" formControlName="date">
+        <label for="date" [ngClass]="{active: nameInputActive}">Имя</label>
+      </div>
+    </form>
+    <!--<div class="row add-installer-btn">-->
+      <!--<a class="modal-action waves-red btn left" (click)="openInstallerList()">+</a>-->
+    <!--</div>-->
+    <!--<div class="installers-list">-->
+      <!--<app-brigade-installer *ngFor="let position of brigade?.installers"-->
+                             <!--[installerPosition]="position" (onDel)="deleteInstaller($event)"></app-brigade-installer>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="modal-footer">-->
+    <!--<a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="close(false)">Отмена</a>-->
+    <!--<a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="ok()">ОК</a>-->
+  <!--</div>-->
+</div>
+
+<!--<app-installer-select-list [open]="installerListIsOpen" (onClose)="closeInstallerList($event)"></app-installer-select-list>-->
+
+<script>
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: true // Close upon selecting a date,
+  });
+</script>

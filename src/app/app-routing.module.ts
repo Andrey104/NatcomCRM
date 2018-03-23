@@ -24,6 +24,7 @@ import {InstallersComponent} from './settings-page/installers/installers.compone
 import {BrigadesComponent} from './settings-page/brigades/brigades.component';
 import {CompaniesComponent} from './settings-page/companies/companies.component';
 import {SettingsPageComponent} from './settings-page/settings-page.component';
+import {ReviewComponent} from './admin/review/review.component';
 
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts
@@ -61,7 +62,8 @@ const settings_router: Routes = [
 ];
 
 const admin_routes: Routes = [
-  {path: 'settings', component: SettingsPageComponent, children: settings_router}
+  {path: 'settings', component: SettingsPageComponent, children: settings_router},
+  {path: 'review', component: ReviewComponent}
 ];
 
 const pages_routes: Routes = [
