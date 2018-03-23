@@ -3,8 +3,9 @@
     <i *ngIf="closable" class="material-icons hover-element dialog-close-btn" (click)="close()">close</i>
     <h4>Добавить стадию</h4>
     <form (ngSubmit)="submitForm()" #form="ngForm">
-      <p><label class="required-area-dialog">Дата стадии</label> <input type="date"
+      <p><label class="required-area-dialog display-block">Дата стадии</label> <input type="date"
                                                                          ngModel
+                                                                        class="browser-default"
                                                                          name="calendar"
                                                                          required>
       </p>
