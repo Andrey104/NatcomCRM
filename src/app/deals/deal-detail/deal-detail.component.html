@@ -103,7 +103,7 @@
     <div class="col s2 center-align header">
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Монтажи</span>
-        <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+        <i *ngIf="!(deal?.status == 4 || deal?.status == 5||deal?.status == 0||deal?.status == 1)&&showEditButtons"
            (click)="showMountDialog = !showMountDialog"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
