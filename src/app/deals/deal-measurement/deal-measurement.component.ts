@@ -47,7 +47,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
 
   getBackUrl() {
     this.activatedRoute.params.subscribe((params) => {
-    this.backUrl = `/deals/${this.dealService.statusDeal}/${params['id']}`;
+        this.backUrl = `/deals/${this.dealService.statusDeal}/${params['id']}`;
     });
   }
 
