@@ -36,7 +36,7 @@
 }
 
 .main-info {
-  padding-top: 30px;
+  padding-top: 10px;
 }
 
 .deal-detail {
@@ -94,6 +94,7 @@
 }
 
 .status-container {
+  margin-top: 10px;
   height: 80px;
 }
 

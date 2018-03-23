@@ -3,14 +3,21 @@
 </div>
 <div *ngIf="!loadPage" class="col s12 detail-col scrollable-page" id="page">
   <div class="row main-row valign-wrapper">
-    <div class="col s4 valign-wrapper">
+    <div class="col s6 valign-wrapper">
+      <div routerLink="/orders/{{orderStatus}}/{{orderId}}"
+           class="row-back valign-wrapper hover-element no-border">
+        <i class="small material-icons no-border icon-arrow-back">
+          keyboard_arrow_left
+        </i>
+        <span class="back icon-arrow-back">Назад к сделке</span>
+      </div>
       <img class="avatar" src="assets/images/worker.png"/>
       <div [style.color]="measurement?.worker ? 'green': 'red'">{{measurement?.worker | workerName}}</div>
     </div>
-    <div class="col s4 valign-wrapper">
+    <div class="col s3 valign-wrapper">
       <div>{{measurement?.status | measurementStatus}}</div>
     </div>
-    <div class="col s4 valign-wrapper">
+    <div class="col s3 valign-wrapper">
       <i class="tiny material-icons icon date-icon">date_range</i>
       <div class="deal-date">Дата замера: {{measurement?.date | dateFormat: 'date'}}</div>
     </div>
@@ -18,7 +25,7 @@
   <div class="divider"></div>
   <div class="row main-info">
     <div class="col s7">
-      <div class="deal">Замер {{measurement?.deal}}</div>
+      <div class="measurement">Замер</div>
       <div class="status-container valign-wrapper">
         <div [appColorCompany]="measurement?.company?.symbol" class="company-symbol">{{measurement?.company?.symbol}}
         </div>

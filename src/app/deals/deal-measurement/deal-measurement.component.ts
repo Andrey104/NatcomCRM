@@ -23,9 +23,11 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   showMeasurementReject = false;
   showMeasurementTransfer = false;
   showMeasurementEdit = false;
+  statusDeal: string;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private measurementService: MeasurementService, private utils: UtilsService) {
+              private measurementService: MeasurementService,
+              private utils: UtilsService) {
   }
 
   ngOnInit() {

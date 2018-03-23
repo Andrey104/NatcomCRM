@@ -9,6 +9,7 @@ import {MeasurementResult} from '../models/measurement/measurement-result';
 
 @Injectable()
 export class MeasurementService extends BaseApi {
+  measurementStatus;
 
   constructor(public http: HttpClient) {
     super(http);
