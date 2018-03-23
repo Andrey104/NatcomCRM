@@ -120,6 +120,7 @@ import {MeasurementDialogTransferComponent} from './measurements/dialogs/measure
 import {DealDialogEditComponent} from './deals/dialogs/deal-dialog-edit/deal-dialog-edit';
 import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
 import { AddStageComponent } from './mounts/add-stage/add-stage.component';
+import { ReviewComponent } from './admin/review/review.component';
 
 
 @NgModule({
@@ -222,7 +223,8 @@ import { AddStageComponent } from './mounts/add-stage/add-stage.component';
     MeasurementDialogTransferComponent,
     DealDialogEditComponent,
     MeasurementTransferCausePipe,
-    AddStageComponent
+    AddStageComponent,
+    ReviewComponent
 ],
   imports: [
     BrowserModule,
