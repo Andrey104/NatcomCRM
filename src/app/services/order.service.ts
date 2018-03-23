@@ -47,7 +47,7 @@ export class OrderService extends BaseApi {
   }
 
   getOrderById(idOrder: number): Observable<OrderResult> {
-    return this.get(`orders/${idOrder}`);
+    return this.get(`orders/${idOrder}/`);
   }
 
   getFilterOrders(page: number, text: string): Observable<Orders> {

@@ -373,3 +373,7 @@
 .row-back:hover i{
   transform: scale(1.2, 1.2);
 }
+
+.display-block {
+  display: block;
+}

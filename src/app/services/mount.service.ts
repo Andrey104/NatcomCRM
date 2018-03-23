@@ -15,7 +15,7 @@ export class MountService extends BaseApi {
   }
 
   getAllMounts(page: number, status: string): Observable<MountPage> {
-    return this.get(`mounts/?page=${page.toString()}&&${status}`);
+    return this.get(`mounts/?page=${page.toString()}&${status}`);
   }
 
   getMounts(idDeal: number): Observable<DealMount[]> {
@@ -27,7 +27,7 @@ export class MountService extends BaseApi {
   }
 
   getMount(idMount: number): Observable<DealMount> {
-    return this.get(`mounts/${idMount}`);
+    return this.get(`mounts/${idMount}/`);
   }
 
   getFilterMounts(page: number, text: string) {
