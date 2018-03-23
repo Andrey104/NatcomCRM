@@ -14,6 +14,7 @@ import {Client} from '../models/client';
 
 @Injectable()
 export class DealService extends BaseApi {
+  statusDeal;
 
   constructor(public http: HttpClient) {
     super(http);

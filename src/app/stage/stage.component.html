@@ -4,7 +4,14 @@
 <p class="nothing-show" *ngIf="isNothingToShow">Ничего не найдено по данному запросу</p>
 <div *ngIf="stage&&!isNothingToShow" class="mainDiv col s12 detail-col">
   <div class="col s12 row header-stage">
-    <div class="col s11 date-stage">
+    <div routerLink="{{backRouter}}"
+         class="col s3 row-back valign-wrapper hover-element no-border">
+      <i class="small material-icons no-border icon-arrow-back">
+        keyboard_arrow_left
+      </i>
+      <span class="back icon-arrow-back">Назад</span>
+    </div>
+    <div class="col s8 date-stage">
       <i class="tiny  material-icons icon">date_range</i>
       {{stage.date | dateFormat: 'date'}}
     </div>

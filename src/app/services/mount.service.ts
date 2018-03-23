@@ -8,8 +8,7 @@ import {BaseApi} from '../core/base-api';
 
 @Injectable()
 export class MountService extends BaseApi {
-  private urlDealMounts = 'http://188.225.46.31/api/deals/';
-  private urlMount = 'http://188.225.46.31/api/mounts/';
+  statusMount;
 
   constructor(public http: HttpClient) {
     super(http);

@@ -1,13 +1,20 @@
 <div *ngIf="loadPage" class="spinner-page">
   <app-preloader></app-preloader>
 </div>
-<div *ngIf="!loadPage" class="mainDiv col s12 detail-col scrollable-page" id="page" >
+<div *ngIf="!loadPage" class="mainDiv col s12 detail-col scrollable-page" id="page">
   <div class="col s12 detail-col valign-wrapper left-align">
+    <div routerLink="{{backRouter}}"
+         class="col s2 row-back valign-wrapper hover-element no-border">
+      <i class="small material-icons no-border icon-arrow-back">
+        keyboard_arrow_left
+      </i>
+      <span class="back icon-arrow-back">Назад</span>
+    </div>
     <div class="col s4 valign-wrapper">
       <img class="avatar" src="{{mount?.user?.type | imageType}}">
       <div>{{mount?.user?.first_name}} {{mount?.user?.last_name}}</div>
     </div>
-    <div class="col s3"></div>
+
     <div class="col s8">{{mount?.status | mountStatus}}</div>
     <div class="col s1 namePage">Монтаж</div>
   </div>
@@ -31,7 +38,7 @@
     <div class="col s12 str-info" *ngIf="mount.description">
       <i
         class="tiny  material-icons  icon">comment</i>
-      <span > {{mount?.description}}</span>
+      <span> {{mount?.description}}</span>
     </div>
   </div>
   <div class="col s12 row valign-wrapper detail-col">

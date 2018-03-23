@@ -164,7 +164,7 @@
     </div>
     <div *ngIf="deal?.payments.length!==0" class="row">
       <div *ngFor="let payment of deal?.payments" class="col s10 offset-s1">
-        <p>{{payment.date | dateFormat: 'fullDate'}} {{payment | payment}}</p>
+        <p>{{payment | payment}} {{payment.date | dateFormat: 'date'}}</p>
       </div>
     </div>
     <div class="row valign-wrapper">
