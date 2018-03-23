@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Cost} from '../models/cost';
 import {DealMount} from '../models/deal/deal_mount';
+import {Brigade} from '../models/brigades/brigade';
 
 @Injectable()
 export class StageMountService extends BaseApi {
@@ -27,6 +28,10 @@ export class StageMountService extends BaseApi {
 
   completeStage(idStage: string): Observable<Object> {
     return this.post(`stages/${idStage}/close/`);
+  }
+
+  setInstaller(idStage: string, installers: InsertPosition): Observable<any> {
+    return this.post(`stages/${idStage}/installers/`, {installers});
   }
 
   getStage(id: number): Observable<MountStage> {
