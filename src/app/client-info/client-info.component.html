@@ -6,7 +6,9 @@
     <div>
       <div class="row main-row">
         <div class="col s4 detail-col row-back">
-          <i class="medium material-icons white-text no-border hover-element center-align" (click)="goBack()">arrow_back</i>
+          <i class="medium material-icons white-text no-border hover-element center-align"
+             routerLink="{{backUrl}}">arrow_back
+          </i>
           <div class="back">Назад</div>
         </div>
       </div>
@@ -27,7 +29,7 @@
      <div class="col s10 offset-s1">
        <div class="h-deals">Сделки</div>
       <div *ngFor="let deal of client?.deals">
-        <div class="card horizontal hoverable hover-element no-border" routerLink="/deals/{{deal?.id}}">
+        <div class="card horizontal hoverable hover-element no-border" routerLink="client_deal/{{deal?.id}}">
           <div class="icon image-info">
             <div class="image center-align">{{deal?.company?.symbol}}</div>
             <div class="center-align">{{deal?.offer}}</div>

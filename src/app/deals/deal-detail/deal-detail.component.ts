@@ -12,6 +12,7 @@ import {DealMount} from '../../models/deal/deal_mount';
 import {Subscription} from 'rxjs/Subscription';
 import {DOCUMENT} from '@angular/common';
 import {MountService} from '../../services/mount.service';
+import {OrderService} from '../../services/order.service';
 
 @Component({
   selector: 'app-deal-detail',
@@ -42,12 +43,14 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   url: string;
   backUrl: string;
+  backInfo: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService,
               private utils: UtilsService,
               @Inject(DOCUMENT) private document: Document,
-              private mountService: MountService) {
+              private mountService: MountService,
+              private orderService: OrderService) {
     this.url = this.document.location.href;
   }
 
@@ -122,7 +125,10 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     this.activatedRoute.params.subscribe(params => {
       if (this.url.indexOf('mounts') !== -1) {
         this.backUrl = `/mounts/${this.mountService.statusMount}/${params['mount_id']}`;
-        console.log(this.backUrl);
+        this.backInfo = 'Назад к монтажу';
+      } else if (this.url.indexOf('client_deal') !== -1) {
+        this.backUrl = `/orders/${this.orderService.getOrderStatus()}/${params['id']}/client/${params['client_id']}`;
+        this.backInfo = 'Назад к клиенту';
       }
       this.id = params['id'];
       this.loadPage = true;
@@ -135,7 +141,6 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
       .subscribe((deal) => {
         this.deal = deal;
         this.showEditButtons = this.utils.showEditButtons(String(this.deal.user.id));
-        console.log(this.showEditButtons + ' - show edit');
         this.loadPage = false;
       });
   }
