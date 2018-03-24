@@ -1,4 +1,4 @@
-<div *ngIf="loader" class="spinner-contener">
+<div *ngIf="loader" class="spinner-page">
   <app-preloader></app-preloader>
 </div>
 <div *ngIf="!loader" class="row">
@@ -12,7 +12,7 @@
           <div class="back">Назад</div>
         </div>
       </div>
-      <div class="center-align">
+      <div class="center-align row">
         <img class="status-image col s8 offset-s2" src="assets/images/client.png"/>
       </div>
       <div class="center-align name">{{client?.fio | clientName}}</div>
