@@ -13,7 +13,7 @@ export class InstallersService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' , 'Authorization': 'token ' + this.token()})
   };
-  private urlInstaller = 'http://188.225.46.31/api/installers/';
+  private urlInstaller = '/api/installers/';
 
   constructor(private http: HttpClient,
               private messageService: MessageService) {}

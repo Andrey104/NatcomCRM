@@ -81,7 +81,7 @@
     </a>
     <ul class="fab-ul">
       <li class="hover-element li-element-menu-fab"
-          (click)="showAddInstaller = !showAddInstaller"
+          (click)="openAddInstallerModal()"
           onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить монтажника</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">person</i></div>
@@ -122,3 +122,4 @@
                        [(visible)]="showAddCost"></app-dialog-stage-cost>
 <app-stage-dialog-transfer [stage]="stage" (successStageTransfer)="successStageUpdate()"
                            [(visible)]="showTransferStage"></app-stage-dialog-transfer>
+<app-stage-add-installer [modalState]="addInstallerModalState" (onClose)="closeAddInstallerModal($event)"></app-stage-add-installer>

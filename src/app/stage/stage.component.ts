@@ -8,6 +8,7 @@ import {UtilsService} from '../services/utils.service';
 import {Cost} from '../models/cost';
 import {DOCUMENT} from '@angular/common';
 import {DealService} from '../services/deal.service';
+import {InstallerPosition} from '../models/installers/installer_position';
 
 @Component({
   selector: 'app-stage',
@@ -30,6 +31,7 @@ export class StageComponent implements OnInit {
   showAddCost = false;
   showAddInstaller = false;
   backRouter = '';
+  addInstallerModalState: { open: Boolean, installers?: InstallerPosition[], stageId: string };
 
   constructor(private activatedRoute: ActivatedRoute,
               private stageMountService: StageMountService,
@@ -42,7 +44,19 @@ export class StageComponent implements OnInit {
 
   ngOnInit() {
     this.getRouter();
+    this.addInstallerModalState = {open: false, installers: null, stageId: ''};
+    console.log(typeof this.stage);
     this.getStage();
+  }
+
+  openAddInstallerModal() {
+    this.addInstallerModalState = {open: true, installers: this.stage.installers, stageId: this.stage.id.toString()};
+  }
+
+  closeAddInstallerModal(update: Boolean) {
+    if (update) {
+      this.updateStages(this.idMount);
+    }
   }
 
   getRouter() {
@@ -91,7 +105,7 @@ export class StageComponent implements OnInit {
           }
         });
       } else {
-        //если решили обновить страницу - запросим заново монтаж и закинем его стадии в сервис стадий
+        // если решили обновить страницу - запросим заново монтаж и закинем его стадии в сервис стадий
         this.activatedRoute.params.subscribe(params2 => {
           this.idMount = Number(params2['mount_id']);
         });

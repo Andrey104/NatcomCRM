@@ -81,12 +81,8 @@ export class BrigadeEditComponent implements OnInit, OnChanges {
   deleteBrigade() {
     if (confirm('Удалить бригаду?')) {
       this.brigadesService.deleteBrigade(this.brigade).subscribe(data => {
-        if (data) {
           alert('Бригада удалена!');
           this.close(true);
-        } else {
-          alert('Ошибка удалении бригады! Попробуйте снова!');
-        }
       });
     }
   }
