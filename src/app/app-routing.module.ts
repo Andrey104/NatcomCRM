@@ -30,7 +30,8 @@ import {ReviewComponent} from './admin/review/review.component';
 // deals/id/mounts
 
 const measurements_routes: Routes = [
-  {path: ':measurement_id', component: DealMeasurementComponent}
+  {path: ':measurement_id', component: DealMeasurementComponent},
+  {path: ':measurement_id/deal/:id', component: DealDetailComponent}
 ];
 
 const mounts_routes: Routes = [

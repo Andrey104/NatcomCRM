@@ -30,6 +30,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   statusDeal: string;
   backUrl: string;
   url: string;
+  showToDealButton = true;
 
   constructor(private activatedRoute: ActivatedRoute,
               private measurementService: MeasurementService,
@@ -55,10 +56,11 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   getBackUrl() {
     this.activatedRoute.params.subscribe((params) => {
       if (this.url.indexOf('client_deal') !== -1) {
+        this.showToDealButton = false;
         this.backUrl = `/orders/${this.orderService.getOrderStatus()}/${params['id']}`;
         this.backUrl += `/client/${params['client_id']}/client_deal/${params['client_deal_id']}`;
-        console.log(this.backUrl);
       } else if (this.url.indexOf('deals') !== -1) {
+        this.showToDealButton = false;
         this.backUrl = `/deals/${this.dealService.statusDeal}/${params['id']}`;
       }
     });

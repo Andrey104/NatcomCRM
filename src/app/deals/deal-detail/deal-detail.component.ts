@@ -13,6 +13,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {DOCUMENT} from '@angular/common';
 import {MountService} from '../../services/mount.service';
 import {OrderService} from '../../services/order.service';
+import {MeasurementService} from '../../services/measurement.service';
 
 @Component({
   selector: 'app-deal-detail',
@@ -50,7 +51,8 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
               private utils: UtilsService,
               @Inject(DOCUMENT) private document: Document,
               private mountService: MountService,
-              private orderService: OrderService) {
+              private orderService: OrderService,
+              private measurementService: MeasurementService) {
     this.url = this.document.location.href;
   }
 
@@ -129,6 +131,9 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
       } else if (this.url.indexOf('client_deal') !== -1) {
         this.backUrl = `/orders/${this.orderService.getOrderStatus()}/${params['id']}/client/${params['client_id']}`;
         this.backInfo = 'Назад к клиенту';
+      } else if (this.url.indexOf('measurements') !== -1) {
+        this.backUrl = `/measurements/${this.measurementService.measurementStatus}/${params['id']}`;
+        this.backInfo = 'Назад к замеру';
       }
       this.id = params['id'];
       this.loadPage = true;

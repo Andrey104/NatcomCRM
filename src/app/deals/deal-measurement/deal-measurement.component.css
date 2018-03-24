@@ -32,10 +32,11 @@
 
 .measurement {
   font-size: 24px;
+  padding-left: 55px;
 }
 
 .main-info {
-  padding-top: 30px;
+  padding-top: 10px;
 }
 
 .company-name {
