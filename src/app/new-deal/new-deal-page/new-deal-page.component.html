@@ -1,12 +1,12 @@
 <div class="row main-row scrollable-page">
   <div class="col s7">
-    <div routerLink="/orders/{{orderStatus}}/{{orderId}}"
-         class="row-back valign-wrapper hover-element no-border">
-      <i class="small material-icons no-border icon-arrow-back">
-        keyboard_arrow_left
-      </i>
-      <span class="back icon-arrow-back">Назад к заявке</span>
-    </div>
+    <!--<div routerLink="/orders/{{orderStatus}}/{{orderId}}"-->
+         <!--class="row-back valign-wrapper hover-element no-border">-->
+      <!--<i class="small material-icons no-border icon-arrow-back">-->
+        <!--keyboard_arrow_left-->
+      <!--</i>-->
+      <!--<span class="back icon-arrow-back">Назад к заявке</span>-->
+    <!--</div>-->
     <form #form="ngForm" (ngSubmit)="submitForm(form)">
       <div class="row">
         <div class="col s7">
@@ -84,6 +84,11 @@
           </textarea>
         </div>
       </div>
+      <button *ngIf="orderStatus"
+              routerLink="/orders/{{orderStatus}}/{{orderId}}"
+              class="btn-dialog-cancel">
+        Отмена
+      </button>
       <button class="btn-dialog-submit" type="submit"
               [class.btn-dialog-submit]="form.valid"
               [disabled]="(!form.valid||clients.length===0||!isRequest)"

@@ -47,3 +47,11 @@ form {
   height: 45px;
   width: 120px;
 }
+
+.btn-dialog-cancel {
+  right: 180px;
+  bottom: 40px;
+  height: 45px;
+  width: 120px;
+}
+

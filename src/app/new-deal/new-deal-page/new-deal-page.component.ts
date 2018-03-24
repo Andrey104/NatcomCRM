@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DealService} from '../../services/deal.service';
 import {Company} from '../../models/company';
 import {Subscription} from 'rxjs/Subscription';
@@ -8,7 +8,6 @@ import {MeasurementService} from '../../services/measurement.service';
 import {OrderService} from '../../services/order.service';
 import {OrderResult} from '../../models/orders/order_result';
 import {Client} from '../../models/client';
-import {Phone} from '../../models/phone';
 import {NewDeal} from '../../models/deal/new_deal';
 import {ActivatedRoute, Router} from '@angular/router';
 
