@@ -403,3 +403,24 @@
   margin-right: 10px;
 }
 /*-----------------------------------------*/
+/*Стрелочки(вперед) на карточках замеров/монтажей*/
+.forward-block {
+  padding: 5px 0 5px 0;
+}
+
+.forward-block:hover {
+  background-color: #e2e2e2;
+}
+
+.forward-block:hover .arrow {
+  font-size: 40px;
+  opacity: 1;
+  color: #666666;
+}
+
+.arrow {
+  opacity: 0;
+  line-height: 0;
+  margin-right: 10px;
+}
+/*-----------------------------------------*/
