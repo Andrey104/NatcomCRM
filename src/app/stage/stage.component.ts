@@ -41,7 +41,9 @@ export class StageComponent implements OnInit {
   }
 
   closeAddInstallerModal(update: Boolean) {
-    this.updateStages(this.idMount);
+    if (update) {
+      this.updateStages(this.idMount);
+    }
   }
 
   successStageUpdate() {
