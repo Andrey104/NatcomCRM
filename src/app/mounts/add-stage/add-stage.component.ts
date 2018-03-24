@@ -22,9 +22,9 @@ export class AddStageComponent implements OnInit, OnChanges {
   //
    constructor(private brigadesService: BrigadesService) {
   }
-  stageForm: FormGroup = new FormGroup({
-    date: new FormControl('', Validators.required),
-  });
+  // stageForm: FormGroup = new FormGroup({
+  //   date: new FormControl('', Validators.required),
+  // });
   // formInputSetActive() {
   //   this.nameInputActive = true;
   // }
