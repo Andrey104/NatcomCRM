@@ -13,6 +13,7 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class AddClientComponent implements OnInit {
   @Input() visible: boolean;
+  @Input() clients: Client[];
   @Output() successClient = new EventEmitter<Client>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('form') form: NgForm;
@@ -34,11 +35,34 @@ export class AddClientComponent implements OnInit {
   }
 
   submitForm() {
-    if (this.regularClient === null) {
-      this.addClient();
-    } else {
-      this.changeClient();
+    if (!this.checkSameClients()) {
+      if (this.regularClient === null) {
+        this.addClient();
+      } else {
+        this.changeClient();
+      }
     }
+  }
+
+  checkSameClients(): boolean {
+    if (this.clients.length > 0) {
+      const clientsPhones = [];
+      for (const client of this.clients) {
+        for (const phone of client.phones) {
+          clientsPhones.push(phone.number);
+        }
+      }
+      for (const newClientPhone of this.phones) {
+        const newPhone = this.phoneMaskOff(newClientPhone.number);
+        for (const phone of clientsPhones) {
+          if (phone === newPhone) {
+            alert('Такой клиент уже есть в сделке');
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   addClient() {
@@ -57,7 +81,7 @@ export class AddClientComponent implements OnInit {
   }
 
   changeClient() {
-    let clientForServer = this.getClientFromTheForm();
+    const clientForServer = this.getClientFromTheForm();
     clientForServer.id = this.regularClient.id;
     console.log(clientForServer);
     this.subOnAddClient = this.clientService.refreshClient(clientForServer)
@@ -67,7 +91,7 @@ export class AddClientComponent implements OnInit {
       }, (err) => {
         console.log(err);
       }, () => {
-        clientForServer = null;
+        this.regularClient = null;
         this.subOnAddClient.unsubscribe();
       });
   }
