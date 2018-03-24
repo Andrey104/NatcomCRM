@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
@@ -10,6 +10,8 @@ import {Payment} from '../../models/payment';
 import {DealDiscount} from '../../models/deal/deal_discount';
 import {DealMount} from '../../models/deal/deal_mount';
 import {Subscription} from 'rxjs/Subscription';
+import {DOCUMENT} from '@angular/common';
+import {MountService} from '../../services/mount.service';
 
 @Component({
   selector: 'app-deal-detail',
@@ -38,10 +40,15 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   needSubscribe = true;
   subOnNewClientToDeal: Subscription;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
+  url: string;
+  backUrl: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              @Inject(DOCUMENT) private document: Document,
+              private mountService: MountService) {
+    this.url = this.document.location.href;
   }
 
   ngOnInit() {
@@ -113,6 +120,10 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
 
   subscribeDealId(): void {
     this.activatedRoute.params.subscribe(params => {
+      if (this.url.indexOf('mounts') !== -1) {
+        this.backUrl = `/mounts/${this.mountService.statusMount}/${params['mount_id']}`;
+        console.log(this.backUrl);
+      }
       this.id = params['id'];
       this.loadPage = true;
       this.getDealById();

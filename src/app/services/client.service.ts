@@ -14,7 +14,7 @@ export class ClientService extends BaseApi {
   }
 
   getClient(clientId: number): Observable<Client> {
-    return this.get(`clients/${clientId}`);
+    return this.get(`clients/${clientId}/`);
   }
 
   addClient(client: Client): Observable<Client> {
@@ -27,6 +27,6 @@ export class ClientService extends BaseApi {
   }
 
   getClientByPhone(text: string): Observable<ClientPage> {
-    return this.get(`clients?text=${text}`);
+    return this.get(`clients/?text=${text}`);
   }
 }

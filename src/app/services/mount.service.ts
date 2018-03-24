@@ -8,15 +8,14 @@ import {BaseApi} from '../core/base-api';
 
 @Injectable()
 export class MountService extends BaseApi {
-  private urlDealMounts = 'http://188.225.46.31/api/deals/';
-  private urlMount = 'http://188.225.46.31/api/mounts/';
+  statusMount;
 
   constructor(public http: HttpClient) {
     super(http);
   }
 
   getAllMounts(page: number, status: string): Observable<MountPage> {
-    return this.get(`mounts/?page=${page.toString()}&&${status}`);
+    return this.get(`mounts/?page=${page.toString()}&${status}`);
   }
 
   getMounts(idDeal: number): Observable<DealMount[]> {
@@ -28,7 +27,7 @@ export class MountService extends BaseApi {
   }
 
   getMount(idMount: number): Observable<DealMount> {
-    return this.get(`mounts/${idMount}`);
+    return this.get(`mounts/${idMount}/`);
   }
 
   getFilterMounts(page: number, text: string) {

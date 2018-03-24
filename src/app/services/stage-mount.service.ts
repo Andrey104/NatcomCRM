@@ -30,7 +30,7 @@ export class StageMountService extends BaseApi {
   }
 
   getStage(id: number): Observable<MountStage> {
-    return this.get(`stages/${id.toString()}`);
+    return this.get(`stages/${id.toString()}/`);
   }
 
   addCost(idStage: string, sum: number, comment: string): Observable<Cost> {

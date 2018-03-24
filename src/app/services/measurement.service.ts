@@ -9,13 +9,14 @@ import {MeasurementResult} from '../models/measurement/measurement-result';
 
 @Injectable()
 export class MeasurementService extends BaseApi {
+  measurementStatus;
 
   constructor(public http: HttpClient) {
     super(http);
   }
 
   getAllMeasurements(page: number, status: string): Observable<MeasurementPage> {
-    return this.get(`measurements/?page=${page.toString()}&&${status}`);
+    return this.get(`measurements/?page=${page.toString()}&${status}`);
   }
 
   getMeasurements(idDeal): Observable<DealMeasurement[]> {

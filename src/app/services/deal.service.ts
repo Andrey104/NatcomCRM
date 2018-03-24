@@ -14,6 +14,7 @@ import {Client} from '../models/client';
 
 @Injectable()
 export class DealService extends BaseApi {
+  statusDeal;
 
   constructor(public http: HttpClient) {
     super(http);
@@ -22,15 +23,15 @@ export class DealService extends BaseApi {
 
   /** GET deals from the server */
   getDeals(page: number, status: string): Observable<DealPage> {
-    return this.get(`deals?page=${page.toString()}&&${status}`);
+    return this.get(`deals/?page=${page.toString()}&${status}`);
   }
 
   getDealById(idDeal: number): Observable<DealResult> {
-    return this.get(`deals/${idDeal.toString()}`);
+    return this.get(`deals/${idDeal.toString()}/`);
   }
 
   getFilterDeals(page: number, text: string): Observable<DealPage> {
-    return this.get(`deals/search?page=${page.toString()}&&text=${text}`);
+    return this.get(`deals/search?page=${page.toString()}&text=${text}`);
   }
 
   dealComment(idDeal: number, comment: string): Observable<Object> {
@@ -38,7 +39,7 @@ export class DealService extends BaseApi {
   }
 
   getCompanies(): Observable<CompanyPage> {
-    return this.get(`companies`);
+    return this.get(`companies/`);
   }
 
   newDeal(newDeal: NewDeal): Observable<DealResult> {
@@ -53,13 +54,10 @@ export class DealService extends BaseApi {
     if (comment === '') {
       comment = null;
     }
-    console.log(comment);
-    console.log(cause);
     return this.post(`deals/${idDeal}/reject/`, {cause: cause, comment: comment});
   }
 
   dealPayment(idDeal: number, nonCash: string, date: string, receiver: string, sum: number): Observable<Object> {
-    console.log(nonCash);
     let non_cash: boolean;
     if (nonCash == '0') {
       non_cash = false;

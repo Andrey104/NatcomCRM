@@ -5,6 +5,7 @@ import {MeasurementService} from '../../services/measurement.service';
 import {Client} from '../../models/client';
 import {Picture} from '../../models/picture';
 import {UtilsService} from '../../services/utils.service';
+import {DealService} from '../../services/deal.service';
 
 @Component({
   selector: 'app-deal-measurement',
@@ -23,13 +24,19 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   showMeasurementReject = false;
   showMeasurementTransfer = false;
   showMeasurementEdit = false;
+  showPicture = false;
+  statusDeal: string;
+  backUrl: string;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private measurementService: MeasurementService, private utils: UtilsService) {
+              private measurementService: MeasurementService,
+              private utils: UtilsService,
+              private dealService: DealService) {
   }
 
   ngOnInit() {
     this.subscribeOnMeasurement();
+    this.getBackUrl();
   }
 
   ngAfterViewChecked(): void {
@@ -37,6 +44,12 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
       document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
       this.flag = false;
     }
+  }
+
+  getBackUrl() {
+    this.activatedRoute.params.subscribe((params) => {
+        this.backUrl = `/deals/${this.dealService.statusDeal}/${params['id']}`;
+    });
   }
 
   successMeasurementUpdate() {
@@ -57,7 +70,6 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
       .subscribe((measurement) => {
         this.measurement = measurement;
         this.showEditButtons = this.utils.showEditButtons(String(this.measurement.deal_user.id));
-        console.log(this.showEditButtons + ' фыаывфпаыфвп');
         this.loadPage = false;
       });
   }
@@ -84,6 +96,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
 
   openPicture(idPicture: number) {
     this.picture = this.measurement.pictures[idPicture];
+    this.showPicture = true;
   }
 
   closePicture() {

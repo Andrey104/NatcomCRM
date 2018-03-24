@@ -3,12 +3,21 @@
 </div>
 <div *ngIf="!loadPage" class="col s12 detail-col scrollable-page" id="page">
   <div class="row main-row valign-wrapper">
-    <div class="col s4 valign-wrapper">
+    <div class="col s5 valign-wrapper">
+      <div *ngIf="backUrl" routerLink="{{backUrl}}"
+           class="row-back valign-wrapper hover-element no-border">
+        <i class="small material-icons no-border icon-arrow-back">
+          keyboard_arrow_left
+        </i>
+        <span class="back icon-arrow-back">Назад к монтажу</span>
+      </div>
       <img class="avatar" src="{{deal?.user.type | imageType}}">
       <div>{{deal?.user.first_name}} {{deal?.user.last_name}}</div>
     </div>
-    <div class="col s3">{{getDealStatus(deal?.status)}}</div>
-    <div [style.color]="deal?.contract ? 'green' : 'red'" class="col s2">{{deal?.contract | contract}}</div>
+    <div class="col s2">{{getDealStatus(deal?.status)}}</div>
+    <div [style.color]="deal?.contract ? 'green' : 'red'" class="col s2">
+      {{deal?.contract | contract}}
+    </div>
     <div class="col s3 valign-wrapper">
       <i class="tiny material-icons icon date-icon">date_range</i>
       <div class="deal-date">
@@ -21,7 +30,9 @@
     <div class="col s7">
       <div class="offer">Сделка {{deal?.offer}}</div>
       <div class="status-container valign-wrapper">
-        <div [appColorCompany]="deal?.company?.symbol" class="company-symbol">{{deal?.company?.symbol}}</div>
+        <div [appColorCompany]="deal?.company?.symbol" class="company-symbol">
+          {{deal?.company?.symbol}}
+        </div>
         <div class="deal-detail">
           <div class="company-name">{{deal?.company?.name}}</div>
           <div>Создана: {{deal?.auto_date | dateFormat: 'date'}}</div>
@@ -51,7 +62,8 @@
           <hr class="col s3">
           <div class="col s6 center-align" style="display: inline-block">
             <span class="center-dialog-title">Контакты</span>
-            <i (click)="showEditClient = !showEditClient"
+            <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+               (click)="showEditClient = !showEditClient"
                class="material-icons hover-element center-dialog-title">add_circle_outline</i>
           </div>
           <hr class="col s3">
@@ -59,7 +71,7 @@
       </div>
       <div class="row">
         <div *ngFor="let client of deal?.clients; let i = index" class="col s12">
-          <div (click)="openClientInfo(i)" class="valign-wrapper contact-info forward-block col s12 hover-element">
+          <div class="valign-wrapper contact-info forward-block col s12 hover-element">
             <div class="col s6 valign-wrapper detail-col-right">
               <i class="small material-icons icon">person</i>
               {{client.client.fio}}
@@ -103,7 +115,7 @@
     <div class="col s2 center-align header">
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Монтажи</span>
-        <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+        <i *ngIf="!(deal?.status == 4 || deal?.status == 5||deal?.status == 0||deal?.status == 1)&&showEditButtons"
            (click)="showMountDialog = !showMountDialog"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
@@ -164,7 +176,7 @@
     </div>
     <div *ngIf="deal?.payments.length!==0" class="row">
       <div *ngFor="let payment of deal?.payments" class="col s10 offset-s1">
-        <p>{{payment.date | dateFormat: 'fullDate'}} {{payment | payment}}</p>
+        <p>{{payment | payment}} {{payment.date | dateFormat: 'date'}}</p>
       </div>
     </div>
     <div class="row valign-wrapper">
