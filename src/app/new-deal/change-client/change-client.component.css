@@ -1,0 +1,54 @@
+.dialog {
+  height: 460px;
+  overflow-y: auto;
+  width: 560px;
+}
+
+.dialog::-webkit-scrollbar {
+  width: 0;
+}
+
+.dialog {
+  overflow: -moz-scrollbars-none;
+}
+
+.dialog {
+  -ms-overflow-style: none;
+}
+
+@media (min-width: 768px) {
+  .dialog {
+    top: calc(50% - 230px);
+  }
+}
+
+h4 {
+  margin: 5px auto;
+  padding-right: 40px;
+  padding-left: 40px;
+  text-align: center;
+}
+
+.button-phone-block {
+  position: relative;
+  height: 70px;
+}
+
+.remove-button {
+  right: 0;
+}
+
+.regular-client-container {
+  border-radius: 10px;
+  background-color: #cccccc;
+}
+
+.text-comment-dialog {
+  height: 50px;
+}
+
+.button-container {
+  position: relative;
+  height: 70px;
+  margin-right: 10px;
+}

@@ -22,7 +22,6 @@ export class ClientService extends BaseApi {
   }
 
   refreshClient(client: Client): Observable<Client> {
-    console.log(client);
     return this.patch(`clients/${client.id}/`, client);
   }
 

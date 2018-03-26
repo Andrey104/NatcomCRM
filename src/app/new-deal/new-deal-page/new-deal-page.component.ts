@@ -19,10 +19,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class NewDealPageComponent implements OnInit, OnDestroy {
   companies: Company[] = [];
   clients: Client[] = [];
+  changeClient: Client = null;
+  changeClientNumber: number;
   subOnCompanies: Subscription;
   subOnDeal: Subscription;
   subOnMeasurement: Subscription;
   showDialog = false;
+  showChangeClientDialog = false;
   defaultCompany: number;
   visibleMeasurement = {show: false, icon: 'add_circle_outline', message: 'Добавить замер'};
   order: OrderResult;
@@ -50,10 +53,15 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   getOrder() {
     this.orderStatus = this.orderService.getOrderStatus();
     this.orderId = this.activatedRoute.snapshot.params['id'];
+    console.log(this.orderService.getOrder());
     if (this.orderService.getOrder() === undefined) {
       this.subOnOrder = this.orderService.getOrderById(this.orderId)
         .subscribe((orderPage) => {
           this.order = orderPage;
+          this.clients.push(this.order.client);
+          this.companies.push(this.order.company);
+          this.defaultCompany = this.companies[0].id;
+          console.log(this.order);
         }, (err) => {
           console.log(err.message);
         }, () => {
@@ -123,6 +131,18 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
 
   addNewClient(client: Client) {
     this.clients.push(client);
+  }
+
+  changeClientDialog(clientNumber: number) {
+    this.changeClientNumber = clientNumber;
+    this.changeClient = JSON.parse(JSON.stringify(this.clients[clientNumber]));
+    this.showChangeClientDialog = !this.showChangeClientDialog;
+  }
+
+  successChangeClient(client: Client) {
+    console.log(client);
+    this.clients[this.changeClientNumber] = client;
+    this.changeClient = null;
   }
 
   unSub() {

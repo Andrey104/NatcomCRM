@@ -105,10 +105,10 @@
     <div *ngIf="clients.length===0" class="center-align">У сделки нет клиентов</div>
     <div class="row">
       <div *ngFor="let client of clients; let i = index" class="col s12">
-        <div class="col s12 valign-wrapper">
+        <div class="col s12 valign-wrapper" (click)="changeClientDialog(i)">
           <div class="col s6 valign-wrapper detail-col-right">
             <i class="small material-icons icon">person</i>
-            {{client.fio}}
+            {{client.fio | clientName}}
           </div>
           <div class="col s5 div-number">{{client.phones[0].number | phoneFormat}}</div>
           <i class="col s1 material-icons detail-col-left">chevron_right</i>
@@ -120,4 +120,7 @@
   <app-add-client [(visible)]="showDialog"
                   [clients]="clients"
                   (successClient)="addNewClient($event)"></app-add-client>
+  <app-change-client [(visible)]="showChangeClientDialog"
+                     [client]="changeClient"
+                     (successChangeClient)="successChangeClient($event)"></app-change-client>
 </div>

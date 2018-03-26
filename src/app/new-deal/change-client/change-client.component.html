@@ -1,0 +1,99 @@
+<div *ngIf="visible" class="dialog">
+  <i *ngIf="closable" class="material-icons hover-element dialog-close-btn"
+     (click)="onClose()">close
+  </i>
+  <h4>Редактирование клиента</h4>
+  <div class="row main-row">
+    <form id="form" class="form" #form="ngForm" (ngSubmit)="submitForm()">
+      <div class="row main-row valign-wrapper">
+        <div class="col s10">
+          <div class="col s12">
+            <label for="client"
+                   data-error="wrong"
+                   data-success="right"
+                   class="required-area-dialog">ФИО
+            </label>
+            <input id="client"
+                   type="text"
+                   class="validate"
+                   [ngModel]="client?.fio"
+                   name="clientName"
+                   #clientName="ngModel"
+                   (input)="changeClientName($event.target.value)"
+                   required>
+          </div>
+        </div>
+        <div class="col s2 button-phone-block">
+          <button class="btn-dialog-submit" type="submit"
+                  (click)="addPhone()"
+                  [class.btn-dialog-submit]="successPhones"
+                  [disabled]="!successPhones"
+                  [class.btn-dialog-disabled]="!successPhones">
+            Добавить телефон
+          </button>
+        </div>
+      </div>
+      <div class="row main-row">
+        <div class="col s10">
+          <div class="col s12">
+            <label data-error="wrong" data-success="right">Email</label>
+            <input type="email"
+                   class="validate"
+                   [ngModel]="client?.email"
+                   name="email"
+                   email
+                   (input)="changeClientEmail($event.target.value)"
+                   #email="ngModel">
+            <span *ngIf="email.invalid && email.touched">Некоректный email</span>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let phone of phones; let i = index" class="valign-wrapper">
+        <div class="col s12">
+          <div class="row main-row valign-wrapper">
+            <div class="col s10 detail-col valign-wrapper">
+              <div class="col s12">
+                <label class="required-area-dialog">Номер телефона</label>
+                <input type="text"
+                       class="validate"
+                       [textMask]="{mask: mask}"
+                       [value]="phone.number"
+                       (input)="phoneNumber(i, $event.target.value)">
+              </div>
+            </div>
+            <div class="col s2 button-phone-block">
+              <button *ngIf="phones.length>1"
+                      class="btn-dialog-cancel remove-button"
+                      (click)="removePhone(i)">Удалить
+              </button>
+            </div>
+          </div>
+          <div class="row main-row">
+            <div class="col s10 detail-col valign-wrapper">
+              <div class="col s12">
+                <label>Комментарий к телефону</label>
+                <textarea type="text"
+                          [value]="phone.comment"
+                          (input)="phoneComment(i, $event.target.value)"
+                          name="comment"
+                          class="text-comment-dialog">
+                </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button-container">
+        <span class="description-required-dialog">
+          <span [ngStyle]="{'color':'red'}">*</span> помечены обязательные поля</span>
+        <button class="btn-dialog-cancel" (click)="onClose()">Отмена</button>
+        <button class="btn-dialog-submit" type="submit"
+                [class.btn-dialog-submit]="(changePhone || changeComment || changeEmail || changeName)"
+                [disabled]="(!changePhone&&!changeComment&&!changeEmail&&!changeName)"
+                [class.btn-dialog-disabled]="(!changePhone&&!changeComment&&!changeEmail&&!changeName)">OK
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="visible" class="overlay-dialog" (click)="onClose()"></div>
