@@ -9,7 +9,7 @@ import {CompanyPage} from '../models/company/company-page';
 import {NewDeal} from '../models/deal/new_deal';
 import {User} from '../models/user';
 import {Managers} from '../models/managers/managers';
-import {Client} from '../models/client';
+import {Client} from '../models/clients/client';
 
 
 @Injectable()

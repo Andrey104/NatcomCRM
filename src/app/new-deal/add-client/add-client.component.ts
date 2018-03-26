@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {NgForm} from '@angular/forms';
 import {ClientService} from '../../services/client.service';
 import {Phone} from '../../models/phone';
-import {Client} from '../../models/client';
+import {Client} from '../../models/clients/client';
 import {Subscription} from 'rxjs/Subscription';
 
 

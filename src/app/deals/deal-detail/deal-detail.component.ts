@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
 import {UtilsService} from '../../services/utils.service';
-import {Client} from '../../models/client';
+import {Client} from '../../models/clients/client';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {Payment} from '../../models/payment';
@@ -25,7 +25,6 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   private id;
   page = 1;
   select;
-  clientInfo = false;
   client: Client;
   deal: DealResult;
   showEditButtons = false;
@@ -41,6 +40,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   showEditClient = false;
   needSubscribe = true;
   subOnNewClientToDeal: Subscription;
+  dealClients: Client[] = [];
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   url: string;
   backUrl: string;
@@ -108,6 +108,14 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     this.getDealById();
   }
 
+  showAddClient() {
+    for (const client of this.deal.clients) {
+      console.log(client.client);
+      this.dealClients.push(client.client);
+    }
+    this.showEditClient = !this.showEditClient;
+  }
+
   successDealClient(client: Client) {
     this.subOnNewClientToDeal = this.dealService.newClientToDeal(this.id, client.id)
       .subscribe((responseClient) => {
@@ -164,13 +172,13 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     return this.utils.statusDeal(status);
   }
 
-  openClientInfo(idClient: number) {
-    this.clientInfo = true;
-    this.client = this.deal.clients[idClient];
-  }
+  // openClientInfo(idClient: number) {
+  //   this.clientInfo = true;
+  //   this.client = this.deal.clients[idClient];
+  // }
 
-  closeClientInfo() {
-    this.clientInfo = false;
-    this.client = null;
-  }
+  // closeClientInfo() {
+  //   this.clientInfo = false;
+  //   this.client = null;
+  // }
 }

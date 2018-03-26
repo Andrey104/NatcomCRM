@@ -7,7 +7,7 @@ import {NgForm} from '@angular/forms';
 import {MeasurementService} from '../../services/measurement.service';
 import {OrderService} from '../../services/order.service';
 import {OrderResult} from '../../models/orders/order_result';
-import {Client} from '../../models/client';
+import {Client} from '../../models/clients/client';
 import {NewDeal} from '../../models/deal/new_deal';
 import {ActivatedRoute, Router} from '@angular/router';
 

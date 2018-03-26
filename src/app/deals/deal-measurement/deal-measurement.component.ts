@@ -2,7 +2,7 @@ import {AfterViewChecked, Component, Inject, OnInit} from '@angular/core';
 import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {ActivatedRoute} from '@angular/router';
 import {MeasurementService} from '../../services/measurement.service';
-import {Client} from '../../models/client';
+import {Client} from '../../models/clients/client';
 import {Picture} from '../../models/picture';
 import {UtilsService} from '../../services/utils.service';
 import {DealService} from '../../services/deal.service';

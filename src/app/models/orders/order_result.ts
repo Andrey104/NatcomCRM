@@ -1,4 +1,4 @@
-import {Client} from '../client';
+import {Client} from '../clients/client';
 import {OrderAction} from './order_action';
 import {Company} from '../company';
 

@@ -63,7 +63,7 @@
           <div class="col s6 center-align" style="display: inline-block">
             <span class="center-dialog-title">Контакты</span>
             <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
-               (click)="showEditClient = !showEditClient"
+               (click)="showAddClient()"
                class="material-icons hover-element center-dialog-title">add_circle_outline</i>
           </div>
           <hr class="col s3">
@@ -251,11 +251,11 @@
       </li>
     </ul>
   </div>
-  <app-deal-client-info
-    [openClientInfo]="clientInfo"
-    [client]="client"
-    (close)="closeClientInfo()">
-  </app-deal-client-info>
+  <!--<app-deal-client-info-->
+    <!--[openClientInfo]="clientInfo"-->
+    <!--[client]="client"-->
+    <!--(close)="closeClientInfo()">-->
+  <!--</app-deal-client-info>-->
 </div>
 <div *ngIf="!loadPage" class="col s12 deal-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
@@ -275,5 +275,6 @@
 <app-dialog-deal-edit [deal]="deal" (successDealEdit)="successEdit()"
                       [(visible)]="showEditDialog"></app-dialog-deal-edit>
 <app-add-client [(visible)]="showEditClient"
+                [clients]="dealClients"
                 (successClient)="successDealClient($event)"></app-add-client>
 

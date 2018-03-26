@@ -1,4 +1,4 @@
-import {Client} from '../client';
+import {Client} from '../clients/client';
 
 export class NewDeal {
   company: number;

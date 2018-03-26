@@ -5,10 +5,11 @@ import {User} from '../user';
 import {DealMount} from './deal_mount';
 import {Payment} from '../payment';
 import {DealDiscount} from './deal_discount';
+import {ClientsList} from '../clients/clients-list';
 
 export class DealResult {
   id: number;
-  clients: object; // add class
+  clients: ClientsList[]; // add class
   measurements: DealMeasurement[];
   description: string;
   mounts: DealMount[];
