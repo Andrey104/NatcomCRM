@@ -3,6 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../../services/deal.service';
 import {NgForm} from '@angular/forms';
 import {DealResult} from '../../../models/deal/deal_result';
+import {Company} from '../../../models/company';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-dialog-deal-edit',
@@ -19,7 +21,9 @@ export class DealDialogEditComponent implements OnInit {
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   isSubmitted = false;
   isRequest = false;
+  companies: Company[] = [];
   formData = {};
+  subOnCompanies: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService) {
@@ -27,9 +31,18 @@ export class DealDialogEditComponent implements OnInit {
 
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.id = params['id'];
-    });
+    this.activatedRoute.params
+      .subscribe(params => {
+        this.id = params['id'];
+        this.subOnCompanies = this.dealService.getCompanies()
+          .subscribe((companyPage) => {
+            this.companies = companyPage.results;
+          }, (err) => {
+            console.log(err);
+          }, () => {
+            this.subOnCompanies.unsubscribe();
+          });
+      });
   }
 
   close() {
@@ -38,11 +51,11 @@ export class DealDialogEditComponent implements OnInit {
   }
 
   submitForm() {
+    const companyId = Number(this.form.form.value.company);
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    console.log(this.form.form.value.address);
-    this.dealService.editDeal(this.id, this.form.form.value.address,
+    this.dealService.editDeal(this.id, companyId, this.form.form.value.address,
       this.form.form.value.address_comment, this.form.form.value.description)
       .subscribe((result) => {
         this.isRequest = false;
