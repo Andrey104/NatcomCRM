@@ -47,7 +47,6 @@ export class ChangeClientComponent implements OnChanges {
         this.successChangeClient.emit(client);
         this.visibleChange.emit(this.visible);
       }, (err) => {
-        console.log(err);
         if (err.error.email) {
           alert('Введен некоректный e-mail');
         } else if (err.error.phones) {

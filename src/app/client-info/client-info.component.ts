@@ -22,6 +22,8 @@ export class ClientInfoComponent implements OnInit {
   loader: boolean;
   orderStatus: string;
   backUrl: string;
+  changeClient: Client = null;
+  showChangeClientDialog = false;
 
   constructor(private orderService: OrderService,
               private clientService: ClientService,
@@ -40,13 +42,23 @@ export class ClientInfoComponent implements OnInit {
         this.id_client = params['client_id'];
         this.orderStatus = this.orderService.getOrderStatus();
         this.backUrl = `/orders/${this.orderStatus}/${this.id.toString()}`;
-        console.log(this.backUrl);
         this.loader = true;
-        this.clientService.getClient(this.id_client).subscribe(client => {
-          this.client = client;
-          this.loader = false;
-        });
+        this.clientService.getClient(this.id_client)
+          .subscribe(client => {
+            this.client = client;
+            this.loader = false;
+          });
       });
+  }
+
+  changeClientDialog() {
+    this.changeClient = JSON.parse(JSON.stringify(this.client));
+    this.showChangeClientDialog = !this.showChangeClientDialog;
+  }
+
+  successChangeClient(client: Client) {
+    this.client = client;
+    this.changeClient = null;
   }
 
   statusDeal(status: number) {

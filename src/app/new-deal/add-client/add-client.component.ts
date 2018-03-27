@@ -69,7 +69,6 @@ export class AddClientComponent implements OnInit {
     let clientForServer = this.getClientFromTheForm();
     this.subOnAddClient = this.clientService.addClient(clientForServer)
       .subscribe((client) => {
-        console.log(client);
         this.successClient.emit(client);
         this.onClose();
       }, (err) => {

@@ -351,6 +351,12 @@
   left: 10px;
   bottom: 10px;
 }
+
+.button-container {
+  position: relative;
+  height: 70px;
+  margin-right: 10px;
+}
 /*------------конец модального окна------------*/
 
 /* Когда контент пустой */

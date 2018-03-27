@@ -53,7 +53,6 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   getOrder() {
     this.orderStatus = this.orderService.getOrderStatus();
     this.orderId = this.activatedRoute.snapshot.params['id'];
-    console.log(this.orderService.getOrder());
     if (this.orderService.getOrder() === undefined) {
       this.subOnOrder = this.orderService.getOrderById(this.orderId)
         .subscribe((orderPage) => {
@@ -61,7 +60,6 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
           this.clients.push(this.order.client);
           this.companies.push(this.order.company);
           this.defaultCompany = this.companies[0].id;
-          console.log(this.order);
         }, (err) => {
           console.log(err.message);
         }, () => {

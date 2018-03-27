@@ -11,15 +11,24 @@
           </i>
           <div class="back">Назад</div>
         </div>
+        <div class="col s7 button-container">
+          <button class="btn-dialog-cancel" (click)="changeClientDialog()">
+            Редактировать клиента
+          </button>
+        </div>
       </div>
       <div class="center-align row">
         <img class="status-image col s8 offset-s2" src="assets/images/client.png"/>
       </div>
       <div class="center-align name">{{client?.fio | clientName}}</div>
       <div class="info-block">
-        <div class="left-align email"><i class="tiny material-icons">email</i> {{client?.email | email}}</div>
+        <div class="left-align email">
+          <i class="tiny material-icons">email</i> {{client?.email | email}}
+        </div>
           <div class="left-align phone-info" *ngFor="let phone of client?.phones">
-            <div class="phone"><i class="tiny material-icons">local_phone</i> {{phone?.number | phoneFormat}}</div>
+            <div class="phone">
+              <i class="tiny material-icons">local_phone</i> {{phone?.number | phoneFormat}}
+            </div>
             <div>{{phone?.comment}}</div>
           </div>
       </div>
@@ -46,6 +55,9 @@
      </div>
   </div>
  </div>
+<app-change-client [(visible)]="showChangeClientDialog"
+                   [client]="changeClient"
+                   (successChangeClient)="successChangeClient($event)"></app-change-client>
 
 
 
