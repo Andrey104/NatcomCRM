@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
 import {UtilsService} from '../../services/utils.service';
-import {Client} from '../../models/client';
+import {Client} from '../../models/clients/client';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {Payment} from '../../models/payment';
@@ -12,6 +12,8 @@ import {DealMount} from '../../models/deal/deal_mount';
 import {Subscription} from 'rxjs/Subscription';
 import {DOCUMENT} from '@angular/common';
 import {MountService} from '../../services/mount.service';
+import {OrderService} from '../../services/order.service';
+import {MeasurementService} from '../../services/measurement.service';
 
 @Component({
   selector: 'app-deal-detail',
@@ -23,8 +25,9 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   private id;
   page = 1;
   select;
-  clientInfo = false;
   client: Client;
+  changeClient: Client = null;
+  changeClientNumber: number;
   deal: DealResult;
   showEditButtons = false;
   loadPage: boolean;
@@ -38,16 +41,21 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   showEditDialog = false;
   showEditClient = false;
   needSubscribe = true;
+  showChangeClientDialog = false;
   subOnNewClientToDeal: Subscription;
+  dealClients: Client[] = [];
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   url: string;
   backUrl: string;
+  backInfo: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService,
               private utils: UtilsService,
               @Inject(DOCUMENT) private document: Document,
-              private mountService: MountService) {
+              private mountService: MountService,
+              private orderService: OrderService,
+              private measurementService: MeasurementService) {
     this.url = this.document.location.href;
   }
 
@@ -103,6 +111,27 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     this.getDealById();
   }
 
+  showAddClient() {
+    for (const client of this.deal.clients) {
+      this.dealClients.push(client.client);
+    }
+    this.showEditClient = !this.showEditClient;
+  }
+
+  changeClientDialog(clientNumber: number) {
+    const user = this.utils.getUserData();
+    if (user.type >= 3 || user.id_manager === this.deal.user.id) {
+      this.changeClientNumber = clientNumber;
+      this.changeClient = JSON.parse(JSON.stringify(this.deal.clients[clientNumber].client));
+      this.showChangeClientDialog = !this.showChangeClientDialog;
+    }
+  }
+
+  successChangeClient(client: Client) {
+    this.deal.clients[this.changeClientNumber].client = client;
+    this.changeClient = null;
+  }
+
   successDealClient(client: Client) {
     this.subOnNewClientToDeal = this.dealService.newClientToDeal(this.id, client.id)
       .subscribe((responseClient) => {
@@ -122,7 +151,13 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     this.activatedRoute.params.subscribe(params => {
       if (this.url.indexOf('mounts') !== -1) {
         this.backUrl = `/mounts/${this.mountService.statusMount}/${params['mount_id']}`;
-        console.log(this.backUrl);
+        this.backInfo = 'Назад к монтажу';
+      } else if (this.url.indexOf('client_deal') !== -1) {
+        this.backUrl = `/orders/${this.orderService.getOrderStatus()}/${params['id']}/client/${params['client_id']}`;
+        this.backInfo = 'Назад к клиенту';
+      } else if (this.url.indexOf('measurements') !== -1) {
+        this.backUrl = `/measurements/${this.measurementService.measurementStatus}/${params['measurement_id']}`;
+        this.backInfo = 'Назад к замеру';
       }
       this.id = params['id'];
       this.loadPage = true;
@@ -135,7 +170,6 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
       .subscribe((deal) => {
         this.deal = deal;
         this.showEditButtons = this.utils.showEditButtons(String(this.deal.user.id));
-        console.log(this.showEditButtons + ' - show edit');
         this.loadPage = false;
       });
   }
@@ -154,13 +188,4 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     return this.utils.statusDeal(status);
   }
 
-  openClientInfo(idClient: number) {
-    this.clientInfo = true;
-    this.client = this.deal.clients[idClient];
-  }
-
-  closeClientInfo() {
-    this.clientInfo = false;
-    this.client = null;
-  }
 }

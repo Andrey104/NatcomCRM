@@ -54,9 +54,12 @@ export class OrderService extends BaseApi {
     return this.get(`orders/search?page=${page.toString()}&text=${text}`);
   }
 
-  deferOrder(id: string, comment: string, cause: number): Observable<Object> {
+  deferOrder(id: string, comment: string, cause: string): Observable<Object> {
     if (comment === '') {
       comment = null;
+    }
+    if (cause  === '') {
+      cause = null;
     }
     const data = {'cause': cause, 'comment': comment};
     return this.post(`orders/${id}/defer/`, data);

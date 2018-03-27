@@ -1,4 +1,4 @@
-import {Client} from '../client';
+import {Client} from '../clients/client';
 
 export class NewDeal {
   company: number;
@@ -20,8 +20,15 @@ export class NewDeal {
     }
   }
 
+  // private checkPayment(payment: string) {
+  //   if (payment === '') {
+  //     this.payment = null;
+  //   } else {
+  //     this.payment = payment;
+  //   }
+  // }
+
   private addDescription(description: string) {
-    console.log(description);
     if (description === '') {
       this.description = null;
     } else {

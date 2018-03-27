@@ -1,6 +1,6 @@
 import {Worker} from '../worker';
 import {Company} from '../company';
-import {Client} from '../client';
+import {Client} from '../clients/client';
 import {Transfer} from '../transfer';
 import {OurComment} from '../comment';
 import {Picture} from '../picture';

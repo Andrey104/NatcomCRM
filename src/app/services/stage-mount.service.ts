@@ -6,7 +6,6 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Cost} from '../models/cost';
 import {DealMount} from '../models/deal/deal_mount';
-import {Brigade} from '../models/brigades/brigade';
 
 @Injectable()
 export class StageMountService extends BaseApi {

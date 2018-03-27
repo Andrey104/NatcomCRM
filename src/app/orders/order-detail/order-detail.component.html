@@ -27,10 +27,10 @@
         </div>
         <div class="row">
           <div routerLink="client/{{order?.client?.id}}"
-               class="valign-wrapper contact-info forward-block col s12 hover-element">
+               class="valign-wrapper contact-info forward-block col s12 hover-element no-border">
             <div class="col s6 valign-wrapper detail-col-right">
               <i class="small material-icons icon">person</i>
-              {{order?.client?.fio}}
+              {{order?.client?.fio | clientName}}
             </div>
             <div class="col s5 div-number">{{order?.client?.phones[0]?.number | phoneFormat}}</div>
             <i class="arrow col s1 material-icons detail-col-left">chevron_right</i>

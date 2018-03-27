@@ -4,6 +4,19 @@
     <h4>Редактирование сделки</h4>
     <form (ngSubmit)="submitForm()" #form="ngForm">
       <div>
+        <label class="required-area-dialog">Компания</label>
+        <select class="browser-default"
+                [ngModel]="deal?.company?.id"
+                name="company"
+                required
+                #select="ngModel">
+          <option *ngFor="let company of companies"
+                  [value]="company?.id">
+            {{company?.name}}
+          </option>
+        </select>
+      </div>
+      <div>
         <label class="required-area-dialog">Адрес</label>
         <textarea type="text"
                   [ngModel]="deal?.address"

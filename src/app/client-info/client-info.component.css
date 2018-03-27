@@ -42,7 +42,7 @@ i:hover + .back {
 
 .name {
   font-size: 24px;
-  line-height: 1.4rem;
+  line-height: 1.6rem;
 }
 
 .email {
@@ -72,6 +72,11 @@ i:hover + .back {
   color: #5f5e8a;
 }
 
+.btn-dialog-cancel {
+  width: 120px;
+  bottom: 18px;
+  right: 0;
+}
 
 
 

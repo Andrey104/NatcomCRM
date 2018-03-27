@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {NgForm} from '@angular/forms';
 import {ClientService} from '../../services/client.service';
 import {Phone} from '../../models/phone';
-import {Client} from '../../models/client';
+import {Client} from '../../models/clients/client';
 import {Subscription} from 'rxjs/Subscription';
 
 
@@ -13,6 +13,7 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class AddClientComponent implements OnInit {
   @Input() visible: boolean;
+  @Input() clients: Client[];
   @Output() successClient = new EventEmitter<Client>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('form') form: NgForm;
@@ -24,6 +25,7 @@ export class AddClientComponent implements OnInit {
   regularClient: Client = null;
   regularClientNumber: number;
   visibleRegularClient = false;
+  isRequest = true;
   public mask = ['+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
 
   constructor(private clientService: ClientService) {
@@ -34,22 +36,53 @@ export class AddClientComponent implements OnInit {
   }
 
   submitForm() {
-    if (this.regularClient === null) {
-      this.addClient();
-    } else {
-      this.changeClient();
+    this.isRequest = false;
+    if (!this.checkSameClients()) {
+      if (this.regularClient === null) {
+        this.addClient();
+      } else {
+        this.changeClient();
+      }
     }
+  }
+
+  checkSameClients(): boolean {
+    if (this.clients.length > 0) {
+      const clientsPhones = [];
+      for (const client of this.clients) {
+        for (const phone of client.phones) {
+          clientsPhones.push(phone.number);
+        }
+      }
+      for (const newClientPhone of this.phones) {
+        const newPhone = this.phoneMaskOff(newClientPhone.number);
+        for (const phone of clientsPhones) {
+          if (phone === newPhone) {
+            alert('Такой клиент уже есть в сделке');
+            this.isRequest = true;
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   addClient() {
     let clientForServer = this.getClientFromTheForm();
     this.subOnAddClient = this.clientService.addClient(clientForServer)
       .subscribe((client) => {
-        console.log(client);
         this.successClient.emit(client);
         this.onClose();
       }, (err) => {
-        console.log(err);
+        if (err.error.email) {
+          alert('Введен некоректный e-mail');
+        } else if (err.error.phones) {
+          alert('Введенный телефон уже существует в базе, проверьте правильность написания номера телефона');
+        } else {
+          alert('Произошла ошибка');
+        }
+        this.isRequest = true;
       }, () => {
         clientForServer = null;
         this.subOnAddClient.unsubscribe();
@@ -57,17 +90,22 @@ export class AddClientComponent implements OnInit {
   }
 
   changeClient() {
-    let clientForServer = this.getClientFromTheForm();
+    const clientForServer = this.getClientFromTheForm();
     clientForServer.id = this.regularClient.id;
-    console.log(clientForServer);
     this.subOnAddClient = this.clientService.refreshClient(clientForServer)
       .subscribe((client) => {
         this.successClient.emit(client);
         this.onClose();
       }, (err) => {
-        console.log(err);
+        if (err.error.email) {
+          alert('Введен некоректный e-mail');
+        } else if (err.error.phones) {
+          alert('Введенный телефон уже существует в базе, проверьте правильность написания номера телефона');
+        } else {
+          alert('Произошла ошибка');
+        }
       }, () => {
-        clientForServer = null;
+        this.regularClient = null;
         this.subOnAddClient.unsubscribe();
       });
   }
@@ -98,24 +136,26 @@ export class AddClientComponent implements OnInit {
     this.phones[phoneId].number = phone;
     newPhone = this.phoneMaskOff(phone);
     if (newPhone.length === 10) {
-      if (!this.visibleRegularClient) {
+      if (!this.visibleRegularClient && this.isRequest) {
+        this.isRequest = false;
         this.successPhones = true;
         this.subOnClientPhone = this.clientService.getClientByPhone(newPhone)
           .subscribe((clientPage) => {
-            console.log(clientPage.results[0]);
             if (clientPage.results[0] !== undefined) {
               this.regularClient = clientPage.results[0];
               this.regularClientNumber = phoneId;
               this.visibleRegularClient = true;
+              this.successPhones = false;
             }
           }, (err) => {
             console.log(err);
+            this.isRequest = true;
           }, () => {
             this.subOnClientPhone.unsubscribe();
+            this.isRequest = true;
           });
       }
     } else {
-      // this.regularClient = null;
       this.visibleRegularClient = false;
       this.successPhones = false;
     }
@@ -160,6 +200,7 @@ export class AddClientComponent implements OnInit {
         email: this.regularClient.email
       }
     );
+    this.successPhones = true;
     this.visibleRegularClient = false;
   }
 
@@ -179,6 +220,8 @@ export class AddClientComponent implements OnInit {
   }
 
   onClose() {
+    this.isRequest = true;
+    this.successPhones = false;
     this.phones = [];
     this.phones.push(new Phone('', null));
     this.visible = false;

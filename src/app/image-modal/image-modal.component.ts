@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Picture} from '../models/picture';
-import {Client} from '../models/client';
+import {Client} from '../models/clients/client';
 
 @Component({
   selector: 'app-image-modal',

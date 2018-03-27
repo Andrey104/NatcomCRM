@@ -1,11 +1,13 @@
-import {AfterViewChecked, Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, Inject, OnInit} from '@angular/core';
 import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {ActivatedRoute} from '@angular/router';
 import {MeasurementService} from '../../services/measurement.service';
-import {Client} from '../../models/client';
+import {Client} from '../../models/clients/client';
 import {Picture} from '../../models/picture';
 import {UtilsService} from '../../services/utils.service';
 import {DealService} from '../../services/deal.service';
+import {DOCUMENT} from '@angular/common';
+import {OrderService} from '../../services/order.service';
 
 @Component({
   selector: 'app-deal-measurement',
@@ -15,7 +17,6 @@ import {DealService} from '../../services/deal.service';
 export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   measurement: DealMeasurement;
   id: number;
-  clientInfo = false;
   showEditButtons = false;
   client: Client;
   flag = false;
@@ -27,11 +28,16 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   showPicture = false;
   statusDeal: string;
   backUrl: string;
+  url: string;
+  showToDealButton = true;
 
   constructor(private activatedRoute: ActivatedRoute,
               private measurementService: MeasurementService,
               private utils: UtilsService,
-              private dealService: DealService) {
+              private dealService: DealService,
+              @Inject(DOCUMENT) private document: Document,
+              private orderService: OrderService) {
+    this.url = this.document.location.href;
   }
 
   ngOnInit() {
@@ -48,7 +54,14 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
 
   getBackUrl() {
     this.activatedRoute.params.subscribe((params) => {
+      if (this.url.indexOf('client_deal') !== -1) {
+        this.showToDealButton = false;
+        this.backUrl = `/orders/${this.orderService.getOrderStatus()}/${params['id']}`;
+        this.backUrl += `/client/${params['client_id']}/client_deal/${params['client_deal_id']}`;
+      } else if (this.url.indexOf('deals') !== -1) {
+        this.showToDealButton = false;
         this.backUrl = `/deals/${this.dealService.statusDeal}/${params['id']}`;
+      }
     });
   }
 
@@ -72,16 +85,6 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
         this.showEditButtons = this.utils.showEditButtons(String(this.measurement.deal_user.id));
         this.loadPage = false;
       });
-  }
-
-  openClientInfo(idClient: number) {
-    this.clientInfo = true;
-    this.client = this.measurement.clients[idClient];
-  }
-
-  closeClientInfo() {
-    this.clientInfo = false;
-    this.client = null;
   }
 
   sendComment(comment: string) {

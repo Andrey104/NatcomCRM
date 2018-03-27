@@ -13,14 +13,18 @@
       <p id="user">{{user?.username}} <br>
         <span id="name">{{user?.first_name}} {{user?.last_name}}</span></p>
       <ul>
-        <li id="email"><i class="small material-icons icon">email</i> {{user?.email}}</li>
-        <li><i class="small material-icons icon">local_phone</i> {{user?.phone}}</li>
-        <li><i class="small material-icons icon">email</i> {{user?.telegram}}</li>
+        <li class="valign-wrapper"><i class="small material-icons icon">email</i>{{user?.email | email}}</li>
+        <li class="valign-wrapper"><i class="small material-icons icon">local_phone</i>{{user?.phone | phoneFormat}}</li>
+        <li class="valign-wrapper"><i class="small material-icons icon">info_outline</i>{{user?.telegram | phoneFormat}}</li>
       </ul>
     </div>
   </article>
   <footer>
-    <a (click)="logOut()" routerLink="/login" class="waves-effect btn-large button"><i class="material-icons left">exit_to_app</i>Выход</a>
+    <a (click)="logOut()"
+       routerLink="/login" class="waves-effect btn-large button">
+      <i class="material-icons left">exit_to_app</i>
+      Выход
+    </a>
   </footer>
 </div>
 

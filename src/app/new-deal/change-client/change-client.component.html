@@ -2,7 +2,7 @@
   <i *ngIf="closable" class="material-icons hover-element dialog-close-btn"
      (click)="onClose()">close
   </i>
-  <h4>Добавить клиента</h4>
+  <h4>Редактирование клиента</h4>
   <div class="row main-row">
     <form id="form" class="form" #form="ngForm" (ngSubmit)="submitForm()">
       <div class="main-dialog-content">
@@ -17,8 +17,9 @@
               <input id="client"
                      type="text"
                      class="validate"
-                     ngModel
+                     [ngModel]="client?.fio"
                      name="clientName"
+                     #clientName="ngModel"
                      required>
             </div>
           </div>
@@ -38,7 +39,7 @@
               <label data-error="wrong" data-success="right">Email</label>
               <input type="email"
                      class="validate"
-                     ngModel
+                     [ngModel]="client?.email"
                      name="email"
                      #email="ngModel">
             </div>
@@ -46,26 +47,11 @@
         </div>
         <div *ngFor="let phone of phones; let i = index" class="valign-wrapper">
           <div class="col s12">
-            <div class="row regular-client-container valign-wrapper"
-                 *ngIf="visibleRegularClient&&regularClientNumber===i">
-              <div class="col s10">
-                <div>ФИО: {{regularClient.fio}}</div>
-                <div>Email: {{regularClient.email | email}}
-                </div>
-                <div *ngFor="let regClientPhone of regularClient.phones; let i = index">
-                  <div>{{i + 1}} телефон: {{regClientPhone.number | phoneFormat}}</div>
-                </div>
-              </div>
-              <div class="col s2 detail-col">
-                <button class="add-button" (click)="addRegularClient()">Добавить</button>
-              </div>
-            </div>
             <div class="row main-row valign-wrapper">
               <div class="col s10 detail-col valign-wrapper">
                 <div class="col s6">
                   <label class="required-area-dialog">Номер телефона</label>
                   <input type="text"
-                         [ngClass]="{invalid: visibleRegularClient&&regularClientNumber===i}"
                          class="validate phone-number"
                          [textMask]="{mask: mask}"
                          [value]="phone.number"
@@ -87,9 +73,6 @@
                         (click)="removePhone(i)">Удалить
                 </button>
               </div>
-            </div>
-            <div *ngIf="visibleRegularClient&&regularClientNumber===i" class="row">
-              <span class="col s12 error-message">Клиент с таким номером телефона уже существует. Введите новый номер телефона или нажмите кнопку добавить.</span>
             </div>
           </div>
         </div>

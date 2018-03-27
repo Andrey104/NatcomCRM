@@ -3,13 +3,13 @@
 </div>
 <div *ngIf="!loadPage" class="col s12 detail-col scrollable-page" id="page">
   <div class="row main-row valign-wrapper">
-    <div class="col s5 valign-wrapper">
+    <div class="col s5 valign-wrapper detail-col">
       <div *ngIf="backUrl" routerLink="{{backUrl}}"
            class="row-back valign-wrapper hover-element no-border">
         <i class="small material-icons no-border icon-arrow-back">
           keyboard_arrow_left
         </i>
-        <span class="back icon-arrow-back">Назад к монтажу</span>
+        <span class="back icon-arrow-back">{{backInfo}}</span>
       </div>
       <img class="avatar" src="{{deal?.user.type | imageType}}">
       <div>{{deal?.user.first_name}} {{deal?.user.last_name}}</div>
@@ -63,7 +63,7 @@
           <div class="col s6 center-align" style="display: inline-block">
             <span class="center-dialog-title">Контакты</span>
             <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
-               (click)="showEditClient = !showEditClient"
+               (click)="showAddClient()"
                class="material-icons hover-element center-dialog-title">add_circle_outline</i>
           </div>
           <hr class="col s3">
@@ -71,7 +71,8 @@
       </div>
       <div class="row">
         <div *ngFor="let client of deal?.clients; let i = index" class="col s12">
-          <div class="valign-wrapper contact-info forward-block col s12 hover-element">
+          <div class="valign-wrapper contact-info forward-block col s12 hover-element"
+               (click)="changeClientDialog(i)">
             <div class="col s6 valign-wrapper detail-col-right">
               <i class="small material-icons icon">person</i>
               {{client.client.fio}}
@@ -89,7 +90,7 @@
     <div class="col s2 center-align header">
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Замеры</span>
-        <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+        <i *ngIf="!(deal?.status == 4 || deal?.status == 5 || deal?.status == 1)&&showEditButtons"
            (click)="showMeasurementDialog = !showMeasurementDialog"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
@@ -100,14 +101,11 @@
     <div class="col s12 offset-s1 no-information">Нет замеров</div>
   </div>
   <div *ngIf="deal?.measurements.length!==0" class="row">
-    <div *ngFor="let measurement of deal?.measurements; let i = index"
-         class="col s12 valign-wrapper forward-block hover-element no-border"
-         routerLink="measurement/{{measurement?.id}}">
+    <div *ngFor="let measurement of deal?.measurements; let i = index">
       <div *ngIf="i!==0">
         <div class="divider"></div>
       </div>
-      <app-measurement-card [measurement]="measurement" class="col s11"></app-measurement-card>
-      <i class="arrow col s1 material-icons right-align">chevron_right</i>
+      <app-measurement-card [measurement]="measurement" class="col s12"></app-measurement-card>
     </div>
   </div>
   <div class="row valign-wrapper">
@@ -219,7 +217,7 @@
       <li class="hover-element li-element-menu-fab" onclick="$('#main-btn').click()"
           (click)="showManagerDialog = !showManagerDialog">
         <div class="center-align valign-wrapper menu-li-div">
-          <span class="fab-text">Установить менеджера</span>
+          <span class="fab-text">Изменить менеджера</span>
           <div class="icon-fab center-align valign-wrapper">
             <i class="material-icons color-fab-icon">person</i>
           </div>
@@ -254,11 +252,6 @@
       </li>
     </ul>
   </div>
-  <app-deal-client-info
-    [openClientInfo]="clientInfo"
-    [client]="client"
-    (close)="closeClientInfo()">
-  </app-deal-client-info>
 </div>
 <div *ngIf="!loadPage" class="col s12 deal-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
@@ -278,5 +271,9 @@
 <app-dialog-deal-edit [deal]="deal" (successDealEdit)="successEdit()"
                       [(visible)]="showEditDialog"></app-dialog-deal-edit>
 <app-add-client [(visible)]="showEditClient"
+                [clients]="dealClients"
                 (successClient)="successDealClient($event)"></app-add-client>
+<app-change-client [(visible)]="showChangeClientDialog"
+                   [client]="changeClient"
+                   (successChangeClient)="successChangeClient($event)"></app-change-client>
 

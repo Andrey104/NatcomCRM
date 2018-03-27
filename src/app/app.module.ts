@@ -55,7 +55,6 @@ import {DiscountPipe} from './pipes/discount.pipe';
 import {PaymentPipe} from './pipes/payment.pipe';
 import {CommentComponent} from './comment/comment.component';
 import {MountStatusPipe} from './pipes/mountStatus.pipe';
-import {DealClientInfoComponent} from './deals/deal-client-info/deal-client-info.component';
 import {DealContractView} from './pipes/deal-contract-view.pipe';
 import {StageDealComponent} from './stage-deal/stage-deal.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
@@ -120,6 +119,7 @@ import { AddStageComponent } from './mounts/add-stage/add-stage.component';
 import { ReviewComponent } from './admin/review/review.component';
 import {TextMaskModule} from 'angular2-text-mask';
 import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-stage/mount-dialog-add-stage';
+import { ChangeClientComponent } from './new-deal/change-client/change-client.component';
 import { StageAddInstallerComponent } from './stage/dialogs/stage-add-installer/stage-add-installer.component';
 
 
@@ -175,7 +175,6 @@ import { StageAddInstallerComponent } from './stage/dialogs/stage-add-installer/
     MountStatusPipe,
     StageDealComponent,
     StageMountStatusPipe,
-    DealClientInfoComponent,
     StageComponent,
     WorkerNamePipe,
     MeasurementStatusPipe,
@@ -224,7 +223,8 @@ import { StageAddInstallerComponent } from './stage/dialogs/stage-add-installer/
     MeasurementTransferCausePipe,
     AddStageComponent,
     ReviewComponent,
-    StageAddInstallerComponent
+    ChangeClientComponent,
+    StageAddInstallerComponent,
   ],
   imports: [
     BrowserModule,

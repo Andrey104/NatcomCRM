@@ -1,12 +1,5 @@
 <div class="row main-row scrollable-page">
   <div class="col s7">
-    <div routerLink="/orders/{{orderStatus}}/{{orderId}}"
-         class="row-back valign-wrapper hover-element no-border">
-      <i class="small material-icons no-border icon-arrow-back">
-        keyboard_arrow_left
-      </i>
-      <span class="back icon-arrow-back">Назад к заявке</span>
-    </div>
     <form #form="ngForm" (ngSubmit)="submitForm(form)">
       <div class="row">
         <div class="col s7">
@@ -23,11 +16,10 @@
           </select>
         </div>
         <div class="col s5">
-          <label class="required-area-dialog">Способ оплаты</label>
+          <label>Способ оплаты</label>
           <select class="browser-default"
                   ngModel
-                  name="payment"
-                  required>
+                  name="payment">
             <option value="0">Наличными</option>
             <option value="1">Безналичный</option>
           </select>
@@ -55,15 +47,15 @@
           </textarea>
         </div>
       </div>
-      <div class="measurement-container" (click)="showMeasurement()">
-        <i class="small material-icons center-dialog-title">{{visibleMeasurement.icon}}</i>
+      <div class="col s12 measurement-container" (click)="showMeasurement()">
         <span>{{visibleMeasurement.message}}</span>
+        <i class="small material-icons center-dialog-title">{{visibleMeasurement.icon}}</i>
       </div>
       <div *ngIf="visibleMeasurement.show" class="row">
         <div class="col s12">
-          <label class="required-area-dialog">Дата замера</label>
+          <label class="col s12 detail-col required-area-dialog">Дата замера</label>
           <input type="date"
-                 class="calendar"
+                 class="calendar browser-default"
                  ngModel
                  name="calendar"
                  required>
@@ -76,14 +68,18 @@
           </textarea>
         </div>
         <div class="col s12">
-          <label class="required-area-dialog">Комментарий ко времени</label>
+          <label>Комментарий по времени</label>
           <textarea class="text-comment-dialog"
                     ngModel
-                    name="commentTime"
-                    required>
+                    name="commentTime">
           </textarea>
         </div>
       </div>
+      <button *ngIf="orderStatus"
+              routerLink="/orders/{{orderStatus}}/{{orderId}}"
+              class="btn-dialog-cancel">
+        Отмена
+      </button>
       <button class="btn-dialog-submit" type="submit"
               [class.btn-dialog-submit]="form.valid"
               [disabled]="(!form.valid||clients.length===0||!isRequest)"
@@ -100,17 +96,17 @@
     <div class="row contacts">
       <div class="col s12 valign-wrapper">
         <hr class="col s4">
-        <div class="col s4 center-align header">Клиенты</div>
+        <div class="col s4 center-align header required-area-dialog">Клиенты</div>
         <hr class="col s4">
       </div>
     </div>
     <div *ngIf="clients.length===0" class="center-align">У сделки нет клиентов</div>
     <div class="row">
       <div *ngFor="let client of clients; let i = index" class="col s12">
-        <div class="col s12 valign-wrapper">
+        <div class="col s12 valign-wrapper hover-element" (click)="changeClientDialog(i)">
           <div class="col s6 valign-wrapper detail-col-right">
             <i class="small material-icons icon">person</i>
-            {{client.fio}}
+            {{client.fio | clientName}}
           </div>
           <div class="col s5 div-number">{{client.phones[0].number | phoneFormat}}</div>
           <i class="col s1 material-icons detail-col-left">chevron_right</i>
@@ -120,5 +116,9 @@
     </div>
   </div>
   <app-add-client [(visible)]="showDialog"
+                  [clients]="clients"
                   (successClient)="addNewClient($event)"></app-add-client>
+  <app-change-client [(visible)]="showChangeClientDialog"
+                     [client]="changeClient"
+                     (successChangeClient)="successChangeClient($event)"></app-change-client>
 </div>

@@ -89,23 +89,3 @@ hr {
   border-left: solid 1px #c4c4c4;
   height: calc(100vh - 142px);
 }
-
-
-.btn-go-deal {
-  cursor: pointer;
-  padding: 0 8px;
-  color: white;
-  min-width: 110px;
-  max-width: 110px;
-  background-color: orange;
-  border-radius: 5px;
-  height: 30px;
-}
-
-.deal-icon {
-  color: white!important;
-  margin-right: 0;
-  position: relative;
-  right: 0px!important;
-  transform: scale(-1, 1);
-}

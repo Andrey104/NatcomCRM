@@ -47,6 +47,7 @@ export class MeasurementPageComponent implements OnInit {
   subscribeOnUrl() {
     this.activatedRoute.params
       .subscribe((params) => {
+        this.measurementService.measurementStatus = params['status'];
         this.inputText = '';
         this.status = this.utils.statusUrlMeasurement(params['status']);
         this.measurements = [];

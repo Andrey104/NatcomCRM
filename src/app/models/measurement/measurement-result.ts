@@ -1,16 +1,17 @@
 import {Picture} from '../picture';
-import {Client} from '../client';
+import {Client} from '../clients/client';
 import {Action} from '../action';
 import {Transfer} from '../transfer';
 import {OurComment} from '../comment';
 import {Company} from '../company';
 import {Worker} from '../worker';
 import {User} from '../user';
+import {ClientsList} from '../clients/clients-list';
 
 export class MeasurementResult {
   id: number;
   pictures: Picture[];
-  clients: Client[];
+  clients: ClientsList[];
   actions: Action[];
   transfers: Transfer[];
   comments: OurComment[];

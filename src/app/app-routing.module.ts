@@ -30,7 +30,8 @@ import {ReviewComponent} from './admin/review/review.component';
 // deals/id/mounts
 
 const measurements_routes: Routes = [
-  {path: ':measurement_id', component: DealMeasurementComponent}
+  {path: ':measurement_id', component: DealMeasurementComponent},
+  {path: ':measurement_id/deal/:id', component: DealDetailComponent}
 ];
 
 const mounts_routes: Routes = [
@@ -51,7 +52,12 @@ const deals_routes: Routes = [
 const orders_routes: Routes = [
   {path: ':id', component: OrderDetailComponent},
   {path: ':id/to_deal', component: NewDealPageComponent},
-  {path: ':id/client/:client_id', component: ClientInfoComponent}
+  {path: ':id/client/:client_id', component: ClientInfoComponent},
+  {path: ':id/client/:client_id/client_deal/:id', component: DealDetailComponent},
+  {
+    path: ':id/client/:client_id/client_deal/:client_deal_id/measurement/:measurement_id',
+    component: DealMeasurementComponent
+  }
 ];
 
 const settings_router: Routes = [

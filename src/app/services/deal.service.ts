@@ -7,9 +7,7 @@ import {DealResult} from '../models/deal/deal_result';
 import {BaseApi} from '../core/base-api';
 import {CompanyPage} from '../models/company/company-page';
 import {NewDeal} from '../models/deal/new_deal';
-import {User} from '../models/user';
-import {Managers} from '../models/managers/managers';
-import {Client} from '../models/client';
+import {Client} from '../models/clients/client';
 
 
 @Injectable()
@@ -90,7 +88,7 @@ export class DealService extends BaseApi {
     return this.post(`deals/${idDeal}/set_manager/`, {manager});
   }
 
-  editDeal(idDeal: number, address: string, address_comment: string, description: string): Observable<Object> {
+  editDeal(idDeal: number, company: number, address: string, address_comment: string, description: string): Observable<Object> {
     if (description === '') {
       description = null;
     }
@@ -98,11 +96,11 @@ export class DealService extends BaseApi {
       address_comment = null;
     }
     const data = {
+      company,
       address_comment,
       address,
       description
     };
-    console.log(data.address_comment , 'edit deal');
     return this.patch(`deals/${idDeal}/`, data);
   }
 

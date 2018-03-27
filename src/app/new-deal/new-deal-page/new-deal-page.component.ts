@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DealService} from '../../services/deal.service';
 import {Company} from '../../models/company';
 import {Subscription} from 'rxjs/Subscription';
@@ -7,8 +7,7 @@ import {NgForm} from '@angular/forms';
 import {MeasurementService} from '../../services/measurement.service';
 import {OrderService} from '../../services/order.service';
 import {OrderResult} from '../../models/orders/order_result';
-import {Client} from '../../models/client';
-import {Phone} from '../../models/phone';
+import {Client} from '../../models/clients/client';
 import {NewDeal} from '../../models/deal/new_deal';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -20,10 +19,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class NewDealPageComponent implements OnInit, OnDestroy {
   companies: Company[] = [];
   clients: Client[] = [];
+  changeClient: Client = null;
+  changeClientNumber: number;
   subOnCompanies: Subscription;
   subOnDeal: Subscription;
   subOnMeasurement: Subscription;
   showDialog = false;
+  showChangeClientDialog = false;
   defaultCompany: number;
   visibleMeasurement = {show: false, icon: 'add_circle_outline', message: 'Добавить замер'};
   order: OrderResult;
@@ -55,6 +57,9 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
       this.subOnOrder = this.orderService.getOrderById(this.orderId)
         .subscribe((orderPage) => {
           this.order = orderPage;
+          this.clients.push(this.order.client);
+          this.companies.push(this.order.company);
+          this.defaultCompany = this.companies[0].id;
         }, (err) => {
           console.log(err.message);
         }, () => {
@@ -124,6 +129,17 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
 
   addNewClient(client: Client) {
     this.clients.push(client);
+  }
+
+  changeClientDialog(clientNumber: number) {
+    this.changeClientNumber = clientNumber;
+    this.changeClient = JSON.parse(JSON.stringify(this.clients[clientNumber]));
+    this.showChangeClientDialog = !this.showChangeClientDialog;
+  }
+
+  successChangeClient(client: Client) {
+    this.clients[this.changeClientNumber] = client;
+    this.changeClient = null;
   }
 
   unSub() {

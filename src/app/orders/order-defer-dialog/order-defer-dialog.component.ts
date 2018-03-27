@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {animate, style, transition, trigger} from '@angular/animations';
 import {ActivatedRoute} from '@angular/router';
 import {OrderService} from '../../services/order.service';
 import {NgForm} from '@angular/forms';
@@ -18,7 +17,7 @@ export class OrderDeferDialogComponent implements OnInit {
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('form') form: NgForm;
   @ViewChild('comment') comment;
-  causes = [1, 2, 3];
+  causes = [1, 2];
   isSubmitted = false;
   formData = {};
   isRequest = false;
@@ -29,9 +28,10 @@ export class OrderDeferDialogComponent implements OnInit {
 
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.id = params['id'];
-    });
+    this.activatedRoute.params
+      .subscribe(params => {
+        this.id = params['id'];
+      });
   }
 
   close() {
@@ -42,7 +42,6 @@ export class OrderDeferDialogComponent implements OnInit {
   submitForm() {
     this.isRequest = true;
     this.isSubmitted = true;
-    console.log(this.form);
     this.formData = this.form.value;
     this.orderService.deferOrder(this.id, this.comment.nativeElement.value, this.form.form.value.answer)
       .subscribe((response) => {
