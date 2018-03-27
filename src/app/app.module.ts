@@ -120,6 +120,7 @@ import { ReviewComponent } from './admin/review/review.component';
 import {TextMaskModule} from 'angular2-text-mask';
 import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-stage/mount-dialog-add-stage';
 import { ChangeClientComponent } from './new-deal/change-client/change-client.component';
+import { StageAddInstallerComponent } from './stage/dialogs/stage-add-installer/stage-add-installer.component';
 
 
 @NgModule({
@@ -222,7 +223,8 @@ import { ChangeClientComponent } from './new-deal/change-client/change-client.co
     MeasurementTransferCausePipe,
     AddStageComponent,
     ReviewComponent,
-    ChangeClientComponent
+    ChangeClientComponent,
+    StageAddInstallerComponent,
   ],
   imports: [
     BrowserModule,

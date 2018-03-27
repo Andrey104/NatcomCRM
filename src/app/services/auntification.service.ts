@@ -13,7 +13,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private messageService: MessageService) {
   }
 
-  private userUrl = 'http://188.225.46.31/api/user_info';
+  private userUrl = 'http://188.225.46.31/api/api/user_info';
 
   login(username: string, password: string) {
     const user = {username: username, password: password};

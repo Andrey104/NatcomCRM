@@ -1,12 +1,12 @@
 <div class="modal modal-fixed-footer" [ngClass]="{open: true}">
   <!--<div class="modal-content">-->
     <!--<h5>{{header}}</h5>-->
-    <form [formGroup]="stageForm">
-      <div class="input-field">
-        <input name="date" type="text" id="date" class="datepicker" formControlName="date">
-        <label for="date" [ngClass]="{active: nameInputActive}">Имя</label>
-      </div>
-    </form>
+    <!--<form [formGroup]="stageForm">-->
+      <!--<div class="input-field">-->
+        <!--<input name="date" type="text" id="date" class="datepicker" formControlName="date">-->
+        <!--<label for="date" [ngClass]="{active: nameInputActive}">Имя</label>-->
+      <!--</div>-->
+    <!--</form>-->
     <!--<div class="row add-installer-btn">-->
       <!--<a class="modal-action waves-red btn left" (click)="openInstallerList()">+</a>-->
     <!--</div>-->
@@ -23,13 +23,3 @@
 
 <!--<app-installer-select-list [open]="installerListIsOpen" (onClose)="closeInstallerList($event)"></app-installer-select-list>-->
 
-<script>
-  $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15, // Creates a dropdown of 15 years to control year,
-    today: 'Today',
-    clear: 'Clear',
-    close: 'Ok',
-    closeOnSelect: true // Close upon selecting a date,
-  });
-</script>
