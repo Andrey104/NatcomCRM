@@ -71,7 +71,8 @@
       </div>
       <div class="row">
         <div *ngFor="let client of deal?.clients; let i = index" class="col s12">
-          <div class="valign-wrapper contact-info forward-block col s12 hover-element">
+          <div class="valign-wrapper contact-info forward-block col s12 hover-element"
+               (click)="changeClientDialog(i)">
             <div class="col s6 valign-wrapper detail-col-right">
               <i class="small material-icons icon">person</i>
               {{client.client.fio}}
@@ -89,7 +90,7 @@
     <div class="col s2 center-align header">
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Замеры</span>
-        <i *ngIf="!(deal?.status == 4 || deal?.status == 5)&&showEditButtons"
+        <i *ngIf="!(deal?.status == 4 || deal?.status == 5 || deal?.status == 1)&&showEditButtons"
            (click)="showMeasurementDialog = !showMeasurementDialog"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
@@ -251,11 +252,6 @@
       </li>
     </ul>
   </div>
-  <!--<app-deal-client-info-->
-    <!--[openClientInfo]="clientInfo"-->
-    <!--[client]="client"-->
-    <!--(close)="closeClientInfo()">-->
-  <!--</app-deal-client-info>-->
 </div>
 <div *ngIf="!loadPage" class="col s12 deal-comment-content valign-wrapper">
   <app-comment class="comment-content" (comment)="sendComment($event)"></app-comment>
@@ -277,4 +273,7 @@
 <app-add-client [(visible)]="showEditClient"
                 [clients]="dealClients"
                 (successClient)="successDealClient($event)"></app-add-client>
+<app-change-client [(visible)]="showChangeClientDialog"
+                   [client]="changeClient"
+                   (successChangeClient)="successChangeClient($event)"></app-change-client>
 

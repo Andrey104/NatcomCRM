@@ -26,6 +26,8 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   page = 1;
   select;
   client: Client;
+  changeClient: Client = null;
+  changeClientNumber: number;
   deal: DealResult;
   showEditButtons = false;
   loadPage: boolean;
@@ -39,6 +41,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   showEditDialog = false;
   showEditClient = false;
   needSubscribe = true;
+  showChangeClientDialog = false;
   subOnNewClientToDeal: Subscription;
   dealClients: Client[] = [];
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
@@ -110,10 +113,23 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
 
   showAddClient() {
     for (const client of this.deal.clients) {
-      console.log(client.client);
       this.dealClients.push(client.client);
     }
     this.showEditClient = !this.showEditClient;
+  }
+
+  changeClientDialog(clientNumber: number) {
+    const user = this.utils.getUserData();
+    if (user.type >= 3 || user.id_manager === this.deal.user.id) {
+      this.changeClientNumber = clientNumber;
+      this.changeClient = JSON.parse(JSON.stringify(this.deal.clients[clientNumber].client));
+      this.showChangeClientDialog = !this.showChangeClientDialog;
+    }
+  }
+
+  successChangeClient(client: Client) {
+    this.deal.clients[this.changeClientNumber].client = client;
+    this.changeClient = null;
   }
 
   successDealClient(client: Client) {
@@ -172,13 +188,4 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     return this.utils.statusDeal(status);
   }
 
-  // openClientInfo(idClient: number) {
-  //   this.clientInfo = true;
-  //   this.client = this.deal.clients[idClient];
-  // }
-
-  // closeClientInfo() {
-  //   this.clientInfo = false;
-  //   this.client = null;
-  // }
 }
