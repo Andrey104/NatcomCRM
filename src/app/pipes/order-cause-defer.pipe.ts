@@ -12,10 +12,6 @@ export class OrderDeferCause implements PipeTransform {
         break;
       }
       case 2: {
-        cause = 'Слишком высокая цена';
-        break;
-      }
-      case 3: {
         cause = 'Позвонить позже';
         break;
       }
