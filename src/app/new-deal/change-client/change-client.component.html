@@ -49,25 +49,15 @@
           <div class="col s12">
             <div class="row main-row valign-wrapper">
               <div class="col s10 detail-col valign-wrapper">
-                <div class="col s12">
+                <div class="col s6">
                   <label class="required-area-dialog">Номер телефона</label>
                   <input type="text"
-                         class="validate"
+                         class="validate phone-number"
                          [textMask]="{mask: mask}"
                          [value]="phone.number"
                          (input)="phoneNumber(i, $event.target.value)">
                 </div>
-              </div>
-              <div class="col s2 button-phone-block">
-                <button *ngIf="phones.length>1"
-                        class="btn-dialog-cancel remove-button"
-                        (click)="removePhone(i)">Удалить
-                </button>
-              </div>
-            </div>
-            <div class="row main-row">
-              <div class="col s10 detail-col valign-wrapper">
-                <div class="col s12">
+                <div class="col s6">
                   <label>Комментарий к телефону</label>
                   <textarea type="text"
                             [value]="phone.comment"
@@ -76,6 +66,12 @@
                             class="text-comment-dialog">
                 </textarea>
                 </div>
+              </div>
+              <div class="col s2 button-phone-block">
+                <button *ngIf="phones.length>1"
+                        class="btn-dialog-cancel remove-button"
+                        (click)="removePhone(i)">Удалить
+                </button>
               </div>
             </div>
           </div>

@@ -145,6 +145,7 @@ export class AddClientComponent implements OnInit {
               this.regularClient = clientPage.results[0];
               this.regularClientNumber = phoneId;
               this.visibleRegularClient = true;
+              this.successPhones = false;
             }
           }, (err) => {
             console.log(err);
@@ -199,6 +200,7 @@ export class AddClientComponent implements OnInit {
         email: this.regularClient.email
       }
     );
+    this.successPhones = true;
     this.visibleRegularClient = false;
   }
 
