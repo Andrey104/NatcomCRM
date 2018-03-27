@@ -6,6 +6,10 @@ form {
   height: 50px;
 }
 
+.contacts {
+  margin-bottom: 0;
+}
+
 .date-container {
   display: inline-block;
 }

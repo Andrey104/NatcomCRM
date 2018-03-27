@@ -1,22 +1,20 @@
-import {stringDistance} from 'codelyzer/util/utils';
-
 export class Phone {
- id: number;
- client: number;
- number: string;
- comment: string;
+  id: number;
+  client: number;
+  number: string;
+  comment: string;
 
- constructor(number: string, comment: string) {
+  constructor(number: string, comment: string) {
     this.number = number;
-    this.comment = comment;
- }
+    this.checkComment(comment);
+  }
+
+  checkComment(comment) {
+    if (comment !== null) {
+      this.comment = comment;
+    } else {
+      this.comment = null;
+    }
+  }
 }
 
-/*"phones": [
-      {
-        "id": 1,
-        "client": 1,
-        "number": 911,
-        "comment": "my phone"
-      }
-    ]*/

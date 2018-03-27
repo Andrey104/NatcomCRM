@@ -105,7 +105,7 @@
     <div *ngIf="clients.length===0" class="center-align">У сделки нет клиентов</div>
     <div class="row">
       <div *ngFor="let client of clients; let i = index" class="col s12">
-        <div class="col s12 valign-wrapper" (click)="changeClientDialog(i)">
+        <div class="col s12 valign-wrapper hover-element" (click)="changeClientDialog(i)">
           <div class="col s6 valign-wrapper detail-col-right">
             <i class="small material-icons icon">person</i>
             {{client.fio | clientName}}

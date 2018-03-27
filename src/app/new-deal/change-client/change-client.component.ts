@@ -21,10 +21,6 @@ export class ChangeClientComponent implements OnChanges {
   closable = true;
   successPhones = true;
   subOnChangeClient: Subscription;
-  changeName = false;
-  changeEmail = false;
-  changePhone = false;
-  changeComment = false;
   public mask = ['+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
 
 
@@ -34,7 +30,6 @@ export class ChangeClientComponent implements OnChanges {
   ngOnChanges() {
     if (this.client !== null) {
       this.clientCopy = JSON.parse(JSON.stringify(this.client));
-      console.log(this.clientCopy);
       for (const phone of this.client.phones) {
         this.phones.push(phone);
       }
@@ -48,16 +43,16 @@ export class ChangeClientComponent implements OnChanges {
     const clientServer = this.getClientFromTheForm();
     this.subOnChangeClient = this.clientService.refreshClient(clientServer)
       .subscribe((client) => {
-        this.form.reset();
-        this.phones = [];
-        this.visible = false;
-        this.successPhones = true;
-        this.changePhone = false;
-        this.changeComment = false;
+        this.valueVariables();
         this.successChangeClient.emit(client);
         this.visibleChange.emit(this.visible);
       }, (err) => {
-        alert('Произошла ошибка');
+        console.log(err);
+        if (err.error.email) {
+          alert('Введен некоректный e-mail');
+        } else if (err.error.phones) {
+          alert('Введенный телефон уже существует в базе, проверьте правильность написания номера телефона');
+        }
       }, () => {
         this.subOnChangeClient.unsubscribe();
       });
@@ -79,7 +74,6 @@ export class ChangeClientComponent implements OnChanges {
 
   addPhone() {
     this.successPhones = false;
-    this.changePhone = false;
     const lastPhone = this.phones.length - 1;
     if (this.phones[lastPhone].number !== '') {
       this.phones.push(new Phone('', null));
@@ -87,71 +81,20 @@ export class ChangeClientComponent implements OnChanges {
   }
 
   phoneNumber(phoneId: number, phone: string) {
-    if (phone !== '') {
+    const phoneWithoutMask = this.phoneMaskOff(phone);
+    if (phoneWithoutMask.length === 10) {
+      this.successPhones = true;
       this.phones[phoneId].number = phone;
-      const numberWithoutMask = this.phoneMaskOff(phone);
-      if (numberWithoutMask.length === 10) {
-        this.successPhones = true;
-        if (this.clientCopy.phones[phoneId]) {
-          if (numberWithoutMask !== this.clientCopy.phones[phoneId].number) {
-            this.changePhone = true;
-          } else {
-            this.changePhone = false;
-          }
-        } else {
-          this.changePhone = true;
-        }
-      } else {
-        this.successPhones = false;
-        this.changePhone = false;
-      }
     } else {
-      this.changePhone = false;
-      this.phones[phoneId].number = null;
+      this.successPhones = false;
     }
   }
 
   phoneComment(phoneId: number, comment: string) {
-    this.phones[phoneId].comment = comment;
-    if (this.clientCopy.phones[phoneId]) {
-      if (this.clientCopy.phones[phoneId].comment !== comment) {
-        this.changeComment = true;
-      } else {
-        this.changeComment = false;
-      }
+    if (comment !== '') {
+      this.phones[phoneId].comment = comment;
     } else {
-      this.changeComment = true;
-    }
-    if (comment === '') {
       this.phones[phoneId].comment = null;
-    }
-  }
-
-  changeClientName(name: string) {
-    if (name !== '') {
-      if (this.clientCopy.fio) {
-        if (this.clientCopy.fio !== name) {
-          this.changeName = true;
-        } else {
-          this.changeName = false;
-        }
-      } else {
-        this.changeName = true;
-      }
-    } else {
-      this.changeName = false;
-    }
-  }
-
-  changeClientEmail(email: string) {
-    if (this.clientCopy.email) {
-      if (this.clientCopy.email !== email) {
-        this.changeEmail = true;
-      } else {
-        this.changeEmail = false;
-      }
-    } else {
-      this.changeEmail = true;
     }
   }
 
@@ -188,23 +131,15 @@ export class ChangeClientComponent implements OnChanges {
     }
   }
 
-  changeClient(): boolean {
-    if (this.changePhone || this.changeComment) {
-      return true;
-    } else {
-      return false;
-    }
+  valueVariables() {
+    this.form.reset();
+    this.phones = [];
+    this.successPhones = true;
+    this.visible = false;
   }
 
   onClose() {
-    this.form.reset();
-    this.successPhones = true;
-    this.changeName = false;
-    this.changeEmail = false;
-    this.changePhone = false;
-    this.changeComment = false;
-    this.phones = [];
-    this.visible = false;
+    this.valueVariables();
     this.successChangeClient.emit(this.clientCopy);
     this.visibleChange.emit(this.visible);
     this.client = null;

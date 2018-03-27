@@ -4,18 +4,6 @@
   width: 560px;
 }
 
-.dialog::-webkit-scrollbar {
-  width: 0;
-}
-
-.dialog {
-  overflow: -moz-scrollbars-none;
-}
-
-.dialog {
-  -ms-overflow-style: none;
-}
-
 @media (min-width: 768px) {
   .dialog {
     top: calc(50% - 230px);

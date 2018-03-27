@@ -126,7 +126,6 @@ export class AddClientComponent implements OnInit {
         this.successPhones = true;
         this.subOnClientPhone = this.clientService.getClientByPhone(newPhone)
           .subscribe((clientPage) => {
-            console.log(clientPage.results[0]);
             if (clientPage.results[0] !== undefined) {
               this.regularClient = clientPage.results[0];
               this.regularClientNumber = phoneId;
@@ -139,7 +138,6 @@ export class AddClientComponent implements OnInit {
           });
       }
     } else {
-      // this.regularClient = null;
       this.visibleRegularClient = false;
       this.successPhones = false;
     }
