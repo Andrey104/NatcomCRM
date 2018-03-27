@@ -25,6 +25,7 @@ export class AddClientComponent implements OnInit {
   regularClient: Client = null;
   regularClientNumber: number;
   visibleRegularClient = false;
+  isRequest = true;
   public mask = ['+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
 
   constructor(private clientService: ClientService) {
@@ -35,6 +36,7 @@ export class AddClientComponent implements OnInit {
   }
 
   submitForm() {
+    this.isRequest = false;
     if (!this.checkSameClients()) {
       if (this.regularClient === null) {
         this.addClient();
@@ -57,6 +59,7 @@ export class AddClientComponent implements OnInit {
         for (const phone of clientsPhones) {
           if (phone === newPhone) {
             alert('Такой клиент уже есть в сделке');
+            this.isRequest = true;
             return true;
           }
         }
@@ -66,7 +69,6 @@ export class AddClientComponent implements OnInit {
   }
 
   addClient() {
-    console.log(this.form);
     let clientForServer = this.getClientFromTheForm();
     this.subOnAddClient = this.clientService.addClient(clientForServer)
       .subscribe((client) => {
@@ -80,6 +82,7 @@ export class AddClientComponent implements OnInit {
         } else {
           alert('Произошла ошибка');
         }
+        this.isRequest = true;
       }, () => {
         clientForServer = null;
         this.subOnAddClient.unsubscribe();
@@ -89,7 +92,6 @@ export class AddClientComponent implements OnInit {
   changeClient() {
     const clientForServer = this.getClientFromTheForm();
     clientForServer.id = this.regularClient.id;
-    console.log(clientForServer);
     this.subOnAddClient = this.clientService.refreshClient(clientForServer)
       .subscribe((client) => {
         this.successClient.emit(client);
@@ -134,7 +136,8 @@ export class AddClientComponent implements OnInit {
     this.phones[phoneId].number = phone;
     newPhone = this.phoneMaskOff(phone);
     if (newPhone.length === 10) {
-      if (!this.visibleRegularClient) {
+      if (!this.visibleRegularClient && this.isRequest) {
+        this.isRequest = false;
         this.successPhones = true;
         this.subOnClientPhone = this.clientService.getClientByPhone(newPhone)
           .subscribe((clientPage) => {
@@ -145,8 +148,10 @@ export class AddClientComponent implements OnInit {
             }
           }, (err) => {
             console.log(err);
+            this.isRequest = true;
           }, () => {
             this.subOnClientPhone.unsubscribe();
+            this.isRequest = true;
           });
       }
     } else {
@@ -213,6 +218,7 @@ export class AddClientComponent implements OnInit {
   }
 
   onClose() {
+    this.isRequest = true;
     this.successPhones = false;
     this.phones = [];
     this.phones.push(new Phone('', null));

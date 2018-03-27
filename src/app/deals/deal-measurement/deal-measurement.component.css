@@ -7,14 +7,8 @@
   margin-right: 5px;
 }
 
-.date-icon {
-  float: left;
-  margin-top: 5px;
-  margin-right: 5px;
-}
-
-.deal-date {
-  overflow: hidden;
+.measurement-date {
+  font-size: 18px;
 }
 
 .avatar {

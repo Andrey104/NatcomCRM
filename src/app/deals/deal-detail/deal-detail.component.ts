@@ -156,7 +156,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
         this.backUrl = `/orders/${this.orderService.getOrderStatus()}/${params['id']}/client/${params['client_id']}`;
         this.backInfo = 'Назад к клиенту';
       } else if (this.url.indexOf('measurements') !== -1) {
-        this.backUrl = `/measurements/${this.measurementService.measurementStatus}/${params['id']}`;
+        this.backUrl = `/measurements/${this.measurementService.measurementStatus}/${params['measurement_id']}`;
         this.backInfo = 'Назад к замеру';
       }
       this.id = params['id'];

@@ -17,7 +17,6 @@ import {OrderService} from '../../services/order.service';
 export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   measurement: DealMeasurement;
   id: number;
-  clientInfo = false;
   showEditButtons = false;
   client: Client;
   flag = false;
@@ -86,16 +85,6 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
         this.showEditButtons = this.utils.showEditButtons(String(this.measurement.deal_user.id));
         this.loadPage = false;
       });
-  }
-
-  openClientInfo(idClient: number) {
-    this.clientInfo = true;
-    this.client = this.measurement.clients[idClient];
-  }
-
-  closeClientInfo() {
-    this.clientInfo = false;
-    this.client = null;
   }
 
   sendComment(comment: string) {

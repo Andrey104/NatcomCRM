@@ -55,7 +55,6 @@ import {DiscountPipe} from './pipes/discount.pipe';
 import {PaymentPipe} from './pipes/payment.pipe';
 import {CommentComponent} from './comment/comment.component';
 import {MountStatusPipe} from './pipes/mountStatus.pipe';
-import {DealClientInfoComponent} from './deals/deal-client-info/deal-client-info.component';
 import {DealContractView} from './pipes/deal-contract-view.pipe';
 import {StageDealComponent} from './stage-deal/stage-deal.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
@@ -175,7 +174,6 @@ import { ChangeClientComponent } from './new-deal/change-client/change-client.co
     MountStatusPipe,
     StageDealComponent,
     StageMountStatusPipe,
-    DealClientInfoComponent,
     StageComponent,
     WorkerNamePipe,
     MeasurementStatusPipe,

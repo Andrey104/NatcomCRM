@@ -19,10 +19,6 @@ export class MeasurementService extends BaseApi {
     return this.get(`measurements/?page=${page.toString()}&${status}`);
   }
 
-  getMeasurements(idDeal): Observable<DealMeasurement[]> {
-    return this.get(`deals/${idDeal}/measurements/`);
-  }
-
   getMeasurement(idMeasurement): Observable<DealMeasurement> {
     return this.get(`measurements/${idMeasurement}`);
   }

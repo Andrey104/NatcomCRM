@@ -20,6 +20,7 @@ export class ChangeClientComponent implements OnChanges {
   phones: Phone[] = [];
   closable = true;
   successPhones = true;
+  isRequest = true;
   subOnChangeClient: Subscription;
   public mask = ['+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
 
@@ -40,6 +41,7 @@ export class ChangeClientComponent implements OnChanges {
   }
 
   submitForm() {
+    this.isRequest = false;
     const clientServer = this.getClientFromTheForm();
     this.subOnChangeClient = this.clientService.refreshClient(clientServer)
       .subscribe((client) => {
@@ -54,6 +56,7 @@ export class ChangeClientComponent implements OnChanges {
         } else {
           alert('Произошла ошибка');
         }
+        this.isRequest = true;
       }, () => {
         this.subOnChangeClient.unsubscribe();
       });
@@ -133,6 +136,7 @@ export class ChangeClientComponent implements OnChanges {
   }
 
   valueVariables() {
+    this.isRequest = true;
     this.form.reset();
     this.phones = [];
     this.successPhones = true;

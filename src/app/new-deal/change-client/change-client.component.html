@@ -87,8 +87,8 @@
         <button class="btn-dialog-cancel" (click)="onClose()">Отмена</button>
         <button class="btn-dialog-submit" type="submit"
                 [class.btn-dialog-submit]="form.valid"
-                [disabled]="(!form.valid||!successPhones)"
-                [class.btn-dialog-disabled]="(!form.valid||!successPhones)">OK
+                [disabled]="(!form.valid||!successPhones||!isRequest)"
+                [class.btn-dialog-disabled]="(!form.valid||!successPhones||!isRequest)">OK
         </button>
       </div>
     </form>
