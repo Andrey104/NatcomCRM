@@ -66,13 +66,20 @@ export class AddClientComponent implements OnInit {
   }
 
   addClient() {
+    console.log(this.form);
     let clientForServer = this.getClientFromTheForm();
     this.subOnAddClient = this.clientService.addClient(clientForServer)
       .subscribe((client) => {
         this.successClient.emit(client);
         this.onClose();
       }, (err) => {
-        console.log(err);
+        if (err.error.email) {
+          alert('Введен некоректный e-mail');
+        } else if (err.error.phones) {
+          alert('Введенный телефон уже существует в базе, проверьте правильность написания номера телефона');
+        } else {
+          alert('Произошла ошибка');
+        }
       }, () => {
         clientForServer = null;
         this.subOnAddClient.unsubscribe();
@@ -88,7 +95,13 @@ export class AddClientComponent implements OnInit {
         this.successClient.emit(client);
         this.onClose();
       }, (err) => {
-        console.log(err);
+        if (err.error.email) {
+          alert('Введен некоректный e-mail');
+        } else if (err.error.phones) {
+          alert('Введенный телефон уже существует в базе, проверьте правильность написания номера телефона');
+        } else {
+          alert('Произошла ошибка');
+        }
       }, () => {
         this.regularClient = null;
         this.subOnAddClient.unsubscribe();
@@ -200,6 +213,7 @@ export class AddClientComponent implements OnInit {
   }
 
   onClose() {
+    this.successPhones = false;
     this.phones = [];
     this.phones.push(new Phone('', null));
     this.visible = false;

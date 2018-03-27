@@ -53,7 +53,7 @@ const orders_routes: Routes = [
   {path: ':id', component: OrderDetailComponent},
   {path: ':id/to_deal', component: NewDealPageComponent},
   {path: ':id/client/:client_id', component: ClientInfoComponent},
-  {path: ':id/client/:client_id/client_deal/:client_deal_id', component: DealDetailComponent},
+  {path: ':id/client/:client_id/client_deal/:id', component: DealDetailComponent},
   {
     path: ':id/client/:client_id/client_deal/:client_deal_id/measurement/:measurement_id',
     component: DealMeasurementComponent

@@ -357,6 +357,11 @@
   height: 70px;
   margin-right: 10px;
 }
+
+.main-dialog-content {
+  overflow-y: auto;
+  height: 340px;
+}
 /*------------конец модального окна------------*/
 
 /* Когда контент пустой */

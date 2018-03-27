@@ -1,7 +1,11 @@
 .dialog {
   height: 460px;
-  overflow-y: auto;
   width: 560px;
+}
+
+.main-dialog-content {
+  overflow-y: auto;
+  height: 340px;
 }
 
 @media (min-width: 768px) {

@@ -5,87 +5,87 @@
   <h4>Добавить клиента</h4>
   <div class="row main-row">
     <form id="form" class="form" #form="ngForm" (ngSubmit)="submitForm()">
-      <div class="row main-row valign-wrapper">
-        <div class="col s10">
-          <div class="col s12">
-            <label for="client"
-                   data-error="wrong"
-                   data-success="right"
-                   class="required-area-dialog">ФИО
-            </label>
-            <input id="client"
-                   type="text"
-                   class="validate"
-                   ngModel
-                   name="clientName"
-                   required>
-          </div>
-        </div>
-        <div class="col s2 button-phone-block">
-          <button class="btn-dialog-submit" type="submit"
-                  (click)="addPhone()"
-                  [class.btn-dialog-submit]="successPhones"
-                  [disabled]="!successPhones"
-                  [class.btn-dialog-disabled]="!successPhones">
-            Добавить телефон
-          </button>
-        </div>
-      </div>
-      <div class="row main-row">
-        <div class="col s10">
-          <div class="col s12">
-            <label data-error="wrong" data-success="right">Email</label>
-            <input type="email"
-                   class="validate"
-                   ngModel
-                   name="email"
-                   email
-                   #email="ngModel">
-            <span *ngIf="email.invalid && email.touched">Некоректный email</span>
-          </div>
-        </div>
-      </div>
-      <div *ngFor="let phone of phones; let i = index" class="valign-wrapper">
-        <div class="col s12">
-          <div class="regular-client-container"
-               *ngIf="visibleRegularClient&&regularClientNumber===i"
-               (click)="addRegularClient()">
-            <div>ФИО: {{regularClient.fio}}</div>
-            <div>Email: {{regularClient.email | email}}
-            </div>
-            <div *ngFor="let regClientPhone of regularClient.phones; let i = index">
-              <div>{{i + 1}} телефон: {{regClientPhone.number | phoneFormat}}</div>
+      <div class="main-dialog-content">
+        <div class="row main-row valign-wrapper">
+          <div class="col s10">
+            <div class="col s12">
+              <label for="client"
+                     data-error="wrong"
+                     data-success="right"
+                     class="required-area-dialog">ФИО
+              </label>
+              <input id="client"
+                     type="text"
+                     class="validate"
+                     ngModel
+                     name="clientName"
+                     required>
             </div>
           </div>
-          <div class="row main-row valign-wrapper">
-            <div class="col s10 detail-col valign-wrapper">
-              <div class="col s12">
-                <label class="required-area-dialog">Номер телефона</label>
-                <input type="text"
-                       [ngClass]="{invalid: visibleRegularClient&&regularClientNumber===i}"
-                       class="validate"
-                       [textMask]="{mask: mask}"
-                       [value]="phone.number"
-                       (input)="phoneNumber(i, $event.target.value)">
+          <div class="col s2 button-phone-block">
+            <button class="btn-dialog-submit" type="submit"
+                    (click)="addPhone()"
+                    [class.btn-dialog-submit]="successPhones"
+                    [disabled]="!successPhones"
+                    [class.btn-dialog-disabled]="!successPhones">
+              Добавить телефон
+            </button>
+          </div>
+        </div>
+        <div class="row main-row">
+          <div class="col s10">
+            <div class="col s12">
+              <label data-error="wrong" data-success="right">Email</label>
+              <input type="email"
+                     class="validate"
+                     ngModel
+                     name="email"
+                     #email="ngModel">
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let phone of phones; let i = index" class="valign-wrapper">
+          <div class="col s12">
+            <div class="regular-client-container"
+                 *ngIf="visibleRegularClient&&regularClientNumber===i"
+                 (click)="addRegularClient()">
+              <div>ФИО: {{regularClient.fio}}</div>
+              <div>Email: {{regularClient.email | email}}
+              </div>
+              <div *ngFor="let regClientPhone of regularClient.phones; let i = index">
+                <div>{{i + 1}} телефон: {{regClientPhone.number | phoneFormat}}</div>
               </div>
             </div>
-            <div class="col s2 button-phone-block">
-              <button *ngIf="phones.length>1"
-                      class="btn-dialog-cancel remove-button"
-                      (click)="removePhone(i)">Удалить
-              </button>
+            <div class="row main-row valign-wrapper">
+              <div class="col s10 detail-col valign-wrapper">
+                <div class="col s12">
+                  <label class="required-area-dialog">Номер телефона</label>
+                  <input type="text"
+                         [ngClass]="{invalid: visibleRegularClient&&regularClientNumber===i}"
+                         class="validate"
+                         [textMask]="{mask: mask}"
+                         [value]="phone.number"
+                         (input)="phoneNumber(i, $event.target.value)">
+                </div>
+              </div>
+              <div class="col s2 button-phone-block">
+                <button *ngIf="phones.length>1"
+                        class="btn-dialog-cancel remove-button"
+                        (click)="removePhone(i)">Удалить
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="row main-row">
-            <div class="col s10 detail-col valign-wrapper">
-              <div class="col s12">
-                <label>Комментарий к телефону</label>
-                <textarea type="text"
-                          [value]="phone.comment"
-                          (input)="phoneComment(i, $event.target.value)"
-                          name="comment"
-                          class="text-comment-dialog">
+            <div class="row main-row">
+              <div class="col s10 detail-col valign-wrapper">
+                <div class="col s12">
+                  <label>Комментарий к телефону</label>
+                  <textarea type="text"
+                            [value]="phone.comment"
+                            (input)="phoneComment(i, $event.target.value)"
+                            name="comment"
+                            class="text-comment-dialog">
                 </textarea>
+                </div>
               </div>
             </div>
           </div>

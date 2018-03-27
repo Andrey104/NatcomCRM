@@ -51,6 +51,8 @@ export class ChangeClientComponent implements OnChanges {
           alert('Введен некоректный e-mail');
         } else if (err.error.phones) {
           alert('Введенный телефон уже существует в базе, проверьте правильность написания номера телефона');
+        } else {
+          alert('Произошла ошибка');
         }
       }, () => {
         this.subOnChangeClient.unsubscribe();
