@@ -15,23 +15,6 @@ i:hover + .back {
   opacity: 1;
 }
 
-.image-info {
-  min-width: 90px;
-  padding-left: 3%;
-}
-
-.image {
-  width: 80px;
-  height: 80px;
-  background: #ffa726;
-  text-align: center;
-  line-height: 80px;
-  font-size: 46px;
-  color: white;
-  border-radius: 50%;
-  margin-top: 50%;
-}
-
 .card-content {
   min-width: 80%;
 }

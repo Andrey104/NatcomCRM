@@ -122,6 +122,7 @@ import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-st
 import { ChangeClientComponent } from './new-deal/change-client/change-client.component';
 import { StageAddInstallerComponent } from './stage/dialogs/stage-add-installer/stage-add-installer.component';
 import { DealDialogClientInfoComponent } from './deals/dialogs/deal-dialog-client-info/deal-dialog-client-info.component';
+import { ClientDealComponent } from './client-deal/client-deal.component';
 
 
 @NgModule({
@@ -227,6 +228,7 @@ import { DealDialogClientInfoComponent } from './deals/dialogs/deal-dialog-clien
     ChangeClientComponent,
     StageAddInstallerComponent,
     DealDialogClientInfoComponent,
+    ClientDealComponent,
   ],
   imports: [
     BrowserModule,

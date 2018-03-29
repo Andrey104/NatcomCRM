@@ -25,36 +25,24 @@
         <div class="left-align email">
           <i class="tiny material-icons">email</i> {{client?.email | email}}
         </div>
-          <div class="left-align phone-info" *ngFor="let phone of client?.phones">
-            <div class="phone">
-              <i class="tiny material-icons">local_phone</i> {{phone?.number | phoneFormat}}
-            </div>
-            <div>{{phone?.comment}}</div>
+        <div class="left-align phone-info" *ngFor="let phone of client?.phones">
+          <div class="phone">
+            <i class="tiny material-icons">local_phone</i> {{phone?.number | phoneFormat}}
           </div>
+          <div>{{phone?.comment}}</div>
+        </div>
       </div>
     </div>
   </div>
-   <div class="col s8 grey lighten-3 scrollable-page">
-     <div class="col s10 offset-s1">
-       <div class="h-deals">Сделки</div>
+  <div class="col s8 grey lighten-3 scrollable-page">
+    <div class="col s10 offset-s1">
+      <div class="h-deals">Сделки</div>
       <div *ngFor="let deal of client?.deals">
-        <div class="card horizontal hoverable hover-element no-border" routerLink="client_deal/{{deal?.id}}">
-          <div class="icon image-info">
-            <div class="image center-align">{{deal?.company?.symbol}}</div>
-            <div class="center-align">{{deal?.offer}}</div>
-          </div>
-            <div class="card-content">
-              <div class="right-align"><i class="tiny material-icons icon">date_range</i> {{deal?.task_date | dateFormat: 'date'}} </div>
-               <h5>{{deal?.company?.name | companyName}}</h5>
-              <div><i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}</div>
-              <div><i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}</div>
-              <div class="right-align red-text">{{statusDeal(deal?.status)}}</div>
-            </div>
-        </div>
+        <app-client-deal [deal]="deal"></app-client-deal>
       </div>
-     </div>
+    </div>
   </div>
- </div>
+</div>
 <app-change-client [(visible)]="showChangeClientDialog"
                    [client]="changeClient"
                    (successChangeClient)="successChangeClient($event)"></app-change-client>

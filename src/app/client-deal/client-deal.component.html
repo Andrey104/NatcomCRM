@@ -1,0 +1,13 @@
+<div class="card horizontal hoverable hover-element no-border" routerLink="{{forwardUrl}}">
+  <div class="icon image-info">
+    <div class="image center-align">{{deal?.company?.symbol}}</div>
+    <div class="center-align">{{deal?.offer}}</div>
+  </div>
+  <div class="card-content">
+    <div class="right-align"><i class="tiny material-icons icon">date_range</i> {{deal?.task_date | dateFormat: 'date'}} </div>
+    <h5>{{deal?.company?.name | companyName}}</h5>
+    <div><i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}</div>
+    <div><i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}</div>
+    <!--<div class="right-align red-text">{{statusDeal(deal?.status)}}</div>-->
+  </div>
+</div>
