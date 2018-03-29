@@ -26,6 +26,7 @@ export class AddClientComponent implements OnInit {
   regularClientNumber: number;
   visibleRegularClient = false;
   isRequest = true;
+  modalHeader = 'Добавить клиента';
   public mask = ['+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
 
   constructor(private clientService: ClientService) {
@@ -144,6 +145,7 @@ export class AddClientComponent implements OnInit {
             if (clientPage.results[0] !== undefined) {
               this.regularClient = clientPage.results[0];
               this.regularClientNumber = phoneId;
+              this.modalHeader = 'Редактировать клиента';
               this.visibleRegularClient = true;
               this.successPhones = false;
             }

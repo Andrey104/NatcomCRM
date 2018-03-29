@@ -85,7 +85,7 @@ export class UtilsService {
         break;
       }
       case 2: {
-        ourStatus = 'Контракт не заключен';
+        ourStatus = 'Перерасчет';
         break;
       }
       case 3: {

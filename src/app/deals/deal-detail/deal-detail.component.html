@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="!loadPage" class="col s12 detail-col scrollable-page" id="page">
   <div class="row main-row valign-wrapper">
-    <div class="col s5 valign-wrapper detail-col">
+    <div class="col s8 valign-wrapper detail-col">
       <div *ngIf="backUrl" routerLink="{{backUrl}}"
            class="row-back valign-wrapper hover-element no-border">
         <i class="small material-icons no-border icon-arrow-back">
@@ -14,16 +14,7 @@
       <img class="avatar" src="{{deal?.user.type | imageType}}">
       <div>{{deal?.user.first_name}} {{deal?.user.last_name}}</div>
     </div>
-    <div class="col s2">{{getDealStatus(deal?.status)}}</div>
-    <div [style.color]="deal?.contract ? 'green' : 'red'" class="col s2">
-      {{deal?.contract | contract}}
-    </div>
-    <div class="col s3 valign-wrapper">
-      <i class="tiny material-icons icon date-icon">date_range</i>
-      <div class="deal-date">
-        <div>Дата события: {{deal?.task_date | dateFormat: 'date'}}</div>
-      </div>
-    </div>
+    <div class="col s4">{{getDealStatus(deal?.status)}}</div>
   </div>
   <div class="divider"></div>
   <div class="row main-info">
@@ -39,6 +30,13 @@
         </div>
       </div>
       <div class="deal-info">
+        <div [style.color]="deal?.contract ? 'green' : 'red'">
+          {{deal?.contract | contract}}
+        </div>
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">date_range</i>
+          <span class="task-date">{{deal?.task_date | dateFormat: 'date'}}</span>
+        </div>
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}
         </div>
