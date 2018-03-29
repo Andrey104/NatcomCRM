@@ -273,6 +273,7 @@
                 (successClient)="successDealClient($event)"></app-add-client>
 <app-deal-dialog-client-info [(visible)]="showClientDialog"
                              [client]="clientInfo"
+                             [showEditButtons]="showEditButtons"
                              (successClientInfoDialog)="successClientInfoDialog($event)">
 </app-deal-dialog-client-info>
 <app-change-client [(visible)]="showChangeClientDialog"

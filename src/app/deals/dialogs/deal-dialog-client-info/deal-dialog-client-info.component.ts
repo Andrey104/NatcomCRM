@@ -11,6 +11,7 @@ import {Phone} from '../../../models/phone';
 export class DealDialogClientInfoComponent implements OnChanges {
   @Input() visible: boolean;
   @Input() client: Client;
+  @Input() showEditButtons: boolean;
   @Output() successClientInfoDialog = new EventEmitter<Client>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('form') form: NgForm;

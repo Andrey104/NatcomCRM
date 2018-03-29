@@ -20,11 +20,14 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   companies: Company[] = [];
   clients: Client[] = [];
   changeClient: Client = null;
+  clientInfo: Client = null;
   changeClientNumber: number;
   subOnCompanies: Subscription;
   subOnDeal: Subscription;
   subOnMeasurement: Subscription;
+  showEditButtons = true;
   showDialog = false;
+  showClientDialog = false;
   showChangeClientDialog = false;
   defaultCompany: number;
   visibleMeasurement = {show: false, icon: 'add_circle_outline', message: 'Добавить замер'};
@@ -131,16 +134,24 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
     this.clients.push(client);
   }
 
-  changeClientDialog(clientNumber: number) {
+  clientInfoDialog(clientNumber: number) {
     this.changeClientNumber = clientNumber;
-    this.changeClient = JSON.parse(JSON.stringify(this.clients[clientNumber]));
-    this.showChangeClientDialog = !this.showChangeClientDialog;
+    this.showClientDialog = !this.showClientDialog;
+    this.clientInfo = JSON.parse(JSON.stringify(this.clients[clientNumber]));
+  }
+
+  successClientInfoDialog(client: Client) {
+    if (client !== null) {
+      this.changeClient = client;
+      this.showChangeClientDialog = true;
+    }
+    this.clientInfo = null;
   }
 
   successChangeClient(client: Client) {
-    console.log(client);
     if (client !== null) {
       this.clients[this.changeClientNumber] = client;
+      this.clientInfoDialog(this.changeClientNumber);
     }
     this.changeClient = null;
   }

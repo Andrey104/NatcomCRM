@@ -34,7 +34,10 @@
             </div>
           </div>
           <div class="button-action-container">
-            <button class="btn-dialog-submit" type="submit">Редактировать</button>
+            <button class="btn-dialog-submit" type="submit"
+                    [class.btn-dialog-submit]="form.valid"
+                    [disabled]="(!form.valid||!showEditButtons)"
+                    [class.btn-dialog-disabled]="(!form.valid||!showEditButtons)">Редактировать</button>
             <button routerLink="client/{{client?.id}}"
                     class="btn-dialog-more-info client-btn">Подробнее
             </button>
