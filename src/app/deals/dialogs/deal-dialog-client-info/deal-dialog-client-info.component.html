@@ -1,0 +1,50 @@
+<div *ngIf="visible" class="dialog">
+  <i *ngIf="closable" class="material-icons hover-element dialog-close-btn"
+     (click)="onClose()">close
+  </i>
+  <h4>Информация о клиенте</h4>
+  <div class="row main-row">
+    <form id="form" class="form" #form="ngForm" (ngSubmit)="submitForm()">
+      <div class="main-dialog-content">
+        <div class="row main-row valign-wrapper">
+          <div class="col s12">
+            <span class="valign-wrapper">
+              <i class="tiny material-icons icon">person</i>{{client?.fio}}
+            </span>
+          </div>
+        </div>
+        <div class="row main-row">
+          <div class="col s12">
+            <span class="valign-wrapper">
+              <i class="tiny material-icons icon">email</i>{{client?.email}}
+            </span>
+          </div>
+        </div>
+        <div>
+          <div class="phones-container">
+            <div *ngFor="let phone of phones; let i = index">
+              <div class="phone-info">
+                <div class="valign-wrapper">
+                  <i class="tiny material-icons icon">local_phone</i>{{phone?.number}}
+                </div>
+                <div class="valign-wrapper">
+                  <i class="tiny material-icons icon">comment</i>{{phone?.comment}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="button-action-container">
+            <button class="btn-dialog-submit" type="submit">Редактировать</button>
+            <button routerLink="client/{{client?.id}}"
+                    class="btn-dialog-more-info client-btn">Подробнее
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="button-container">
+        <button class="client-btn btn-dialog-ok" (click)="onClose()">Ок</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="visible" class="overlay-dialog" (click)="onClose()"></div>

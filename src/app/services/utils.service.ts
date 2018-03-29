@@ -553,13 +553,4 @@ export class UtilsService {
 
     return type + cause + comment;
   }
-
-  getUserData() {
-    let user: { type: number, id_manager: number };
-    user = {
-      type: Number(localStorage.getItem('user_type')),
-      id_manager: Number(localStorage.getItem('id_manager'))
-    };
-    return user;
-  }
 }

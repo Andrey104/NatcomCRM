@@ -16,7 +16,6 @@ export class ChangeClientComponent implements OnChanges {
   @Output() successChangeClient = new EventEmitter<Client>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild('form') form: NgForm;
-  clientCopy: Client;
   phones: Phone[] = [];
   closable = true;
   successPhones = true;
@@ -30,7 +29,6 @@ export class ChangeClientComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.client !== null) {
-      this.clientCopy = JSON.parse(JSON.stringify(this.client));
       for (const phone of this.client.phones) {
         this.phones.push(phone);
       }
@@ -145,9 +143,9 @@ export class ChangeClientComponent implements OnChanges {
 
   onClose() {
     this.valueVariables();
-    this.successChangeClient.emit(this.clientCopy);
-    this.visibleChange.emit(this.visible);
     this.client = null;
+    this.successChangeClient.emit(this.client);
+    this.visibleChange.emit(this.visible);
   }
 
 }

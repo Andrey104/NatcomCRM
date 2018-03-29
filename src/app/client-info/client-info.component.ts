@@ -3,10 +3,7 @@ import {Client} from '../models/clients/client';
 import {ClientService} from '../services/client.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {Phone} from '../models/phone';
-import {OrderAction} from '../models/orders/order_action';
 import {UtilsService} from '../services/utils.service';
-import {Location} from '@angular/common';
 import {OrderService} from '../services/order.service';
 
 @Component({
@@ -57,7 +54,9 @@ export class ClientInfoComponent implements OnInit {
   }
 
   successChangeClient(client: Client) {
-    this.client = client;
+    if (client !== null) {
+      this.client = client;
+    }
     this.changeClient = null;
   }
 

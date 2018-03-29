@@ -138,7 +138,10 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   }
 
   successChangeClient(client: Client) {
-    this.clients[this.changeClientNumber] = client;
+    console.log(client);
+    if (client !== null) {
+      this.clients[this.changeClientNumber] = client;
+    }
     this.changeClient = null;
   }
 

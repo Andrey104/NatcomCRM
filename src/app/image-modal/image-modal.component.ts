@@ -17,7 +17,6 @@ export class ImageModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.visible);
   }
 
   onClose() {

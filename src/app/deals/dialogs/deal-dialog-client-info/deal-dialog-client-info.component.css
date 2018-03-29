@@ -1,0 +1,89 @@
+.dialog {
+  height: 400px;
+  width: 520px;
+}
+
+.main-dialog-content {
+  overflow-y: auto;
+  height: 340px;
+}
+
+@media (min-width: 768px) {
+  .dialog {
+    top: calc(50% - 200px);
+  }
+}
+
+h4 {
+  margin: 5px auto;
+  padding-right: 40px;
+  padding-left: 40px;
+  text-align: center;
+}
+
+.main-dialog-content {
+  margin-top: 10px;
+  overflow-y: auto;
+  height: 270px;
+  padding-left: 10px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.phones-container {
+  padding-left: 10px;
+  width: 370px;
+  float: left;
+}
+
+.phone-info {
+  margin-top: 10px;
+}
+
+.button-action-container {
+  width: 140px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-dialog-ok {
+  width: 80px;
+  right: 20px;
+  top: 35px;
+}
+
+.btn-dialog-more-info {
+  height: 30px;
+  width: 111px;
+  left: 5px;
+  top: 50px;
+  right: 10px;
+  bottom: 10px;
+}
+
+.btn-dialog-submit {
+  top: 0;
+  left: 5px;
+  height: 30px;
+  width: 111px;
+}
+
+.client-btn {
+  border-radius: 5px;
+  border: 0;
+  background-color: #5c6b96;
+  box-shadow: 0 0 4px rgba(0, 0, 0, .4);
+  color: white;
+  position: absolute;
+}
+
+.btn-dialog-more-info:hover {
+  box-shadow: inset 0 0 10px rgba(52, 52, 52, 0.4), 0 0 10px rgba(0, 0, 0, .1);
+}
+
+.btn-dialog-more-info:focus{
+  background-color: #5c6b96;
+}

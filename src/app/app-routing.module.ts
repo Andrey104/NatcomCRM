@@ -44,6 +44,7 @@ const mounts_routes: Routes = [
 
 const deals_routes: Routes = [
   {path: ':id', component: DealDetailComponent},
+  {path: ':id/client/:client_id', component: ClientInfoComponent},
   {path: ':id/measurement/:measurement_id', component: DealMeasurementComponent},
   {path: ':id/mount/:mount_id', component: DealMountComponent},
   {path: ':id/mount/:mount_id/stage/:stage_id', component: StageComponent},

@@ -121,6 +121,7 @@ import {TextMaskModule} from 'angular2-text-mask';
 import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-stage/mount-dialog-add-stage';
 import { ChangeClientComponent } from './new-deal/change-client/change-client.component';
 import { StageAddInstallerComponent } from './stage/dialogs/stage-add-installer/stage-add-installer.component';
+import { DealDialogClientInfoComponent } from './deals/dialogs/deal-dialog-client-info/deal-dialog-client-info.component';
 
 
 @NgModule({
@@ -225,6 +226,7 @@ import { StageAddInstallerComponent } from './stage/dialogs/stage-add-installer/
     ReviewComponent,
     ChangeClientComponent,
     StageAddInstallerComponent,
+    DealDialogClientInfoComponent,
   ],
   imports: [
     BrowserModule,
