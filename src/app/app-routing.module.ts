@@ -79,6 +79,7 @@ const pages_routes: Routes = [
   {path: 'measurements/:status', component: MeasurementPageComponent, children: measurements_routes},
   {path: 'mounts/:status', component: MountPageComponent, children: mounts_routes},
   {path: 'new_deal', component: NewDealPageComponent},
+  {path: 'new_deal/client/:client_id', component: ClientInfoComponent},
   {path: 'user', component: UserInfoComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard], children: admin_routes},
   {path: '', redirectTo: 'user', pathMatch: 'full'}

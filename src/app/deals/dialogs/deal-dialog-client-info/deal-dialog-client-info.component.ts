@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Client} from '../../../models/clients/client';
 import {Phone} from '../../../models/phone';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'app-deal-dialog-client-info',
@@ -18,8 +19,12 @@ export class DealDialogClientInfoComponent implements OnChanges {
   closable = true;
   clientCopy: Client;
   phones: Phone[] = [];
+  // forwardUrl: string;
+  url: string;
 
-  constructor() { }
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.url = this.document.location.href;
+  }
 
   ngOnChanges() {
     if (this.client !== null) {
@@ -37,6 +42,12 @@ export class DealDialogClientInfoComponent implements OnChanges {
     this.resetValue();
     this.successClientInfoDialog.emit(this.clientCopy);
   }
+
+  // getForwardUrl() {
+  //   if (this.url.indexOf('deals')) {
+  //     this.forwardUrl =
+  //   }
+  // }
 
   phoneMaskOn(phoneNumber: string) {
     return '+7(' + phoneNumber.slice(0, 3) + ') ' + phoneNumber.slice(3, 6) +
