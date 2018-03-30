@@ -4,23 +4,21 @@ import {NgForm} from '@angular/forms';
 import {StageMountService} from '../../../services/stage-mount.service';
 
 @Component({
-  selector: 'app-stage-dialog-transfer',
-  templateUrl: './stage-dialog-transfer.html',
-  styleUrls: ['./stage-dialog-transfer.css'],
+  selector: 'app-dialog-cost',
+  templateUrl: './dialog-cost.html',
+  styleUrls: ['./dialog-cost.css'],
 })
-
-export class StageDialogTransferComponent implements OnInit {
+export class DialogCostComponent implements OnInit {
   id;
   @Input() closable = true;
-  @Input() stage;
+  @Input() mount;
   @Input() visible: boolean;
   @ViewChild('form') form: NgForm;
-  @Output() successStageTransfer = new EventEmitter();
+  @Output() successCost = new EventEmitter();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   isSubmitted = false;
   isRequest = false;
   formData = {};
-  causes = [1, 2];
 
   constructor(private activatedRoute: ActivatedRoute,
               private stageService: StageMountService) {
@@ -42,24 +40,19 @@ export class StageDialogTransferComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    this.stageService.transferStage(this.id, this.form.form.value.calendar, this.form.form.value.comment, this.form.form.value.cause)
+    console.log(this.form.form.value.sum);
+    this.stageService.addCost(this.id, this.form.form.value.sum,
+      this.form.form.value.comment)
       .subscribe((result) => {
         this.isRequest = false;
         this.visibleChange.emit(this.visible);
-        this.successStageTransfer.emit(result);
+        this.successCost.emit(result);
         this.close();
       }, (error) => {
-        this.isRequest = false;
-        if (error.status === 200) {
-          console.log('error');
-          this.visibleChange.emit(this.visible);
-          this.successStageTransfer.emit();
-          this.close();
-        } else {
-          alert('Произошла ошибка');
-        }
+        alert('Произошла ошибка');
       });
   }
+
 }
 
 

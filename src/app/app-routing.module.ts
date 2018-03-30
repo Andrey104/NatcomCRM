@@ -15,9 +15,7 @@ import {OrderDetailComponent} from './orders/order-detail/order-detail.component
 import {DealDetailComponent} from './deals/deal-detail/deal-detail.component';
 import {DealMeasurementComponent} from './deals/deal-measurement/deal-measurement.component';
 import {DealMountComponent} from './deals/deal-mount/deal-mount.component';
-import {StageComponent} from './stage/stage.component';
 import {MountPageComponent} from './mounts/mount-page/mount-page.component';
-import {MountDetailComponent} from './mounts/mount-detail/mount-detail.component';
 import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
 import {NewDealPageComponent} from './new-deal/new-deal-page/new-deal-page.component';
 import {InstallersComponent} from './settings-page/installers/installers.component';
@@ -39,11 +37,9 @@ const measurements_routes: Routes = [
 ];
 
 const mounts_routes: Routes = [
-  {path: ':mount_id', component: MountDetailComponent},
+  {path: ':mount_id', component: DealMountComponent},
   {path: ':mount_id/deal/:id', component: DealDetailComponent},
   {path: ':mount_id/deal/:id/mount/:mount_id', component: DealMountComponent},
-  {path: ':mount_id/deal/:id/mount/:mount_id/stage/:stage_id', component: StageComponent},
-  {path: ':mount_id/stage/:stage_id', component: StageComponent}
 ];
 
 const deals_routes: Routes = [
@@ -51,7 +47,6 @@ const deals_routes: Routes = [
   {path: ':id/client/:client_id', component: ClientInfoComponent},
   {path: ':id/measurement/:measurement_id', component: DealMeasurementComponent},
   {path: ':id/mount/:mount_id', component: DealMountComponent},
-  {path: ':id/mount/:mount_id/stage/:stage_id', component: StageComponent},
 ];
 
 const orders_routes: Routes = [

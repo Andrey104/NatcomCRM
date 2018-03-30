@@ -131,6 +131,7 @@ export class DealPageComponent implements OnInit {
     if (c.needSubscribe === true) {
       const modal = c.updateList
         .subscribe(next => {
+          console.log(c + 'в сделке');
           if (next) {
             this.dealPage = [];
             if (this.inputText === '') {
