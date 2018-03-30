@@ -59,6 +59,8 @@ export class ClientInfoComponent implements OnInit {
     } else if (this.url.indexOf('deals') !== -1) {
       const dealStatus = this.dealService.statusDeal;
       this.backUrl = `/deals/${dealStatus}/${this.id.toString()}`;
+    } else if (this.url.indexOf('new_deal')) {
+      this.backUrl = `/new_deal`;
     }
   }
 

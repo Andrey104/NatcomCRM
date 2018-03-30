@@ -8,10 +8,13 @@ import {BaseApi} from '../core/base-api';
 import {CompanyPage} from '../models/company/company-page';
 import {NewDeal} from '../models/deal/new_deal';
 import {Client} from '../models/clients/client';
+import {Company} from '../models/company';
 
 
 @Injectable()
 export class DealService extends BaseApi {
+  deal: NewDeal;
+  companies: Company[];
   statusDeal;
 
   constructor(public http: HttpClient) {
@@ -55,14 +58,8 @@ export class DealService extends BaseApi {
     return this.post(`deals/${idDeal}/reject/`, {cause: cause, comment: comment});
   }
 
-  dealPayment(idDeal: number, nonCash: string, date: string, receiver: string, sum: number): Observable<Object> {
-    let non_cash: boolean;
-    if (nonCash == '0') {
-      non_cash = false;
-    } else {
-      non_cash = true;
-    }
-    return this.post(`deals/${idDeal}/payment/`, {sum: sum, date: date, receiver: receiver, non_cash: non_cash});
+  dealPayment(idDeal: number, payment_type: number, date: string, receiver: string, sum: number): Observable<Object> {
+    return this.post(`deals/${idDeal}/payment/`, {sum: sum, date: date, receiver: receiver, payment_type: payment_type});
   }
 
   dealDiscount(idDeal: number, after: number, comment: string): Observable<Object> {

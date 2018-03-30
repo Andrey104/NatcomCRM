@@ -23,4 +23,5 @@ export class InputSearchComponent implements OnChanges {
   textOut(text: string) {
     this.out.emit(text);
   }
+
 }

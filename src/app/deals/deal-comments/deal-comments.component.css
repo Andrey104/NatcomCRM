@@ -3,12 +3,15 @@
   width: 60px;
   float: left;
 }
+
 .comment-content {
   padding-top: 10px;
 }
+
 .comment-name {
   float: left;
 }
+
 .comment-date {
   overflow: hidden;
   padding-left: 7px;
@@ -18,11 +21,12 @@
 .text {
   overflow: hidden;
 }
+
 pre {
   line-height: 1.8;
   font-family: "Roboto", sans-serif;
   font-weight: normal;
-  color: rgba(0,0,0,0.87);
+  color: rgba(0, 0, 0, 0.87);
   word-wrap: break-word;
   overflow-x: hidden;
   white-space: pre-wrap;

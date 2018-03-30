@@ -40,8 +40,7 @@ export class DealDialogPaymentComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    console.log(this.form.form.value.sum);
-    this.dealService.dealPayment(this.id, this.form.form.value.payment,
+    this.dealService.dealPayment(this.id, Number(this.form.form.value.payment),
       this.form.form.value.calendar,
       this.form.form.value.receiver, Number(this.form.form.value.sum))
       .subscribe((result) => {
@@ -50,6 +49,7 @@ export class DealDialogPaymentComponent implements OnInit {
         this.successDealPayment.emit(result);
         this.close();
       }, (error) => {
+        console.log(error);
         alert('Произошла ошибка');
       });
   }

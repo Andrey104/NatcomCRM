@@ -89,6 +89,7 @@
 /*Ограничение текста в родительском контейнере*/
 .text {
   word-wrap: break-word;
+  overflow-x: hidden;
 }
 
 .no-scroll {

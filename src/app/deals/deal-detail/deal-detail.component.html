@@ -89,7 +89,7 @@
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Замеры</span>
         <i *ngIf="!(deal?.status == 4 || deal?.status == 5 || deal?.status == 1)&&showEditButtons"
-           (click)="showMeasurementDialog = !showMeasurementDialog"
+           (click)="showMeasurementModal()"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
     </div>
@@ -151,7 +151,7 @@
       <div class="col s12 offset-s1 no-information">Нет перерасчетов</div>
     </div>
     <div *ngIf="deal?.discounts.length!==0" class="row">
-      <div *ngFor="let discount of deal?.discounts" class="col s10 offset-s1">
+      <div *ngFor="let discount of deal?.discounts" class="col s10 offset-s1 text">
         <p>{{discount.auto_date | dateFormat: 'fullDate'}} {{discount | discount}}</p>
       </div>
     </div>
@@ -171,7 +171,7 @@
       <div class="col s12 offset-s1 no-information">Нет оплат</div>
     </div>
     <div *ngIf="deal?.payments.length!==0" class="row">
-      <div *ngFor="let payment of deal?.payments" class="col s10 offset-s1">
+      <div *ngFor="let payment of deal?.payments" class="col s10 offset-s1 text">
         <p>{{payment | payment}} {{payment.date | dateFormat: 'date'}}</p>
       </div>
     </div>
@@ -182,13 +182,13 @@
     </div>
     <div class="col s12 offset-s1">История заказа:</div>
     <div class="row">
-      <div *ngFor="let action of deal?.order_actions" class="col s10 offset-s1">
+      <div *ngFor="let action of deal?.order_actions" class="col s10 offset-s1 text">
         <p>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'deal'}}</p>
       </div>
     </div>
     <div class="col s12 offset-s1">История сделки:</div>
     <div class="row">
-      <div *ngFor="let action of deal?.actions" class="col s10 offset-s1">
+      <div *ngFor="let action of deal?.actions" class="col s10 offset-s1 text">
         <p>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'deal'}}</p>
       </div>
     </div>

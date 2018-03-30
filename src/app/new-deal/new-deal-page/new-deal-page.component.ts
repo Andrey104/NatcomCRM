@@ -53,6 +53,16 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
     } else {
       this.subscribeOnGetCompanies();
     }
+  // else if (this.dealService.deal) {
+  //     this.companies = this.dealService.companies;
+  //     this.defaultCompany = this.dealService.deal.company;
+  //     this.clients = this.dealService.deal.clients;
+  //     this.form.form.patchValue({
+  //       address: this.dealService.deal.address,
+  //       description: this.dealService.deal.description
+  //     });
+  //     this.clients = this.dealService.deal.clients;
+  //   }
   }
 
   getOrder() {
@@ -101,38 +111,48 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
         this.visibleMeasurement.icon = 'add_circle_outline';
         this.visibleMeasurement.message = 'Добавить замер';
       }
+    } else {
+      alert('Нельзя добавить замер в сделку без адреса. Укажите адрес.');
     }
   }
 
-  submitForm(form: NgForm) {
+  submitForm() {
     this.isRequest = false;
-    const companyId = Number(form.form.value.company);
-    const payment = Number(form.form.value.payment);
-    const address = form.form.value.address;
-    const description = form.form.value.description;
-    const comment = form.form.value.addressComment;
-    const date = form.form.value.calendar;
-    const commentTime = form.form.value.commentTime;
-    const descriptionMeasurement = form.form.value.descriptionMeasurement;
-    const newDeal = new NewDeal(companyId, payment, description, address, comment, this.clients);
+    const newDeal = this.getNewDeal();
     this.subOnDeal = this.dealService.newDeal(newDeal)
       .subscribe((deal) => {
         this.dealId = deal.id;
-        if (deal !== null && date !== undefined && commentTime !== undefined) {
-          const newMeasurement = new NewMeasurement(deal.payment_type, date, commentTime, descriptionMeasurement);
+        const newMeasurement = this.getNewMeasurement(deal.payment_type);
+        if (deal !== null && newMeasurement.date !== undefined) {
+          console.log(newMeasurement);
           this.subOnMeasurement =
             this.measurementService.newMeasurement(deal.id, newMeasurement)
               .subscribe((measurement) => {
                 this.showMeasurement();
-                this.unSub();
-                this.router.navigate(['/deals/all/' + this.dealId.toString()]);
+                this.resetForm();
               });
         } else {
-          this.unSub();
-          this.router.navigate(['/deals/all/' + this.dealId.toString()]);
+          this.resetForm();
         }
       });
-    form.reset();
+  }
+
+  getNewDeal(): NewDeal {
+    const companyId = Number(this.form.form.value.company);
+    const payment = Number(this.form.form.value.payment);
+    const address = this.form.form.value.address;
+    const description = this.form.form.value.description;
+    const comment = this.form.form.value.addressComment;
+    const newDeal = new NewDeal(companyId, payment, description, address, comment, this.clients);
+    return newDeal;
+  }
+
+  getNewMeasurement(paymentType: number): NewMeasurement {
+    const date = this.form.form.value.calendar;
+    const commentTime = this.form.form.value.commentTime;
+    const descriptionMeasurement = this.form.form.value.descriptionMeasurement;
+    const newMeasurement = new NewMeasurement(paymentType, date, commentTime, descriptionMeasurement);
+    return newMeasurement;
   }
 
   addNewClient(client: Client) {
@@ -140,6 +160,8 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   }
 
   clientInfoDialog(clientNumber: number) {
+    this.dealService.companies = this.companies;
+    this.dealService.deal = this.getNewDeal();
     this.changeClientNumber = clientNumber;
     this.showClientDialog = !this.showClientDialog;
     this.clientInfo = JSON.parse(JSON.stringify(this.clients[clientNumber]));
@@ -159,6 +181,12 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
       this.clientInfoDialog(this.changeClientNumber);
     }
     this.changeClient = null;
+  }
+
+  resetForm() {
+    this.unSub();
+    this.form.reset();
+    this.router.navigate(['/deals/all/' + this.dealId.toString()]);
   }
 
   unSub() {

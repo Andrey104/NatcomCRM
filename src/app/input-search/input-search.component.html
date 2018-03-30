@@ -1,6 +1,9 @@
 <div class="col s3 input-field white">
-  <div class="col s12 center-align order-status">
-    <span>{{statusName}}</span>
+  <div class="col s12 order-status">
+    <span class="col s5">{{statusName}}</span>
+    <input type="date"
+           class="col s7 detail-col browser-default"
+           (input)="textOut($event.target.value)">
   </div>
   <input #input class="col s12" type="search" (input)="textOut($event.target.value)">
 </div>

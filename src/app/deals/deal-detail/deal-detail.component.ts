@@ -91,6 +91,17 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     this.updateList.next(true);
   }
 
+  showMeasurementModal() {
+    if (this.deal.address !== null) {
+      this.showMeasurementDialog = !this.showMeasurementDialog;
+    } else {
+      const answer = confirm('Замер не может быть добавлен без адреса. Хотите добавить адрес к сделке?');
+      if (answer) {
+        this.showEditDialog = !this.showEditDialog;
+      }
+    }
+  }
+
   successMeasurementAdded(measurement: DealMeasurement) {
     this.loadPage = true;
     this.getDealById();

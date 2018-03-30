@@ -18,6 +18,8 @@ export class MeasurementPageComponent implements OnInit {
   status: { statusName: string, statusUrl: string };
   term$ = new Subject<string>();
   inputText = '';
+  date = '';
+  pattern = /\d{4}-\d{2}-\d{2}/;
 
   constructor(private measurementService: MeasurementService,
               private activatedRoute: ActivatedRoute,
@@ -61,7 +63,6 @@ export class MeasurementPageComponent implements OnInit {
       .distinctUntilChanged()
       .subscribe(
         (term) => {
-          this.inputText = term;
           this.search(term);
         }
       );
@@ -76,10 +77,17 @@ export class MeasurementPageComponent implements OnInit {
   }
 
   search(text: string) {
-    if (text !== '') {
+    if (text.match(this.pattern) !== null) {
+      this.date = text;
+    } else {
+      this.inputText = text;
+    }
+    if (this.date !== '' || this.inputText !== '') {
       this.load = true;
       this.page = 1;
-      this.measurementService.getFilterMeasurements(this.page, text)
+      const params = this.getParams();
+      console.log(params);
+      this.measurementService.getFilterMeasurements(this.page, params)
         .subscribe((measurementPage) => {
             this.measurements = measurementPage.results;
             if (measurementPage.next === null) {
@@ -94,6 +102,18 @@ export class MeasurementPageComponent implements OnInit {
     } else {
       this.showMeasurements();
     }
+  }
+
+  getParams(): string {
+    let params: string;
+    if (this.inputText !== '' && this.date !== '') {
+      params = `text=${this.inputText}&text=${this.date}`;
+    } else if (this.inputText !== '') {
+      params = `text=${this.inputText}`;
+    } else if (this.date !== '') {
+      params = `text=${this.date}`;
+    }
+    return params;
   }
 
   nextPage() {
