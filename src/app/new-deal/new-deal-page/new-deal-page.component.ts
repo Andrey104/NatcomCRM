@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DealService} from '../../services/deal.service';
 import {Company} from '../../models/company';
 import {Subscription} from 'rxjs/Subscription';
@@ -10,6 +10,7 @@ import {OrderResult} from '../../models/orders/order_result';
 import {Client} from '../../models/clients/client';
 import {NewDeal} from '../../models/deal/new_deal';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NewMeasurement} from '../../models/measurement/new-measurement';
 
 @Component({
   selector: 'app-new-deal-page',
@@ -17,6 +18,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./new-deal-page.component.css']
 })
 export class NewDealPageComponent implements OnInit, OnDestroy {
+  @ViewChild('form') form: NgForm;
   companies: Company[] = [];
   clients: Client[] = [];
   changeClient: Client = null;
@@ -90,20 +92,22 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   }
 
   showMeasurement() {
-    this.visibleMeasurement.show = !this.visibleMeasurement.show;
-    if (this.visibleMeasurement.icon === 'add_circle_outline') {
-      this.visibleMeasurement.icon = 'remove_circle_outline';
-      this.visibleMeasurement.message = 'Удалить замер';
-    } else {
-      this.visibleMeasurement.icon = 'add_circle_outline';
-      this.visibleMeasurement.message = 'Добавить замер';
+    if (this.form.form.value.address !== '') {
+      this.visibleMeasurement.show = !this.visibleMeasurement.show;
+      if (this.visibleMeasurement.icon === 'add_circle_outline') {
+        this.visibleMeasurement.icon = 'remove_circle_outline';
+        this.visibleMeasurement.message = 'Удалить замер';
+      } else {
+        this.visibleMeasurement.icon = 'add_circle_outline';
+        this.visibleMeasurement.message = 'Добавить замер';
+      }
     }
   }
 
   submitForm(form: NgForm) {
     this.isRequest = false;
     const companyId = Number(form.form.value.company);
-    const payment = Boolean(form.form.value.payment);
+    const payment = Number(form.form.value.payment);
     const address = form.form.value.address;
     const description = form.form.value.description;
     const comment = form.form.value.addressComment;
@@ -115,8 +119,9 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
       .subscribe((deal) => {
         this.dealId = deal.id;
         if (deal !== null && date !== undefined && commentTime !== undefined) {
+          const newMeasurement = new NewMeasurement(deal.payment_type, date, commentTime, descriptionMeasurement);
           this.subOnMeasurement =
-            this.measurementService.newMeasurement(deal.id, deal.non_cash, date, commentTime, descriptionMeasurement)
+            this.measurementService.newMeasurement(deal.id, newMeasurement)
               .subscribe((measurement) => {
                 this.showMeasurement();
                 this.unSub();

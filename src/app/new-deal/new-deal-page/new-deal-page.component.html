@@ -20,8 +20,9 @@
           <select class="browser-default"
                   ngModel
                   name="payment">
-            <option value="0">Наличными</option>
-            <option value="1">Безналичный</option>
+            <option value="1">Безналичная оплата</option>
+            <option value="2">Наличная оплата</option>
+            <option value="3">Терминал</option>
           </select>
         </div>
         <div class="col s12">
@@ -32,11 +33,10 @@
           </textarea>
         </div>
         <div class="col s12">
-          <label class="required-area-dialog">Адрес</label>
+          <label>Адрес</label>
           <textarea class="text-comment-dialog"
                     ngModel
-                    name="address"
-                    required>
+                    name="address">
           </textarea>
         </div>
         <div class="col s12">

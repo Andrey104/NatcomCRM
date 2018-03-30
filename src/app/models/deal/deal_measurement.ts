@@ -18,7 +18,7 @@ export class DealMeasurement {
   address: string;
   address_comment: string;
   company: Company;
-  non_cash: boolean;
+  non_cash: number;
   auto_date: string;
   description: string;
   date: string;

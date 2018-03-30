@@ -29,6 +29,10 @@ import {ReviewComponent} from './admin/review/review.component';
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts
 
+const new_deal_routes: Routes = [
+  {path: 'deal/all/:id', component: DealDetailComponent}
+];
+
 const measurements_routes: Routes = [
   {path: ':measurement_id', component: DealMeasurementComponent},
   {path: ':measurement_id/deal/:id', component: DealDetailComponent}
@@ -79,7 +83,7 @@ const pages_routes: Routes = [
   {path: 'measurements/:status', component: MeasurementPageComponent, children: measurements_routes},
   {path: 'mounts/:status', component: MountPageComponent, children: mounts_routes},
   {path: 'new_deal', component: NewDealPageComponent},
-  {path: 'new_deal/client/:client_id', component: ClientInfoComponent},
+  {path: 'new_deal/client/:client_id', component: ClientInfoComponent, children: new_deal_routes},
   {path: 'user', component: UserInfoComponent},
   {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard], children: admin_routes},
   {path: '', redirectTo: 'user', pathMatch: 'full'}

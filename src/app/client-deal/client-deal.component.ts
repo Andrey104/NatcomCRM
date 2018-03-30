@@ -33,8 +33,10 @@ export class ClientDealComponent implements OnChanges {
         } else if (this.url.indexOf('deals') !== -1) {
           const status = this.dealService.statusDeal;
           this.forwardUrl = `/deals/${status}/${this.deal.id.toString()}`;
+        } else if (this.url.indexOf('new_deal') !== -1) {
+          this.forwardUrl = `deal/all/${this.deal.id.toString()}`;
         }
-    });
+      });
   }
 
   statusDeal(status: number) {

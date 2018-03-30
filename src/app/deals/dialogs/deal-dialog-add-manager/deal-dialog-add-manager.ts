@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../../services/deal.service';
 import {NgForm} from '@angular/forms';
-import {MeasurementService} from '../../../services/measurement.service';
 
 @Component({
   selector: 'app-dialog-add-manager',
@@ -38,7 +37,6 @@ export class DealDialogManagerComponent implements OnInit {
   getManagers() {
     this.dealService.getManagers().subscribe((result) => {
       this.managers = result;
-      console.log(this.managers);
     });
   }
 
@@ -51,7 +49,6 @@ export class DealDialogManagerComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    console.log(this.form.form.value.manager);
     this.dealService.setManager(this.id, this.form.form.value.manager)
       .subscribe((result) => {
         this.isRequest = false;

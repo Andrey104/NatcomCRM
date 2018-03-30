@@ -35,6 +35,7 @@
     </div>
   </div>
   <div class="col s8 grey lighten-3 scrollable-page">
+    <router-outlet></router-outlet>
     <div class="col s10 offset-s1">
       <div class="h-deals">Сделки</div>
       <div *ngFor="let deal of client?.deals">

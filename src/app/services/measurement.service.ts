@@ -6,6 +6,7 @@ import {OurComment} from '../models/comment';
 import {MeasurementPage} from '../models/measurement/measurement-page';
 import {BaseApi} from '../core/base-api';
 import {MeasurementResult} from '../models/measurement/measurement-result';
+import {NewMeasurement} from '../models/measurement/new-measurement';
 
 @Injectable()
 export class MeasurementService extends BaseApi {
@@ -31,17 +32,8 @@ export class MeasurementService extends BaseApi {
     return this.get(`measurements/search?page=${page}&&text=${text}`);
   }
 
-  newMeasurement(dealId: number, non_cash: boolean, date: string, time: string, description: string): Observable<MeasurementResult> {
-    if (description === '') {
-      description = null;
-    }
-    const data = {
-      non_cash: non_cash,
-      date,
-      time,
-      description
-    };
-    return this.post(`deals/${dealId}/measurement/`, data);
+  newMeasurement(dealId: number, measurement: NewMeasurement): Observable<MeasurementResult> {
+    return this.post(`deals/${dealId}/measurement/`, measurement);
   }
 
   editMeasurement(idMeasurement: number, time: string, description: string): Observable<Object> {

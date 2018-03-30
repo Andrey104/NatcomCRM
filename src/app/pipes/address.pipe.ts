@@ -5,10 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class AddressPipe implements PipeTransform {
-  transform(email: string): string {
-    if (email === null || email === '') {
-      email = 'Email отсутствует';
+  transform(address: string): string {
+    if (address === null || address === '') {
+      address = 'Адрес отсутствует';
     }
-    return email;
+    return address;
   }
 }
