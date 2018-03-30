@@ -59,13 +59,11 @@ import {DealContractView} from './pipes/deal-contract-view.pipe';
 import {StageDealComponent} from './stage-deal/stage-deal.component';
 import {StageMountStatusPipe} from './pipes/stage-mount.pipe';
 import {CompaniesService} from './services/companies.service';
-import {StageComponent} from './stage/stage.component';
 import {WorkerNamePipe} from './pipes/worker-name.pipe';
 import {MeasurementStatusPipe} from './pipes/measurement-status.pipe';
 import {ImageModalComponent} from './image-modal/image-modal.component';
 import {MountPageComponent} from './mounts/mount-page/mount-page.component';
 import {MountComponent} from './mounts/mount/mount.component';
-import {MountDetailComponent} from './mounts/mount-detail/mount-detail.component';
 import {StageMountService} from './services/stage-mount.service';
 import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
 import {MeasurementComponent} from './measurements/measurement/measurement.component';
@@ -104,9 +102,6 @@ import {MountRejectCausePipe} from './pipes/mount-reject-cause.pipe';
 import {MountDialogRejectComponent} from './mounts/dialogs/mount-dialog-reject/mount-dialog-reject';
 import {MountDialogCompleteComponent} from './mounts/dialogs/mount-dialog-complete/mount-dialog-complete';
 import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transfer/mount-dialog-transfer';
-import {StageDialogCompleteComponent} from './stage/dialogs/stage-dialog-complete/stage-dialog-complete';
-import {StageDialogCostComponent} from './stage/dialogs/stage-dialog-cost/stage-dialog-cost';
-import {StageDialogTransferComponent} from './stage/dialogs/stage-dialog-transfer/stage-dialog-transfer';
 import {DealDialogMountComponent} from './deals/dialogs/deal-dialog-add-mount/deal-dialog-add-mount';
 import {DealDialogManagerComponent} from './deals/dialogs/deal-dialog-add-manager/deal-dialog-add-manager';
 import {MeasurementRejectCausePipe} from './pipes/measurement-cause-reject';
@@ -120,9 +115,10 @@ import { ReviewComponent } from './admin/review/review.component';
 import {TextMaskModule} from 'angular2-text-mask';
 import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-stage/mount-dialog-add-stage';
 import { ChangeClientComponent } from './new-deal/change-client/change-client.component';
-import { StageAddInstallerComponent } from './stage/dialogs/stage-add-installer/stage-add-installer.component';
 import { DealDialogClientInfoComponent } from './deals/dialogs/deal-dialog-client-info/deal-dialog-client-info.component';
 import { ClientDealComponent } from './client-deal/client-deal.component';
+import {DialogCostComponent} from './mounts/dialogs/dialog-cost/dialog-cost';
+import {AddInstallerComponent} from './mounts/dialogs/add-installer/add-installer.component';
 
 
 @NgModule({
@@ -177,13 +173,11 @@ import { ClientDealComponent } from './client-deal/client-deal.component';
     MountStatusPipe,
     StageDealComponent,
     StageMountStatusPipe,
-    StageComponent,
     WorkerNamePipe,
     MeasurementStatusPipe,
     ImageModalComponent,
     MountPageComponent,
     MountComponent,
-    MountDetailComponent,
     MeasurementPageComponent,
     MeasurementComponent,
     InputSearchComponent,
@@ -210,9 +204,7 @@ import { ClientDealComponent } from './client-deal/client-deal.component';
     MountDialogRejectComponent,
     MountDialogCompleteComponent,
     MountDialogTransferComponent,
-    StageDialogCompleteComponent,
-    StageDialogCostComponent,
-    StageDialogTransferComponent,
+    DialogCostComponent,
     DealDialogMountComponent,
     DealDialogManagerComponent,
     MeasurementRejectCausePipe,
@@ -226,7 +218,7 @@ import { ClientDealComponent } from './client-deal/client-deal.component';
     AddStageComponent,
     ReviewComponent,
     ChangeClientComponent,
-    StageAddInstallerComponent,
+    AddInstallerComponent,
     DealDialogClientInfoComponent,
     ClientDealComponent,
   ],

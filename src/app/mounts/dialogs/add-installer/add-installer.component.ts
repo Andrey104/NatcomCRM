@@ -7,11 +7,11 @@ import {Brigade} from '../../../models/brigades/brigade';
 import {StageMountService} from '../../../services/stage-mount.service';
 
 @Component({
-  selector: 'app-stage-add-installer',
-  templateUrl: './stage-add-installer.component.html',
-  styleUrls: ['./stage-add-installer.component.css']
+  selector: 'app-add-installer',
+  templateUrl: './add-installer.component.html',
+  styleUrls: ['./add-installer.component.css']
 })
-export class StageAddInstallerComponent implements OnInit, OnChanges {
+export class AddInstallerComponent implements OnInit, OnChanges {
   installers: InstallerPosition[];
   stageId: string;
   installerListIsOpen = false;

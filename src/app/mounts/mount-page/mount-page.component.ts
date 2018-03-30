@@ -134,6 +134,7 @@ export class MountPageComponent implements OnInit {
     if (c.needSubscribe === true) {
       const modal = c.updateList
         .subscribe(next => {
+    console.log('asdasd' + c);
           if (next) {
             this.mounts = [];
             if (this.inputText === '') {
