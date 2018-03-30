@@ -24,6 +24,11 @@
       <div [appColorCompany]="mount?.company?.symbol" class="company-symbol">{{mount?.company?.symbol}}</div>
       <div class="company-name">{{mount?.company?.name}}</div>
     </div>
+    <div class=" col s2 valign-wrapper no-border" routerLink="deal/{{dealId}}">
+      <div class="btn-go-deal valign-wrapper no-border">
+        К сделке<i class="normal  material-icons  deal-icon">reply</i>
+      </div>
+    </div>
   </div>
   <div class="mount-info">
     <div class="col s12 str-info">
@@ -41,20 +46,47 @@
       <span> {{mount?.description}}</span>
     </div>
   </div>
-  <div class="col s12 row valign-wrapper detail-col">
+  <div class="col s12 valign-wrapper detail-col">
     <div class="col s5 divider "></div>
-    <div class="col s2 center-align">Cтадии</div>
+    <div class="col s2 center-align">Монтажники</div>
     <div class="col s5 divider "></div>
   </div>
-  <div class="col s12 main-row valign-wrapper forward-block hover-element" routerLink="stage/{{stage?.id}}"
-       *ngFor="let stage of mount?.stages; let i = index">
-    <div *ngIf="i!==0">
-      <div class="row">
-        <div class="divider"></div>
-      </div>
+  <div *ngIf="mount?.installers.length===0" class="row">
+    <div class="col s12 offset-s1 no-information">Нет монтажников</div>
+  </div>
+  <div class="row col s12 installer" *ngFor="let installer of mount.installers">
+    <div>
+      <i class="tiny  material-icons icon">person</i>{{installer.installer.fio}}
     </div>
-    <app-stage-deal [stage]="stage" class="col s11"></app-stage-deal>
-    <i class="arrow col s1 material-icons right-align">chevron_right</i>
+    <div>
+      <i class="tiny  material-icons icon">phone</i>{{installer.installer.phone}}
+    </div>
+  </div>
+  <div class="col s12 valign-wrapper detail-col">
+    <div class="col s5 divider "></div>
+    <div class="col s2 center-align">Затраты</div>
+    <div class="col s5 divider "></div>
+  </div>
+  <div *ngIf="mount?.costs.length===0" class="row">
+    <div class="col s12 offset-s1 no-information">Нет затрат</div>
+  </div>
+  <div class="row col s12 valign-wrapper installer" *ngFor="let cost of mount.costs">
+    <div>
+      <span id="cost_component">{{cost.sum | money}} - {{cost.comment}}</span>
+    </div>
+  </div>
+  <div class="col s12 valign-wrapper detail-col">
+    <div class="col s5 divider "></div>
+    <div class="col s2 center-align">Затраты на комплектующие</div>
+    <div class="col s5 divider "></div>
+  </div>
+  <div *ngIf="mount?.component_costs.length===0" class="row">
+    <div class="col s12 offset-s1 no-information">Нет затрат</div>
+  </div>
+  <div class="row col s12 valign-wrapper installer" *ngFor="let cost of mount.component_costs">
+    <div>
+      <span id="cost">{{cost.sum | money}} - {{cost.comment}}</span>
+    </div>
   </div>
   <div class="col s12 row valign-wrapper detail-col">
     <div class="col s5 divider "></div>

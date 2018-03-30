@@ -83,9 +83,6 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
         this.stageMountService.mount = mount;
         this.showEditButtons = this.utils.showEditButtons(String(this.mount.user.id));
         this.stageMountService.resetStages();
-        this.mount.stages.forEach((stage) => {
-          this.stageMountService.putStage(stage);
-        });
         this.loadPage = false;
       });
   }

@@ -8,6 +8,7 @@ import {UtilsService} from '../../services/utils.service';
 import {DealService} from '../../services/deal.service';
 import {DOCUMENT} from '@angular/common';
 import {OrderService} from '../../services/order.service';
+import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-deal-measurement',
@@ -36,7 +37,8 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
               private utils: UtilsService,
               private dealService: DealService,
               @Inject(DOCUMENT) private document: Document,
-              private orderService: OrderService) {
+              private orderService: OrderService,
+              private sanitization: DomSanitizer) {
     this.url = this.document.location.href;
   }
 
@@ -50,6 +52,10 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
       document.getElementById('page').scrollTop = document.getElementById('page').scrollHeight;
       this.flag = false;
     }
+  }
+
+  getBackground(pictureurl: String) {
+    return this.sanitization.bypassSecurityTrustStyle(`url(${pictureurl})`);
   }
 
   getBackUrl() {
