@@ -10,8 +10,10 @@ import {Client} from '../models/clients/client';
 export class ImageModalComponent implements OnInit {
   @Input() picture: Picture;
   @Input() visible: boolean;
+  zoomIn = false;
   @Output() successClient = new EventEmitter<Client>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
 
   constructor() {
   }
@@ -23,4 +25,8 @@ export class ImageModalComponent implements OnInit {
     this.visibleChange.emit();
   }
 
+  zoom() {
+    this.zoomIn = !this.zoomIn;
+    console.log(this.zoomIn);
+  }
 }

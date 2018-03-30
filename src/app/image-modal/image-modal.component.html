@@ -1,4 +1,8 @@
 <div *ngIf="visible">
-  <img src="{{picture.url}}"/>
+  <a rel="nofollow" target="_blank" href="{{picture.url}}">
+  <img id="zoom_mw" (click)="zoom()" [ngClass]="{zoom:zoomIn}"
+        src="{{picture.url}}"/>
+  </a>
 </div>
+
 <div *ngIf="visible" class="overlay-dialog" (click)="onClose()"></div>

@@ -113,8 +113,10 @@
     <div class="col s12 offset-s1 no-information">Нет изображений</div>
   </div>
   <div class="row" *ngIf="measurement?.pictures.length!==0">
-    <div class="col s3 picture-container" *ngFor="let picture of measurement?.pictures; let i = index">
-      <img class="col s12 picture" (click)="openPicture(i)" src="{{picture.url}}"/>
+    <div class="col s3" *ngFor="let picture of measurement?.pictures; let i = index">
+      <div class="img-container" (click)="openPicture(i)"
+           [style.background-image]="getBackground(picture.url)">
+      </div>
       <div class="col s12 picture-date center-align">
         {{picture?.auto_date | dateFormat: 'fullDate'}}
       </div>
@@ -133,7 +135,8 @@
   <div *ngIf="measurement?.comments.length===0" class="row">
     <div class="col s12 offset-s1 no-information">Нет комментариев</div>
   </div>
-  <div class="fixed-action-btn click-to-toggle" *ngIf="(measurement?.status==0||measurement?.status==1)&&showEditButtons">
+  <div class="fixed-action-btn click-to-toggle"
+       *ngIf="(measurement?.status==0||measurement?.status==1)&&showEditButtons">
     <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
