@@ -119,6 +119,7 @@ import { DealDialogClientInfoComponent } from './deals/dialogs/deal-dialog-clien
 import { ClientDealComponent } from './client-deal/client-deal.component';
 import {DialogCostComponent} from './mounts/dialogs/dialog-cost/dialog-cost';
 import {AddInstallerComponent} from './mounts/dialogs/add-installer/add-installer.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 
 @NgModule({
@@ -221,6 +222,7 @@ import {AddInstallerComponent} from './mounts/dialogs/add-installer/add-installe
     AddInstallerComponent,
     DealDialogClientInfoComponent,
     ClientDealComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     BrowserModule,

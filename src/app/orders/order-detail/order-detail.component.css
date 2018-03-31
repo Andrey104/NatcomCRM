@@ -125,4 +125,8 @@ hr {
   color: #666666;
 }
 
-
+.btn-dialog-submit {
+  width: 110px;
+  right: 50px;
+  bottom: 20px;
+}

@@ -86,6 +86,9 @@ export class DealService extends BaseApi {
   }
 
   editDeal(idDeal: number, company: number, address: string, address_comment: string, description: string): Observable<Object> {
+    if (address === '') {
+      address = null;
+    }
     if (description === '') {
       description = null;
     }

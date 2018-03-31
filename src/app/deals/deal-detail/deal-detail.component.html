@@ -38,19 +38,22 @@
           <span class="task-date">{{deal?.task_date | dateFormat: 'date'}}</span>
         </div>
         <div class="valign-wrapper">
-          <i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}
+          <i class="tiny material-icons icon">location_on</i>
+          <div class="text">{{deal?.address | address}}</div>
         </div>
         <div class="valign-wrapper" *ngIf="deal.address_comment">
-          <i class="tiny material-icons icon">announcement</i> {{deal?.address_comment}}
+          <i class="tiny material-icons icon">announcement</i>
+          <div class="text">{{deal?.address_comment}}</div>
         </div>
         <div class="valign-wrapper">
-          <i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}
+          <i class="tiny material-icons icon">attach_money</i>{{deal?.sum | money}}
         </div>
         <div class="valign-wrapper">
-          <i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}
+          <i class="tiny material-icons icon">date_range</i> {{deal?.payment_type | nonCash}}
         </div>
         <div class="valign-wrapper" *ngIf="deal.description">
-          <i class="tiny material-icons icon">comment</i> {{deal?.description}}
+          <i class="tiny material-icons icon">comment</i>
+          <div class="text">{{deal?.description}}</div>
         </div>
       </div>
     </div>
@@ -73,7 +76,7 @@
                (click)="clientInfoDialog(i)">
             <div class="col s6 valign-wrapper detail-col-right">
               <i class="small material-icons icon">person</i>
-              {{client.client.fio}}
+              <div class="text">{{client.client.fio}}</div>
             </div>
             <div class="col s5 div-number">{{client.client.phones[0].number | phoneFormat}}</div>
             <i class="arrow col s1 material-icons detail-col-left">chevron_right</i>
@@ -279,4 +282,6 @@
 <app-change-client [(visible)]="showChangeClientDialog"
                    [client]="clientChange"
                    (successChangeClient)="successClientChangeDialog($event)"></app-change-client>
+<app-confirm-modal [(confirmModal)]="confirmModal"
+                   (userAnswer)="confirmModalAnswer($event)"></app-confirm-modal>
 

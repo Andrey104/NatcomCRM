@@ -35,8 +35,6 @@ export class CommentComponent implements OnInit {
       this.form.reset();
       document.getElementById('text').blur();
       this.comment.emit(userComment);
-    } else {
-      alert('Нельзя отправлять пустой коммент');
     }
   }
 

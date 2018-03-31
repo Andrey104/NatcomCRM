@@ -8,9 +8,10 @@
       <div class="main-dialog-content">
         <div class="row main-row valign-wrapper">
           <div class="col s12">
-            <span class="valign-wrapper">
-              <i class="tiny material-icons icon">person</i>{{client?.fio}}
-            </span>
+            <div class="valign-wrapper">
+              <i class="tiny material-icons icon">person</i>
+              <p class="text">{{client?.fio}}</p>
+            </div>
           </div>
         </div>
         <div *ngIf="client?.email" class="row main-row">
@@ -28,7 +29,8 @@
                   <i class="tiny material-icons icon">local_phone</i>{{phone?.number}}
                 </div>
                 <div *ngIf="phone.comment" class="valign-wrapper">
-                  <i class="tiny material-icons icon">comment</i>{{phone?.comment}}
+                  <i class="tiny material-icons icon">comment</i>
+                  <p class="text">{{phone?.comment}}</p>
                 </div>
               </div>
             </div>

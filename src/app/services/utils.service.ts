@@ -201,6 +201,10 @@ export class UtilsService {
         type = 'перенес(ла) в сделку';
         break;
       }
+      case 4: {
+        type = 'перенес(ла) из отклоненных в текущие ';
+        break;
+      }
     }
 
 

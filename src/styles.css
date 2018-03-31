@@ -1,12 +1,13 @@
 /*Блок, содержащий список карточек(заказы, сделки)*/
 .list-col{
-  margin-top: 70px;
+  margin-top: 100px;
   position: relative;
   overflow-y: scroll;
   background-color: #ffffff;
   min-width: 200px;
   width: 100%;
-  height: calc(100vh - 134px);
+  height: calc(100vh - 164px);
+  overflow-x: hidden;
 }
 /*Классы для отмены прокрутки в list-col*/
 .list-col::-webkit-scrollbar-track {border-radius: 4px;}

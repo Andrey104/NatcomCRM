@@ -1,0 +1,14 @@
+.dialog {
+  height: 140px;
+  width: 335px;
+}
+
+.message-container {
+  margin: 25px 10px 0;
+}
+
+@media (min-width: 768px) {
+  .dialog {
+    top: calc(50% - 70px);
+  }
+}

@@ -50,6 +50,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   url: string;
   backUrl: string;
   backInfo: string;
+  confirmModal = {showConfirmDialog: false, confirmMessage: 'Замер не может быть добавлен без адреса. Хотите добавить адрес к сделке?'};
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService,
@@ -95,10 +96,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     if (this.deal.address !== null) {
       this.showMeasurementDialog = !this.showMeasurementDialog;
     } else {
-      const answer = confirm('Замер не может быть добавлен без адреса. Хотите добавить адрес к сделке?');
-      if (answer) {
-        this.showEditDialog = !this.showEditDialog;
-      }
+      this.confirmModal.showConfirmDialog = true;
     }
   }
 
@@ -166,6 +164,12 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
       }, () => {
         this.subOnNewClientToDeal.unsubscribe();
       });
+  }
+
+  confirmModalAnswer(userAnswer: boolean) {
+    if (userAnswer) {
+      this.showEditDialog = !this.showEditDialog;
+    }
   }
 
   subscribeDealId(): void {

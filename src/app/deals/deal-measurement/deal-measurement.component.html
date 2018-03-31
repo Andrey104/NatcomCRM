@@ -36,22 +36,26 @@
           <span class="measurement-date">{{measurement?.date | dateFormat: 'date'}}</span>
         </div>
         <div class="valign-wrapper">
-          <i class="tiny material-icons icon">location_on</i> {{measurement?.address | address}}
+          <i class="tiny material-icons icon">location_on</i>
+          <div class="text">{{measurement?.address | address}}</div>
         </div>
         <div class="valign-wrapper" *ngIf="measurement.address_comment">
-          <i class="tiny material-icons icon">announcement</i> {{measurement?.address_comment}}
+          <i class="tiny material-icons icon">announcement</i>
+          <div class="text">{{measurement?.address_comment}}</div>
         </div>
         <div class="valign-wrapper" *ngIf="measurement.time">
-          <i class="tiny material-icons icon">access_time</i> {{measurement?.time}}
+          <i class="tiny material-icons icon">access_time</i>
+          <div class="text">{{measurement?.time}}</div>
         </div>
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">attach_money</i> {{measurement?.sum | money}}
         </div>
         <div class="valign-wrapper">
-          <i class="tiny material-icons icon">date_range</i> {{measurement?.non_cash | nonCash}}
+          <i class="tiny material-icons icon">date_range</i> {{measurement?.payment_type | nonCash}}
         </div>
         <div class="valign-wrapper" *ngIf="measurement.description">
-          <i class="tiny material-icons icon">comment</i> {{measurement.description}}
+          <i class="tiny material-icons icon">comment</i>
+          <div class="text">{{measurement.description}}</div>
         </div>
       </div>
     </div>
@@ -76,7 +80,7 @@
           <div class="valign-wrapper contact-info col s12">
             <div class="col s6 valign-wrapper detail-col-right text">
               <i class="small material-icons icon">person</i>
-              {{client.client.fio}}
+              <div class="text">{{client.client.fio}}</div>
             </div>
             <div class="col s6 div-number">{{client.client.phones[0].number | phoneFormat}}</div>
           </div>
@@ -90,7 +94,7 @@
     <div class="col s2 center-align header">История</div>
     <div class="col s5 divider"></div>
   </div>
-  <div class="history">
+  <div class="history text">
     <div class="col s12 offset-s1">История замера:</div>
     <div class="row">
       <div *ngFor="let action of measurement?.actions" class="col s10 offset-s1">

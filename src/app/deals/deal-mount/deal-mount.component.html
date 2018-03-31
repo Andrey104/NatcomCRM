@@ -94,7 +94,7 @@
     <div class="col s5 divider "></div>
   </div>
   <div *ngFor="let action of mount?.actions" class="col s10 offset-s1 action">
-    <div>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'mount'}}</div>
+    <div class="text">{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'mount'}}</div>
   </div>
   <div class="col s12 row valign-wrapper detail-col">
     <div class="col s5 divider"></div>
