@@ -20,6 +20,7 @@ export class MountDialogTransferComponent implements OnInit {
   isSubmitted = false;
   isRequest = false;
   formData = {};
+  causes = [1, 2];
 
   constructor(private activatedRoute: ActivatedRoute,
               private mountService: MountService) {
@@ -41,7 +42,7 @@ export class MountDialogTransferComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    this.mountService.mountDateTransfer(this.id, this.form.form.value.calendar, this.form.form.value.comment)
+    this.mountService.mountTransfer(this.id, this.form.form.value.calendar, this.form.form.value.comment, this.form.form.value.cause)
       .subscribe((result) => {
         this.isRequest = false;
         this.visibleChange.emit(this.visible);

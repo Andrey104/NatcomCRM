@@ -6,12 +6,12 @@ h4 {
 }
 
 .dialog {
-  height: 350px;
+  height: 400px;
   width: 500px;
 }
 
 @media (min-width: 768px) {
   .dialog {
-    top: calc(50% - 175px);
+    top: calc(50% - 200px);
   }
 }

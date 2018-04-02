@@ -25,8 +25,8 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   loadPage: boolean;
   showRejectMount = false;
   showCompleteMount = false;
-  showMountStageAdd = false;
   showTransferMount = false;
+  showSetDateMount = false;
   showAddCost = false;
   needSubscribe = true;
   showAddInstaller = false;

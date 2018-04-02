@@ -101,7 +101,6 @@ import {DealDialogDiscountComponent} from './deals/dialogs/deal-dialog-discount/
 import {MountRejectCausePipe} from './pipes/mount-reject-cause.pipe';
 import {MountDialogRejectComponent} from './mounts/dialogs/mount-dialog-reject/mount-dialog-reject';
 import {MountDialogCompleteComponent} from './mounts/dialogs/mount-dialog-complete/mount-dialog-complete';
-import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transfer/mount-dialog-transfer';
 import {DealDialogMountComponent} from './deals/dialogs/deal-dialog-add-mount/deal-dialog-add-mount';
 import {DealDialogManagerComponent} from './deals/dialogs/deal-dialog-add-manager/deal-dialog-add-manager';
 import {MeasurementRejectCausePipe} from './pipes/measurement-cause-reject';
@@ -110,17 +109,19 @@ import {MeasurementDialogEditComponent} from './measurements/dialogs/measurement
 import {MeasurementDialogTransferComponent} from './measurements/dialogs/measurement-dialog-transfer/measurement-dialog-transfer';
 import {DealDialogEditComponent} from './deals/dialogs/deal-dialog-edit/deal-dialog-edit';
 import {MeasurementTransferCausePipe} from './pipes/measurement-cause-transfer';
-import { AddStageComponent } from './mounts/add-stage/add-stage.component';
-import { ReviewComponent } from './admin/review/review.component';
+import {AddStageComponent} from './mounts/add-stage/add-stage.component';
+import {ReviewComponent} from './admin/review/review.component';
 import {TextMaskModule} from 'angular2-text-mask';
-import {MountDialogAddStageComponent} from './mounts/dialogs/mount-dialog-add-stage/mount-dialog-add-stage';
-import { ChangeClientComponent } from './new-deal/change-client/change-client.component';
-import { DealDialogClientInfoComponent } from './deals/dialogs/deal-dialog-client-info/deal-dialog-client-info.component';
-import { ClientDealComponent } from './client-deal/client-deal.component';
+import {ChangeClientComponent} from './new-deal/change-client/change-client.component';
+import {DealDialogClientInfoComponent} from './deals/dialogs/deal-dialog-client-info/deal-dialog-client-info.component';
+import {ClientDealComponent} from './client-deal/client-deal.component';
 import {DialogCostComponent} from './mounts/dialogs/dialog-cost/dialog-cost';
 import {AddInstallerComponent} from './mounts/dialogs/add-installer/add-installer.component';
-import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import {ConfirmModalComponent} from './confirm-modal/confirm-modal.component';
 import {MeasurementTimePipe} from './pipes/measurement-time.pipe';
+import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transfer/mount-dialog-transfer';
+import {MountDialogSetDateComponent} from './mounts/dialogs/mount-dialog-set-date/mount-dialog-set-date';
+import {MountTransferCausePipe} from './pipes/mount-transfer-cause.pipe';
 
 
 @NgModule({
@@ -215,7 +216,6 @@ import {MeasurementTimePipe} from './pipes/measurement-time.pipe';
     MeasurementDialogTransferComponent,
     DealDialogEditComponent,
     MeasurementTransferCausePipe,
-    MountDialogAddStageComponent,
     MeasurementTransferCausePipe,
     AddStageComponent,
     ReviewComponent,
@@ -224,7 +224,9 @@ import {MeasurementTimePipe} from './pipes/measurement-time.pipe';
     DealDialogClientInfoComponent,
     ClientDealComponent,
     ConfirmModalComponent,
-    MeasurementTimePipe
+    MeasurementTimePipe,
+    MountDialogSetDateComponent,
+    MountTransferCausePipe,
   ],
   imports: [
     BrowserModule,
