@@ -29,6 +29,22 @@
   color: #666666;
 }
 
+.header {
+  font-size: 14px;
+  color: black;
+}
+
+.center-dialog-title {
+  line-height: normal;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+i.center-dialog-title:hover {
+  transform: scale(1.1, 1.1);
+}
+
+
 .arrow {
   opacity: 0;
 }

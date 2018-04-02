@@ -4,6 +4,7 @@ import {OurComment} from '../comment';
 import {MountStage} from '../mount/mount-stage';
 import {InstallerPosition} from '../installers/installer_position';
 import {Cost} from '../cost';
+import {DealAction} from './deal_action';
 
 export class DealMount {
   installers: InstallerPosition[];
@@ -11,7 +12,7 @@ export class DealMount {
   costs: Cost[];
   component_costs: Cost[];
   id: number;
-  actions: object;
+  actions: DealAction[];
   stages: MountStage[];
   comments: OurComment[];
   company: Company;

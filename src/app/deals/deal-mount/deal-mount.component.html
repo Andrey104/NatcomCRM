@@ -47,9 +47,15 @@
     </div>
   </div>
   <div class="col s12 valign-wrapper detail-col">
-    <div class="col s5 divider "></div>
-    <div class="col s2 center-align">Монтажники</div>
-    <div class="col s5 divider "></div>
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">
+      <div class="valign-wrapper" style="display: inline-block">
+        <span class="center-dialog-title">Монтажники</span>
+        <i *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons"
+           class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+      </div>
+    </div>
+    <div class="col s5 divider"></div>
   </div>
   <div *ngIf="mount?.installers.length===0" class="row">
     <div class="col s12 offset-s1 no-information">Нет монтажников</div>
@@ -63,9 +69,15 @@
     </div>
   </div>
   <div class="col s12 valign-wrapper detail-col">
-    <div class="col s5 divider "></div>
-    <div class="col s2 center-align">Затраты</div>
-    <div class="col s5 divider "></div>
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">
+      <div class="valign-wrapper" style="display: inline-block">
+        <span class="center-dialog-title">Затраты</span>
+        <i *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons"
+           class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+      </div>
+    </div>
+    <div class="col s5 divider"></div>
   </div>
   <div *ngIf="mount?.costs.length===0" class="row">
     <div class="col s12 offset-s1 no-information">Нет затрат</div>
@@ -76,9 +88,15 @@
     </div>
   </div>
   <div class="col s12 valign-wrapper detail-col">
-    <div class="col s5 divider "></div>
-    <div class="col s2 center-align">Затраты на комплектующие</div>
-    <div class="col s5 divider "></div>
+    <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">
+      <div class="valign-wrapper" style="display: inline-block">
+        <span class="center-dialog-title">Затраты на комплектующие</span>
+        <i *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons"
+           class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+      </div>
+    </div>
+    <div class="col s5 divider"></div>
   </div>
   <div *ngIf="mount?.component_costs.length===0" class="row">
     <div class="col s12 offset-s1 no-information">Нет затрат</div>
@@ -93,6 +111,9 @@
     <div class="col s2 center-align">История</div>
     <div class="col s5 divider "></div>
   </div>
+  <div *ngIf="mount?.actions.length===0" class="row">
+    <div class="col s12 offset-s1 no-information">Нет истории</div>
+  </div>
   <div *ngFor="let action of mount?.actions" class="col s10 offset-s1 action">
     <div class="text">{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'mount'}}</div>
   </div>
@@ -100,6 +121,9 @@
     <div class="col s5 divider"></div>
     <div class="col s2 center-align header">Комментарии</div>
     <div class="col s5 divider"></div>
+  </div>
+  <div *ngIf="mount?.comments.length===0" class="row">
+    <div class="col s12 offset-s1 no-information">Нет комментариев</div>
   </div>
   <div class="row">
     <div *ngFor="let comment of mount?.comments" class="col s12">
@@ -119,13 +143,14 @@
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">close</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab" (click)="showMountStageAdd = !showMountStageAdd"
+
+      <li *ngIf="!mount.date" class="hover-element li-element-menu-fab" (click)="showSetDateMount = !showSetDateMount"
           onclick="$('#main-btn').click()">
-        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Добавить стадию</span>
-          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">add</i></div>
+        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Установить дату монтажа</span>
+          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">event</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab" (click)="showTransferMount = !showTransferMount"
+      <li *ngIf="mount.date" class="hover-element li-element-menu-fab" (click)="showTransferMount = !showTransferMount"
           onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Перенести монтаж</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">event</i></div>
@@ -145,12 +170,12 @@
 </div>
 <app-mount-dialog-reject [mount]="mount" (successMountReject)="successMountUpdateAndList()"
                          [(visible)]="showRejectMount"></app-mount-dialog-reject>
-<app-mount-dialog-complete [mount]="mount" (successMountComplete)="successMountUpdate()"
+<app-mount-dialog-complete [mount]="mount" (successMountComplete)="successMountUpdateAndList()"
                            [(visible)]="showCompleteMount"></app-mount-dialog-complete>
+<app-mount-dialog-set-date [mount]="mount" (successMountSetDate)="successMountUpdate()"
+                           [(visible)]="showSetDateMount"></app-mount-dialog-set-date>
 <app-mount-dialog-transfer [mount]="mount" (successMountTransfer)="successMountUpdate()"
                            [(visible)]="showTransferMount"></app-mount-dialog-transfer>
-<app-mount-dialog-add-stage [mount]="mount" (successMountStageAdd)="successMountUpdate()"
-                            [(visible)]="showMountStageAdd"></app-mount-dialog-add-stage>
 <!--<app-add-installer [modalState]="addInstallerModalState" (onClose)="closeAddInstallerModal($event)"></app-add-installer>-->
 <app-dialog-cost [mount]="mount" (successCost)="successMountUpdate()"
                  [(visible)]="showAddCost"></app-dialog-cost>
