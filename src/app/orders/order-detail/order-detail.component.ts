@@ -23,6 +23,7 @@ export class OrderDetailComponent implements OnInit {
   loader: boolean;
   showDialogReject = false;
   showDialogDefer = false;
+  confirmModal = {showConfirmDialog: false, confirmMessage: 'Вы уверены, что хотите перенести данную заявку из отклонненых в текущие?'};
   needSubscribe = true;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
@@ -40,8 +41,8 @@ export class OrderDetailComponent implements OnInit {
       this.loader = true;
       this.orderService.getOrderById(this.id)
         .subscribe(order => {
-        this.order = order;
-        this.loader = false;
+          this.order = order;
+          this.loader = false;
       });
     });
   }
@@ -49,6 +50,16 @@ export class OrderDetailComponent implements OnInit {
   successUpdate(order) {
     this.order = order;
     this.updateList.next(true);
+  }
+
+  orderReturn(userAnswer: boolean) {
+    if (userAnswer) {
+      this.orderService.returnOrder(this.id)
+        .subscribe((order: OrderResult) => {
+          this.order = order;
+          this.updateList.next(true);
+        });
+    }
   }
 
   onNewDeal() {

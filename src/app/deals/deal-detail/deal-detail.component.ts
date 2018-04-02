@@ -26,7 +26,8 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   page = 1;
   select;
   client: Client;
-  changeClient: Client = null;
+  clientInfo: Client = null;
+  clientChange: Client = null;
   changeClientNumber: number;
   deal: DealResult;
   showEditButtons = false;
@@ -40,14 +41,16 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   showManagerDialog = false;
   showEditDialog = false;
   showEditClient = false;
-  needSubscribe = true;
+  showClientDialog = false;
   showChangeClientDialog = false;
+  needSubscribe = true;
   subOnNewClientToDeal: Subscription;
   dealClients: Client[] = [];
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   url: string;
   backUrl: string;
   backInfo: string;
+  confirmModal = {showConfirmDialog: false, confirmMessage: 'Замер не может быть добавлен без адреса. Хотите добавить адрес к сделке?'};
 
   constructor(private activatedRoute: ActivatedRoute,
               private dealService: DealService,
@@ -89,6 +92,14 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     this.updateList.next(true);
   }
 
+  showMeasurementModal() {
+    if (this.deal.address !== null) {
+      this.showMeasurementDialog = !this.showMeasurementDialog;
+    } else {
+      this.confirmModal.showConfirmDialog = true;
+    }
+  }
+
   successMeasurementAdded(measurement: DealMeasurement) {
     this.loadPage = true;
     this.getDealById();
@@ -118,18 +129,26 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
     this.showEditClient = !this.showEditClient;
   }
 
-  changeClientDialog(clientNumber: number) {
-    const user = this.utils.getUserData();
-    if (user.type >= 3 || user.id_manager === this.deal.user.id) {
-      this.changeClientNumber = clientNumber;
-      this.changeClient = JSON.parse(JSON.stringify(this.deal.clients[clientNumber].client));
-      this.showChangeClientDialog = !this.showChangeClientDialog;
-    }
+  clientInfoDialog(clientNumber: number) {
+    this.changeClientNumber = clientNumber;
+    this.showClientDialog = !this.showClientDialog;
+    this.clientInfo = JSON.parse(JSON.stringify(this.deal.clients[clientNumber].client));
   }
 
-  successChangeClient(client: Client) {
-    this.deal.clients[this.changeClientNumber].client = client;
-    this.changeClient = null;
+  successClientInfoDialog(client: Client) {
+    if (client !== null) {
+      this.clientChange = client;
+      this.showChangeClientDialog = true;
+    }
+    this.clientInfo = null;
+  }
+
+  successClientChangeDialog(client: Client) {
+    if (client !== null) {
+      this.deal.clients[this.changeClientNumber].client = client;
+      this.clientInfoDialog(this.changeClientNumber);
+    }
+    this.clientChange = null;
   }
 
   successDealClient(client: Client) {
@@ -145,6 +164,12 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
       }, () => {
         this.subOnNewClientToDeal.unsubscribe();
       });
+  }
+
+  confirmModalAnswer(userAnswer: boolean) {
+    if (userAnswer) {
+      this.showEditDialog = !this.showEditDialog;
+    }
   }
 
   subscribeDealId(): void {

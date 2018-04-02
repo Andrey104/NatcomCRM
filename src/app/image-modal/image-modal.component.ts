@@ -10,18 +10,23 @@ import {Client} from '../models/clients/client';
 export class ImageModalComponent implements OnInit {
   @Input() picture: Picture;
   @Input() visible: boolean;
+  zoomIn = false;
   @Output() successClient = new EventEmitter<Client>();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
 
   constructor() {
   }
 
   ngOnInit() {
-    console.log(this.visible);
   }
 
   onClose() {
     this.visibleChange.emit();
   }
 
+  zoom() {
+    this.zoomIn = !this.zoomIn;
+    console.log(this.zoomIn);
+  }
 }

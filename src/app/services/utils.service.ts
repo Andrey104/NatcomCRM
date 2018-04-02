@@ -85,7 +85,7 @@ export class UtilsService {
         break;
       }
       case 2: {
-        ourStatus = 'Контракт не заключен';
+        ourStatus = 'Перерасчет';
         break;
       }
       case 3: {
@@ -199,6 +199,10 @@ export class UtilsService {
       }
       case 3: {
         type = 'перенес(ла) в сделку';
+        break;
+      }
+      case 4: {
+        type = 'перенес(ла) из отклоненных в текущие ';
         break;
       }
     }
@@ -554,12 +558,15 @@ export class UtilsService {
     return type + cause + comment;
   }
 
-  getUserData() {
-    let user: { type: number, id_manager: number };
-    user = {
-      type: Number(localStorage.getItem('user_type')),
-      id_manager: Number(localStorage.getItem('id_manager'))
-    };
-    return user;
+  getSearchParams(inputText: string, date: string): string {
+    let params: string;
+    if (inputText !== '' && date !== '') {
+      params = `text=${inputText}&date=${date}`;
+    } else if (inputText !== '') {
+      params = `text=${inputText}`;
+    } else if (date !== '') {
+      params = `date=${date}`;
+    }
+    return params;
   }
 }

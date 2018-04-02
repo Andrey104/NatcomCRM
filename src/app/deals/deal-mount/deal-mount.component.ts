@@ -2,10 +2,11 @@ import {AfterViewChecked, Component, Inject, Input, OnInit} from '@angular/core'
 import {ActivatedRoute} from '@angular/router';
 import {MountService} from '../../services/mount.service';
 import {DealMount} from '../../models/deal/deal_mount';
-import {StageMountService} from '../../services/stage-mount.service';
 import {UtilsService} from '../../services/utils.service';
 import {DOCUMENT} from '@angular/common';
 import {DealService} from '../../services/deal.service';
+import {InstallerPosition} from '../../models/installers/installer_position';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-deal-mount',
@@ -26,10 +27,15 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   showCompleteMount = false;
   showMountStageAdd = false;
   showTransferMount = false;
+  showAddCost = false;
+  needSubscribe = true;
+  showAddInstaller = false;
+  updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
+  addInstallerModalState: { open: Boolean, installers?: InstallerPosition[], stageId: string };
+
 
   constructor(private activatedRoute: ActivatedRoute,
               private mountService: MountService,
-              private stageMountService: StageMountService,
               private dealService: DealService,
               private utils: UtilsService,
               @Inject(DOCUMENT) private document: Document) {
@@ -47,6 +53,20 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
       this.isSend = false;
     }
   }
+
+  // closeAddInstallerModal(update: Boolean) {
+  //   if (update) {
+  //     this.successMountUpdate();
+  //   }
+  // }
+
+  successMountUpdateAndList() {
+    console.log(this.updateList);
+    this.loadPage = true;
+    this.getMountById();
+    this.updateList.next(true);
+  }
+
 
   getBackRoute() {
     this.activatedRoute.params.subscribe(params => {
@@ -70,7 +90,6 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   subscribeMount() {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['mount_id'];
-      this.dealId = params['id'];
       this.loadPage = true;
       this.getMountById();
     });
@@ -80,12 +99,8 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
     this.mountService.getMount(this.id)
       .subscribe((mount) => {
         this.mount = mount;
-        this.stageMountService.mount = mount;
+        this.dealId = this.mount.deal;
         this.showEditButtons = this.utils.showEditButtons(String(this.mount.user.id));
-        this.stageMountService.resetStages();
-        this.mount.stages.forEach((stage) => {
-          this.stageMountService.putStage(stage);
-        });
         this.loadPage = false;
       });
   }

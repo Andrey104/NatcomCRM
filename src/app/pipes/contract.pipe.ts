@@ -8,9 +8,9 @@ export class ContractPipe implements PipeTransform {
   transform(contract: boolean): string {
     let statusContract: string;
     if (contract === true) {
-      statusContract = 'Заключен';
+      statusContract = 'Договор заключен';
     } else {
-      statusContract = 'Не заключен';
+      statusContract = 'Договор не заключен';
     }
     return statusContract;
   }

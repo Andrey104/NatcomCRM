@@ -6,7 +6,7 @@ export class Payment {
   auto_date: string;
   date: string;
   sum: string;
-  non_cash: boolean;
+  payment_type: number;
   receiver: string;
   comment: string;
 }

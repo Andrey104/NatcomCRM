@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input,  OnInit, Output,  ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../../services/deal.service';
 import {NgForm} from '@angular/forms';
 import {MeasurementService} from '../../../services/measurement.service';
+import {NewMeasurement} from '../../../models/measurement/new-measurement';
 
 @Component({
   selector: 'app-dialog-deal-measurement',
@@ -42,10 +43,9 @@ export class DealDialogMeasurementComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    this.measurementService.newMeasurement(this.id, this.form.form.value.payment,
-      this.form.form.value.date,
-      this.form.form.value.time,
-      this.form.form.value.description)
+    const newMeasurement = new NewMeasurement(this.form.form.value.payment, this.form.form.value.date,
+                                              this.form.form.value.time, this.form.form.value.description);
+    this.measurementService.newMeasurement(this.id, newMeasurement)
       .subscribe((result) => {
         this.isRequest = false;
         this.visibleChange.emit(this.visible);

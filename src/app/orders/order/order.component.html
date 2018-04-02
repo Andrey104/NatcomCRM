@@ -1,10 +1,10 @@
-<div class="card horizontal order hover-element hoverable no-border" routerLinkActive="active-card" routerLink="{{order.id}}">
+<div class="col s12 card horizontal order hover-element hoverable no-border" routerLinkActive="active-card" routerLink="{{order.id}}">
   <div class="center-align valign-wrapper">
     <div class="icon status-image">
       <i class="small material-icons icon image {{statusColor(order?.status)}}">{{statusIcon(order?.status)}}</i>
     </div>
   </div>
-  <div class="card-stacked">
+  <div class=" card-stacked col s9 detail-col text">
     <div class="info">
       <div class="col s12 detail-col">
         <div class="company col s6 detail-col">{{order.company?.name | companyName}}</div>

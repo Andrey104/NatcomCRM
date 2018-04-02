@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="!loadPage" class="col s12 detail-col scrollable-page" id="page">
   <div class="row main-row valign-wrapper">
-    <div class="col s5 valign-wrapper detail-col">
+    <div class="col s8 valign-wrapper detail-col">
       <div *ngIf="backUrl" routerLink="{{backUrl}}"
            class="row-back valign-wrapper hover-element no-border">
         <i class="small material-icons no-border icon-arrow-back">
@@ -14,16 +14,7 @@
       <img class="avatar" src="{{deal?.user.type | imageType}}">
       <div>{{deal?.user.first_name}} {{deal?.user.last_name}}</div>
     </div>
-    <div class="col s2">{{getDealStatus(deal?.status)}}</div>
-    <div [style.color]="deal?.contract ? 'green' : 'red'" class="col s2">
-      {{deal?.contract | contract}}
-    </div>
-    <div class="col s3 valign-wrapper">
-      <i class="tiny material-icons icon date-icon">date_range</i>
-      <div class="deal-date">
-        <div>Дата события: {{deal?.task_date | dateFormat: 'date'}}</div>
-      </div>
-    </div>
+    <div class="col s4">{{getDealStatus(deal?.status)}}</div>
   </div>
   <div class="divider"></div>
   <div class="row main-info">
@@ -39,20 +30,30 @@
         </div>
       </div>
       <div class="deal-info">
+        <div [style.color]="deal?.contract ? 'green' : 'red'">
+          {{deal?.contract | contract}}
+        </div>
         <div class="valign-wrapper">
-          <i class="tiny material-icons icon">location_on</i> {{deal?.address | address}}
+          <i class="tiny material-icons icon">date_range</i>
+          <span class="task-date">{{deal?.task_date | dateFormat: 'date'}}</span>
+        </div>
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">location_on</i>
+          <div class="text">{{deal?.address | address}}</div>
         </div>
         <div class="valign-wrapper" *ngIf="deal.address_comment">
-          <i class="tiny material-icons icon">announcement</i> {{deal?.address_comment}}
+          <i class="tiny material-icons icon">announcement</i>
+          <div class="text">{{deal?.address_comment}}</div>
         </div>
         <div class="valign-wrapper">
-          <i class="tiny material-icons icon">attach_money</i> {{deal?.sum | money}}
+          <i class="tiny material-icons icon">attach_money</i>{{deal?.sum | money}}
         </div>
         <div class="valign-wrapper">
-          <i class="tiny material-icons icon">date_range</i> {{deal?.non_cash | nonCash}}
+          <i class="tiny material-icons icon">date_range</i> {{deal?.payment_type | nonCash}}
         </div>
         <div class="valign-wrapper" *ngIf="deal.description">
-          <i class="tiny material-icons icon">comment</i> {{deal?.description}}
+          <i class="tiny material-icons icon">comment</i>
+          <div class="text">{{deal?.description}}</div>
         </div>
       </div>
     </div>
@@ -72,10 +73,10 @@
       <div class="row">
         <div *ngFor="let client of deal?.clients; let i = index" class="col s12">
           <div class="valign-wrapper contact-info forward-block col s12 hover-element"
-               (click)="changeClientDialog(i)">
+               (click)="clientInfoDialog(i)">
             <div class="col s6 valign-wrapper detail-col-right">
               <i class="small material-icons icon">person</i>
-              {{client.client.fio}}
+              <div class="text">{{client.client.fio}}</div>
             </div>
             <div class="col s5 div-number">{{client.client.phones[0].number | phoneFormat}}</div>
             <i class="arrow col s1 material-icons detail-col-left">chevron_right</i>
@@ -91,7 +92,7 @@
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Замеры</span>
         <i *ngIf="!(deal?.status == 4 || deal?.status == 5 || deal?.status == 1)&&showEditButtons"
-           (click)="showMeasurementDialog = !showMeasurementDialog"
+           (click)="showMeasurementModal()"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
     </div>
@@ -153,7 +154,7 @@
       <div class="col s12 offset-s1 no-information">Нет перерасчетов</div>
     </div>
     <div *ngIf="deal?.discounts.length!==0" class="row">
-      <div *ngFor="let discount of deal?.discounts" class="col s10 offset-s1">
+      <div *ngFor="let discount of deal?.discounts" class="col s10 offset-s1 text">
         <p>{{discount.auto_date | dateFormat: 'fullDate'}} {{discount | discount}}</p>
       </div>
     </div>
@@ -173,7 +174,7 @@
       <div class="col s12 offset-s1 no-information">Нет оплат</div>
     </div>
     <div *ngIf="deal?.payments.length!==0" class="row">
-      <div *ngFor="let payment of deal?.payments" class="col s10 offset-s1">
+      <div *ngFor="let payment of deal?.payments" class="col s10 offset-s1 text">
         <p>{{payment | payment}} {{payment.date | dateFormat: 'date'}}</p>
       </div>
     </div>
@@ -184,13 +185,13 @@
     </div>
     <div class="col s12 offset-s1">История заказа:</div>
     <div class="row">
-      <div *ngFor="let action of deal?.order_actions" class="col s10 offset-s1">
+      <div *ngFor="let action of deal?.order_actions" class="col s10 offset-s1 text">
         <p>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'deal'}}</p>
       </div>
     </div>
     <div class="col s12 offset-s1">История сделки:</div>
     <div class="row">
-      <div *ngFor="let action of deal?.actions" class="col s10 offset-s1">
+      <div *ngFor="let action of deal?.actions" class="col s10 offset-s1 text">
         <p>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'deal'}}</p>
       </div>
     </div>
@@ -273,7 +274,14 @@
 <app-add-client [(visible)]="showEditClient"
                 [clients]="dealClients"
                 (successClient)="successDealClient($event)"></app-add-client>
+<app-deal-dialog-client-info [(visible)]="showClientDialog"
+                             [client]="clientInfo"
+                             [showEditButtons]="showEditButtons"
+                             (successClientInfoDialog)="successClientInfoDialog($event)">
+</app-deal-dialog-client-info>
 <app-change-client [(visible)]="showChangeClientDialog"
-                   [client]="changeClient"
-                   (successChangeClient)="successChangeClient($event)"></app-change-client>
+                   [client]="clientChange"
+                   (successChangeClient)="successClientChangeDialog($event)"></app-change-client>
+<app-confirm-modal [(confirmModal)]="confirmModal"
+                   (userAnswer)="confirmModalAnswer($event)"></app-confirm-modal>
 

@@ -17,7 +17,10 @@ export class MeasurementPageComponent implements OnInit {
   lastPage: boolean;
   status: { statusName: string, statusUrl: string };
   term$ = new Subject<string>();
+  termDate$ = new Subject<string>();
   inputText = '';
+  date = '';
+  pattern = /\d{4}-\d{2}-\d{2}/;
 
   constructor(private measurementService: MeasurementService,
               private activatedRoute: ActivatedRoute,
@@ -27,6 +30,7 @@ export class MeasurementPageComponent implements OnInit {
   ngOnInit() {
     this.subscribeOnUrl();
     this.subscribeOnInputField();
+    this.subscribeOnDateField();
   }
 
   showMeasurements() {
@@ -49,6 +53,7 @@ export class MeasurementPageComponent implements OnInit {
       .subscribe((params) => {
         this.measurementService.measurementStatus = params['status'];
         this.inputText = '';
+        this.date = '';
         this.status = this.utils.statusUrlMeasurement(params['status']);
         this.measurements = [];
         this.showMeasurements();
@@ -62,24 +67,36 @@ export class MeasurementPageComponent implements OnInit {
       .subscribe(
         (term) => {
           this.inputText = term;
-          this.search(term);
+          this.search();
+        }
+      );
+  }
+
+  subscribeOnDateField() {
+    this.termDate$
+      .subscribe(
+        (term) => {
+          this.date = term;
+          this.search();
         }
       );
   }
 
   onScrollMeasurement() {
-    if (this.inputText === '') {
+    if (this.inputText === '' && this.date === '') {
       this.nextPage();
     } else {
       this.nextFilterPage();
     }
   }
 
-  search(text: string) {
-    if (text !== '') {
+  search() {
+    if ((this.date !== '' || this.inputText !== '') && this.measurements !== []) {
+      this.measurements = [];
       this.load = true;
       this.page = 1;
-      this.measurementService.getFilterMeasurements(this.page, text)
+      const params = this.utils.getSearchParams(this.inputText, this.date);
+      this.measurementService.getFilterMeasurements(this.page, params)
         .subscribe((measurementPage) => {
             this.measurements = measurementPage.results;
             if (measurementPage.next === null) {
@@ -92,6 +109,7 @@ export class MeasurementPageComponent implements OnInit {
         );
       document.getElementById('scroll').scrollTop = 0;
     } else {
+      this.measurements = [];
       this.showMeasurements();
     }
   }
@@ -115,7 +133,8 @@ export class MeasurementPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.measurementService.getFilterMeasurements(this.page, this.inputText)
+      const params = this.utils.getSearchParams(this.inputText, this.date);
+      this.measurementService.getFilterMeasurements(this.page, params)
         .subscribe((measurementPage) => {
           this.measurements = this.measurements.concat(measurementPage.results);
           if (measurementPage.next === null) {
