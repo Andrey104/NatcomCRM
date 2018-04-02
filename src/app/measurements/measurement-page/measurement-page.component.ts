@@ -53,6 +53,7 @@ export class MeasurementPageComponent implements OnInit {
       .subscribe((params) => {
         this.measurementService.measurementStatus = params['status'];
         this.inputText = '';
+        this.date = '';
         this.status = this.utils.statusUrlMeasurement(params['status']);
         this.measurements = [];
         this.showMeasurements();

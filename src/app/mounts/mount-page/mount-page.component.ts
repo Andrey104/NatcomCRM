@@ -58,6 +58,7 @@ export class MountPageComponent implements OnInit {
     this.activatedRoute.params
       .subscribe((params) => {
         this.inputText = '';
+        this.date = '';
         this.status = this.utils.statusUrlMount(params['status']);
         this.mountService.statusMount = params['status'];
         this.mounts = [];
@@ -116,8 +117,7 @@ export class MountPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      const params = this.utils.getSearchParams(this.inputText, this.date);
-      this.mountService.getAllMounts(this.page, params)
+      this.mountService.getAllMounts(this.page, this.status.statusUrl)
         .subscribe((mounts) => {
           this.mounts = this.mounts.concat(mounts.results);
           if (mounts.next === null) {
@@ -132,7 +132,8 @@ export class MountPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.mountService.getFilterMounts(this.page, this.inputText)
+      const params = this.utils.getSearchParams(this.inputText, this.date);
+      this.mountService.getFilterMounts(this.page, params)
         .subscribe(mountsPage => {
           this.mounts = this.mounts.concat(mountsPage.results);
           this.load = false;
@@ -153,7 +154,7 @@ export class MountPageComponent implements OnInit {
         .subscribe(next => {
           if (next) {
             this.mounts = [];
-            if (this.inputText === '') {
+            if (this.inputText === '' && this.date === '') {
               this.showMounts();
             } else {
               this.search();
