@@ -557,8 +557,8 @@ export class UtilsService {
               cause = 'по инициативе компании ';
               break;
           }
-          break;
         }
+          break;
       }
       case 5: {
         type = ' добавил(а) сопутствующий расход ';

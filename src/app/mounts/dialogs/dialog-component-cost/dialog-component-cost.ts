@@ -1,15 +1,14 @@
 import {Component, EventEmitter, Input,  OnInit, Output,  ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NgForm} from '@angular/forms';
-import {StageMountService} from '../../../services/stage-mount.service';
 import {MountService} from '../../../services/mount.service';
 
 @Component({
-  selector: 'app-dialog-cost',
-  templateUrl: './dialog-cost.html',
-  styleUrls: ['./dialog-cost.css'],
+  selector: 'app-dialog-component-cost',
+  templateUrl: './dialog-component-cost.html',
+  styleUrls: ['./dialog-component-cost.css'],
 })
-export class DialogCostComponent implements OnInit {
+export class DialogCostComponentComponent implements OnInit {
   id;
   @Input() closable = true;
   @Input() mount;
@@ -42,7 +41,7 @@ export class DialogCostComponent implements OnInit {
     this.isSubmitted = true;
     this.formData = this.form.value;
     console.log(this.form.form.value.sum);
-    this.mountService.addCost(this.mount.id, this.form.form.value.sum,
+    this.mountService.addCostComponent(this.mount.id, this.form.form.value.sum,
       this.form.form.value.comment)
       .subscribe((result) => {
         this.isRequest = false;

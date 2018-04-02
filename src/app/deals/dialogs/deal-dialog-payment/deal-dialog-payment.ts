@@ -49,6 +49,7 @@ export class DealDialogPaymentComponent implements OnInit {
         this.successDealPayment.emit(result);
         this.close();
       }, (error) => {
+        this.isRequest = false;
         console.log(error);
         alert('Произошла ошибка');
       });

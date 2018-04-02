@@ -30,6 +30,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   showTransferMount = false;
   showSetDateMount = false;
   showAddCost = false;
+  showAddCostComponent = false;
   needSubscribe = true;
   showToDealButton = true;
   showAddInstaller = false;
