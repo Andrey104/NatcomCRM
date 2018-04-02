@@ -93,7 +93,7 @@
     <div class="col s2 center-align header">
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Затраты на комплектующие</span>
-        <i *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons"
+        <i *ngIf="showEditButtons"
            (click)="showAddCostComponent = !showAddCostComponent"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
