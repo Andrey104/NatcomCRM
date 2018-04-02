@@ -18,10 +18,6 @@ export class MountService extends BaseApi {
     return this.get(`mounts/?page=${page.toString()}&${status}`);
   }
 
-  getMounts(idDeal: number): Observable<DealMount[]> {
-    return this.get(`deals/${idDeal}/mounts`);
-  }
-
   sendComment(idMount: number, comment: string): Observable<OurComment> {
     return this.post(`mounts/${idMount.toString()}/comment/`, {text: comment});
   }
@@ -31,7 +27,7 @@ export class MountService extends BaseApi {
   }
 
   getFilterMounts(page: number, text: string) {
-    return this.get(`mounts/search?text=${text}`);
+    return this.get(`mounts/search?page=${page}&${text}`);
   }
 
   mountReject(idMount: string, cause: number, comment: string): Observable<OurComment> {

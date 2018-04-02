@@ -21,7 +21,9 @@ export class DealPageComponent implements OnInit {
   lastPage: boolean;
   load: boolean;
   term$ = new Subject<string>();
+  termDate$ = new Subject<string>();
   inputText = '';
+  date = '';
   private subscriptions: Subscription[] = [];
 
   constructor(private dealService: DealService,
@@ -32,11 +34,13 @@ export class DealPageComponent implements OnInit {
   ngOnInit() {
     this.subscribeOnUrl();
     this.subscribeOnInputField();
+    this.subscribeOnDateField();
   }
 
   subscribeOnUrl() {
     this.activatedRoute.params.subscribe(params => {
       this.inputText = '';
+      this.date = '';
       this.status = this.utils.statusUrlDeal(params['status']);
       this.dealService.statusDeal = params['status'];
       this.dealPage = [];
@@ -51,7 +55,17 @@ export class DealPageComponent implements OnInit {
       .subscribe(
         (term) => {
           this.inputText = term;
-          this.search(term);
+          this.search();
+        }
+      );
+  }
+
+  subscribeOnDateField() {
+    this.termDate$
+      .subscribe(
+        (term) => {
+          this.date = term;
+          this.search();
         }
       );
   }
@@ -71,12 +85,14 @@ export class DealPageComponent implements OnInit {
       }, error2 => log(error2));
   }
 
-  search(text: string) {
-    if (text !== '') {
+  search() {
+    if ((this.date !== '' || this.inputText !== '') && this.dealPage !== []) {
+      this.dealPage = [];
       this.page = 1;
       this.load = true;
       this.lastPage = false;
-      this.dealService.getFilterDeals(this.page, text)
+      const params = this.utils.getSearchParams(this.inputText, this.date);
+      this.dealService.getFilterDeals(this.page, params)
         .subscribe(deals => {
           this.dealPage = deals.results;
           if (deals.next === null) {
@@ -85,12 +101,13 @@ export class DealPageComponent implements OnInit {
           this.load = false;
         });
     } else {
+      this.dealPage = [];
       this.showDeals();
     }
   }
 
   onScrollDeal() {
-    if (this.inputText === '') {
+    if (this.inputText === '' && this.date === '') {
       this.nextPage();
     } else {
       this.nextFilterPage();
@@ -116,7 +133,8 @@ export class DealPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.dealService.getFilterDeals(this.page, this.inputText)
+      const params = this.utils.getSearchParams(this.inputText, this.date);
+      this.dealService.getFilterDeals(this.page, params)
         .subscribe(dealPage => {
           this.dealPage = this.dealPage.concat(dealPage.results);
           if (dealPage.next === null) {
@@ -131,13 +149,12 @@ export class DealPageComponent implements OnInit {
     if (c.needSubscribe === true) {
       const modal = c.updateList
         .subscribe(next => {
-          console.log(c + 'в сделке');
           if (next) {
             this.dealPage = [];
-            if (this.inputText === '') {
+            if (this.inputText === '' && this.date === '') {
               this.showDeals();
             } else {
-              this.search(this.inputText);
+              this.search();
             }
           }
         });

@@ -32,7 +32,7 @@ export class DealService extends BaseApi {
   }
 
   getFilterDeals(page: number, text: string): Observable<DealPage> {
-    return this.get(`deals/search?page=${page.toString()}&text=${text}`);
+    return this.get(`deals/search?page=${page}&${text}`);
   }
 
   dealComment(idDeal: number, comment: string): Observable<Object> {
