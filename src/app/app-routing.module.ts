@@ -23,19 +23,21 @@ import {BrigadesComponent} from './settings-page/brigades/brigades.component';
 import {CompaniesComponent} from './settings-page/companies/companies.component';
 import {SettingsPageComponent} from './settings-page/settings-page.component';
 import {ReviewComponent} from './admin/review/review.component';
+import {DealMeasurement} from './models/deal/deal_measurement';
 
 // import { AuthGuard } from './_guards/index';
 // deals/id/mounts
 
 const measurements_routes: Routes = [
   {path: ':measurement_id', component: DealMeasurementComponent},
-  {path: ':measurement_id/deal/:id', component: DealDetailComponent}
+  {path: ':measurement_id/deal/:id', component: DealDetailComponent},
+  {path: ':measurement_id/deal/:id/mount/:mount_id', component: DealMountComponent}
 ];
 
 const mounts_routes: Routes = [
   {path: ':mount_id', component: DealMountComponent},
   {path: ':mount_id/deal/:id', component: DealDetailComponent},
-  {path: ':mount_id/deal/:id/mount/:mount_id', component: DealMountComponent},
+  {path: ':mount_id/deal/:id/measurement/:measurement_id', component: DealMeasurementComponent},
 ];
 
 const deals_routes: Routes = [
@@ -53,6 +55,10 @@ const orders_routes: Routes = [
   {
     path: ':id/client/:client_id/client_deal/:client_deal_id/measurement/:measurement_id',
     component: DealMeasurementComponent
+  },
+  {
+    path: ':id/client/:client_id/client_deal/:client_deal_id/mount/:mount_id',
+    component: DealMountComponent
   }
 ];
 

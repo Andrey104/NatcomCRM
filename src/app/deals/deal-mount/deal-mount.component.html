@@ -3,12 +3,12 @@
 </div>
 <div *ngIf="!loadPage" class="mainDiv col s12 detail-col scrollable-page" id="page">
   <div class="col s12 detail-col valign-wrapper left-align">
-    <div routerLink="{{backRouter}}"
+    <div *ngIf="backRouter" routerLink="{{backRouter}}"
          class="col s2 row-back valign-wrapper hover-element no-border">
       <i class="small material-icons no-border icon-arrow-back">
         keyboard_arrow_left
       </i>
-      <span class="back icon-arrow-back">Назад</span>
+      <span class="back icon-arrow-back">Назад к сделке</span>
     </div>
     <div class="col s4 valign-wrapper">
       <img class="avatar" src="{{mount?.user?.type | imageType}}">
@@ -24,7 +24,9 @@
       <div [appColorCompany]="mount?.company?.symbol" class="company-symbol">{{mount?.company?.symbol}}</div>
       <div class="company-name">{{mount?.company?.name}}</div>
     </div>
-    <div class=" col s2 valign-wrapper no-border" routerLink="deal/{{dealId}}">
+    <div *ngIf="showToDealButton"
+         class=" col s2 valign-wrapper no-border"
+         routerLink="deal/{{dealId}}">
       <div class="btn-go-deal valign-wrapper no-border">
         К сделке<i class="normal  material-icons  deal-icon">reply</i>
       </div>
