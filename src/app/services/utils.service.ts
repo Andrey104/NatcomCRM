@@ -525,18 +525,14 @@ export class UtilsService {
     let cause = '';
     switch (action.type) {
       case 1: {
-        type = ' добавил(а) стадию ';
+        type = ' добавил(а) дату ';
         break;
       }
       case 2: {
-        type = ' изменил(а) дату ';
-        break;
-      }
-      case 3: {
         type = ' закрыл(а) монтаж(успешно) ';
         break;
       }
-      case 4: {
+      case 3: {
         type = ' отказался(лась) от монтажа ';
         if (action.cause) {
           switch (action.cause) {
@@ -548,6 +544,32 @@ export class UtilsService {
               break;
           }
         }
+        break;
+      }
+      case 4: {
+        type = ' перенес(ла) монтаж ';
+        if (action.cause) {
+          switch (action.cause) {
+            case 1:
+              cause = 'по инициативе клиента ';
+              break;
+            case 2:
+              cause = 'по инициативе компании ';
+              break;
+          }
+        }
+          break;
+      }
+      case 5: {
+        type = ' добавил(а) сопутствующий расход ';
+        break;
+      }
+      case 6: {
+        type = ' добавил(а)/изменил(а) расход на комплектующие ';
+        break;
+      }
+      case 7: {
+        type = ' изменил(а) монтажников ';
         break;
       }
     }

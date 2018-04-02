@@ -9,6 +9,7 @@ import {DealService} from '../../services/deal.service';
 import {DOCUMENT} from '@angular/common';
 import {OrderService} from '../../services/order.service';
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import {MountService} from '../../services/mount.service';
 
 @Component({
   selector: 'app-deal-measurement',
@@ -38,7 +39,8 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
               private dealService: DealService,
               @Inject(DOCUMENT) private document: Document,
               private orderService: OrderService,
-              private sanitization: DomSanitizer) {
+              private sanitization: DomSanitizer,
+              private mountService: MountService) {
     this.url = this.document.location.href;
   }
 
@@ -67,6 +69,10 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
       } else if (this.url.indexOf('deals') !== -1) {
         this.showToDealButton = false;
         this.backUrl = `/deals/${this.dealService.statusDeal}/${params['id']}`;
+      } else if (this.url.indexOf('mounts') !== -1) {
+        this.showToDealButton = false;
+        this.backUrl = `/mounts/${this.mountService.statusMount}/${params['mount_id']}`;
+        this.backUrl += `/deal/${params['id']}`;
       }
     });
   }

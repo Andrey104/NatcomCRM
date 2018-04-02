@@ -8,11 +8,11 @@ export class MountStatusPipe implements PipeTransform {
     let statusStr: string;
     switch (status) {
       case 0: {
-        statusStr = 'Обработка';
+        statusStr = 'Добавлен';
         break;
       }
       case 1: {
-        statusStr = 'Добавлена стадия';
+        statusStr = 'В процессе';
         break;
       }
       case 2: {

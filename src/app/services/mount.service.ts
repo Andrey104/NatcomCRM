@@ -5,6 +5,7 @@ import {DealMount} from '../models/deal/deal_mount';
 import {OurComment} from '../models/comment';
 import {MountPage} from '../models/mount/mount-page';
 import {BaseApi} from '../core/base-api';
+import {Cost} from '../models/cost';
 
 @Injectable()
 export class MountService extends BaseApi {
@@ -41,17 +42,31 @@ export class MountService extends BaseApi {
     return this.post(`mounts/${idMount}/close/`);
   }
 
-  mountDateTransfer(idMount: string, date: string, comment: string): Observable<OurComment> {
+  mountSetDate(idMount: string, date: string, comment: string): Observable<OurComment> {
     if (comment === '') {
       comment = null;
     }
     return this.post(`mounts/${idMount}/date/`, {date, comment});
   }
 
-  mountStageAdd(idMount: string, date: string, description: string): Observable<OurComment> {
-    if (description === '') {
-      description = null;
+  mountTransfer(idMount: string, new_date: string, comment: string, cause: number): Observable<OurComment> {
+    if (comment === '') {
+      comment = null;
     }
-    return this.post(`mounts/${idMount}/stage/`, {date, installers: [], description});
+    return this.post(`mounts/${idMount}/transfer/`, {new_date, comment, cause});
+  }
+
+  addCost(idMount: string, sum: number, comment: string): Observable<Cost> {
+    if (comment === '') {
+      comment = null;
+    }
+    return this.post(`mounts/${idMount}/cost/`, {sum, comment});
+  }
+
+  addCostComponent(idMount: string, sum: number, comment: string): Observable<Cost> {
+    if (comment === '') {
+      comment = null;
+    }
+    return this.post(`mounts/${idMount}/component_costs/`, {sum, comment});
   }
 }

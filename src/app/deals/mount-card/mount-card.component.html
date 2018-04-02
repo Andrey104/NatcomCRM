@@ -1,13 +1,17 @@
-<div class="valign-wrapper col s12">
-  <div class="image-content">
+<div class="col s12 valign-wrapper forward-block hover-element no-border"
+     routerLink="{{urlToMount}}">
+  <div class="valign-wrapper col s11">
+    <div class="image-content">
       <i class="small material-icons icon image {{statusColor(mount?.status)}}">{{statusIcon(mount?.status)}}</i>
-  </div>
-  <div class="content-dialog">
-    <div class="mount-time valign-wrapper">
-      <i class="tiny material-icons icon">access_time</i> {{mount?.date | mountDate}}
     </div>
-    <div class="name valign-wrapper">
-      <i class="tiny material-icons icon">error_outline</i> {{mount?.status | mountStatus}}
+    <div class="content-dialog">
+      <div class="mount-time valign-wrapper">
+        <i class="tiny material-icons icon">access_time</i> {{mount?.date | mountDate}}
+      </div>
+      <div class="name valign-wrapper">
+        <i class="tiny material-icons icon">error_outline</i> {{mount?.status | mountStatus}}
+      </div>
     </div>
   </div>
+  <i class="arrow col s1 material-icons right-align">chevron_right</i>
 </div>

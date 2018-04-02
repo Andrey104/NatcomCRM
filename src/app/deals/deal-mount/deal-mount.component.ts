@@ -7,6 +7,8 @@ import {DOCUMENT} from '@angular/common';
 import {DealService} from '../../services/deal.service';
 import {InstallerPosition} from '../../models/installers/installer_position';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {OrderService} from '../../services/order.service';
+import {MeasurementService} from '../../services/measurement.service';
 
 @Component({
   selector: 'app-deal-mount',
@@ -25,10 +27,12 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   loadPage: boolean;
   showRejectMount = false;
   showCompleteMount = false;
-  showMountStageAdd = false;
   showTransferMount = false;
+  showSetDateMount = false;
   showAddCost = false;
+  showAddCostComponent = false;
   needSubscribe = true;
+  showToDealButton = true;
   showAddInstaller = false;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   addInstallerModalState: { open: Boolean, installers?: InstallerPosition[], stageId: string };
@@ -38,6 +42,8 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
               private mountService: MountService,
               private dealService: DealService,
               private utils: UtilsService,
+              private orderService: OrderService,
+              private measurementService: MeasurementService,
               @Inject(DOCUMENT) private document: Document) {
     this.url = this.document.location.href;
   }
@@ -61,26 +67,42 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   // }
 
   successMountUpdateAndList() {
-    console.log(this.updateList);
     this.loadPage = true;
     this.getMountById();
     this.updateList.next(true);
   }
 
-
   getBackRoute() {
-    this.activatedRoute.params.subscribe(params => {
-      this.idDeal = params['id'];
-      this.id = params['mount_id'];
-      const index = this.url.indexOf('deal/');
-      if (index === -1) {
-        this.backRouter = `/deals/${this.dealService.statusDeal}/${this.idDeal}`;
-      } else {
-        this.backRouter = `/mounts/${this.mountService.statusMount}/${this.id}/deal/${this.idDeal}`;
-        console.log(this.backRouter);
+    this.activatedRoute.params.subscribe((params) => {
+      if (this.url.indexOf('client_deal') !== -1) {
+        this.showToDealButton = false;
+        this.backRouter = `/orders/${this.orderService.getOrderStatus()}/${params['id']}`;
+        this.backRouter += `/client/${params['client_id']}/client_deal/${params['client_deal_id']}`;
+      } else if (this.url.indexOf('deals') !== -1) {
+        this.showToDealButton = false;
+        this.backRouter = `/deals/${this.dealService.statusDeal}/${params['id']}`;
+      } else if (this.url.indexOf('measurements') !== -1) {
+        this.showToDealButton = false;
+        this.backRouter = `/measurements/${this.measurementService.measurementStatus}/${params['measurement_id']}`;
+        this.backRouter += `/deal/${params['id']}`;
       }
     });
   }
+
+
+  // getBackRoute() {
+  //   this.activatedRoute.params.subscribe(params => {
+  //     this.idDeal = params['id'];
+  //     this.id = params['mount_id'];
+  //     const index = this.url.indexOf('deal/');
+  //     if (index === -1) {
+  //       this.backRouter = `/deals/${this.dealService.statusDeal}/${this.idDeal}`;
+  //     } else {
+  //       this.backRouter = `/mounts/${this.mountService.statusMount}/${this.id}/deal/${this.idDeal}`;
+  //       console.log(this.backRouter);
+  //     }
+  //   });
+  // }
 
   successMountUpdate() {
     this.loadPage = true;

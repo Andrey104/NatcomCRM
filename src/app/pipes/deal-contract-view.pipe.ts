@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DealContractView implements PipeTransform {
   transform(value: string): string {
-    while (value.length < 5) {
+    while (String(value).length < 5) {
       value = '0' + value;
     }
     return value;

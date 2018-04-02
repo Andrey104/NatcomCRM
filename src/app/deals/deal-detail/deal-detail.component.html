@@ -125,16 +125,11 @@
     <div class="col s12 offset-s1 no-information">Нет монтажей</div>
   </div>
   <div *ngIf="deal?.mounts.length!==0" class="row">
-    <div *ngFor="let mount of deal?.mounts; let i = index"
-         class="col s12 valign-wrapper forward-block hover-element no-border"
-         routerLink="mount/{{mount?.id}}">
+    <div *ngFor="let mount of deal?.mounts; let i = index">
       <div *ngIf="i!==0">
-        <div class="row">
-          <div class="divider"></div>
-        </div>
+        <div class="divider"></div>
       </div>
-      <app-mount-card [mount]="mount" class="col s11"></app-mount-card>
-      <i class="arrow col s1 material-icons right-align">chevron_right</i>
+      <app-mount-card [mount]="mount" class="col s12"></app-mount-card>
     </div>
   </div>
   <div class="deal-action">

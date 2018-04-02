@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input,  OnInit, Output,  ViewChild} from '@angu
 import {ActivatedRoute} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {StageMountService} from '../../../services/stage-mount.service';
+import {MountService} from '../../../services/mount.service';
 
 @Component({
   selector: 'app-dialog-cost',
@@ -21,7 +22,7 @@ export class DialogCostComponent implements OnInit {
   formData = {};
 
   constructor(private activatedRoute: ActivatedRoute,
-              private stageService: StageMountService) {
+              private mountService: MountService) {
   }
 
 
@@ -41,7 +42,7 @@ export class DialogCostComponent implements OnInit {
     this.isSubmitted = true;
     this.formData = this.form.value;
     console.log(this.form.form.value.sum);
-    this.stageService.addCost(this.id, this.form.form.value.sum,
+    this.mountService.addCost(this.mount.id, this.form.form.value.sum,
       this.form.form.value.comment)
       .subscribe((result) => {
         this.isRequest = false;
@@ -49,6 +50,7 @@ export class DialogCostComponent implements OnInit {
         this.successCost.emit(result);
         this.close();
       }, (error) => {
+        this.isRequest = false;
         alert('Произошла ошибка');
       });
   }
