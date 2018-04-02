@@ -9,6 +9,7 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, Output, ViewChild
 export class InputSearchComponent implements OnChanges {
   @Input() statusName;
   @Output() out = new EventEmitter<string>();
+  @Output() outDate = new EventEmitter<string>();
   @ViewChild('input') input: ElementRef;
 
   constructor() {
@@ -22,6 +23,10 @@ export class InputSearchComponent implements OnChanges {
 
   textOut(text: string) {
     this.out.emit(text);
+  }
+
+  dateOut(date: string) {
+    this.outDate.emit(date);
   }
 
 }

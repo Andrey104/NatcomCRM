@@ -120,6 +120,7 @@ import { ClientDealComponent } from './client-deal/client-deal.component';
 import {DialogCostComponent} from './mounts/dialogs/dialog-cost/dialog-cost';
 import {AddInstallerComponent} from './mounts/dialogs/add-installer/add-installer.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import {MeasurementTimePipe} from './pipes/measurement-time.pipe';
 
 
 @NgModule({
@@ -223,6 +224,7 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     DealDialogClientInfoComponent,
     ClientDealComponent,
     ConfirmModalComponent,
+    MeasurementTimePipe
   ],
   imports: [
     BrowserModule,

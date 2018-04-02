@@ -557,4 +557,16 @@ export class UtilsService {
 
     return type + cause + comment;
   }
+
+  getSearchParams(inputText: string, date: string): string {
+    let params: string;
+    if (inputText !== '' && date !== '') {
+      params = `text=${inputText}&date=${date}`;
+    } else if (inputText !== '') {
+      params = `text=${inputText}`;
+    } else if (date !== '') {
+      params = `date=${date}`;
+    }
+    return params;
+  }
 }

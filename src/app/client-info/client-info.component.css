@@ -3,6 +3,18 @@
   background-color: #7481a6;
 }
 
+.client-info::-webkit-scrollbar {
+  width: 0;
+}
+
+.client-info {
+  -ms-overflow-style: none;
+}
+
+.client-info {
+  overflow: -moz-scrollbars-none;
+}
+
 .row {
   margin-bottom: 0;
 }

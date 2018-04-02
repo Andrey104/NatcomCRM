@@ -17,6 +17,7 @@ export class MeasurementPageComponent implements OnInit {
   lastPage: boolean;
   status: { statusName: string, statusUrl: string };
   term$ = new Subject<string>();
+  termDate$ = new Subject<string>();
   inputText = '';
   date = '';
   pattern = /\d{4}-\d{2}-\d{2}/;
@@ -29,6 +30,7 @@ export class MeasurementPageComponent implements OnInit {
   ngOnInit() {
     this.subscribeOnUrl();
     this.subscribeOnInputField();
+    this.subscribeOnDateField();
   }
 
   showMeasurements() {
@@ -63,30 +65,36 @@ export class MeasurementPageComponent implements OnInit {
       .distinctUntilChanged()
       .subscribe(
         (term) => {
-          this.search(term);
+          this.inputText = term;
+          this.search();
+        }
+      );
+  }
+
+  subscribeOnDateField() {
+    this.termDate$
+      .subscribe(
+        (term) => {
+          this.date = term;
+          this.search();
         }
       );
   }
 
   onScrollMeasurement() {
-    if (this.inputText === '') {
+    if (this.inputText === '' && this.date === '') {
       this.nextPage();
     } else {
       this.nextFilterPage();
     }
   }
 
-  search(text: string) {
-    if (text.match(this.pattern) !== null) {
-      this.date = text;
-    } else {
-      this.inputText = text;
-    }
-    if (this.date !== '' || this.inputText !== '') {
+  search() {
+    if ((this.date !== '' || this.inputText !== '') && this.measurements !== []) {
+      this.measurements = [];
       this.load = true;
       this.page = 1;
-      const params = this.getParams();
-      console.log(params);
+      const params = this.utils.getSearchParams(this.inputText, this.date);
       this.measurementService.getFilterMeasurements(this.page, params)
         .subscribe((measurementPage) => {
             this.measurements = measurementPage.results;
@@ -100,20 +108,9 @@ export class MeasurementPageComponent implements OnInit {
         );
       document.getElementById('scroll').scrollTop = 0;
     } else {
+      this.measurements = [];
       this.showMeasurements();
     }
-  }
-
-  getParams(): string {
-    let params: string;
-    if (this.inputText !== '' && this.date !== '') {
-      params = `text=${this.inputText}&text=${this.date}`;
-    } else if (this.inputText !== '') {
-      params = `text=${this.inputText}`;
-    } else if (this.date !== '') {
-      params = `text=${this.date}`;
-    }
-    return params;
   }
 
   nextPage() {
@@ -135,7 +132,8 @@ export class MeasurementPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.measurementService.getFilterMeasurements(this.page, this.inputText)
+      const params = this.utils.getSearchParams(this.inputText, this.date);
+      this.measurementService.getFilterMeasurements(this.page, params)
         .subscribe((measurementPage) => {
           this.measurements = this.measurements.concat(measurementPage.results);
           if (measurementPage.next === null) {
