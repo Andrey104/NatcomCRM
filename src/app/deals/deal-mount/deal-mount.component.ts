@@ -28,6 +28,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   showTransferMount = false;
   showSetDateMount = false;
   showAddCost = false;
+  showAddCostComponent = false;
   needSubscribe = true;
   showAddInstaller = false;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);

@@ -122,6 +122,7 @@ import {MeasurementTimePipe} from './pipes/measurement-time.pipe';
 import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transfer/mount-dialog-transfer';
 import {MountDialogSetDateComponent} from './mounts/dialogs/mount-dialog-set-date/mount-dialog-set-date';
 import {MountTransferCausePipe} from './pipes/mount-transfer-cause.pipe';
+import {DialogCostComponentComponent} from './mounts/dialogs/dialog-component-cost/dialog-component-cost';
 
 
 @NgModule({
@@ -227,6 +228,7 @@ import {MountTransferCausePipe} from './pipes/mount-transfer-cause.pipe';
     MeasurementTimePipe,
     MountDialogSetDateComponent,
     MountTransferCausePipe,
+    DialogCostComponentComponent
   ],
   imports: [
     BrowserModule,

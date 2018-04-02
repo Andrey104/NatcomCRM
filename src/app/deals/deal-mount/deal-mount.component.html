@@ -74,6 +74,7 @@
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Затраты</span>
         <i *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons"
+           (click)="showAddCost = !showAddCost"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
     </div>
@@ -93,6 +94,7 @@
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Затраты на комплектующие</span>
         <i *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons"
+           (click)="showAddCostComponent = !showAddCostComponent"
            class="material-icons hover-element center-dialog-title">add_circle_outline</i>
       </div>
     </div>
@@ -103,7 +105,8 @@
   </div>
   <div class="row col s12 valign-wrapper installer" *ngFor="let cost of mount.component_costs">
     <div>
-      <span id="cost">{{cost.sum | money}} - {{cost.comment}}</span>
+      <span id="cost">{{cost.sum | money}}</span>
+      <span *ngIf="cost.comment">- {{cost.comment}}</span>
     </div>
   </div>
   <div class="col s12 row valign-wrapper detail-col">
@@ -179,3 +182,7 @@
 <!--<app-add-installer [modalState]="addInstallerModalState" (onClose)="closeAddInstallerModal($event)"></app-add-installer>-->
 <app-dialog-cost [mount]="mount" (successCost)="successMountUpdate()"
                  [(visible)]="showAddCost"></app-dialog-cost>
+
+<app-dialog-component-cost [mount]="mount" (successCost)="successMountUpdate()"
+[(visible)]="showAddCostComponent"></app-dialog-component-cost>
+
