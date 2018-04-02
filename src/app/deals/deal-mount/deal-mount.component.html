@@ -4,7 +4,7 @@
 <div *ngIf="!loadPage" class="mainDiv col s12 detail-col scrollable-page" id="page">
   <div class="col s12 detail-col valign-wrapper left-align">
     <div *ngIf="backRouter" routerLink="{{backRouter}}"
-         class="col s2 row-back valign-wrapper hover-element no-border">
+         class="col s3 row-back valign-wrapper hover-element no-border">
       <i class="small material-icons no-border icon-arrow-back">
         keyboard_arrow_left
       </i>
@@ -14,8 +14,7 @@
       <img class="avatar" src="{{mount?.user?.type | imageType}}">
       <div>{{mount?.user?.first_name}} {{mount?.user?.last_name}}</div>
     </div>
-
-    <div class="col s8">{{mount?.status | mountStatus}}</div>
+    <div class="col s4">{{mount?.status | mountStatus}}</div>
     <div class="col s1 namePage">Монтаж</div>
   </div>
   <div class="col s12 divider detail-col"></div>
