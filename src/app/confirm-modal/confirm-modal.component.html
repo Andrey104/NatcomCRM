@@ -1,0 +1,9 @@
+<div *ngIf="confirmModal.showConfirmDialog" class="dialog">
+  <i *ngIf="closable" class="material-icons hover-element dialog-close-btn"
+     (click)="onClose()">close
+  </i>
+    <div class="message-container">{{confirmModal?.confirmMessage}}</div>
+    <button class="btn-dialog-cancel" (click)="onClose()">Нет</button>
+    <button class="btn-dialog-submit" (click)="success()">Да</button>
+</div>
+<div *ngIf="confirmModal.showConfirmDialog" class="overlay-dialog" (click)="onClose()"></div>

@@ -5,7 +5,9 @@
        [infiniteScrollThrottle]="300"
        [scrollWindow]="false"
        (scrolled)="onScrollDeal()">
-    <app-input-search [statusName]="status?.statusName" (out)="term$.next($event)"></app-input-search>
+    <app-input-search [statusName]="status?.statusName"
+                      (out)="term$.next($event)"
+                      (outDate)="termDate$.next($event)"></app-input-search>
     <app-deal *ngFor="let deal of dealPage"
                [deal]="deal">
     </app-deal>

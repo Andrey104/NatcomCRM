@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Client} from '../models/clients/client';
 import {ClientService} from '../services/client.service';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
-import {Phone} from '../models/phone';
-import {OrderAction} from '../models/orders/order_action';
 import {UtilsService} from '../services/utils.service';
-import {Location} from '@angular/common';
 import {OrderService} from '../services/order.service';
+import {DOCUMENT} from '@angular/common';
+import {DealService} from '../services/deal.service';
 
 @Component({
   selector: 'app-client-info',
@@ -20,15 +19,18 @@ export class ClientInfoComponent implements OnInit {
   private id_client: number;
   id: number;
   loader: boolean;
-  orderStatus: string;
   backUrl: string;
   changeClient: Client = null;
   showChangeClientDialog = false;
+  url: string;
 
   constructor(private orderService: OrderService,
               private clientService: ClientService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private dealService: DealService,
+              @Inject(DOCUMENT) private document: Document) {
+    this.url = this.document.location.href;
   }
 
   ngOnInit() {
@@ -40,9 +42,8 @@ export class ClientInfoComponent implements OnInit {
       .subscribe(params => {
         this.id = params['id'];
         this.id_client = params['client_id'];
-        this.orderStatus = this.orderService.getOrderStatus();
-        this.backUrl = `/orders/${this.orderStatus}/${this.id.toString()}`;
         this.loader = true;
+        this.getBackUrl();
         this.clientService.getClient(this.id_client)
           .subscribe(client => {
             this.client = client;
@@ -51,17 +52,27 @@ export class ClientInfoComponent implements OnInit {
       });
   }
 
+  getBackUrl() {
+    if (this.url.indexOf('orders') !== -1) {
+      const orderStatus = this.orderService.getOrderStatus();
+      this.backUrl = `/orders/${orderStatus}/${this.id.toString()}`;
+    } else if (this.url.indexOf('deals') !== -1) {
+      const dealStatus = this.dealService.statusDeal;
+      this.backUrl = `/deals/${dealStatus}/${this.id.toString()}`;
+    } else if (this.url.indexOf('new_deal')) {
+      this.backUrl = `/new_deal`;
+    }
+  }
+
   changeClientDialog() {
     this.changeClient = JSON.parse(JSON.stringify(this.client));
     this.showChangeClientDialog = !this.showChangeClientDialog;
   }
 
   successChangeClient(client: Client) {
-    this.client = client;
+    if (client !== null) {
+      this.client = client;
+    }
     this.changeClient = null;
-  }
-
-  statusDeal(status: number) {
-    return this.utils.statusDeal(status);
   }
 }

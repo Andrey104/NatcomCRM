@@ -2,7 +2,7 @@
   <i *ngIf="closable" class="material-icons hover-element dialog-close-btn"
      (click)="onClose()">close
   </i>
-  <h4>Добавить клиента</h4>
+  <h4>{{modalHeader}}</h4>
   <div class="row main-row">
     <form id="form" class="form" #form="ngForm" (ngSubmit)="submitForm()">
       <div class="main-dialog-content">
@@ -49,11 +49,19 @@
             <div class="row regular-client-container valign-wrapper"
                  *ngIf="visibleRegularClient&&regularClientNumber===i">
               <div class="col s10">
-                <div>ФИО: {{regularClient.fio}}</div>
-                <div>Email: {{regularClient.email | email}}
+                <div class="valign-wrapper">
+                  <i class="tiny material-icons icon">person</i>
+                  {{regularClient.fio}}
                 </div>
-                <div *ngFor="let regClientPhone of regularClient.phones; let i = index">
-                  <div>{{i + 1}} телефон: {{regClientPhone.number | phoneFormat}}</div>
+                <div *ngIf="regularClient.email" class="valign-wrapper">
+                  <i class="tiny material-icons icon">email</i>
+                  {{regularClient.email | email}}
+                </div>
+                <div *ngFor="let regClientPhone of regularClient.phones">
+                  <div class="valign-wrapper">
+                    <i class="tiny material-icons icon">local_phone</i>
+                    {{regClientPhone.number | phoneFormat}}
+                  </div>
                 </div>
               </div>
               <div class="col s2 detail-col">
@@ -93,6 +101,7 @@
             </div>
           </div>
         </div>
+        <app-preloader *ngIf="!isRequest"></app-preloader>
       </div>
       <div class="button-container">
         <span class="description-required-dialog">

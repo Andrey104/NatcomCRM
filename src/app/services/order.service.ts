@@ -51,14 +51,14 @@ export class OrderService extends BaseApi {
   }
 
   getFilterOrders(page: number, text: string): Observable<Orders> {
-    return this.get(`orders/search?page=${page.toString()}&text=${text}`);
+    return this.get(`orders/search?page=${page}&${text}`);
   }
 
   deferOrder(id: string, comment: string, cause: string): Observable<Object> {
     if (comment === '') {
       comment = null;
     }
-    if (cause  === '') {
+    if (cause === '') {
       cause = null;
     }
     const data = {'cause': cause, 'comment': comment};
@@ -73,23 +73,7 @@ export class OrderService extends BaseApi {
     return this.post(`orders/${id}/reject/`, data);
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+  returnOrder(orderId: number): Observable<OrderResult> {
+    return this.post(`orders/${orderId.toString()}/return/`);
   }
-
-
-  private log(message: string) {
-    this.messageService.add('HeroService: ' + message);
-  }
-
 }

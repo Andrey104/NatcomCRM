@@ -1,6 +1,6 @@
 <div class="row main-row scrollable-page">
   <div class="col s7">
-    <form #form="ngForm" (ngSubmit)="submitForm(form)">
+    <form #form="ngForm" (ngSubmit)="submitForm()">
       <div class="row">
         <div class="col s7">
           <label class="required-area-dialog">Компания</label>
@@ -20,8 +20,9 @@
           <select class="browser-default"
                   ngModel
                   name="payment">
-            <option value="0">Наличными</option>
-            <option value="1">Безналичный</option>
+            <option value="1">Безналичная оплата</option>
+            <option value="2">Наличная оплата</option>
+            <option value="3">Терминал</option>
           </select>
         </div>
         <div class="col s12">
@@ -32,11 +33,10 @@
           </textarea>
         </div>
         <div class="col s12">
-          <label class="required-area-dialog">Адрес</label>
+          <label>Адрес</label>
           <textarea class="text-comment-dialog"
                     ngModel
-                    name="address"
-                    required>
+                    name="address">
           </textarea>
         </div>
         <div class="col s12">
@@ -47,7 +47,7 @@
           </textarea>
         </div>
       </div>
-      <div class="col s12 measurement-container" (click)="showMeasurement()">
+      <div class="measurement-container" (click)="showMeasurement()">
         <span>{{visibleMeasurement.message}}</span>
         <i class="small material-icons center-dialog-title">{{visibleMeasurement.icon}}</i>
       </div>
@@ -103,13 +103,13 @@
     <div *ngIf="clients.length===0" class="center-align">У сделки нет клиентов</div>
     <div class="row">
       <div *ngFor="let client of clients; let i = index" class="col s12">
-        <div class="col s12 valign-wrapper hover-element" (click)="changeClientDialog(i)">
-          <div class="col s6 valign-wrapper detail-col-right">
+        <div class="col s12 valign-wrapper hover-element forward-block" (click)="clientInfoDialog(i)">
+          <div class="col s6 text valign-wrapper detail-col-right">
             <i class="small material-icons icon">person</i>
-            {{client.fio | clientName}}
+            <div class="text">{{client.fio | clientName}}</div>
           </div>
-          <div class="col s5 div-number">{{client.phones[0].number | phoneFormat}}</div>
-          <i class="col s1 material-icons detail-col-left">chevron_right</i>
+          <div class="col s5 detail-col-right">{{client.phones[0].number | phoneFormat}}</div>
+          <i class="col s1 arrow material-icons detail-col-left">chevron_right</i>
         </div>
         <hr class="col s12 black">
       </div>
@@ -118,6 +118,11 @@
   <app-add-client [(visible)]="showDialog"
                   [clients]="clients"
                   (successClient)="addNewClient($event)"></app-add-client>
+  <app-deal-dialog-client-info [(visible)]="showClientDialog"
+                               [client]="clientInfo"
+                               [showEditButtons]="showEditButtons"
+                               (successClientInfoDialog)="successClientInfoDialog($event)">
+  </app-deal-dialog-client-info>
   <app-change-client [(visible)]="showChangeClientDialog"
                      [client]="changeClient"
                      (successChangeClient)="successChangeClient($event)"></app-change-client>

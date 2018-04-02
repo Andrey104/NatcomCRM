@@ -9,14 +9,14 @@ import {ClientsList} from '../clients/clients-list';
 
 export class DealResult {
   id: number;
-  clients: ClientsList[]; // add class
+  clients: ClientsList[];
   measurements: DealMeasurement[];
   description: string;
   mounts: DealMount[];
   discounts: DealDiscount[];
   comments: object[];
   payments: Payment[];
-  order_actions: DealAction[]; // !!!!!!!!!!!!!!!!!!!!add class
+  order_actions: DealAction[];
   actions: DealAction[];
   user: User;
   offer: string;
@@ -28,8 +28,8 @@ export class DealResult {
   auto_change_date: string;
   contract: boolean;
   task_date: string;
-  non_cash: boolean;
+  payment_type: number;
   order: number;
-  company: Company; // NO
-  worker: object; // !!!!!!!
+  company: Company;
+  worker: object;
 }

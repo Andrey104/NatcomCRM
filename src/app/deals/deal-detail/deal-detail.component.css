@@ -2,8 +2,8 @@
   margin-right: 5px;
 }
 
-.deal-date {
-  overflow: hidden;
+.task-date {
+  font-size: 18px;
 }
 
 .scrollable-page {
@@ -24,10 +24,6 @@
   margin-left: 10px;
   height: 50px;
   width: 50px;
-  float: left;
-}
-
-.date-icon {
   float: left;
 }
 

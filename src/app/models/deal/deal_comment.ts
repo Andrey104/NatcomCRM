@@ -6,5 +6,4 @@ export class DealComment {
   auto_date: string;
   date: string;
   text: string;
-  read: boolean;
 }

@@ -21,8 +21,10 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   id: string;
   status: { statusName: string, statusUrl: string };
   term$ = new Subject<string>();
+  termDate$ = new Subject<string>();
   subInputField: Subscription;
-  inputText: string;
+  inputText = '';
+  date = '';
   private subscriptions: Subscription[] = [];
 
   constructor(private orderService: OrderService,
@@ -33,6 +35,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscribeOnInputField();
     this.subscribeOnOrderStatus();
+    this.subscribeOnDateField();
   }
 
   subscribeOnInputField() {
@@ -42,7 +45,17 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       .subscribe(
         (term) => {
           this.inputText = term;
-          this.search(term);
+          this.search();
+        }
+      );
+  }
+
+  subscribeOnDateField() {
+    this.termDate$
+      .subscribe(
+        (term) => {
+          this.date = term;
+          this.search();
         }
       );
   }
@@ -52,6 +65,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       .subscribe((params) => {
         this.orderService.setOrderStatus(params['status']);
         this.inputText = '';
+        this.date = '';
         this.status = this.utils.statusUrlOrder(params['status']);
         this.orders = [];
         this.showOrders();
@@ -59,11 +73,13 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   }
 
   // отображение первой страницы заказов в зависимости от содержимого поисковой строки
-  search(text: string) {
-    if (text !== '') {
+  search() {
+    if ((this.date !== '' || this.inputText !== '') && this.orders !== []) {
+      this.orders = [];
       this.load = true;
       this.page = 1;
-      this.orderService.getFilterOrders(this.page, text)
+      const params = this.utils.getSearchParams(this.inputText, this.date);
+      this.orderService.getFilterOrders(this.page, params)
         .subscribe((orderPage) => {
             this.orders = orderPage.results;
             if (orderPage.next === null) {
@@ -76,6 +92,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
         );
       document.getElementById('scroll').scrollTop = 0;
     } else {
+      this.orders = [];
       this.showOrders();
     }
   }
@@ -100,7 +117,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   }
 
   onScroll() {
-    if (this.inputText === '') {
+    if (this.inputText === '' && this.date === '') {
       this.nextPage();
     } else {
       this.nextFilterPage();
@@ -131,7 +148,8 @@ export class OrderPageComponent implements OnInit, OnDestroy {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.orderService.getFilterOrders(this.page, this.inputText)
+      const params = this.utils.getSearchParams(this.inputText, this.date);
+      this.orderService.getFilterOrders(this.page, params)
         .subscribe(orders => {
           this.orders = this.orders.concat(orders.results);
           this.load = false;
@@ -153,10 +171,10 @@ export class OrderPageComponent implements OnInit, OnDestroy {
         .subscribe(next => {
           if (next) {
             this.orders = [];
-            if (this.inputText === '') {
+            if (this.inputText === '' && this.date === '') {
               this.showOrders();
             } else {
-              this.search(this.inputText);
+              this.search();
             }
           }
         });

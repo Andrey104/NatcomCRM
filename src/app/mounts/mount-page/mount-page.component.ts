@@ -18,7 +18,9 @@ export class MountPageComponent implements OnInit {
   lastPage: boolean;
   page: number;
   term$ = new Subject<string>();
+  termDate$ = new Subject<string>();
   inputText = '';
+  date = '';
   private subscriptions: Subscription[] = [];
 
   constructor(private mountService: MountService,
@@ -29,6 +31,7 @@ export class MountPageComponent implements OnInit {
   ngOnInit() {
     this.subscribeOnInputField();
     this.subscribeOnUrl();
+    this.subscribeOnDateField();
   }
 
   subscribeOnInputField() {
@@ -37,14 +40,25 @@ export class MountPageComponent implements OnInit {
       .distinctUntilChanged()
       .subscribe((term) => {
         this.inputText = term;
-        this.search(term);
+        this.search();
       });
+  }
+
+  subscribeOnDateField() {
+    this.termDate$
+      .subscribe(
+        (term) => {
+          this.date = term;
+          this.search();
+        }
+      );
   }
 
   subscribeOnUrl() {
     this.activatedRoute.params
       .subscribe((params) => {
         this.inputText = '';
+        this.date = '';
         this.status = this.utils.statusUrlMount(params['status']);
         this.mountService.statusMount = params['status'];
         this.mounts = [];
@@ -67,11 +81,13 @@ export class MountPageComponent implements OnInit {
       });
   }
 
-  search(text: string) {
-    if (text !== '') {
+  search() {
+    if ((this.date !== '' || this.inputText !== '') && this.mounts !== []) {
+      this.mounts = [];
       this.load = true;
       this.page = 1;
-      this.mountService.getFilterMounts(this.page, text)
+      const params = this.utils.getSearchParams(this.inputText, this.date);
+      this.mountService.getFilterMounts(this.page, params)
         .subscribe((mountsPage) => {
             this.mounts = mountsPage.results;
             if (mountsPage.next === null) {
@@ -84,12 +100,13 @@ export class MountPageComponent implements OnInit {
         );
       document.getElementById('scroll').scrollTop = 0;
     } else {
+      this.mounts = [];
       this.showMounts();
     }
   }
 
   onScrollMount() {
-    if (this.inputText === '') {
+    if (this.inputText === '' && this.date === '') {
       this.nextPage();
     } else {
       this.nextFilterPage();
@@ -115,7 +132,8 @@ export class MountPageComponent implements OnInit {
     if (!this.lastPage && !this.load) {
       this.load = true;
       this.page = this.page + 1;
-      this.mountService.getFilterMounts(this.page, this.inputText)
+      const params = this.utils.getSearchParams(this.inputText, this.date);
+      this.mountService.getFilterMounts(this.page, params)
         .subscribe(mountsPage => {
           this.mounts = this.mounts.concat(mountsPage.results);
           this.load = false;
@@ -136,10 +154,10 @@ export class MountPageComponent implements OnInit {
         .subscribe(next => {
           if (next) {
             this.mounts = [];
-            if (this.inputText === '') {
+            if (this.inputText === '' && this.date === '') {
               this.showMounts();
             } else {
-              this.search(this.inputText);
+              this.search();
             }
           }
         });

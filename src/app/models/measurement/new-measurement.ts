@@ -1,22 +1,21 @@
 export class NewMeasurement {
-  non_cash: boolean;
+  payment_type: number;
   date: string;
   time: string;
   description: string;
 
-  constructor(non_cash: number, date: string, time: string, description: string) {
-    this.checkNonCash(non_cash);
+  constructor(payment_type: number, date: string, time: string, description: string) {
+    this.checkPaymentType(payment_type);
     this.date = date;
     this.checkTime(time);
     this.checkDescription(description);
   }
 
-  private checkNonCash(non_cash) {
-    // проверить при пустом поле
-    if (non_cash === '') {
-      this.non_cash = null;
+  private checkPaymentType(payment_type) {
+    if (payment_type === 0) {
+      this.payment_type = null;
     } else {
-      this.non_cash = non_cash;
+      this.payment_type = payment_type;
     }
   }
 
