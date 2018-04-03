@@ -29,10 +29,6 @@ export class StageMountService extends BaseApi {
     return this.post(`stages/${idStage}/close/`);
   }
 
-  setInstaller(idStage: string, installers: InsertPosition): Observable<any> {
-    return this.post(`stages/${idStage}/installers/`, {installers});
-  }
-
   getStage(id: number): Observable<MountStage> {
     return this.get(`stages/${id.toString()}/`);
   }

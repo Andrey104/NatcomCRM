@@ -53,7 +53,7 @@
       <div class="valign-wrapper" style="display: inline-block">
         <span class="center-dialog-title">Монтажники</span>
         <i *ngIf="!(mount.status==2 || mount.status==3)&&showEditButtons"
-           class="material-icons hover-element center-dialog-title">add_circle_outline</i>
+           class="material-icons hover-element center-dialog-title"(click)="openAddInstallerModal()">edit</i>
       </div>
     </div>
     <div class="col s5 divider"></div>
@@ -186,4 +186,6 @@
 
 <app-dialog-component-cost [mount]="mount" (successCost)="successMountUpdate()"
 [(visible)]="showAddCostComponent"></app-dialog-component-cost>
+<app-add-installer [modalState]="addInstallerModalState" (onClose)="closeAddInstallerModal($event)"></app-add-installer>
+
 

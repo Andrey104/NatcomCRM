@@ -1,0 +1,10 @@
+<div class="row installer" (click)="select()">
+  <div class="name">
+    {{brigade.name}}
+  </div>
+  <div>
+    <div *ngFor="let installer of brigade.installers">
+      {{installer.installer.fio}}
+    </div>
+  </div>
+</div>

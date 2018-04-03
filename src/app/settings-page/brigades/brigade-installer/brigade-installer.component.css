@@ -1,5 +1,6 @@
 .del-btn{
   cursor: pointer;
+  float: right;
 }
 .installer{
   padding: 5px;
