@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.loading = true;
     this.http
-      .post('http://188.225.46.31/api/login/', { 'username': this.username, 'password': this.password })
+      .post('api/login/', { 'username': this.username, 'password': this.password })
       .subscribe(
         data => {
           localStorage.setItem('token', data['token']);

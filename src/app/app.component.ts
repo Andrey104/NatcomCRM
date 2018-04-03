@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {ChatService} from './services/chat.service';
+import {ParseWebsocketService} from './services/parse-websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor(private chatService: ChatService) {
+  }
 }
