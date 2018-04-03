@@ -125,6 +125,8 @@ import {MountTransferCausePipe} from './pipes/mount-transfer-cause.pipe';
 import {DialogCostComponentComponent} from './mounts/dialogs/dialog-component-cost/dialog-component-cost';
 import {ChatService} from './services/chat.service';
 import {WebsocketService} from './services/websocket.service';
+import { BrigadeListComponent } from './mounts/dialogs/add-installer/brigade-list/brigade-list.component';
+import { BrigadeListItemComponent } from './mounts/dialogs/add-installer/brigade-list/brigade-list-item/brigade-list-item.component';
 
 
 @NgModule({
@@ -230,7 +232,9 @@ import {WebsocketService} from './services/websocket.service';
     MeasurementTimePipe,
     MountDialogSetDateComponent,
     MountTransferCausePipe,
-    DialogCostComponentComponent
+    DialogCostComponentComponent,
+    BrigadeListComponent,
+    BrigadeListItemComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,13 @@
 <div class="modal modal-fixed-footer" [ngClass]="{open: open}">
-  <div class="modal-content">
+  <div class="modal-header">
     <h5>Изменить монтажников</h5>
+    Добавить:
     <div class="row add-installer-btn">
-      <a class="modal-action waves-red btn left" (click)="openInstallerList()">+</a>
+      <a class="modal-action waves-red btn left add-btn" (click)="openInstallerList()">Монтажника</a>
+      <a class="modal-action waves-red btn left add-btn" (click)="openBrigadeList()">Бригаду</a>
     </div>
+  </div>
+  <div class="modal-content">
     <div class="installers-list">
       <app-brigade-installer *ngFor="let position of installers"
                              [installerPosition]="position" (onDel)="deleteInstaller($event)"></app-brigade-installer>
@@ -16,3 +20,6 @@
 </div>
 
 <app-installer-select-list [open]="installerListIsOpen" (onClose)="closeInstallerList($event)"></app-installer-select-list>
+<app-brigade-list [open]="brigadeListIsOpen" (onClose)="closeBrigadeList($event)"></app-brigade-list>
+
+<div *ngIf="open" class="overlay-dialog" (click)="close(false)"></div>

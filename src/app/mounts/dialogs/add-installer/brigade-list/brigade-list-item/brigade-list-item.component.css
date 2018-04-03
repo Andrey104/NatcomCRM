@@ -1,0 +1,7 @@
+.installer{
+  border-bottom: 1px solid #9e9e9e;
+  cursor: pointer;
+}
+.name{
+  font-weight: 700;
+}
