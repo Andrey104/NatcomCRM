@@ -60,11 +60,15 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  // closeAddInstallerModal(update: Boolean) {
-  //   if (update) {
-  //     this.successMountUpdate();
-  //   }
-  // }
+  openAddInstallerModal() {
+    this.addInstallerModalState = {open: true, installers: this.mount.installers, stageId: this.mount.id.toString()};
+  }
+
+  closeAddInstallerModal(update: Boolean) {
+    if (update) {
+      this.successMountUpdate();
+    }
+  }
 
   successMountUpdateAndList() {
     this.loadPage = true;

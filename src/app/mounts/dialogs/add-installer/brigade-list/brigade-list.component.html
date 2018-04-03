@@ -1,8 +1,8 @@
 <div class="modal modal-fixed-footer dialog" [ngClass]="{open: open}">
   <div class="modal-content">
-    <app-installer-list-item *ngFor="let installer of installers"
-                             [installer]="installer" (onSelect)="close($event)">
-    </app-installer-list-item>
+    <app-brigade-list-item *ngFor="let brigade of brigades"
+                             [brigade]="brigade" (onSelect)="close($event)">
+    </app-brigade-list-item>
   </div>
   <div class="modal-footer">
     <a class="modal-action modal-close waves-effect waves-green btn-flat" (click)="close()">Отмена</a>

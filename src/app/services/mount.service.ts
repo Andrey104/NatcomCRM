@@ -69,4 +69,8 @@ export class MountService extends BaseApi {
     }
     return this.post(`mounts/${idMount}/component_costs/`, {sum, comment});
   }
+
+  setInstaller(idMount: string, installers: InsertPosition): Observable<any> {
+    return this.post(`mounts/${idMount}/installers/`, {installers});
+  }
 }

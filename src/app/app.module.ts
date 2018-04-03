@@ -123,6 +123,8 @@ import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transf
 import {MountDialogSetDateComponent} from './mounts/dialogs/mount-dialog-set-date/mount-dialog-set-date';
 import {MountTransferCausePipe} from './pipes/mount-transfer-cause.pipe';
 import {DialogCostComponentComponent} from './mounts/dialogs/dialog-component-cost/dialog-component-cost';
+import { BrigadeListComponent } from './mounts/dialogs/add-installer/brigade-list/brigade-list.component';
+import { BrigadeListItemComponent } from './mounts/dialogs/add-installer/brigade-list/brigade-list-item/brigade-list-item.component';
 
 
 @NgModule({
@@ -228,7 +230,9 @@ import {DialogCostComponentComponent} from './mounts/dialogs/dialog-component-co
     MeasurementTimePipe,
     MountDialogSetDateComponent,
     MountTransferCausePipe,
-    DialogCostComponentComponent
+    DialogCostComponentComponent,
+    BrigadeListComponent,
+    BrigadeListItemComponent
   ],
   imports: [
     BrowserModule,
