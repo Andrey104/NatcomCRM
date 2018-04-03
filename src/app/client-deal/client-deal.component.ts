@@ -35,6 +35,9 @@ export class ClientDealComponent implements OnChanges {
           this.forwardUrl = `/deals/${status}/${this.deal.id.toString()}`;
         } else if (this.url.indexOf('new_deal') !== -1) {
           this.forwardUrl = `/new_deal/client/${params['client_id']}`;
+        } else if (this.url.indexOf('to_deal') !== -1) {
+          this.forwardUrl = `/orders/${this.orderService.getOrderStatus()}/${params['id']}`;
+          this.forwardUrl += `/to_deal/client/${params['client_id']}`;
         }
       });
   }
