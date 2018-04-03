@@ -11,20 +11,12 @@ export class NewDeal {
   constructor(company: number, payment: number, description: string,
               address: string, addressComment: string, clients: Client[]) {
     this.company = company;
-    this.checkPayment(payment);
+    this.payment_type = payment;
     this.addDescription(description);
     this.checkAddress(address);
     this.addressComment(addressComment);
     for (const client of clients) {
       this.clients.push({client: client.id});
-    }
-  }
-
-  private checkPayment(payment: number) {
-    if (payment === 0) {
-      this.payment_type = 0;
-    } else {
-      this.payment_type = payment;
     }
   }
 

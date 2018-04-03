@@ -11,9 +11,9 @@
     <app-order *ngFor="let order of orders"
                [order]="order">
     </app-order>
-      <div [class.spinner-contener]="orders.length===0" *ngIf="!lastPage" class="col s10">
-        <app-preloader></app-preloader>
-      </div>
+    <div [class.spinner-contener]="orders.length===0" *ngIf="!lastPage" class="col s10">
+      <app-preloader></app-preloader>
+    </div>
   </div>
   <div class="detail-col col s9">
     <div class="detail">

@@ -51,7 +51,7 @@ export class OrderService extends BaseApi {
   }
 
   getFilterOrders(page: number, text: string): Observable<Orders> {
-    return this.get(`orders/search?page=${page}&${text}`);
+    return this.get(`orders/search/?page=${page}&${text}`);
   }
 
   deferOrder(id: string, comment: string, cause: string): Observable<Object> {

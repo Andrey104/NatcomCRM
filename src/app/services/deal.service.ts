@@ -32,7 +32,7 @@ export class DealService extends BaseApi {
   }
 
   getFilterDeals(page: number, text: string): Observable<DealPage> {
-    return this.get(`deals/search?page=${page}&${text}`);
+    return this.get(`deals/search/?page=${page}&${text}`);
   }
 
   dealComment(idDeal: number, comment: string): Observable<Object> {
@@ -45,6 +45,10 @@ export class DealService extends BaseApi {
 
   newDeal(newDeal: NewDeal): Observable<DealResult> {
     return this.post(`deals/`, newDeal);
+  }
+
+  newDealByOrder(orderId: number, newDeal: NewDeal): Observable<DealResult> {
+    return this.post(`orders/${orderId.toString()}/deal/`, newDeal);
   }
 
   dealComplete(idDeal: number): Observable<Object> {

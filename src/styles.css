@@ -435,3 +435,8 @@
   margin-right: 10px;
 }
 /*-----------------------------------------*/
+.no-content {
+  position: relative;
+  top: 50%;
+  left: 30%;
+}

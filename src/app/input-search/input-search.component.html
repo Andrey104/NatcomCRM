@@ -3,7 +3,8 @@
     <span>{{statusName}}</span>
   </div>
   <input #input class="col s12" type="search" (input)="textOut($event.target.value)">
-  <div class="right-align">
-    <input #date type="date" class="browser-default" (input)="dateOut($event.target.value)">
+  <div class="col s12 right-align">
+    <i class="tiny material-icons icon">date_range</i>
+    <input #date type="date" class="browser-default calendar" (input)="dateOut($event.target.value)">
   </div>
 </div>

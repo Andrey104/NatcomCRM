@@ -18,7 +18,7 @@ export class MeasurementResult {
   address: string;
   address_comment: string;
   company: Company;
-  non_cash: boolean;
+  payment_type: boolean;
   auto_date: string;
   date: string;
   status: number;

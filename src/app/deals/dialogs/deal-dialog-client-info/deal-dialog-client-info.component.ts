@@ -19,7 +19,6 @@ export class DealDialogClientInfoComponent implements OnChanges {
   closable = true;
   clientCopy: Client;
   phones: Phone[] = [];
-  // forwardUrl: string;
   url: string;
 
   constructor(@Inject(DOCUMENT) private document: Document) {

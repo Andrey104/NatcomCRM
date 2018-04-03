@@ -11,16 +11,13 @@
           </i>
           <div class="back">Назад</div>
         </div>
-        <div class="col s7 button-container">
-          <button class="btn-dialog-cancel" (click)="changeClientDialog()">
-            Редактировать клиента
-          </button>
-        </div>
       </div>
       <div class="center-align row">
         <img class="status-image col s8 offset-s2" src="assets/images/client.png"/>
       </div>
-      <div class="center-align name">{{client?.fio | clientName}}</div>
+      <div class="col s12 center-align name valign-wrapper row-back"><span>{{client?.fio | clientName}}</span>
+        <i class="small material-icons no-border hover-element" (click)="changeClientDialog()">edit</i>
+      </div>
       <div class="info-block">
         <div class="left-align email">
           <i class="tiny material-icons">email</i> {{client?.email | email}}

@@ -29,7 +29,7 @@ export class MeasurementService extends BaseApi {
   }
 
   getFilterMeasurements(page: number, text: string): Observable<MeasurementPage> {
-    return this.get(`measurements/search?page=${page}&${text}`);
+    return this.get(`measurements/search/?page=${page}&${text}`);
   }
 
   newMeasurement(dealId: number, measurement: NewMeasurement): Observable<MeasurementResult> {
