@@ -43,7 +43,7 @@ export class DealDialogMeasurementComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    const newMeasurement = new NewMeasurement(this.form.form.value.payment, this.form.form.value.date,
+    const newMeasurement = new NewMeasurement(Number(this.form.form.value.payment), this.form.form.value.date,
                                               this.form.form.value.time, this.form.form.value.description);
     this.measurementService.newMeasurement(this.id, newMeasurement)
       .subscribe((result) => {
