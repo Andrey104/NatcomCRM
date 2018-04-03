@@ -14,6 +14,7 @@ import {DOCUMENT} from '@angular/common';
 import {MountService} from '../../services/mount.service';
 import {OrderService} from '../../services/order.service';
 import {MeasurementService} from '../../services/measurement.service';
+import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-deal-detail',
@@ -58,8 +59,24 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
               @Inject(DOCUMENT) private document: Document,
               private mountService: MountService,
               private orderService: OrderService,
-              private measurementService: MeasurementService) {
+              private measurementService: MeasurementService,
+              private chatService: ChatService) {
+    chatService.messages.subscribe(msg => {
+      console.log('Response from websocket: ' + JSON.stringify(msg));
+    });
     this.url = this.document.location.href;
+  }
+
+  message = {
+    event: 'auth',
+    data: {
+      token: localStorage.getItem('token')
+    }
+  };
+
+  sendMsg() {
+    console.log('new message from client to websocket: ', this.message);
+    this.chatService.messages.next(this.message);
   }
 
   ngOnInit() {
@@ -200,13 +217,14 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   }
 
   sendComment(comment: string) {
-    this.dealService.dealComment(this.id, comment).subscribe(
-      next => {
-        this.deal.comments.push(next);
-        this.flag = true;
-      }, error => {
-        console.log(error.error);
-      });
+    // this.dealService.dealComment(this.id, comment).subscribe(
+    //   next => {
+    //     this.deal.comments.push(next);
+    //     this.flag = true;
+    //   }, error => {
+    //     console.log(error.error);
+    //   });
+    this.sendMsg();
   }
 
   getDealStatus(status) {
