@@ -123,6 +123,8 @@ import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transf
 import {MountDialogSetDateComponent} from './mounts/dialogs/mount-dialog-set-date/mount-dialog-set-date';
 import {MountTransferCausePipe} from './pipes/mount-transfer-cause.pipe';
 import {DialogCostComponentComponent} from './mounts/dialogs/dialog-component-cost/dialog-component-cost';
+import {ChatService} from './services/chat.service';
+import {WebsocketService} from './services/websocket.service';
 
 
 @NgModule({
@@ -266,7 +268,9 @@ import {DialogCostComponentComponent} from './mounts/dialogs/dialog-component-co
     MountService,
     StageMountService,
     BrigadesService,
-    BaseApi
+    BaseApi,
+    ChatService,
+    WebsocketService
   ],
   bootstrap:
     [AppComponent],
