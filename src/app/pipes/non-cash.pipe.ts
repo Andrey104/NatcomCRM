@@ -9,11 +9,11 @@ export class NonCashPipe implements PipeTransform {
     let paymentType: string;
     switch (type) {
       case 1: {
-        paymentType = 'Наличный';
+        paymentType = 'Безналичный';
         break;
       }
       case 2: {
-        paymentType = 'Безналичный';
+        paymentType = 'Наличный';
         break;
       }
       case 3: {

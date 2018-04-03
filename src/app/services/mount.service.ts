@@ -28,7 +28,7 @@ export class MountService extends BaseApi {
   }
 
   getFilterMounts(page: number, text: string) {
-    return this.get(`mounts/search?page=${page}&${text}`);
+    return this.get(`mounts/search/?page=${page}&${text}`);
   }
 
   mountReject(idMount: string, cause: number, comment: string): Observable<OurComment> {

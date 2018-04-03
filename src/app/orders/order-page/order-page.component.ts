@@ -81,6 +81,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       const params = this.utils.getSearchParams(this.inputText, this.date);
       this.orderService.getFilterOrders(this.page, params)
         .subscribe((orderPage) => {
+            console.log(orderPage);
             this.orders = orderPage.results;
             if (orderPage.next === null) {
               this.lastPage = true;

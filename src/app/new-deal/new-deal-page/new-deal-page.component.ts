@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {DealService} from '../../services/deal.service';
 import {Company} from '../../models/company';
 import {Subscription} from 'rxjs/Subscription';
@@ -11,6 +11,7 @@ import {Client} from '../../models/clients/client';
 import {NewDeal} from '../../models/deal/new_deal';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NewMeasurement} from '../../models/measurement/new-measurement';
+import {DealResult} from '../../models/deal/deal_result';
 
 @Component({
   selector: 'app-new-deal-page',
@@ -34,7 +35,7 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   defaultCompany: number;
   visibleMeasurement = {show: false, icon: 'add_circle_outline', message: 'Добавить замер'};
   order: OrderResult;
-  dealId: number;
+  deal: DealResult;
   isRequest = true;
   orderId: number;
   orderStatus;
@@ -53,16 +54,16 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
     } else {
       this.subscribeOnGetCompanies();
     }
-  // else if (this.dealService.deal) {
-  //     this.companies = this.dealService.companies;
-  //     this.defaultCompany = this.dealService.deal.company;
-  //     this.clients = this.dealService.deal.clients;
-  //     this.form.form.patchValue({
-  //       address: this.dealService.deal.address,
-  //       description: this.dealService.deal.description
-  //     });
-  //     this.clients = this.dealService.deal.clients;
-  //   }
+    // else if (this.dealService.deal) {
+    //     this.companies = this.dealService.companies;
+    //     this.defaultCompany = this.dealService.deal.company;
+    //     this.clients = this.dealService.deal.clients;
+    //     this.form.form.patchValue({
+    //       address: this.dealService.deal.address,
+    //       description: this.dealService.deal.description
+    //     });
+    //     this.clients = this.dealService.deal.clients;
+    //   }
   }
 
   getOrder() {
@@ -75,6 +76,7 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
           this.clients.push(this.order.client);
           this.companies.push(this.order.company);
           this.defaultCompany = this.companies[0].id;
+          document.getElementById('select').setAttribute('disabled', 'disabled');
         }, (err) => {
           console.log(err.message);
         }, () => {
@@ -91,6 +93,7 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
     this.defaultCompany = this.companies[0].id;
     this.clients.push(this.order.client);
     this.orderService.setOrder(null);
+    document.getElementById('select').setAttribute('disabled', 'disabled');
   }
 
   subscribeOnGetCompanies() {
@@ -118,23 +121,38 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
 
   submitForm() {
     this.isRequest = false;
+    this.sendNewDeal();
+  }
+
+  sendNewDeal() {
     const newDeal = this.getNewDeal();
-    this.subOnDeal = this.dealService.newDeal(newDeal)
-      .subscribe((deal) => {
-        this.dealId = deal.id;
-        const newMeasurement = this.getNewMeasurement(deal.payment_type);
-        if (deal !== null && newMeasurement.date !== undefined) {
-          console.log(newMeasurement);
-          this.subOnMeasurement =
-            this.measurementService.newMeasurement(deal.id, newMeasurement)
-              .subscribe((measurement) => {
-                this.showMeasurement();
-                this.resetForm();
-              });
-        } else {
-          this.resetForm();
-        }
-      });
+    if (this.order) {
+      this.subOnDeal = this.dealService.newDealByOrder(this.orderId, newDeal)
+        .subscribe((deal) => {
+          this.deal = deal;
+          this.sendMeasurement();
+        });
+    } else {
+      this.subOnDeal = this.dealService.newDeal(newDeal)
+        .subscribe((deal) => {
+          this.deal = deal;
+          this.sendMeasurement();
+        });
+    }
+  }
+
+  sendMeasurement() {
+    const newMeasurement = this.getNewMeasurement(this.deal.payment_type);
+    if (this.deal !== null && newMeasurement.date !== undefined) {
+      this.subOnMeasurement =
+        this.measurementService.newMeasurement(this.deal.id, newMeasurement)
+          .subscribe((measurement) => {
+            this.showMeasurement();
+            this.resetForm();
+          });
+    } else {
+      this.resetForm();
+    }
   }
 
   getNewDeal(): NewDeal {
@@ -178,15 +196,16 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   successChangeClient(client: Client) {
     if (client !== null) {
       this.clients[this.changeClientNumber] = client;
-      this.clientInfoDialog(this.changeClientNumber);
     }
+    this.clientInfoDialog(this.changeClientNumber);
     this.changeClient = null;
   }
 
   resetForm() {
+    this.isRequest = true;
     this.unSub();
     this.form.reset();
-    this.router.navigate(['/deals/all/' + this.dealId.toString()]);
+    this.router.navigate(['/deals/all/' + this.deal.id.toString()]);
   }
 
   unSub() {

@@ -30,3 +30,11 @@ input[type="search"]:focus {
 input[type="date"] {
   margin-top: 5px;
 }
+
+::-webkit-inner-spin-button {
+  display: none;
+}
+
+::-webkit-calendar-picker-indicator:hover {
+  background:none;
+}

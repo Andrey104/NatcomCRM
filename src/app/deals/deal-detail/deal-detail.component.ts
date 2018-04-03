@@ -146,8 +146,8 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   successClientChangeDialog(client: Client) {
     if (client !== null) {
       this.deal.clients[this.changeClientNumber].client = client;
-      this.clientInfoDialog(this.changeClientNumber);
     }
+    this.clientInfoDialog(this.changeClientNumber);
     this.clientChange = null;
   }
 

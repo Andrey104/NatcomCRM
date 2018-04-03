@@ -27,7 +27,7 @@ export class PaymentPipe implements PipeTransform {
         break;
       }
     }
-    return user + ' добавил(а) ' + sum + 'р' + paymentType + ', получатель ' + payment.receiver + comment + ' дата получения - ';
+    return user + ' добавил(а) ' + sum + 'р' + paymentType + ', получатель ' + payment.receiver + comment + ', дата получения - ';
   }
 
 }

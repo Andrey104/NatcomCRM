@@ -8,7 +8,7 @@ export class DealRejectCausePipe implements PipeTransform {
     let cause: string;
     switch (type) {
       case 1: {
-        cause = 'Заключились с конкурентами';
+        cause = 'Заключили договор с конкурентами';
         break;
       }
       case 2: {
@@ -16,7 +16,7 @@ export class DealRejectCausePipe implements PipeTransform {
         break;
       }
       case 3: {
-        cause = 'Нет возможности монтажа';
+        cause = 'Нет возможности произвести монтаж';
         break;
       }
       case 4: {
