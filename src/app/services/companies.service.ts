@@ -12,7 +12,7 @@ export class CompaniesService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json', 'Authorization': 'token ' + this.token()})
   };
-  private urlCompany = 'http://188.225.46.31/api/companies/';
+  private urlCompany = 'api/companies/';
 
   constructor(private http: HttpClient,
               private messageService: MessageService) {

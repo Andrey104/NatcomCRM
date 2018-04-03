@@ -15,6 +15,7 @@ import {MountService} from '../../services/mount.service';
 import {OrderService} from '../../services/order.service';
 import {MeasurementService} from '../../services/measurement.service';
 import {ChatService} from '../../services/chat.service';
+import {ParseWebsocketService} from '../../services/parse-websocket.service';
 
 @Component({
   selector: 'app-deal-detail',
@@ -60,23 +61,23 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
               private mountService: MountService,
               private orderService: OrderService,
               private measurementService: MeasurementService,
+              private parseWebsocket: ParseWebsocketService,
               private chatService: ChatService) {
-    chatService.messages.subscribe(msg => {
-      console.log('Response from websocket: ' + JSON.stringify(msg));
+    this.chatService.messages.subscribe(msg => {
+      this.parseEvent(msg);
     });
     this.url = this.document.location.href;
   }
 
-  message = {
-    event: 'auth',
-    data: {
-      token: localStorage.getItem('token')
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_comment_deal': {
+        if (msg.data.data.comment.user.id !== Number(localStorage.getItem('id_manager'))) {
+          this.deal.comments.push(msg.data.data.comment);
+        }
+        break;
+      }
     }
-  };
-
-  sendMsg() {
-    console.log('new message from client to websocket: ', this.message);
-    this.chatService.messages.next(this.message);
   }
 
   ngOnInit() {
@@ -217,14 +218,13 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   }
 
   sendComment(comment: string) {
-    // this.dealService.dealComment(this.id, comment).subscribe(
-    //   next => {
-    //     this.deal.comments.push(next);
-    //     this.flag = true;
-    //   }, error => {
-    //     console.log(error.error);
-    //   });
-    this.sendMsg();
+    this.dealService.dealComment(this.id, comment).subscribe(
+      next => {
+        this.deal.comments.push(next);
+        this.flag = true;
+      }, error => {
+        console.log(error.error);
+      });
   }
 
   getDealStatus(status) {

@@ -125,6 +125,7 @@ import {MountTransferCausePipe} from './pipes/mount-transfer-cause.pipe';
 import {DialogCostComponentComponent} from './mounts/dialogs/dialog-component-cost/dialog-component-cost';
 import {ChatService} from './services/chat.service';
 import {WebsocketService} from './services/websocket.service';
+import {ParseWebsocketService} from './services/parse-websocket.service';
 
 
 @NgModule({
@@ -270,7 +271,8 @@ import {WebsocketService} from './services/websocket.service';
     BrigadesService,
     BaseApi,
     ChatService,
-    WebsocketService
+    WebsocketService,
+    ParseWebsocketService
   ],
   bootstrap:
     [AppComponent],
