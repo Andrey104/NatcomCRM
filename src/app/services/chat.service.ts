@@ -3,7 +3,7 @@ import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import {WebsocketService} from './websocket.service';
 
-const CHAT_URL = 'ws://natcom-crm.nextf.ru/ws/connect';
+const URL = 'ws://natcom-crm.nextf.ru/ws/connect';
 
 @Injectable()
 export class ChatService {
@@ -11,12 +11,28 @@ export class ChatService {
 
   constructor(wsService: WebsocketService) {
     this.messages = <Subject<object>>wsService
-      .connect(CHAT_URL)
+      .connect(URL)
       .map((response: MessageEvent): object => {
         const data = JSON.parse(response.data);
         return {
           data
         };
       });
+    setTimeout(() => {
+      this.sendMsg();
+    });
   }
+
+  message = {
+    event: 'auth',
+    data: {
+      token: localStorage.getItem('token')
+    }
+  };
+
+  sendMsg() {
+    console.log('new message from client to websocket: ', this.message);
+    this.messages.next(this.message);
+  }
+
 }
