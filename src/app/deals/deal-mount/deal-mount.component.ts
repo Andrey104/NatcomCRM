@@ -19,7 +19,6 @@ import {ChatService} from '../../services/chat.service';
 })
 export class DealMountComponent implements OnInit, AfterViewChecked {
   id;
-  idDeal;
   url;
   backRouter;
   mount: DealMount;
@@ -35,7 +34,6 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   showAddCostComponent = false;
   needSubscribe = true;
   showToDealButton = true;
-  showAddInstaller = false;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   addInstallerModalState: { open: Boolean, installers?: InstallerPosition[], stageId: string };
 
@@ -145,6 +143,9 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
         this.mount = mount;
         this.dealId = this.mount.deal;
         this.showEditButtons = this.utils.showEditButtons(String(this.mount.user.id));
+        if (localStorage.getItem('user_type') === '3') {
+          this.showEditButtons = true;
+        }
         this.loadPage = false;
       });
   }
