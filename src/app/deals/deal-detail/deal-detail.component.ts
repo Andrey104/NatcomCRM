@@ -71,6 +71,14 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
 
   parseEvent(msg) {
     switch (msg.data.event) {
+      case 'success_auth': {
+        console.log(msg);
+        break;
+      }
+      case 'invalid_token': {
+        console.log(msg);
+        break;
+      }
       case 'on_comment_deal': {
         if (msg.data.data.comment.user.id !== Number(localStorage.getItem('id_manager'))) {
           this.deal.comments.push(msg.data.data.comment);

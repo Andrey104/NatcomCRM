@@ -1,0 +1,10 @@
+.event-window {
+  position: fixed;
+  bottom: 0;
+  height: 70px;
+  z-index: 100000;
+}
+
+.message-container {
+  margin: auto;
+}

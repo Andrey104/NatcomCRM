@@ -128,6 +128,7 @@ import {WebsocketService} from './services/websocket.service';
 import { BrigadeListComponent } from './mounts/dialogs/add-installer/brigade-list/brigade-list.component';
 import { BrigadeListItemComponent } from './mounts/dialogs/add-installer/brigade-list/brigade-list-item/brigade-list-item.component';
 import {ParseWebsocketService} from './services/parse-websocket.service';
+import { NewEventComponent } from './new-event/new-event.component';
 
 
 @NgModule({
@@ -235,7 +236,8 @@ import {ParseWebsocketService} from './services/parse-websocket.service';
     MountTransferCausePipe,
     DialogCostComponentComponent,
     BrigadeListComponent,
-    BrigadeListItemComponent
+    BrigadeListItemComponent,
+    NewEventComponent
   ],
   imports: [
     BrowserModule,

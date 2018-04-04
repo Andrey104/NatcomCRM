@@ -25,6 +25,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   subInputField: Subscription;
   inputText = '';
   date = '';
+  eventMessage = 'Новая сделка';
   private subscriptions: Subscription[] = [];
 
   constructor(private orderService: OrderService,

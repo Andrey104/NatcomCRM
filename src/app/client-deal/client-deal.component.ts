@@ -5,6 +5,8 @@ import {DealService} from '../services/deal.service';
 import {DOCUMENT} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../services/utils.service';
+import {MeasurementService} from '../services/measurement.service';
+import {MountService} from '../services/mount.service';
 
 @Component({
   selector: 'app-client-deal',
@@ -20,6 +22,8 @@ export class ClientDealComponent implements OnChanges {
               private orderService: OrderService,
               private dealService: DealService,
               private utils: UtilsService,
+              private measurementService: MeasurementService,
+              private mountService: MountService,
               @Inject(DOCUMENT) private document: Document) {
     this.url = this.document.location.href;
   }
@@ -38,6 +42,12 @@ export class ClientDealComponent implements OnChanges {
         } else if (this.url.indexOf('to_deal') !== -1) {
           this.forwardUrl = `/orders/${this.orderService.getOrderStatus()}/${params['id']}`;
           this.forwardUrl += `/to_deal/client/${params['client_id']}`;
+        } else if (this.url.indexOf('measurements') !== -1) {
+          this.forwardUrl = `measurements/${this.measurementService.measurementStatus}`;
+          this.forwardUrl += `/${params['measurement_id']}/deal/${this.deal.id}`;
+        } else if (this.url.indexOf('mounts') !== -1) {
+          this.forwardUrl = `mounts/${this.mountService.statusMount}`;
+          this.forwardUrl += `/${params['mount_id']}/deal/${this.deal.id}`;
         }
       });
   }
