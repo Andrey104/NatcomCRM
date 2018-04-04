@@ -13,12 +13,12 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private messageService: MessageService) {
   }
 
-  private userUrl = 'api/user_info';
+  private userUrl = 'http://188.225.46.31/api/user_info';
 
   login(username: string, password: string) {
     const user = {username: username, password: password};
     this.http
-      .post('/api/login', user)
+      .post('http://188.225.46.31/api/login', user)
       // See below - subscribe() is still necessary when using post().
       .subscribe(// Successful responses call the first callback.
         data => {
