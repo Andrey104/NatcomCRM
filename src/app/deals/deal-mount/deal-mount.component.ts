@@ -37,7 +37,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   showToDealButton = true;
   showAddInstaller = false;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
-  addInstallerModalState: { open: Boolean, installers?: InstallerPosition[], stageId: string };
+  addInstallerModalState: { open: Boolean, installers?: InstallerPosition[], stageId: string } = {open: false, installers: [], stageId: ''};
 
 
   constructor(private activatedRoute: ActivatedRoute,

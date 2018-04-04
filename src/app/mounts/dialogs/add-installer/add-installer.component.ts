@@ -56,6 +56,7 @@ export class AddInstallerComponent implements OnInit, OnChanges {
     this.onClose.emit(successfully);
     this.open = false;
     this.installerListIsOpen = false;
+    this.brigadeListIsOpen = false;
   }
 
   checkInstallerId(id: number, installers: InstallerPosition[]) {
@@ -126,7 +127,7 @@ export class AddInstallerComponent implements OnInit, OnChanges {
     installersMin = this.cloneObject(this.installers);
     installersMin = installersMin.map(this.brigadeMinMap);
     this.mountService.setInstaller(this.stageId, installersMin).subscribe(data => {
-      alert('Монтажники изменены успешно!');
+      // alert('Монтажники изменены успешно!');
       this.close(true);
     });
   }
