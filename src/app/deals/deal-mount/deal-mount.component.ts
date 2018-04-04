@@ -9,6 +9,8 @@ import {InstallerPosition} from '../../models/installers/installer_position';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {OrderService} from '../../services/order.service';
 import {MeasurementService} from '../../services/measurement.service';
+import {ParseWebsocketService} from '../../services/parse-websocket.service';
+import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-deal-mount',
@@ -44,8 +46,24 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
               private utils: UtilsService,
               private orderService: OrderService,
               private measurementService: MeasurementService,
-              @Inject(DOCUMENT) private document: Document) {
+              @Inject(DOCUMENT) private document: Document,
+              private parseWebsocket: ParseWebsocketService,
+              private chatService: ChatService) {
+    this.chatService.messages.subscribe(msg => {
+      this.parseEvent(msg);
+    });
     this.url = this.document.location.href;
+  }
+
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_comment_mount': {
+        if (msg.data.data.comment.user.id !== Number(localStorage.getItem('id_manager'))) {
+          this.mount.comments.push(msg.data.data.comment);
+        }
+        break;
+      }
+    }
   }
 
   ngOnInit() {

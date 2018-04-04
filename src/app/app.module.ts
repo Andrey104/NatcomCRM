@@ -127,6 +127,7 @@ import {ChatService} from './services/chat.service';
 import {WebsocketService} from './services/websocket.service';
 import { BrigadeListComponent } from './mounts/dialogs/add-installer/brigade-list/brigade-list.component';
 import { BrigadeListItemComponent } from './mounts/dialogs/add-installer/brigade-list/brigade-list-item/brigade-list-item.component';
+import {ParseWebsocketService} from './services/parse-websocket.service';
 
 
 @NgModule({
@@ -274,7 +275,8 @@ import { BrigadeListItemComponent } from './mounts/dialogs/add-installer/brigade
     BrigadesService,
     BaseApi,
     ChatService,
-    WebsocketService
+    WebsocketService,
+    ParseWebsocketService
   ],
   bootstrap:
     [AppComponent],

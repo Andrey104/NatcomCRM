@@ -10,6 +10,8 @@ import {DOCUMENT} from '@angular/common';
 import {OrderService} from '../../services/order.service';
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import {MountService} from '../../services/mount.service';
+import {ParseWebsocketService} from '../../services/parse-websocket.service';
+import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-deal-measurement',
@@ -40,8 +42,24 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
               @Inject(DOCUMENT) private document: Document,
               private orderService: OrderService,
               private sanitization: DomSanitizer,
-              private mountService: MountService) {
+              private mountService: MountService,
+              private parseWebsocket: ParseWebsocketService,
+              private chatService: ChatService) {
+    this.chatService.messages.subscribe(msg => {
+      this.parseEvent(msg);
+    });
     this.url = this.document.location.href;
+  }
+
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_comment_measurement': {
+        if (msg.data.data.comment.user.id !== Number(localStorage.getItem('id_manager'))) {
+          this.measurement.comments.push(msg.data.data.comment);
+        }
+        break;
+      }
+    }
   }
 
   ngOnInit() {
