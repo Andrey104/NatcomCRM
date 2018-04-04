@@ -9,7 +9,7 @@ export class MountDatePipe implements PipeTransform {
   constructor(private utils: UtilsService) {}
   transform(date: string): string {
     if (date === null || date === '') {
-      date = 'По телефону';
+      date = 'По звонку';
     } else {
       const mountDate = new Date(date);
       date = mountDate.getDate() + ' '

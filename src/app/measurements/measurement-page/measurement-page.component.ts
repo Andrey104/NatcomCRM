@@ -4,6 +4,7 @@ import {MeasurementResult} from '../../models/measurement/measurement-result';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
+import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-measurement-page',
@@ -20,32 +21,22 @@ export class MeasurementPageComponent implements OnInit {
   termDate$ = new Subject<string>();
   inputText = '';
   date = '';
-  pattern = /\d{4}-\d{2}-\d{2}/;
+  eventMessage = '';
+  eventRoute = '';
 
   constructor(private measurementService: MeasurementService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private chatService: ChatService) {
+    this.chatService.messages.subscribe(msg => {
+      this.parseEvent(msg);
+    });
   }
 
   ngOnInit() {
     this.subscribeOnUrl();
     this.subscribeOnInputField();
     this.subscribeOnDateField();
-  }
-
-  showMeasurements() {
-    this.page = 1;
-    this.load = true;
-    this.lastPage = false;
-    this.measurementService.getAllMeasurements(this.page, this.status.statusUrl)
-      .subscribe((measurementPage) => {
-        this.measurements = measurementPage.results;
-        if (measurementPage.next === null) {
-          this.lastPage = true;
-        }
-        this.load = false;
-        document.getElementById('scroll').scrollTop = 0;
-      });
   }
 
   subscribeOnUrl() {
@@ -80,6 +71,31 @@ export class MeasurementPageComponent implements OnInit {
           this.search();
         }
       );
+  }
+
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_create_order': {
+        this.eventMessage = 'Новая заявка';
+        this.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+        break;
+      }
+    }
+  }
+
+  showMeasurements() {
+    this.page = 1;
+    this.load = true;
+    this.lastPage = false;
+    this.measurementService.getAllMeasurements(this.page, this.status.statusUrl)
+      .subscribe((measurementPage) => {
+        this.measurements = measurementPage.results;
+        if (measurementPage.next === null) {
+          this.lastPage = true;
+        }
+        this.load = false;
+        document.getElementById('scroll').scrollTop = 0;
+      });
   }
 
   onScrollMeasurement() {

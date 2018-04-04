@@ -47,13 +47,31 @@ export class DealPageComponent implements OnInit {
 
   parseEvent(msg) {
     switch (msg.data.event) {
-      case 'on_create_deal': {
-        this.eventMessage = 'Добавлена новая сделка';
-        break;
-      }
       case 'on_create_order': {
         this.eventMessage = 'Новая заявка';
         this.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+        break;
+      }
+      case 'on_create_deal': {
+        this.dealService.getDealById(msg.data.data.deal_id)
+          .subscribe((deal: DealResult) => {
+            if (deal.status === 0) {
+              if ((this.dealService.statusDeal === 'all') ||
+                (this.dealService.statusDeal === 'processing')) {
+                this.dealPage.unshift(deal);
+                this.dealPage.pop();
+              }
+            } else if (deal.status === 1) {
+              if ((this.dealService.statusDeal === 'all') ||
+                (this.dealService.statusDeal === 'measurement_assigned')) {
+                this.dealPage.unshift(deal);
+                this.dealPage.pop();
+              }
+            }
+          });
+        break;
+      }
+      case 'on_reject_deal': {
         break;
       }
     }

@@ -5,6 +5,7 @@ import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
 import {Subscription} from 'rxjs/Subscription';
+import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-mount-page',
@@ -21,11 +22,17 @@ export class MountPageComponent implements OnInit {
   termDate$ = new Subject<string>();
   inputText = '';
   date = '';
+  eventMessage = '';
+  eventRoute = '';
   private subscriptions: Subscription[] = [];
 
   constructor(private mountService: MountService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private chatService: ChatService) {
+    this.chatService.messages.subscribe(msg => {
+      this.parseEvent(msg);
+    });
   }
 
   ngOnInit() {
@@ -64,6 +71,16 @@ export class MountPageComponent implements OnInit {
         this.mounts = [];
         this.showMounts();
       });
+  }
+
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_create_order': {
+        this.eventMessage = 'Новая заявка';
+        this.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+        break;
+      }
+    }
   }
 
   showMounts() {

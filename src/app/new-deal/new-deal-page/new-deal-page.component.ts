@@ -12,6 +12,7 @@ import {NewDeal} from '../../models/deal/new_deal';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NewMeasurement} from '../../models/measurement/new-measurement';
 import {DealResult} from '../../models/deal/deal_result';
+import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-new-deal-page',
@@ -40,12 +41,18 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   orderId: number;
   orderStatus;
   subOnOrder: Subscription;
+  eventMessage = '';
+  eventRoute = '';
 
   constructor(private dealService: DealService,
               private measurementService: MeasurementService,
               private orderService: OrderService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private chatService: ChatService) {
+    this.chatService.messages.subscribe(msg => {
+      this.parseEvent(msg);
+    });
   }
 
   ngOnInit() {
@@ -64,6 +71,16 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
     //     });
     //     this.clients = this.dealService.deal.clients;
     //   }
+  }
+
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_create_order': {
+        this.eventMessage = 'Новая заявка';
+        this.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+        break;
+      }
+    }
   }
 
   getOrder() {
