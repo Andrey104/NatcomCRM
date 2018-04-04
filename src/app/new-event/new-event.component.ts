@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class NewEventComponent implements OnInit {
   @Input() message;
+  @Input() route;
 
   constructor() {
   }

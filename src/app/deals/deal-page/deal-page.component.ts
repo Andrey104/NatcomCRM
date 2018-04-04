@@ -8,6 +8,7 @@ import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {Subscription} from 'rxjs/Subscription';
+import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-deal-page',
@@ -24,17 +25,38 @@ export class DealPageComponent implements OnInit {
   termDate$ = new Subject<string>();
   inputText = '';
   date = '';
+  eventMessage = '';
+  eventRoute = '';
   private subscriptions: Subscription[] = [];
 
   constructor(private dealService: DealService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private chatService: ChatService) {
+    this.chatService.messages.subscribe(msg => {
+      console.log(msg);
+      this.parseEvent(msg);
+    });
   }
 
   ngOnInit() {
     this.subscribeOnUrl();
     this.subscribeOnInputField();
     this.subscribeOnDateField();
+  }
+
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_create_deal': {
+        this.eventMessage = 'Добавлена новая сделка';
+        break;
+      }
+      case 'on_create_order': {
+        this.eventMessage = 'Новая заявка';
+        this.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+        break;
+      }
+    }
   }
 
   subscribeOnUrl() {
