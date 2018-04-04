@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
+import {ChatService} from '../../services/chat.service';
 
 
 @Component({
@@ -30,7 +31,37 @@ export class OrderPageComponent implements OnInit, OnDestroy {
 
   constructor(private orderService: OrderService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private chatService: ChatService) {
+    this.chatService.messages.subscribe(msg => {
+      console.log(msg);
+      this.parseEvent(msg);
+    });
+  }
+
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_create_order': {
+        this.orderService.getOrderById(msg.data.data.order_id).subscribe(result => {
+          if ((this.orderService.getOrderStatus() === 'all') ||
+            (this.orderService.getOrderStatus() === 'processing')) {
+            this.orders.unshift(result);
+            this.orders.pop();
+          }
+        });
+        break;
+      }
+      case 'on_reject_order': {
+        this.orderService.getOrderById(msg.data.data.order_id).subscribe(result => {
+          for (let i = 0; i < this.orders.length; i++) {
+            if (msg.data.data.order_id === this.orders[i]) {
+
+            }
+          }
+        });
+        break;
+      }
+    }
   }
 
   ngOnInit() {

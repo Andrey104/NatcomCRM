@@ -366,7 +366,7 @@ export class UtilsService {
     let status: { statusName: string, statusUrl: string };
     switch (statusStr) {
       case 'processing': {
-        status = {statusName: 'Заявки в процессе', statusUrl: 'status=0&&status=2'};
+        status = {statusName: 'Заявки в процессе', statusUrl: 'status=0&status=2'};
         break;
       }
       case 'completed': {
