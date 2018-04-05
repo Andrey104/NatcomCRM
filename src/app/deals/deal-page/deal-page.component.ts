@@ -25,15 +25,15 @@ export class DealPageComponent implements OnInit {
   termDate$ = new Subject<string>();
   inputText = '';
   date = '';
-  eventMessage = '';
-  eventRoute = '';
+  showEventDialog = false;
+  event = {eventMessage: '', eventRoute: ''};
   private subscriptions: Subscription[] = [];
 
   constructor(private dealService: DealService,
               private activatedRoute: ActivatedRoute,
               private utils: UtilsService,
               private chatService: ChatService) {
-    this.chatService.messages.subscribe(msg => {
+    chatService.messages.subscribe(msg => {
       console.log(msg);
       this.parseEvent(msg);
     });
@@ -48,8 +48,9 @@ export class DealPageComponent implements OnInit {
   parseEvent(msg) {
     switch (msg.data.event) {
       case 'on_create_order': {
-        this.eventMessage = 'Новая заявка';
-        this.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+        this.event.eventMessage = 'Новая заявка';
+        this.event.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+        this.showEventDialog = true;
         break;
       }
       case 'on_create_deal': {
@@ -72,6 +73,15 @@ export class DealPageComponent implements OnInit {
         break;
       }
       case 'on_reject_deal': {
+        this.dealService.getDealById(msg.data.data.deal_id)
+          .subscribe((deal: DealResult) => {
+            if (deal.status === 0) {
+              this.dealPage.unshift(deal);
+              this.dealPage.pop();
+            } else if (deal.status !== 4) {
+              this.showDeals();
+            }
+          });
         break;
       }
     }

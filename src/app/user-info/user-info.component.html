@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="user">
   <article>
-    <div class="status-image" [ngSwitch]="user?.type">
+    <div class="status-image">
       <img src="{{user?.type | imageType}}">
     </div>
     <div class="user-info">

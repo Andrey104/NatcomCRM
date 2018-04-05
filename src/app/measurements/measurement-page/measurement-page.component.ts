@@ -28,7 +28,8 @@ export class MeasurementPageComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private utils: UtilsService,
               private chatService: ChatService) {
-    this.chatService.messages.subscribe(msg => {
+    chatService.messages.subscribe(msg => {
+      console.log(msg);
       this.parseEvent(msg);
     });
   }

@@ -20,7 +20,7 @@ export class ChatService {
       });
     setTimeout(() => {
       this.sendMsg();
-    });
+    }, 1000);
   }
 
   message = {
