@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {MountService} from '../../services/mount.service';
-import {MountResult} from '../../models/mount/mount-result';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
 import {Subscription} from 'rxjs/Subscription';
 import {ChatService} from '../../services/chat.service';
+import {DealMount} from '../../models/deal/deal_mount';
 
 @Component({
   selector: 'app-mount-page',
@@ -13,7 +13,7 @@ import {ChatService} from '../../services/chat.service';
   styleUrls: ['./mount-page.component.css']
 })
 export class MountPageComponent implements OnInit {
-  mounts: MountResult[];
+  mounts: DealMount[];
   status: { statusName: string, statusUrl: string };
   load: boolean;
   lastPage: boolean;

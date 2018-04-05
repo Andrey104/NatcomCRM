@@ -2,49 +2,80 @@
   <app-preloader></app-preloader>
 </div>
 <div *ngIf="!loadPage" class="mainDiv col s12 detail-col scrollable-page" id="page">
-  <div class="col s12 detail-col valign-wrapper left-align">
-    <div *ngIf="backRouter" routerLink="{{backRouter}}"
-         class="col s3 row-back valign-wrapper hover-element no-border">
-      <i class="small material-icons no-border icon-arrow-back">
-        keyboard_arrow_left
-      </i>
-      <span class="back icon-arrow-back">Назад к сделке</span>
+  <div class="row main-row">
+    <div class="col s12 detail-col valign-wrapper left-align">
+      <div *ngIf="backRouter" routerLink="{{backRouter}}"
+           class="col s3 row-back valign-wrapper hover-element no-border">
+        <i class="small material-icons no-border icon-arrow-back">
+          keyboard_arrow_left
+        </i>
+        <span class="back icon-arrow-back">Назад к сделке</span>
+      </div>
+      <div class="col s4 valign-wrapper">
+        <img class="avatar" src="{{mount?.user?.type | imageType}}">
+        <div>{{mount?.user?.first_name}} {{mount?.user?.last_name}}</div>
+      </div>
+      <div class="col s4">{{mount?.status | mountStatus}}</div>
+      <div class="col s1 namePage">Монтаж</div>
     </div>
-    <div class="col s4 valign-wrapper">
-      <img class="avatar" src="{{mount?.user?.type | imageType}}">
-      <div>{{mount?.user?.first_name}} {{mount?.user?.last_name}}</div>
-    </div>
-    <div class="col s4">{{mount?.status | mountStatus}}</div>
-    <div class="col s1 namePage">Монтаж</div>
   </div>
   <div class="col s12 divider detail-col"></div>
-  <div class="col s12 valign-wrapper">
-    <div class="status-container valign-wrapper main-info">
-      <div [appColorCompany]="mount?.company?.symbol" class="company-symbol">{{mount?.company?.symbol}}</div>
-      <div class="company-name">{{mount?.company?.name}}</div>
-    </div>
-    <div *ngIf="showToDealButton"
-         class=" col s2 valign-wrapper no-border"
-         routerLink="deal/{{dealId}}">
-      <div class="btn-go-deal valign-wrapper no-border">
-        К сделке<i class="normal  material-icons  deal-icon">reply</i>
+  <div class="row main-info">
+    <div class="col s7">
+      <div class="status-container valign-wrapper">
+        <div [appColorCompany]="mount?.company?.symbol" class="company-symbol">{{mount?.company?.symbol}}</div>
+        <div class="company-name">{{mount?.company?.name}}</div>
+      </div>
+      <div class="mount-info">
+        <div class="valign-wrapper">
+          <i class="tiny  material-icons  icon">date_range</i>
+          <span>  {{mount?.date | dateFormat: 'date'}}</span>
+        </div>
+        <div class="valign-wrapper">
+          <i class="tiny  material-icons icon">assignment</i><span> Номер договора:  {{dealId | dealContractView}}</span>
+        </div>
+        <div class="valign-wrapper" *ngIf="mount?.address">
+          <i class="tiny  material-icons  icon">location_on</i>
+          <div class="text"> {{mount?.address}}</div>
+        </div>
+        <div class="valign-wrapper" *ngIf="mount?.address_comment">
+          <i class="tiny  material-icons  icon">comment</i>
+          <div class="text"> {{mount?.address_comment}}</div>
+        </div>
+        <div class="valign-wrapper" *ngIf="mount?.description">
+          <i class="tiny  material-icons  icon">comment</i>
+          <div class="text"> {{mount?.description}}</div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="mount-info">
-    <div class="col s12 str-info">
-      <i
-        class="tiny  material-icons  icon">date_range</i>
-      <span *ngIf="mount.date">  {{mount?.date | dateFormat: 'date'}}</span>
-      <span *ngIf="!mount.date">По звонку</span>
-    </div>
-    <div class="col s12 str-info">
-      <i class="tiny  material-icons icon">assignment</i><span> Номер договора:  {{dealId | dealContractView}}</span>
-    </div>
-    <div class="col s12 str-info" *ngIf="mount.description">
-      <i
-        class="tiny  material-icons  icon">comment</i>
-      <span> {{mount?.description}}</span>
+    <div class="col s5">
+      <div *ngIf="showToDealButton" class="row">
+        <div class="valign-wrapper no-border btn-go-deal-container"
+             routerLink="deal/{{mount?.deal.toString()}}">
+          <div class="btn-go-deal valign-wrapper no-border">
+            К сделке<i class="normal  material-icons  deal-icon">reply</i>
+          </div>
+        </div>
+      </div>
+      <div class="row main-row">
+        <div class="col s12 valign-wrapper">
+          <hr class="col s4">
+          <div class="col s4 center-align header">Контакты</div>
+          <hr class="col s4">
+        </div>
+      </div>
+      <div class="row">
+        <div *ngFor="let client of mount?.clients; let i = index" class="col s12">
+          <div class="valign-wrapper contact-info col s12">
+            <div class="col s6 valign-wrapper detail-col-right text">
+              <i class="small material-icons icon">person</i>
+              <div class="text">{{client.fio | clientName}}</div>
+            </div>
+            <div class="col s6 div-number">{{client.phones[0].number | phoneFormat}}</div>
+          </div>
+          <hr class="col s12 black">
+        </div>
+      </div>
     </div>
   </div>
   <div class="col s12 valign-wrapper detail-col">
@@ -123,6 +154,24 @@
   </div>
   <div class="col s12 row valign-wrapper detail-col">
     <div class="col s5 divider"></div>
+    <div class="col s2 center-align header">Изображения</div>
+    <div class="col s5 divider"></div>
+  </div>
+  <div *ngIf="mount?.pictures.length===0" class="row">
+    <div class="col s12 offset-s1 no-information">Нет изображений</div>
+  </div>
+  <div class="row" *ngIf="mount?.pictures.length!==0">
+    <div class="col s3" *ngFor="let picture of mount?.pictures; let i = index">
+      <div class="img-container" (click)="openPicture(i)"
+           [style.background-image]="getBackground(picture.url)">
+      </div>
+      <div class="col s12 picture-date center-align">
+        {{picture?.auto_date | dateFormat: 'fullDate'}}
+      </div>
+    </div>
+  </div>
+  <div class="col s12 row valign-wrapper detail-col">
+    <div class="col s5 divider"></div>
     <div class="col s2 center-align header">Комментарии</div>
     <div class="col s5 divider"></div>
   </div>
@@ -181,8 +230,12 @@
 <app-mount-dialog-transfer [mount]="mount" (successMountTransfer)="successMountUpdate()"
                            [(visible)]="showTransferMount"></app-mount-dialog-transfer>
 <!--<app-add-installer [modalState]="addInstallerModalState" (onClose)="closeAddInstallerModal($event)"></app-add-installer>-->
-<app-dialog-cost [mount]="mount" (successCost)="successMountUpdate()"
+<app-dialog-cost [mount]="mount"
+                 (successCost)="successMountUpdate()"
                  [(visible)]="showAddCost"></app-dialog-cost>
+<app-image-modal [picture]="picture"
+                 [(visible)]="showPicture"
+                 (close)="closePicture()"></app-image-modal>
 
 <app-dialog-component-cost [mount]="mount" (successCost)="successMountUpdate()"
 [(visible)]="showAddCostComponent"></app-dialog-component-cost>

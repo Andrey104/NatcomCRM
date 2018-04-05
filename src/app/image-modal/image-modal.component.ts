@@ -22,11 +22,11 @@ export class ImageModalComponent implements OnInit {
   }
 
   onClose() {
+    console.log(this.picture.url);
     this.visibleChange.emit();
   }
 
   zoom() {
     this.zoomIn = !this.zoomIn;
-    console.log(this.zoomIn);
   }
 }
