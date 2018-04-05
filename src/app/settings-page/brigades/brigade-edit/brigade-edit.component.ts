@@ -136,7 +136,7 @@ export class BrigadeEditComponent implements OnInit, OnChanges {
     if (this.edit) {
       this.brigadesService.editBrigade(brigadeMin).subscribe(data => {
         if (data) {
-          alert('Бригада изменена успешно!');
+          // alert('Бригада изменена успешно!');
           this.close(true);
         } else {
           alert('Ошибка при изменении бригады! Попробуйте снова!');
@@ -145,7 +145,7 @@ export class BrigadeEditComponent implements OnInit, OnChanges {
     } else {
         this.brigadesService.addBrigade(brigadeMin).subscribe(data => {
           if (data) {
-            alert('Бригада добавлена успешно!');
+            // alert('Бригада добавлена успешно!');
             this.close(true);
           } else {
             alert('Ошибка при добавлении бригады! Попробуйте снова!');

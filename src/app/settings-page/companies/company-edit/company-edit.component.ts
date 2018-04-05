@@ -63,7 +63,7 @@ export class CompanyEditComponent implements OnInit, OnChanges {
       company.id = this.modalState.company.id;
       this.companyService.editCompany(company).subscribe(data => {
         if (data) {
-          alert('Компания изменена успешно!');
+          // alert('Компания изменена успешно!');
           this.close(true);
         } else {
           alert('Ошибка при изменении компании! Попробуйте снова!');
@@ -72,7 +72,7 @@ export class CompanyEditComponent implements OnInit, OnChanges {
     } else {
       this.companyService.addCompany(company).subscribe(data => {
         if (data) {
-          alert('Комапния добавлена успешно!');
+          // alert('Комапния добавлена успешно!');
           this.close(true);
         } else {
           alert('Ошибка при добавлении компании! Попробуйте снова!');

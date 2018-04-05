@@ -61,7 +61,7 @@ export class InstallerEditComponent implements OnInit, OnChanges {
       installer.id = this.modalState.installer.id;
       this.installerService.editInstaller(installer).subscribe(data => {
         if (data) {
-          alert('Монтажник изменен успешно!');
+          // alert('Монтажник изменен успешно!');
           this.close(true);
         } else {
           alert('Ошибка при изменении монтажника! Попробуйте снова!');
@@ -70,7 +70,7 @@ export class InstallerEditComponent implements OnInit, OnChanges {
     } else {
       this.installerService.addInstaller(installer).subscribe(data => {
         if (data) {
-          alert('Монтажник добавлен успешно!');
+          // alert('Монтажник добавлен успешно!');
           this.close(true);
         } else {
           alert('Ошибка при добавлении монтажника! Попробуйте снова!');
