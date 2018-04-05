@@ -41,6 +41,10 @@ export class MeasurementService extends BaseApi {
       description = null;
     }
 
+    if (time === '') {
+      time = null;
+    }
+
     const data = {
       time,
       description

@@ -11,6 +11,8 @@ import {OrderService} from '../../services/order.service';
 import {MeasurementService} from '../../services/measurement.service';
 import {ParseWebsocketService} from '../../services/parse-websocket.service';
 import {ChatService} from '../../services/chat.service';
+import {Picture} from '../../models/picture';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-deal-mount',
@@ -19,11 +21,11 @@ import {ChatService} from '../../services/chat.service';
 })
 export class DealMountComponent implements OnInit, AfterViewChecked {
   id;
-  idDeal;
   url;
   backRouter;
   mount: DealMount;
   dealId;
+  picture: Picture;
   isSend = false;
   showEditButtons = false;
   loadPage: boolean;
@@ -35,7 +37,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   showAddCostComponent = false;
   needSubscribe = true;
   showToDealButton = true;
-  showAddInstaller = false;
+  showPicture = false;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   addInstallerModalState: { open: Boolean, installers?: InstallerPosition[], stageId: string } = {open: false, installers: [], stageId: ''};
 
@@ -47,6 +49,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
               private orderService: OrderService,
               private measurementService: MeasurementService,
               @Inject(DOCUMENT) private document: Document,
+              private sanitization: DomSanitizer,
               private parseWebsocket: ParseWebsocketService,
               private chatService: ChatService) {
     this.chatService.messages.subscribe(msg => {
@@ -111,21 +114,6 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
     });
   }
 
-
-  // getBackRoute() {
-  //   this.activatedRoute.params.subscribe(params => {
-  //     this.idDeal = params['id'];
-  //     this.id = params['mount_id'];
-  //     const index = this.url.indexOf('deal/');
-  //     if (index === -1) {
-  //       this.backRouter = `/deals/${this.dealService.statusDeal}/${this.idDeal}`;
-  //     } else {
-  //       this.backRouter = `/mounts/${this.mountService.statusMount}/${this.id}/deal/${this.idDeal}`;
-  //       console.log(this.backRouter);
-  //     }
-  //   });
-  // }
-
   successMountUpdate() {
     this.loadPage = true;
     this.getMountById();
@@ -143,8 +131,14 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
     this.mountService.getMount(this.id)
       .subscribe((mount) => {
         this.mount = mount;
+        for (const picture of this.mount.pictures) {
+          picture.url = 'http://188.225.46.31' + picture.url;
+        }
         this.dealId = this.mount.deal;
         this.showEditButtons = this.utils.showEditButtons(String(this.mount.user.id));
+        if (localStorage.getItem('user_type') === '3') {
+          this.showEditButtons = true;
+        }
         this.loadPage = false;
       });
   }
@@ -157,5 +151,18 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
       }, error => {
         console.log(error.error);
       });
+  }
+
+  openPicture(idPicture: number) {
+    this.picture = this.mount.pictures[idPicture];
+    this.showPicture = true;
+  }
+
+  getBackground(pictureUrl: String) {
+    return this.sanitization.bypassSecurityTrustStyle(`url(${pictureUrl})`);
+  }
+
+  closePicture() {
+    this.picture = null;
   }
 }

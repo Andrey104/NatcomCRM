@@ -1,4 +1,10 @@
-<div class="col s2 grey event-window valign-wrapper">
-  <div><i class="material-icons hover-element dialog-close-btn">close</i></div>
-  <p routerLink="{{route}}" class="message-container">{{message}}</p>
+<div *ngIf="visible" class="col s2 purple lighten-5 event-window valign-wrapper">
+  <div>
+    <i *ngIf="closable"
+       class="material-icons hover-element dialog-close-btn"
+       (click)="close()">close</i>
+  </div>
+  <div routerLink="{{event?.route}}" class="col s12 message-container">
+    <p class="message">Новая заявка</p>
+  </div>
 </div>

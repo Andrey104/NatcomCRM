@@ -35,7 +35,6 @@ export class MountCardComponent implements OnInit {
       this.urlToMount += `/${this.mount.id.toString()}`;
     } else {
       this.urlToMount = `mount/${this.mount.id.toString()}`;
-      console.log(this.urlToMount);
     }
   }
 

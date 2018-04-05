@@ -26,7 +26,6 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   subInputField: Subscription;
   inputText = '';
   date = '';
-  eventMessage = 'Новая сделка';
   private subscriptions: Subscription[] = [];
 
   constructor(private orderService: OrderService,
@@ -34,34 +33,8 @@ export class OrderPageComponent implements OnInit, OnDestroy {
               private utils: UtilsService,
               private chatService: ChatService) {
     this.chatService.messages.subscribe(msg => {
-      console.log(msg);
       this.parseEvent(msg);
     });
-  }
-
-  parseEvent(msg) {
-    switch (msg.data.event) {
-      case 'on_create_order': {
-        this.orderService.getOrderById(msg.data.data.order_id).subscribe(result => {
-          if ((this.orderService.getOrderStatus() === 'all') ||
-            (this.orderService.getOrderStatus() === 'processing')) {
-            this.orders.unshift(result);
-            this.orders.pop();
-          }
-        });
-        break;
-      }
-      case 'on_reject_order': {
-        this.orderService.getOrderById(msg.data.data.order_id).subscribe(result => {
-          for (let i = 0; i < this.orders.length; i++) {
-            if (msg.data.data.order_id === this.orders[i]) {
-
-            }
-          }
-        });
-        break;
-      }
-    }
   }
 
   ngOnInit() {
@@ -104,6 +77,68 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       });
   }
 
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_create_order': {
+        this.refreshAllAndProcessing(Number(msg.data.data.order_id));
+        break;
+      }
+      case 'on_reject_order': {
+        if ((this.orderService.getOrderStatus() === 'all') ||
+          (this.orderService.getOrderStatus() === 'processing')) {
+          this.showOrders();
+        } else if (this.orderService.getOrderStatus() === 'canceled') {
+          this.orderService.getOrderById(msg.data.data.order_id)
+            .subscribe((result) => {
+              this.orders.unshift(result);
+              this.orders.pop();
+            });
+        }
+        break;
+      }
+      case 'on_defer_order': {
+        this.refreshAllAndProcessing(Number(msg.data.data.order_id));
+        break;
+      }
+      case 'on_return_order': {
+        if ((this.orderService.getOrderStatus() === 'all') ||
+          (this.orderService.getOrderStatus() === 'processing')) {
+          this.orderService.getOrderById(msg.data.data.order_id)
+            .subscribe((result) => {
+              this.orders.unshift(result);
+              this.orders.pop();
+            });
+        } else if (this.orderService.getOrderStatus() === 'canceled') {
+          this.showOrders();
+        }
+        break;
+      }
+      case 'on_create_deal': {
+        if ((this.orderService.getOrderStatus() === 'all') ||
+          (this.orderService.getOrderStatus() === 'completed')) {
+          this.orderService.getOrderById(msg.data.data.order_id)
+            .subscribe((result) => {
+              this.orders.unshift(result);
+              this.orders.pop();
+            });
+        } else if (this.orderService.getOrderStatus() === 'processing') {
+          this.showOrders();
+        }
+      }
+    }
+  }
+
+  refreshAllAndProcessing(orderId: number) {
+    this.orderService.getOrderById(orderId)
+      .subscribe((result) => {
+        if ((this.orderService.getOrderStatus() === 'all') ||
+          (this.orderService.getOrderStatus() === 'processing')) {
+          this.orders.unshift(result);
+          this.orders.pop();
+        }
+      });
+  }
+
   // отображение первой страницы заказов в зависимости от содержимого поисковой строки
   search() {
     if ((this.date !== '' || this.inputText !== '') && this.orders !== []) {
@@ -113,7 +148,6 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       const params = this.utils.getSearchParams(this.inputText, this.date);
       this.orderService.getFilterOrders(this.page, params)
         .subscribe((orderPage) => {
-            console.log(orderPage);
             this.orders = orderPage.results;
             if (orderPage.next === null) {
               this.lastPage = true;

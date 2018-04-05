@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {MountService} from '../../services/mount.service';
-import {MountResult} from '../../models/mount/mount-result';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
 import {Subscription} from 'rxjs/Subscription';
+import {ChatService} from '../../services/chat.service';
+import {DealMount} from '../../models/deal/deal_mount';
 
 @Component({
   selector: 'app-mount-page',
@@ -12,7 +13,7 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./mount-page.component.css']
 })
 export class MountPageComponent implements OnInit {
-  mounts: MountResult[];
+  mounts: DealMount[];
   status: { statusName: string, statusUrl: string };
   load: boolean;
   lastPage: boolean;
@@ -21,11 +22,17 @@ export class MountPageComponent implements OnInit {
   termDate$ = new Subject<string>();
   inputText = '';
   date = '';
+  eventMessage = '';
+  eventRoute = '';
   private subscriptions: Subscription[] = [];
 
   constructor(private mountService: MountService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private chatService: ChatService) {
+    this.chatService.messages.subscribe(msg => {
+      this.parseEvent(msg);
+    });
   }
 
   ngOnInit() {
@@ -64,6 +71,16 @@ export class MountPageComponent implements OnInit {
         this.mounts = [];
         this.showMounts();
       });
+  }
+
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_create_order': {
+        this.eventMessage = 'Новая заявка';
+        this.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+        break;
+      }
+    }
   }
 
   showMounts() {

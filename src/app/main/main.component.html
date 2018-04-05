@@ -2,18 +2,15 @@
   <nav>
     <div class="nav-wrapper header menu">
       <div class="right image">
-        <a routerLink="/user" [ngSwitch]="type">
-          <img *ngSwitchCase="1" class="avatar" src="assets/images/worker.png"/>
-          <img *ngSwitchCase="2" class="avatar" src="assets/images/avatar.png"/>
-          <img *ngSwitchCase="3" class="avatar" src="assets/images/admin.png"/>
-          <img *ngSwitchCase="4" class="avatar" src="assets/images/admin.png"/>
+        <a routerLink="/user">
+          <img class="avatar" src="{{type | imageType}}"/>
         </a>
       </div>
       <a class="logo" href="/orders"><img class="logo" src="assets/images/logo.png"/></a>
       <ul class="right">
-        <li routerLinkActive="active"><a routerLink="/orders/all">Заявки</a>
+        <li routerLinkActive="active"><a routerLink="/orders/processing">Заявки</a>
           <ul>
-            <li routerLinkActive="active"><a routerLink="/orders/processing">Текущие</a></li>
+            <li routerLinkActive="active"><a routerLink="/orders/all">Все</a></li>
             <li routerLinkActive="active"><a routerLink="/orders/completed">Завершенные</a></li>
             <li routerLinkActive="active"><a routerLink="/orders/canceled">Отклоненные</a></li>
           </ul>
@@ -38,8 +35,8 @@
         </li>
         <li routerLinkActive="active"><a routerLink="/mounts/all">Монтажи</a>
           <ul>
-            <li routerLinkActive="active"><a routerLink="/mounts/processing">Обработка</a></li>
-            <li routerLinkActive="active"><a routerLink="/mounts/added_stage">В процессе</a></li>
+            <li routerLinkActive="active"><a routerLink="/mounts/processing">По звонку</a></li>
+            <li routerLinkActive="active"><a routerLink="/mounts/added_stage">Назначен</a></li>
             <li routerLinkActive="active"><a routerLink="/mounts/completed">Завершенные</a></li>
             <li routerLinkActive="active"><a routerLink="/mounts/canceled">Отклоненные</a></li>
           </ul>

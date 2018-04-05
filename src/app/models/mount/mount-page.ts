@@ -1,8 +1,8 @@
-import {MountResult} from './mount-result';
+import {DealMount} from '../deal/deal_mount';
 
 export class MountPage {
   count: number;
   next: string;
   previous: string;
-  results: MountResult[];
+  results: DealMount[];
 }

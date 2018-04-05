@@ -10,6 +10,10 @@ export class DateFormatPipe implements PipeTransform {
   transform(date: string, dateType: string): string {
     let dateStr: string;
     const newDate = new Date(date);
+    if (date === null) {
+      dateStr = 'По звонку';
+      return dateStr;
+    }
     switch (dateType) {
       case 'date': {
         dateStr = newDate.getDate() + ' ' + this.utils.monthStringFormat(newDate.getMonth()) +

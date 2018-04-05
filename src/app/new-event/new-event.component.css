@@ -5,6 +5,15 @@
   z-index: 100000;
 }
 
-.message-container {
+.message {
   margin: auto;
+}
+
+.message-container {
+  margin-top: 25px;
+  height: 45px;
+}
+
+.dialog-close-btn {
+  background-color: #ffa726;
 }

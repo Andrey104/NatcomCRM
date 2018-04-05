@@ -3,11 +3,8 @@
 </div>
 <div *ngIf="user">
   <article>
-    <div class="status-image" [ngSwitch]="user?.type">
-      <img *ngSwitchCase="2" src="assets/images/avatar.png" alt="менеджер" title="менеджер"/>
-      <img *ngSwitchCase="3" src="assets/images/admin.png" alt="старший менеджер" title="старший менеджер"/>
-      <img *ngSwitchCase="1" src="assets/images/worker.png" alt="рабочий" title="рабочий"/>
-      <img *ngSwitchCase="4" src="assets/images/admin.png" alt="админ" title="админ"/>
+    <div class="status-image">
+      <img src="{{user?.type | imageType}}">
     </div>
     <div class="user-info">
       <p id="user">{{user?.username}} <br>

@@ -16,7 +16,7 @@ export class ImageTypePipe implements PipeTransform {
         break;
       }
       case 3: {
-        url = 'assets/images/admin.png';
+        url = 'assets/images/avatar.png';
         break;
       }
       case 4:

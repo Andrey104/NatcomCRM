@@ -8,7 +8,7 @@ import {UtilsService} from '../../services/utils.service';
 import {DealService} from '../../services/deal.service';
 import {DOCUMENT} from '@angular/common';
 import {OrderService} from '../../services/order.service';
-import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import {DomSanitizer} from '@angular/platform-browser';
 import {MountService} from '../../services/mount.service';
 import {ParseWebsocketService} from '../../services/parse-websocket.service';
 import {ChatService} from '../../services/chat.service';
