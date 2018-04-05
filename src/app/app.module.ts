@@ -64,7 +64,6 @@ import {MeasurementStatusPipe} from './pipes/measurement-status.pipe';
 import {ImageModalComponent} from './image-modal/image-modal.component';
 import {MountPageComponent} from './mounts/mount-page/mount-page.component';
 import {MountComponent} from './mounts/mount/mount.component';
-import {StageMountService} from './services/stage-mount.service';
 import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
 import {MeasurementComponent} from './measurements/measurement/measurement.component';
 import {BaseApi} from './core/base-api';
@@ -273,7 +272,6 @@ import { NewEventComponent } from './new-event/new-event.component';
     ClientService,
     MeasurementService,
     MountService,
-    StageMountService,
     BrigadesService,
     BaseApi,
     ChatService,
