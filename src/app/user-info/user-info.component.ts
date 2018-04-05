@@ -20,8 +20,4 @@ export class UserInfoComponent implements OnInit {
         this.user = user;
       });
   }
-
-  logOut(): void {
-    this.authenticationService.logout();
-  }
 }

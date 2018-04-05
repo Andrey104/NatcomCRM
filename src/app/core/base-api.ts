@@ -65,6 +65,13 @@ export class BaseApi {
       });
   }
 
+  loginRequest(url: string = '', data?: any): Observable<any> {
+    return this.http.post(
+      this.getUrl(url),
+      data
+    );
+  }
+
   private token() {
     return localStorage.getItem('token');
   }
