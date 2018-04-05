@@ -4,10 +4,10 @@
     <h4>Редактирование замера</h4>
     <form (ngSubmit)="submitForm()" #form="ngForm">
       <div>
-        <label class="required-area-dialog">Комментарий ко времени</label>
-        <textarea type="text" [ngModel]="measurement?.time"
+        <label>Комментарий ко времени</label>
+        <textarea type="text"
+                  [ngModel]="measurement?.time"
                   name="time"
-                  required
                   class="text-comment-dialog"></textarea>
       </div>
       <div>
