@@ -56,11 +56,11 @@ export class MountService extends BaseApi {
     return this.post(`mounts/${idMount}/transfer/`, {new_date, comment, cause});
   }
 
-  addCost(idMount: string, sum: number, comment: string): Observable<Cost> {
+  addCost(idMount: string, sum: number, comment: string, destination: number): Observable<Cost> {
     if (comment === '') {
       comment = null;
     }
-    return this.post(`mounts/${idMount}/cost/`, {sum, comment});
+    return this.post(`mounts/${idMount}/cost/`, {sum, comment, destination});
   }
 
   addCostComponent(idMount: string, sum: number, comment: string): Observable<Cost> {
