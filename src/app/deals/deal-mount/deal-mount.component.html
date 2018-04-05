@@ -97,7 +97,12 @@
       <i class="tiny  material-icons icon">person</i>{{installer.installer.fio}}
     </div>
     <div>
-      <i class="tiny  material-icons icon">phone</i>{{installer.installer.phone}}
+      <div *ngIf="installer.installer.phone1">
+        <i class="tiny  material-icons icon">phone</i>{{installer.installer.phone1}}
+      </div>
+      <div *ngIf="installer.installer.phone2">
+        <i class="tiny  material-icons icon">phone</i>{{installer.installer.phone2}}
+      </div>
     </div>
   </div>
   <div class="col s12 valign-wrapper detail-col">
