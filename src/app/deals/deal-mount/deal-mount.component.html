@@ -214,6 +214,12 @@
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">event</i></div>
         </div>
       </li>
+      <li class="hover-element li-element-menu-fab" (click)="showEditMount = !showEditMount"
+          onclick="$('#main-btn').click()">
+        <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Редактировать монтаж</span>
+          <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">edit</i></div>
+        </div>
+      </li>
       <li class="hover-element li-element-menu-fab" (click)="showCompleteMount = !showCompleteMount"
           onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Завершить монтаж</span>
@@ -246,4 +252,5 @@
 [(visible)]="showAddCostComponent"></app-dialog-component-cost>
 <app-add-installer [modalState]="addInstallerModalState" (onClose)="closeAddInstallerModal($event)"></app-add-installer>
 
-
+<app-mount-edit [mount]="mount" (successMountEdit)="successMountUpdate()"
+                           [(visible)]="showEditMount"></app-mount-edit>

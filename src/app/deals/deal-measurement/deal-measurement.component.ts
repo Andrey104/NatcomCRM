@@ -29,6 +29,8 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   showMeasurementReject = false;
   showMeasurementTransfer = false;
   showMeasurementEdit = false;
+  showDeletePhotoDialog = false;
+  photoDeleteID: number;
   showPicture = false;
   statusDeal: string;
   backUrl: string;
@@ -134,5 +136,10 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
 
   closePicture() {
     this.picture = null;
+  }
+
+  deletePicture(id) {
+    this.showDeletePhotoDialog = true;
+    this.photoDeleteID = id;
   }
 }
