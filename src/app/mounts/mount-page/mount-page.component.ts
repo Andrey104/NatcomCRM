@@ -4,7 +4,6 @@ import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
 import {Subscription} from 'rxjs/Subscription';
-import {ChatService} from '../../services/chat.service';
 import {DealMount} from '../../models/deal/deal_mount';
 
 @Component({
@@ -28,11 +27,7 @@ export class MountPageComponent implements OnInit {
 
   constructor(private mountService: MountService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService,
-              private chatService: ChatService) {
-    this.chatService.messages.subscribe(msg => {
-      this.parseEvent(msg);
-    });
+              private utils: UtilsService) {
   }
 
   ngOnInit() {

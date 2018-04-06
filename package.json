@@ -24,6 +24,7 @@
     "angular2-infinite-scroll": "^0.3.43",
     "angular2-modal": "^3.0.3",
     "angular2-text-mask": "^8.0.4",
+    "angular2-websocket": "^0.9.6",
     "core-js": "^2.5.3",
     "ng2-inputmask": "^0.2.5",
     "ngx-infinite-scroll": "^0.7.2",

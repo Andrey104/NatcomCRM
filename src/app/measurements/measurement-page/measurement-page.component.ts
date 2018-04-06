@@ -4,7 +4,6 @@ import {MeasurementResult} from '../../models/measurement/measurement-result';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
-import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-measurement-page',
@@ -26,12 +25,7 @@ export class MeasurementPageComponent implements OnInit {
 
   constructor(private measurementService: MeasurementService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService,
-              private chatService: ChatService) {
-    chatService.messages.subscribe(msg => {
-      console.log(msg);
-      this.parseEvent(msg);
-    });
+              private utils: UtilsService) {
   }
 
   ngOnInit() {

@@ -10,8 +10,6 @@ import {DOCUMENT} from '@angular/common';
 import {OrderService} from '../../services/order.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MountService} from '../../services/mount.service';
-import {ParseWebsocketService} from '../../services/parse-websocket.service';
-import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-deal-measurement',
@@ -44,12 +42,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
               @Inject(DOCUMENT) private document: Document,
               private orderService: OrderService,
               private sanitization: DomSanitizer,
-              private mountService: MountService,
-              private parseWebsocket: ParseWebsocketService,
-              private chatService: ChatService) {
-    this.chatService.messages.subscribe(msg => {
-      this.parseEvent(msg);
-    });
+              private mountService: MountService) {
     this.url = this.document.location.href;
   }
 

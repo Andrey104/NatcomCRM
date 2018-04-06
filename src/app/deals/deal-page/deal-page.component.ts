@@ -8,7 +8,7 @@ import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {Subscription} from 'rxjs/Subscription';
-import {ChatService} from '../../services/chat.service';
+import {WebsocketService} from '../../services/websocket.service';
 
 @Component({
   selector: 'app-deal-page',
@@ -32,17 +32,16 @@ export class DealPageComponent implements OnInit {
   constructor(private dealService: DealService,
               private activatedRoute: ActivatedRoute,
               private utils: UtilsService,
-              private chatService: ChatService) {
-    chatService.messages.subscribe(msg => {
-      console.log(msg);
-      this.parseEvent(msg);
-    });
+              private webSocketService: WebsocketService) {
   }
 
   ngOnInit() {
     this.subscribeOnUrl();
     this.subscribeOnInputField();
     this.subscribeOnDateField();
+    this.webSocketService.message.subscribe((response) => {
+      console.log(response);
+    });
   }
 
   parseEvent(msg) {

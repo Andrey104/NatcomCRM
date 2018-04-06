@@ -12,7 +12,6 @@ import {NewDeal} from '../../models/deal/new_deal';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NewMeasurement} from '../../models/measurement/new-measurement';
 import {DealResult} from '../../models/deal/deal_result';
-import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-new-deal-page',
@@ -48,11 +47,7 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
               private measurementService: MeasurementService,
               private orderService: OrderService,
               private activatedRoute: ActivatedRoute,
-              private router: Router,
-              private chatService: ChatService) {
-    this.chatService.messages.subscribe(msg => {
-      this.parseEvent(msg);
-    });
+              private router: Router) {
   }
 
   ngOnInit() {

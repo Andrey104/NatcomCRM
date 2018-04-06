@@ -9,8 +9,6 @@ import {InstallerPosition} from '../../models/installers/installer_position';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {OrderService} from '../../services/order.service';
 import {MeasurementService} from '../../services/measurement.service';
-import {ParseWebsocketService} from '../../services/parse-websocket.service';
-import {ChatService} from '../../services/chat.service';
 import {Picture} from '../../models/picture';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ComponentCost} from '../../models/component-cost';
@@ -53,12 +51,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
               private orderService: OrderService,
               private measurementService: MeasurementService,
               @Inject(DOCUMENT) private document: Document,
-              private sanitization: DomSanitizer,
-              private parseWebsocket: ParseWebsocketService,
-              private chatService: ChatService) {
-    this.chatService.messages.subscribe(msg => {
-      this.parseEvent(msg);
-    });
+              private sanitization: DomSanitizer) {
     this.url = this.document.location.href;
   }
 
