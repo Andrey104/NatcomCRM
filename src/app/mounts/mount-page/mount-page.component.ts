@@ -70,10 +70,54 @@ export class MountPageComponent implements OnInit {
 
   parseEvent(msg) {
     switch (msg.data.event) {
-      case 'on_create_order': {
-        this.eventMessage = 'Новая заявка';
-        this.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+      case 'on_create_mount': {
+        this.mountService.getMount(msg.data.data.mount_id)
+          .subscribe((mount: DealMount) => {
+            if (mount.status === 1) {
+              if (this.mountService.statusMount === 'all' || this.mountService.statusMount === 'added_stage') {
+                this.mounts.unshift(mount);
+                this.mounts.pop();
+              }
+            } else if (mount.status === 0) {
+              if (this.mountService.statusMount === 'all' || this.mountService.statusMount === 'processing') {
+                this.mounts.unshift(mount);
+                this.mounts.pop();
+              }
+            }
+          });
         break;
+      }
+      case 'on_close_mount': {
+        this.mountService.getMount(msg.data.data.mount_id)
+          .subscribe((mount: DealMount) => {
+            if (this.mountService.statusMount !== 'completed' || this.mountService.statusMount !== 'canceled') {
+              this.showMounts();
+            } else if (this.mountService.statusMount === 'completed') {
+              this.mounts.unshift(mount);
+              this.mounts.pop();
+            }
+          });
+        break;
+      }
+      case 'on_reject_mount': {
+        this.mountService.getMount(msg.data.data.mount_id)
+          .subscribe((mount: DealMount) => {
+            if (this.mountService.statusMount !== 'completed' || this.mountService.statusMount !== 'canceled') {
+              this.showMounts();
+            } else if (this.mountService.statusMount === 'canceled') {
+              this.mounts.unshift(mount);
+              this.mounts.pop();
+            }
+          });
+        break;
+      }
+      case 'on_transfer_mount': {
+        this.mountService.getMount(msg.data.data.mount_id)
+          .subscribe((mount: DealMount) => {
+            if (this.mountService.statusMount !== 'completed' || this.mountService.statusMount !== 'canceled') {
+              this.showMounts();
+            }
+          });
       }
     }
   }

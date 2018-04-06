@@ -1,10 +1,14 @@
-<div *ngIf="visible" class="col s2 purple lighten-5 event-window valign-wrapper">
-  <div>
-    <i *ngIf="closable"
-       class="material-icons hover-element dialog-close-btn"
-       (click)="close()">close</i>
-  </div>
-  <div routerLink="{{event?.route}}" class="col s12 message-container">
-    <p class="message">Новая заявка</p>
+<div *ngIf="visible" class="purple lighten-5 event-window valign-wrapper">
+  <div *ngIf="orderId">
+    <div>
+      <i *ngIf="closable"
+        class="material-icons hover-element dialog-close-btn"
+        (click)="close()">close</i>
+    </div>
+    <div routerLink="orders/all/{{orderId}}"
+         (click)="close()"
+         class="col s12 message-container">
+      <p class="message">Новая заявка</p>
+    </div>
   </div>
 </div>

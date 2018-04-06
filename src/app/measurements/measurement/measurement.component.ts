@@ -1,5 +1,5 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {MeasurementResult} from '../../models/measurement/measurement-result';
+import {Component, Input, OnChanges} from '@angular/core';
+import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {UtilsService} from '../../services/utils.service';
 
 @Component({
@@ -8,7 +8,7 @@ import {UtilsService} from '../../services/utils.service';
   styleUrls: ['./measurement.component.css']
 })
 export class MeasurementComponent implements OnChanges {
-  @Input() measurement: MeasurementResult;
+  @Input() measurement: DealMeasurement;
   iconInfo: { icon: string, color: string };
 
   constructor(private utils: UtilsService) {

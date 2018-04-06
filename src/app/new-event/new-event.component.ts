@@ -5,20 +5,17 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
   templateUrl: './new-event.component.html',
   styleUrls: ['./new-event.component.css']
 })
-export class NewEventComponent implements OnChanges {
+export class NewEventComponent {
   @Input() closable = true;
-  @Input() newEvent;
+  @Input() orderId: number;
   @Input() visible: boolean;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  event: {message: string, route: ''};
 
   constructor() {
   }
 
-  ngOnChanges() {
-  }
-
   close() {
+    console.log('orderID: ' + this.orderId);
     this.visible = false;
     this.visibleChange.emit(this.visible);
   }

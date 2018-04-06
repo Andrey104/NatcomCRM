@@ -5,7 +5,6 @@ import {HttpClient} from '@angular/common/http';
 import {OurComment} from '../models/comment';
 import {MeasurementPage} from '../models/measurement/measurement-page';
 import {BaseApi} from '../core/base-api';
-import {MeasurementResult} from '../models/measurement/measurement-result';
 import {NewMeasurement} from '../models/measurement/new-measurement';
 
 @Injectable()
@@ -32,7 +31,7 @@ export class MeasurementService extends BaseApi {
     return this.get(`measurements/search/?page=${page}&${text}`);
   }
 
-  newMeasurement(dealId: number, measurement: NewMeasurement): Observable<MeasurementResult> {
+  newMeasurement(dealId: number, measurement: NewMeasurement): Observable<DealMeasurement> {
     return this.post(`deals/${dealId}/measurement/`, measurement);
   }
 
