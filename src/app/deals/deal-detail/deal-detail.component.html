@@ -181,7 +181,7 @@
     <div class="col s12 offset-s1">История заказа:</div>
     <div class="row">
       <div *ngFor="let action of deal?.order_actions" class="col s10 offset-s1 text">
-        <p>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'deal'}}</p>
+        <p>{{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'order'}}</p>
       </div>
     </div>
     <div class="col s12 offset-s1">История сделки:</div>

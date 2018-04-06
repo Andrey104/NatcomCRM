@@ -142,7 +142,6 @@ export class UtilsService {
   }
 
   orderActionDecoder(action: OrderAction) {
-    const user = action.user.first_name + ' ' + action.user.last_name;
     let type = '';
     const essence = 'заявку';
     let causeStr = '';
@@ -208,7 +207,7 @@ export class UtilsService {
       commentStr = ', с комментарием: ';
       comment = action.comment;
     }
-    return ' ' + user + ', ' + type + ' ' + essence +
+    return ', ' + type + ' ' + essence +
       ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
   }
 
