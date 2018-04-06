@@ -100,7 +100,7 @@ export class MeasurementPageComponent implements OnInit, OnDestroy {
       case 'on_reject_measurement': {
         this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
-            if (this.measurementService.measurementStatus !== 'closed' || this.measurementService.measurementStatus !== 'rejected') {
+            if (this.measurementService.measurementStatus !== 'closed' && this.measurementService.measurementStatus !== 'rejected') {
               this.showMeasurements();
             } else if (this.measurementService.measurementStatus === 'rejected') {
               this.measurements.unshift(measurement);
@@ -113,13 +113,12 @@ export class MeasurementPageComponent implements OnInit, OnDestroy {
         this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
             if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'responsible') {
-              this.measurements.unshift(measurement);
-              this.measurements.pop();
+              this.showMeasurements();
             }
           });
         break;
       }
-      case 'on_take_measurement': {
+      case 'on_take': {
         this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
             if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'undistributed') {

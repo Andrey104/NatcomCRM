@@ -94,7 +94,7 @@ export class MountPageComponent implements OnInit, OnDestroy {
       case 'on_close_mount': {
         this.mountService.getMount(msg.data.mount_id)
           .subscribe((mount: DealMount) => {
-            if (this.mountService.statusMount !== 'completed' || this.mountService.statusMount !== 'canceled') {
+            if (this.mountService.statusMount !== 'completed' && this.mountService.statusMount !== 'canceled') {
               this.showMounts();
             } else if (this.mountService.statusMount === 'completed') {
               this.mounts.unshift(mount);
@@ -106,7 +106,7 @@ export class MountPageComponent implements OnInit, OnDestroy {
       case 'on_reject_mount': {
         this.mountService.getMount(msg.data.mount_id)
           .subscribe((mount: DealMount) => {
-            if (this.mountService.statusMount !== 'completed' || this.mountService.statusMount !== 'canceled') {
+            if (this.mountService.statusMount !== 'completed' && this.mountService.statusMount !== 'canceled') {
               this.showMounts();
             } else if (this.mountService.statusMount === 'canceled') {
               this.mounts.unshift(mount);
@@ -118,7 +118,7 @@ export class MountPageComponent implements OnInit, OnDestroy {
       case 'on_transfer_mount': {
         this.mountService.getMount(msg.data.mount_id)
           .subscribe((mount: DealMount) => {
-            if (this.mountService.statusMount !== 'completed' || this.mountService.statusMount !== 'canceled') {
+            if (this.mountService.statusMount !== 'completed' && this.mountService.statusMount !== 'canceled') {
               this.showMounts();
             }
           });
