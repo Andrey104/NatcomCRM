@@ -73,4 +73,16 @@ export class MountService extends BaseApi {
   setInstaller(idMount: string, installers: InsertPosition): Observable<any> {
     return this.post(`mounts/${idMount}/installers/`, {installers});
   }
+
+  editMount(idMount: number, description: string, date: string): Observable<Object> {
+    if (description === '') {
+      description = null;
+    }
+
+    const data = {
+      description,
+      date
+    };
+    return this.put(`mounts/${idMount}/`, data);
+  }
 }
