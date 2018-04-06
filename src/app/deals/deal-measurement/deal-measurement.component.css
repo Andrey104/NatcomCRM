@@ -11,6 +11,29 @@
   font-size: 18px;
 }
 
+.icon-delete-photo {
+  position: absolute;
+  display: none;
+  right: 0;
+  top: 0;
+  background-color: #9e9e9e;
+  color: white;
+  cursor: pointer;
+}
+
+.img-container {
+  position: relative;
+}
+
+
+.container-img-delete {
+  position: relative
+}
+
+.container-img-delete:hover .icon-delete-photo {
+  display: block;
+}
+
 .avatar {
   height: 50px;
   width: 50px;

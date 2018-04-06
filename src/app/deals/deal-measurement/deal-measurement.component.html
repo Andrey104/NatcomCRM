@@ -117,10 +117,12 @@
     <div class="col s12 offset-s1 no-information">Нет изображений</div>
   </div>
   <div class="row" *ngIf="measurement?.pictures.length!==0">
-    <div class="col s3" *ngFor="let picture of measurement?.pictures; let i = index">
-      <div class="img-container" (click)="openPicture(i)"
-           [style.background-image]="getBackground(picture.url)">
-      </div>
+    <div class="col s3 container-img-delete" *ngFor="let picture of measurement?.pictures; let i = index">
+        <div class="img-container" (click)="openPicture(i)"
+             [style.background-image]="getBackground(picture.url)">
+        </div>
+        <i class="small material-icons icon-delete-photo"
+           (click)="deletePicture(picture.id)">close</i>
       <div class="col s12 picture-date center-align">
         {{picture?.auto_date | dateFormat: 'fullDate'}}
       </div>
@@ -185,3 +187,7 @@
                       (successMeasurementEdit)="successMeasurementUpdate()"
                       [(visible)]="showMeasurementEdit">
 </app-measurement-edit>
+<app-measurement-delete-photo [measurement]="measurement"
+                              [photoID]="photoDeleteID"
+                   (successDeletePhoto)="successMeasurementUpdate()"
+                   [(visible)]="showDeletePhotoDialog"></app-measurement-delete-photo>
