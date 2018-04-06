@@ -15,7 +15,6 @@ export class NewEventComponent {
   }
 
   close() {
-    console.log('orderID: ' + this.orderId);
     this.visible = false;
     this.visibleChange.emit(this.visible);
   }

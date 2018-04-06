@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, Inject, Input, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, Inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {MountService} from '../../services/mount.service';
 import {DealMount} from '../../models/deal/deal_mount';
@@ -12,18 +12,24 @@ import {MeasurementService} from '../../services/measurement.service';
 import {Picture} from '../../models/picture';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ComponentCost} from '../../models/component-cost';
+import {WebsocketService} from '../../services/websocket.service';
+import {Subscription} from 'rxjs/Subscription';
+import {Cost} from '../../models/cost';
 
 @Component({
   selector: 'app-deal-mount',
   templateUrl: './deal-mount.component.html',
   styleUrls: ['./deal-mount.component.css']
 })
-export class DealMountComponent implements OnInit, AfterViewChecked {
+export class DealMountComponent implements OnInit, AfterViewChecked, OnDestroy {
   id;
   url;
+  ws;
+  subscribeOnSocket: Subscription;
   backRouter;
   mount: DealMount;
   componentCost: ComponentCost;
+  cost: Cost;
   dealId;
   picture: Picture;
   isSend = false;
@@ -40,6 +46,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   showToDealButton = true;
   showPicture = false;
   showComponentCostEdit = false;
+  showCostEdit = false;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   addInstallerModalState: { open: Boolean, installers?: InstallerPosition[], stageId: string } = {open: false, installers: [], stageId: ''};
 
@@ -51,24 +58,52 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
               private orderService: OrderService,
               private measurementService: MeasurementService,
               @Inject(DOCUMENT) private document: Document,
-              private sanitization: DomSanitizer) {
+              private sanitization: DomSanitizer,
+              private webSocketService: WebsocketService) {
     this.url = this.document.location.href;
   }
 
-  parseEvent(msg) {
-    switch (msg.data.event) {
-      case 'on_comment_mount': {
-        if (msg.data.data.comment.user.id !== Number(localStorage.getItem('id_manager'))) {
-          this.mount.comments.push(msg.data.data.comment);
-        }
-        break;
-      }
-    }
-  }
 
   ngOnInit() {
     this.subscribeMount();
     this.getBackRoute();
+    this.subscribeOnSocket = this.webSocketService.message.subscribe((response) => {
+      switch (response.event) {
+        case 'on_comment_mount': {
+          if ((response.data.comment.user.id !== Number(localStorage.getItem('id_manager')))
+            && (Number(response.data.mount_id) === this.mount.id)) {
+            this.mount.comments.push(response.data.comment);
+          }
+          break;
+        }
+        case 'on_close_mount': {
+          if (Number(response.data.mount_id) === this.mount.id) {
+            this.mountService.getMount(this.mount.id)
+              .subscribe((mount: DealMount) => {
+                this.mount = mount;
+              });
+          }
+          break;
+        }
+        case 'on_reject_mount': {
+          if (Number(response.data.mount_id) === this.mount.id) {
+            this.mountService.getMount(this.mount.id)
+              .subscribe((mount: DealMount) => {
+                this.mount = mount;
+              });
+          }
+          break;
+        }
+        case 'on_transfer_mount': {
+          if (Number(response.data.mount_id) === this.mount.id) {
+            this.mountService.getMount(this.mount.id)
+              .subscribe((mount: DealMount) => {
+                this.mount = mount;
+              });
+          }
+        }
+      }
+    });
   }
 
   ngAfterViewChecked(): void {
@@ -121,6 +156,11 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
     this.showComponentCostEdit = true;
   }
 
+  showDialogCost(costNumber: number) {
+    this.cost = this.mount.costs[costNumber];
+    this.showCostEdit = true;
+  }
+
   successEditComponentCost() {
     this.loadPage = true;
     this.getMountById();
@@ -171,5 +211,11 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
 
   closePicture() {
     this.picture = null;
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscribeOnSocket) {
+      this.subscribeOnSocket.unsubscribe();
+    }
   }
 }

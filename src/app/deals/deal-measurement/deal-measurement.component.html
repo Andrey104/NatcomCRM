@@ -118,11 +118,11 @@
   </div>
   <div class="row" *ngIf="measurement?.pictures.length!==0">
     <div class="col s3 container-img-delete" *ngFor="let picture of measurement?.pictures; let i = index">
-        <div class="img-container" (click)="openPicture(i)"
-             [style.background-image]="getBackground(picture.url)">
-        </div>
-        <i class="small material-icons icon-delete-photo"
-           (click)="deletePicture(picture.id)">close</i>
+      <div class="img-container" (click)="openPicture(i)"
+           [style.background-image]="getBackground(picture.url)">
+      </div>
+      <i class="small material-icons icon-delete-photo"
+         (click)="deletePicture(picture.id)">close</i>
       <div class="col s12 picture-date center-align">
         {{picture?.auto_date | dateFormat: 'fullDate'}}
       </div>
@@ -142,24 +142,28 @@
     <div class="col s12 offset-s1 no-information">Нет комментариев</div>
   </div>
   <div class="fixed-action-btn click-to-toggle"
-       *ngIf="(measurement?.status==0||measurement?.status==1)&&showEditButtons">
+       *ngIf="(measurement?.status==0||measurement?.status==1||measurement?.status==5)&&showEditButtons">
     <a class="btn-floating btn-large orange" id="main-btn">
       <i class="large material-icons color-fab-icon">menu</i>
     </a>
     <ul class="fab-ul">
-      <li class="hover-element li-element-menu-fab" (click)="showMeasurementReject = !showMeasurementReject"
+      <li class="hover-element li-element-menu-fab"
+          *ngIf="(measurement?.status==0||measurement?.status==1||measurement?.status==5)&&showEditButtons"
+          (click)="showMeasurementReject = !showMeasurementReject"
           onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Отклонить замер</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">close</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab" (click)="showMeasurementEdit = !showMeasurementEdit"
+      <li *ngIf="(measurement?.status==0||measurement?.status==1)&&showEditButtons"
+          class="hover-element li-element-menu-fab" (click)="showMeasurementEdit = !showMeasurementEdit"
           onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Редактировать замер</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">edit</i></div>
         </div>
       </li>
-      <li class="hover-element li-element-menu-fab" (click)="showMeasurementTransfer = !showMeasurementTransfer"
+      <li *ngIf="(measurement?.status==0||measurement?.status==1)&&showEditButtons"
+          class="hover-element li-element-menu-fab" (click)="showMeasurementTransfer = !showMeasurementTransfer"
           onclick="$('#main-btn').click()">
         <div class="center-align valign-wrapper menu-li-div"><span class="fab-text">Перенести замер</span>
           <div class="icon-fab center-align valign-wrapper"><i class="material-icons color-fab-icon">event</i></div>
@@ -189,5 +193,5 @@
 </app-measurement-edit>
 <app-measurement-delete-photo [measurement]="measurement"
                               [photoID]="photoDeleteID"
-                   (successDeletePhoto)="successMeasurementUpdate()"
-                   [(visible)]="showDeletePhotoDialog"></app-measurement-delete-photo>
+                              (successDeletePhoto)="successMeasurementUpdate()"
+                              [(visible)]="showDeletePhotoDialog"></app-measurement-delete-photo>

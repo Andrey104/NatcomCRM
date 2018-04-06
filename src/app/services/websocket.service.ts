@@ -27,16 +27,12 @@ export class WebsocketService {
       reconnectIfNotNormalClose: true
     });
     ws.onOpen(() => {
-      console.log('onClose');
       ws.send(this.authMessage).subscribe(
         (msg) => {
-          console.log('next', msg.data);
         },
         (msg) => {
-          console.log('error', msg);
         },
         () => {
-          console.log('complete');
         }
       );
     });

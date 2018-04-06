@@ -51,7 +51,6 @@ export class MountDialogTransferComponent implements OnInit {
       }, (error) => {
         this.isRequest = false;
         if (error.status === 200) {
-          console.log('error');
           this.visibleChange.emit(this.visible);
           this.successMountTransfer.emit();
           this.close();

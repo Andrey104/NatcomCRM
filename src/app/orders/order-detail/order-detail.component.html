@@ -54,7 +54,7 @@
     <div *ngIf="order?.actions.length !== 0" class="col s12  horizontal info-card lighten-5">
       <div class="col s12 action">
         <div class="col s12 text" *ngFor="let action of order?.actions">
-          {{action.auto_date | dateFormat: 'fullDate'}} {{action | action: order}}
+          {{action.auto_date | dateFormat: 'fullDate'}} {{action | action: 'order'}}
         </div>
       </div>
     </div>

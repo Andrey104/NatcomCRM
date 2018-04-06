@@ -150,7 +150,6 @@ export class AddClientComponent implements OnInit {
               this.successPhones = false;
             }
           }, (err) => {
-            console.log(err);
             this.isRequest = true;
           }, () => {
             this.subOnClientPhone.unsubscribe();
