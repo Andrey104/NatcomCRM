@@ -4,14 +4,14 @@
     <h4>Добавить затраты</h4>
     <form (ngSubmit)="submitForm()" #form="ngForm">
       <div>
-        <label class="required-area-dialog">Тип затрат</label>
+        <label class="required-area-dialog">Тип</label>
         <select class="browser-default"
                 name="destination"
                 ngModel
                 #destination="ngModel"
                 required>
           <option value="1">Бензин</option>
-          <option value="2">ЗП</option>
+          <option value="2">Заработная плата</option>
           <option value="3">Другое</option>
         </select>
       </div>

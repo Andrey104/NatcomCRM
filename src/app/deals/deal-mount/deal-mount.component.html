@@ -122,7 +122,7 @@
   </div>
   <div class="row col s12 valign-wrapper installer" *ngFor="let cost of mount.costs">
     <div>
-      <span id="cost_component">{{cost.sum | money}} - {{cost.comment}}</span>
+      <span id="cost_component">{{cost.sum | money}} - {{cost | mountCost}}</span>
     </div>
   </div>
   <div class="col s12 valign-wrapper detail-col">
