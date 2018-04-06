@@ -98,7 +98,10 @@ export class OrderPageComponent implements OnInit, OnDestroy {
         break;
       }
       case 'on_defer_order': {
-        this.refreshAllAndProcessing(Number(msg.data.order_id));
+        if ((this.orderService.getOrderStatus() === 'all') ||
+          (this.orderService.getOrderStatus() === 'processing')) {
+          this.showOrders();
+        }
         break;
       }
       case 'on_return_order': {
