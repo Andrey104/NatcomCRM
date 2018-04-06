@@ -14,8 +14,8 @@ import {DOCUMENT} from '@angular/common';
 import {MountService} from '../../services/mount.service';
 import {OrderService} from '../../services/order.service';
 import {MeasurementService} from '../../services/measurement.service';
-import {ChatService} from '../../services/chat.service';
-import {ParseWebsocketService} from '../../services/parse-websocket.service';
+import {$WebSocket, WebSocketSendMode, WebSocketConfig} from 'angular2-websocket/angular2-websocket';
+import {WebsocketService} from '../../services/websocket.service';
 
 @Component({
   selector: 'app-deal-detail',
@@ -50,6 +50,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   dealClients: Client[] = [];
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   url: string;
+  ws;
   backUrl: string;
   backInfo: string;
   confirmModal = {showConfirmDialog: false, confirmMessage: 'Замер не может быть добавлен без адреса. Хотите добавить адрес к сделке?'};
@@ -61,28 +62,26 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
               private mountService: MountService,
               private orderService: OrderService,
               private measurementService: MeasurementService,
-              private parseWebsocket: ParseWebsocketService,
-              private chatService: ChatService) {
-    this.chatService.messages.subscribe(msg => {
-      this.parseEvent(msg);
-    });
+              private webSocketService: WebsocketService) {
     this.url = this.document.location.href;
+
   }
 
-  parseEvent(msg) {
-    switch (msg.data.event) {
-      case 'on_comment_deal': {
-        if (msg.data.data.comment.user.id !== Number(localStorage.getItem('id_manager'))) {
-          this.deal.comments.push(msg.data.data.comment);
-        }
-        break;
-      }
-    }
-  }
 
   ngOnInit() {
     this.select = 0;
     this.subscribeDealId();
+    this.ws = this.webSocketService.makeSocketConnection();
+    this.webSocketService.message.subscribe((response) => {
+      switch (response.event) {
+        case 'on_comment_deal': {
+          if (response.data.comment.user.id !== Number(localStorage.getItem('id_manager'))) {
+            this.deal.comments.push(response.data.comment);
+          }
+          break;
+        }
+      }
+    });
   }
 
   ngAfterViewChecked(): void {

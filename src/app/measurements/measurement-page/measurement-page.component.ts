@@ -1,10 +1,9 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MeasurementService} from '../../services/measurement.service';
-import {MeasurementResult} from '../../models/measurement/measurement-result';
+import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
-import {ChatService} from '../../services/chat.service';
 
 @Component({
   selector: 'app-measurement-page',
@@ -12,7 +11,7 @@ import {ChatService} from '../../services/chat.service';
   styleUrls: ['./measurement-page.component.css']
 })
 export class MeasurementPageComponent implements OnInit {
-  measurements: MeasurementResult[];
+  measurements: DealMeasurement[];
   page: number;
   load: boolean;
   lastPage: boolean;
@@ -26,12 +25,7 @@ export class MeasurementPageComponent implements OnInit {
 
   constructor(private measurementService: MeasurementService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService,
-              private chatService: ChatService) {
-    chatService.messages.subscribe(msg => {
-      console.log(msg);
-      this.parseEvent(msg);
-    });
+              private utils: UtilsService) {
   }
 
   ngOnInit() {
@@ -76,9 +70,60 @@ export class MeasurementPageComponent implements OnInit {
 
   parseEvent(msg) {
     switch (msg.data.event) {
-      case 'on_create_order': {
-        this.eventMessage = 'Новая заявка';
-        this.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+      case 'on_create_measurement': {
+        this.measurementService.getMeasurement(msg.data.data.measurement_id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'undistributed') {
+              this.measurements.unshift(measurement);
+              this.measurements.pop();
+            }
+          });
+        break;
+      }
+      case 'on_complete_measurement': {
+        this.measurementService.getMeasurement(msg.data.data.measurement_id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus === 'closed') {
+              this.measurements.unshift(measurement);
+              this.measurements.pop();
+            } else if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'responsible') {
+              this.showMeasurements();
+            }
+          });
+        break;
+      }
+      case 'on_reject_measurement': {
+        this.measurementService.getMeasurement(msg.data.data.measurement_id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus !== 'closed' || this.measurementService.measurementStatus !== 'rejected') {
+              this.showMeasurements();
+            } else if (this.measurementService.measurementStatus === 'rejected') {
+              this.measurements.unshift(measurement);
+              this.measurements.pop();
+            }
+          });
+        break;
+      }
+      case 'on_transfer_measurement': {
+        this.measurementService.getMeasurement(msg.data.data.measurement_id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'responsible') {
+              this.measurements.unshift(measurement);
+              this.measurements.pop();
+            }
+          });
+        break;
+      }
+      case 'on_take_measurement': {
+        this.measurementService.getMeasurement(msg.data.data.measurement_id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'undistributed') {
+              this.showMeasurements();
+            } else if (this.measurementService.measurementStatus === 'responsible') {
+              this.measurements.unshift(measurement);
+              this.measurements.pop();
+            }
+          });
         break;
       }
     }

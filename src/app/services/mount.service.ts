@@ -78,7 +78,6 @@ export class MountService extends BaseApi {
   editComponentCost(mountId: number, costId: number, data: any): Observable<ComponentCost> {
     return this.patch(`mounts/${mountId.toString()}/component_costs/${costId.toString()}/`, data);
   }
- 
 
   editMount(idMount: number, description: string, date: string): Observable<Object> {
     if (description === '') {

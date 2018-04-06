@@ -8,7 +8,7 @@ import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {Subscription} from 'rxjs/Subscription';
-import {ChatService} from '../../services/chat.service';
+import {WebsocketService} from '../../services/websocket.service';
 
 @Component({
   selector: 'app-deal-page',
@@ -32,27 +32,20 @@ export class DealPageComponent implements OnInit {
   constructor(private dealService: DealService,
               private activatedRoute: ActivatedRoute,
               private utils: UtilsService,
-              private chatService: ChatService) {
-    chatService.messages.subscribe(msg => {
-      console.log(msg);
-      this.parseEvent(msg);
-    });
+              private webSocketService: WebsocketService) {
   }
 
   ngOnInit() {
     this.subscribeOnUrl();
     this.subscribeOnInputField();
     this.subscribeOnDateField();
+    this.webSocketService.message.subscribe((response) => {
+      console.log(response);
+    });
   }
 
   parseEvent(msg) {
     switch (msg.data.event) {
-      case 'on_create_order': {
-        this.event.eventMessage = 'Новая заявка';
-        this.event.eventRoute = `/orders/all/${msg.data.data.order_id}`;
-        this.showEventDialog = true;
-        break;
-      }
       case 'on_create_deal': {
         this.dealService.getDealById(msg.data.data.deal_id)
           .subscribe((deal: DealResult) => {
@@ -75,10 +68,46 @@ export class DealPageComponent implements OnInit {
       case 'on_reject_deal': {
         this.dealService.getDealById(msg.data.data.deal_id)
           .subscribe((deal: DealResult) => {
-            if (deal.status === 0) {
+            if (this.dealService.statusDeal === 'canceled') {
               this.dealPage.unshift(deal);
               this.dealPage.pop();
-            } else if (deal.status !== 4) {
+            } else if (this.dealService.statusDeal !== 'completed') {
+              this.showDeals();
+            }
+          });
+        break;
+      }
+      case 'on_close_deal': {
+        this.dealService.getDealById(msg.data.data.deal_id)
+          .subscribe((deal: DealResult) => {
+            if (this.dealService.statusDeal === 'completed') {
+              this.dealPage.unshift(deal);
+              this.dealPage.pop();
+            } else if (this.dealService.statusDeal === 'mount_assigned' || this.dealService.statusDeal === 'all') {
+              this.showDeals();
+            }
+          });
+        break;
+      }
+      case 'on_create_measurement_deal': {
+        this.dealService.getDealById(msg.data.data.deal_id)
+          .subscribe((deal: DealResult) => {
+            if (this.dealService.statusDeal === 'measurement_assigned') {
+              this.dealPage.unshift(deal);
+              this.dealPage.pop();
+            } else if (this.dealService.statusDeal === 'processing' || this.dealService.statusDeal === 'all') {
+              this.showDeals();
+            }
+          });
+        break;
+      }
+      case 'on_create_mount_deal': {
+        this.dealService.getDealById(msg.data.data.deal_id)
+          .subscribe((deal: DealResult) => {
+            if (this.dealService.statusDeal === 'mount_assigned') {
+              this.dealPage.unshift(deal);
+              this.dealPage.pop();
+            } else if (this.dealService.statusDeal === 'unconnected' || this.dealService.statusDeal === 'all') {
               this.showDeals();
             }
           });

@@ -6,6 +6,7 @@ import {OurComment} from '../comment';
 import {Picture} from '../picture';
 import {User} from '../user';
 import {ClientsList} from '../clients/clients-list';
+import {Action} from '../action';
 
 export class DealMeasurement {
   id: number;

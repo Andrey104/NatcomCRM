@@ -1,41 +1,51 @@
 import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs/Subject';
-import {Observer} from 'rxjs/Observer';
+import {$WebSocket} from 'angular2-websocket/angular2-websocket';
 import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
+
 
 @Injectable()
 export class WebsocketService {
+  authMessage = {
+    event: 'auth',
+    data: {
+      token: localStorage.getItem('token')
+    }
+  };
+
+
+  message = new Subject<{ event, data }>();
+
+
   constructor() {
   }
 
-  private subject: Subject<MessageEvent>;
-
-  public connect(url): Subject<MessageEvent> {
-    if (!this.subject) {
-      this.subject = this.create(url);
-      console.log('Successfully connected: ' + url);
-    }
-    return this.subject;
-  }
-
-  private create(url): Subject<MessageEvent> {
-    const ws = new WebSocket(url);
-
-    const observable = Observable.create(
-      (obs: Observer<MessageEvent>) => {
-        ws.onmessage = obs.next.bind(obs);
-        ws.onerror = obs.error.bind(obs);
-        ws.onclose = obs.complete.bind(obs);
-        return ws.close.bind(ws);
-      });
-    const observer = {
-      next: (data: Object) => {
-        if (ws.readyState === WebSocket.OPEN) {
-          ws.send(JSON.stringify(data));
+  makeSocketConnection() {
+    const ws = new $WebSocket('ws://188.225.46.31/ws/connect', [], {
+      initialTimeout: 500,
+      maxTimeout: 300000,
+      reconnectIfNotNormalClose: true
+    });
+    ws.onOpen(() => {
+      console.log('onClose');
+      ws.send(this.authMessage).subscribe(
+        (msg) => {
+          console.log('next', msg.data);
+        },
+        (msg) => {
+          console.log('error', msg);
+        },
+        () => {
+          console.log('complete');
         }
-      }
-    };
-    return Subject.create(observer, observable);
+      );
+    });
+    ws.onClose(() => {
+      console.log('onClose');
+    });
+    ws.onMessage((msg: MessageEvent) => {
+      this.message.next(JSON.parse(msg.data));
+    });
+    return ws;
   }
-
 }

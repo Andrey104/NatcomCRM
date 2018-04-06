@@ -6,7 +6,6 @@ import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
-import {ChatService} from '../../services/chat.service';
 
 
 @Component({
@@ -30,11 +29,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
 
   constructor(private orderService: OrderService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService,
-              private chatService: ChatService) {
-    this.chatService.messages.subscribe(msg => {
-      this.parseEvent(msg);
-    });
+              private utils: UtilsService) {
   }
 
   ngOnInit() {

@@ -31,10 +31,6 @@ export class OrderDetailComponent implements OnInit {
     this.subscribeOrderId();
   }
 
-  actionDecoder(action: OrderAction) {
-    return this.utils.orderActionDecoder(action);
-  }
-
   subscribeOrderId(): void {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
