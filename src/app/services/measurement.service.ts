@@ -85,4 +85,8 @@ export class MeasurementService extends BaseApi {
     };
     return this.post(`rejects/${idReview}/review/`, data);
   }
+
+  deletePhoto(idMeasurement: number, idPhoto: number): Observable<OurComment> {
+    return this.del(`measurements/${idMeasurement}/images/${idPhoto}/`);
+  }
 }
