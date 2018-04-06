@@ -5,6 +5,8 @@ import {OrderAction} from '../../models/orders/order_action';
 import {ActivatedRoute} from '@angular/router';
 import {OrderResult} from '../../models/orders/order_result';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {WebsocketService} from '../../services/websocket.service';
+import {DealResult} from '../../models/deal/deal_result';
 
 @Component({
   selector: 'app-order-detail',
@@ -15,10 +17,12 @@ export class OrderDetailComponent implements OnInit {
 
   constructor(private orderService: OrderService,
               private utils: UtilsService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private webSocketService: WebsocketService) {
   }
 
   private id: number;
+  ws;
   order: OrderResult;
   loader: boolean;
   showDialogReject = false;
@@ -29,6 +33,46 @@ export class OrderDetailComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeOrderId();
+    this.webSocketService.message.subscribe((response) => {
+      switch (response.event) {
+        case 'on_reject_order': {
+          if (response.data.order_id === this.order.id) {
+            this.orderService.getOrderById(this.order.id)
+              .subscribe((result) => {
+                this.order = result;
+              });
+          }
+          break;
+        }
+        case 'on_defer_order': {
+          if (response.data.order_id === this.order.id) {
+            this.orderService.getOrderById(this.order.id)
+              .subscribe((result) => {
+                this.order = result;
+              });
+          }
+          break;
+        }
+        case 'on_return_order': {
+          if (response.data.order_id === this.order.id) {
+            this.orderService.getOrderById(this.order.id)
+              .subscribe((result) => {
+                this.order = result;
+              });
+          }
+          break;
+        }
+        case 'on_create_deal': {
+          if (response.data.order_id === this.order.id) {
+            this.orderService.getOrderById(this.order.id)
+              .subscribe((result) => {
+                this.order = result;
+              });
+          }
+          break;
+        }
+      }
+    });
   }
 
   subscribeOrderId(): void {
@@ -39,7 +83,7 @@ export class OrderDetailComponent implements OnInit {
         .subscribe(order => {
           this.order = order;
           this.loader = false;
-      });
+        });
     });
   }
 

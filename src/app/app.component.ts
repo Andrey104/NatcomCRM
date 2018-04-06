@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {WebsocketService} from './services/websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ export class AppComponent {
   orderId: number;
   showEvent = false;
 
-  constructor() {
+  constructor(private webSocketService: WebsocketService) {
+    this.webSocketService.makeSocketConnection();
   }
 }

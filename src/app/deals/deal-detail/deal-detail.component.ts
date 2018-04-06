@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, Inject, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
@@ -22,10 +22,11 @@ import {WebsocketService} from '../../services/websocket.service';
   templateUrl: './deal-detail.component.html',
   styleUrls: ['./deal-detail.component.css'],
 })
-export class DealDetailComponent implements OnInit, AfterViewChecked {
+export class DealDetailComponent implements OnInit, AfterViewChecked, OnDestroy {
   flag = false;
   private id;
   page = 1;
+  subscribeOnSocket: Subscription;
   select;
   client: Client;
   clientInfo: Client = null;
@@ -71,12 +72,48 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.select = 0;
     this.subscribeDealId();
-    this.ws = this.webSocketService.makeSocketConnection();
-    this.webSocketService.message.subscribe((response) => {
+    this.subscribeOnSocket = this.webSocketService.message.subscribe((response) => {
       switch (response.event) {
         case 'on_comment_deal': {
-          if (response.data.comment.user.id !== Number(localStorage.getItem('id_manager'))) {
+          if ((response.data.comment.user.id !== Number(localStorage.getItem('id_manager')))
+            && (Number(response.data.deal_id) === this.deal.id)) {
             this.deal.comments.push(response.data.comment);
+          }
+          break;
+        }
+        case 'on_reject_deal': {
+          if (response.data.deal_id === this.deal.id) {
+            this.dealService.getDealById(this.deal.id)
+              .subscribe((deal: DealResult) => {
+                this.deal = deal;
+              });
+          }
+          break;
+        }
+        case 'on_close_deal': {
+          if (response.data.deal_id === this.deal.id) {
+            this.dealService.getDealById(this.deal.id)
+              .subscribe((deal: DealResult) => {
+                this.deal = deal;
+              });
+          }
+          break;
+        }
+        case 'on_create_measurement_deal': {
+          if (response.data.deal_id === this.deal.id) {
+            this.dealService.getDealById(this.deal.id)
+              .subscribe((deal: DealResult) => {
+                this.deal = deal;
+              });
+          }
+          break;
+        }
+        case 'on_create_mount_deal': {
+          if (response.data.deal_id === this.deal.id) {
+            this.dealService.getDealById(this.deal.id)
+              .subscribe((deal: DealResult) => {
+                this.deal = deal;
+              });
           }
           break;
         }
@@ -228,6 +265,12 @@ export class DealDetailComponent implements OnInit, AfterViewChecked {
 
   getDealStatus(status) {
     return this.utils.statusDeal(status);
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscribeOnSocket) {
+      this.subscribeOnSocket.unsubscribe();
+    }
   }
 
 }
