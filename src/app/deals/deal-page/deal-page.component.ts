@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {log} from 'util';
 import {DealService} from '../../services/deal.service';
 import {DealResult} from '../../models/deal/deal_result';
@@ -15,7 +15,7 @@ import {WebsocketService} from '../../services/websocket.service';
   templateUrl: './deal-page.component.html',
   styleUrls: ['./deal-page.component.css'],
 })
-export class DealPageComponent implements OnInit {
+export class DealPageComponent implements OnInit, OnDestroy {
   dealPage: DealResult[];
   status: { statusName: string, statusUrl: string };
   page: number;
@@ -25,9 +25,9 @@ export class DealPageComponent implements OnInit {
   termDate$ = new Subject<string>();
   inputText = '';
   date = '';
-  showEventDialog = false;
   event = {eventMessage: '', eventRoute: ''};
   private subscriptions: Subscription[] = [];
+  subOnWebsocket: Subscription;
 
   constructor(private dealService: DealService,
               private activatedRoute: ActivatedRoute,
@@ -39,15 +39,16 @@ export class DealPageComponent implements OnInit {
     this.subscribeOnUrl();
     this.subscribeOnInputField();
     this.subscribeOnDateField();
-    this.webSocketService.message.subscribe((response) => {
+    this.subOnWebsocket = this.webSocketService.message.subscribe((response) => {
       console.log(response);
+      this.parseEvent(response);
     });
   }
 
   parseEvent(msg) {
-    switch (msg.data.event) {
+    switch (msg.event) {
       case 'on_create_deal': {
-        this.dealService.getDealById(msg.data.data.deal_id)
+        this.dealService.getDealById(msg.data.deal_id)
           .subscribe((deal: DealResult) => {
             if (deal.status === 0) {
               if ((this.dealService.statusDeal === 'all') ||
@@ -66,7 +67,7 @@ export class DealPageComponent implements OnInit {
         break;
       }
       case 'on_reject_deal': {
-        this.dealService.getDealById(msg.data.data.deal_id)
+        this.dealService.getDealById(msg.data.deal_id)
           .subscribe((deal: DealResult) => {
             if (this.dealService.statusDeal === 'canceled') {
               this.dealPage.unshift(deal);
@@ -78,7 +79,7 @@ export class DealPageComponent implements OnInit {
         break;
       }
       case 'on_close_deal': {
-        this.dealService.getDealById(msg.data.data.deal_id)
+        this.dealService.getDealById(msg.data.deal_id)
           .subscribe((deal: DealResult) => {
             if (this.dealService.statusDeal === 'completed') {
               this.dealPage.unshift(deal);
@@ -90,7 +91,7 @@ export class DealPageComponent implements OnInit {
         break;
       }
       case 'on_create_measurement_deal': {
-        this.dealService.getDealById(msg.data.data.deal_id)
+        this.dealService.getDealById(msg.data.deal_id)
           .subscribe((deal: DealResult) => {
             if (this.dealService.statusDeal === 'measurement_assigned') {
               this.dealPage.unshift(deal);
@@ -102,7 +103,7 @@ export class DealPageComponent implements OnInit {
         break;
       }
       case 'on_create_mount_deal': {
-        this.dealService.getDealById(msg.data.data.deal_id)
+        this.dealService.getDealById(msg.data.deal_id)
           .subscribe((deal: DealResult) => {
             if (this.dealService.statusDeal === 'mount_assigned') {
               this.dealPage.unshift(deal);
@@ -244,6 +245,12 @@ export class DealPageComponent implements OnInit {
   onDeactivate(c) {
     this.subscriptions
       .forEach(s => s.unsubscribe());
+  }
+
+  ngOnDestroy() {
+    if (this.subOnWebsocket) {
+      this.subOnWebsocket.unsubscribe();
+    }
   }
 
 }

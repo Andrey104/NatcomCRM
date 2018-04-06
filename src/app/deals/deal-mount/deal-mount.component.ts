@@ -12,9 +12,9 @@ import {MeasurementService} from '../../services/measurement.service';
 import {Picture} from '../../models/picture';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ComponentCost} from '../../models/component-cost';
-import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {WebsocketService} from '../../services/websocket.service';
 import {Subscription} from 'rxjs/Subscription';
+import {Cost} from '../../models/cost';
 
 @Component({
   selector: 'app-deal-mount',
@@ -29,6 +29,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked, OnDestroy {
   backRouter;
   mount: DealMount;
   componentCost: ComponentCost;
+  cost: Cost;
   dealId;
   picture: Picture;
   isSend = false;
@@ -45,6 +46,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked, OnDestroy {
   showToDealButton = true;
   showPicture = false;
   showComponentCostEdit = false;
+  showCostEdit = false;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   addInstallerModalState: { open: Boolean, installers?: InstallerPosition[], stageId: string } = {open: false, installers: [], stageId: ''};
 
@@ -152,6 +154,11 @@ export class DealMountComponent implements OnInit, AfterViewChecked, OnDestroy {
   showDialogComponentCost(costNumber: number) {
     this.componentCost = this.mount.component_costs[costNumber];
     this.showComponentCostEdit = true;
+  }
+
+  showDialogCost(costNumber: number) {
+    this.cost = this.mount.costs[costNumber];
+    this.showCostEdit = true;
   }
 
   successEditComponentCost() {

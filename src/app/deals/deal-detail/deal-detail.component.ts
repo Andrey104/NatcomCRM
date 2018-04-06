@@ -14,7 +14,6 @@ import {DOCUMENT} from '@angular/common';
 import {MountService} from '../../services/mount.service';
 import {OrderService} from '../../services/order.service';
 import {MeasurementService} from '../../services/measurement.service';
-import {$WebSocket, WebSocketSendMode, WebSocketConfig} from 'angular2-websocket/angular2-websocket';
 import {WebsocketService} from '../../services/websocket.service';
 
 @Component({
@@ -65,7 +64,6 @@ export class DealDetailComponent implements OnInit, AfterViewChecked, OnDestroy 
               private measurementService: MeasurementService,
               private webSocketService: WebsocketService) {
     this.url = this.document.location.href;
-
   }
 
 

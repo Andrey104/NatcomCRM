@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
+import {WebsocketService} from '../../services/websocket.service';
 
 
 @Component({
@@ -26,16 +27,21 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   inputText = '';
   date = '';
   private subscriptions: Subscription[] = [];
+  subOnWebSocket: Subscription;
 
   constructor(private orderService: OrderService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private webSocketService: WebsocketService) {
   }
 
   ngOnInit() {
     this.subscribeOnInputField();
     this.subscribeOnOrderStatus();
     this.subscribeOnDateField();
+    this.subOnWebSocket = this.webSocketService.message.subscribe((response) => {
+      this.parseEvent(response);
+    });
   }
 
   subscribeOnInputField() {
@@ -73,9 +79,9 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   }
 
   parseEvent(msg) {
-    switch (msg.data.event) {
+    switch (msg.event) {
       case 'on_create_order': {
-        this.refreshAllAndProcessing(Number(msg.data.data.order_id));
+        this.refreshAllAndProcessing(Number(msg.data.order_id));
         break;
       }
       case 'on_reject_order': {
@@ -83,7 +89,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
           (this.orderService.getOrderStatus() === 'processing')) {
           this.showOrders();
         } else if (this.orderService.getOrderStatus() === 'canceled') {
-          this.orderService.getOrderById(msg.data.data.order_id)
+          this.orderService.getOrderById(msg.data.order_id)
             .subscribe((result) => {
               this.orders.unshift(result);
               this.orders.pop();
@@ -92,13 +98,13 @@ export class OrderPageComponent implements OnInit, OnDestroy {
         break;
       }
       case 'on_defer_order': {
-        this.refreshAllAndProcessing(Number(msg.data.data.order_id));
+        this.refreshAllAndProcessing(Number(msg.data.order_id));
         break;
       }
       case 'on_return_order': {
         if ((this.orderService.getOrderStatus() === 'all') ||
           (this.orderService.getOrderStatus() === 'processing')) {
-          this.orderService.getOrderById(msg.data.data.order_id)
+          this.orderService.getOrderById(msg.data.order_id)
             .subscribe((result) => {
               this.orders.unshift(result);
               this.orders.pop();
@@ -252,6 +258,8 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subInputField) {
       this.subInputField.unsubscribe();
+    } else if (this.subOnWebSocket) {
+      this.subOnWebSocket.unsubscribe();
     }
   }
 }

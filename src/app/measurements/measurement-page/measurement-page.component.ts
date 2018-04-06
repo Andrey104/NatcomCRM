@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MeasurementService} from '../../services/measurement.service';
 import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
+import {WebsocketService} from '../../services/websocket.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-measurement-page',
   templateUrl: './measurement-page.component.html',
   styleUrls: ['./measurement-page.component.css']
 })
-export class MeasurementPageComponent implements OnInit {
+export class MeasurementPageComponent implements OnInit, OnDestroy {
   measurements: DealMeasurement[];
   page: number;
   load: boolean;
@@ -20,18 +22,21 @@ export class MeasurementPageComponent implements OnInit {
   termDate$ = new Subject<string>();
   inputText = '';
   date = '';
-  eventMessage = '';
-  eventRoute = '';
+  subOnWebSocket: Subscription;
 
   constructor(private measurementService: MeasurementService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private webSocketService: WebsocketService) {
   }
 
   ngOnInit() {
     this.subscribeOnUrl();
     this.subscribeOnInputField();
     this.subscribeOnDateField();
+    this.subOnWebSocket = this.webSocketService.message.subscribe((response) => {
+      this.parseEvent(response);
+    });
   }
 
   subscribeOnUrl() {
@@ -69,9 +74,9 @@ export class MeasurementPageComponent implements OnInit {
   }
 
   parseEvent(msg) {
-    switch (msg.data.event) {
+    switch (msg.event) {
       case 'on_create_measurement': {
-        this.measurementService.getMeasurement(msg.data.data.measurement_id)
+        this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
             if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'undistributed') {
               this.measurements.unshift(measurement);
@@ -81,7 +86,7 @@ export class MeasurementPageComponent implements OnInit {
         break;
       }
       case 'on_complete_measurement': {
-        this.measurementService.getMeasurement(msg.data.data.measurement_id)
+        this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
             if (this.measurementService.measurementStatus === 'closed') {
               this.measurements.unshift(measurement);
@@ -93,7 +98,7 @@ export class MeasurementPageComponent implements OnInit {
         break;
       }
       case 'on_reject_measurement': {
-        this.measurementService.getMeasurement(msg.data.data.measurement_id)
+        this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
             if (this.measurementService.measurementStatus !== 'closed' || this.measurementService.measurementStatus !== 'rejected') {
               this.showMeasurements();
@@ -105,7 +110,7 @@ export class MeasurementPageComponent implements OnInit {
         break;
       }
       case 'on_transfer_measurement': {
-        this.measurementService.getMeasurement(msg.data.data.measurement_id)
+        this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
             if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'responsible') {
               this.measurements.unshift(measurement);
@@ -115,7 +120,7 @@ export class MeasurementPageComponent implements OnInit {
         break;
       }
       case 'on_take_measurement': {
-        this.measurementService.getMeasurement(msg.data.data.measurement_id)
+        this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
             if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'undistributed') {
               this.showMeasurements();
@@ -206,6 +211,12 @@ export class MeasurementPageComponent implements OnInit {
           }
           this.load = false;
         });
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subOnWebSocket) {
+      this.subOnWebSocket.unsubscribe();
     }
   }
 }

@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MountService} from '../../services/mount.service';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
 import {Subscription} from 'rxjs/Subscription';
 import {DealMount} from '../../models/deal/deal_mount';
+import {WebsocketService} from '../../services/websocket.service';
 
 @Component({
   selector: 'app-mount-page',
   templateUrl: './mount-page.component.html',
   styleUrls: ['./mount-page.component.css']
 })
-export class MountPageComponent implements OnInit {
+export class MountPageComponent implements OnInit, OnDestroy {
   mounts: DealMount[];
   status: { statusName: string, statusUrl: string };
   load: boolean;
@@ -21,19 +22,22 @@ export class MountPageComponent implements OnInit {
   termDate$ = new Subject<string>();
   inputText = '';
   date = '';
-  eventMessage = '';
-  eventRoute = '';
   private subscriptions: Subscription[] = [];
+  subOnWebSocket: Subscription;
 
   constructor(private mountService: MountService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private webSocketService: WebsocketService) {
   }
 
   ngOnInit() {
     this.subscribeOnInputField();
     this.subscribeOnUrl();
     this.subscribeOnDateField();
+    this.subOnWebSocket = this.webSocketService.message.subscribe((response) => {
+      this.parseEvent(response);
+    });
   }
 
   subscribeOnInputField() {
@@ -69,9 +73,9 @@ export class MountPageComponent implements OnInit {
   }
 
   parseEvent(msg) {
-    switch (msg.data.event) {
+    switch (msg.event) {
       case 'on_create_mount': {
-        this.mountService.getMount(msg.data.data.mount_id)
+        this.mountService.getMount(msg.data.mount_id)
           .subscribe((mount: DealMount) => {
             if (mount.status === 1) {
               if (this.mountService.statusMount === 'all' || this.mountService.statusMount === 'added_stage') {
@@ -88,7 +92,7 @@ export class MountPageComponent implements OnInit {
         break;
       }
       case 'on_close_mount': {
-        this.mountService.getMount(msg.data.data.mount_id)
+        this.mountService.getMount(msg.data.mount_id)
           .subscribe((mount: DealMount) => {
             if (this.mountService.statusMount !== 'completed' || this.mountService.statusMount !== 'canceled') {
               this.showMounts();
@@ -100,7 +104,7 @@ export class MountPageComponent implements OnInit {
         break;
       }
       case 'on_reject_mount': {
-        this.mountService.getMount(msg.data.data.mount_id)
+        this.mountService.getMount(msg.data.mount_id)
           .subscribe((mount: DealMount) => {
             if (this.mountService.statusMount !== 'completed' || this.mountService.statusMount !== 'canceled') {
               this.showMounts();
@@ -112,7 +116,7 @@ export class MountPageComponent implements OnInit {
         break;
       }
       case 'on_transfer_mount': {
-        this.mountService.getMount(msg.data.data.mount_id)
+        this.mountService.getMount(msg.data.mount_id)
           .subscribe((mount: DealMount) => {
             if (this.mountService.statusMount !== 'completed' || this.mountService.statusMount !== 'canceled') {
               this.showMounts();
@@ -224,5 +228,11 @@ export class MountPageComponent implements OnInit {
   onDeactivate(c) {
     this.subscriptions
       .forEach(s => s.unsubscribe());
+  }
+
+  ngOnDestroy() {
+    if (this.subOnWebSocket) {
+      this.subOnWebSocket.unsubscribe();
+    }
   }
 }
