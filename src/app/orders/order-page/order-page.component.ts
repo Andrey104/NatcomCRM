@@ -105,14 +105,13 @@ export class OrderPageComponent implements OnInit, OnDestroy {
         break;
       }
       case 'on_return_order': {
-        if ((this.orderService.getOrderStatus() === 'all') ||
-          (this.orderService.getOrderStatus() === 'processing')) {
+        if (this.orderService.getOrderStatus() === 'processing') {
           this.orderService.getOrderById(msg.data.order_id)
             .subscribe((result) => {
               this.orders.unshift(result);
               this.orders.pop();
             });
-        } else if (this.orderService.getOrderStatus() === 'canceled') {
+        } else if (this.orderService.getOrderStatus() === 'canceled' || this.orderService.getOrderStatus() === 'all') {
           this.showOrders();
         }
         break;
@@ -120,7 +119,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       case 'on_create_deal': {
         if ((this.orderService.getOrderStatus() === 'all') ||
           (this.orderService.getOrderStatus() === 'completed')) {
-          this.orderService.getOrderById(msg.data.data.order_id)
+          this.orderService.getOrderById(msg.data.order_id)
             .subscribe((result) => {
               this.orders.unshift(result);
               this.orders.pop();
