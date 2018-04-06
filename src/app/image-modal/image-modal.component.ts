@@ -22,7 +22,6 @@ export class ImageModalComponent implements OnInit {
   }
 
   onClose() {
-    console.log(this.picture.url);
     this.visibleChange.emit();
   }
 

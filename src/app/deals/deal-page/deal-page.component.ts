@@ -40,7 +40,6 @@ export class DealPageComponent implements OnInit, OnDestroy {
     this.subscribeOnInputField();
     this.subscribeOnDateField();
     this.subOnWebsocket = this.webSocketService.message.subscribe((response) => {
-      console.log(response);
       this.parseEvent(response);
     });
   }

@@ -72,7 +72,6 @@ export class ClientInfoComponent implements OnInit {
     } else if (this.url.indexOf('new_deal')) {
       this.backUrl = `/new_deal`;
     }
-    console.log(this.backUrl);
   }
 
   changeClientDialog() {

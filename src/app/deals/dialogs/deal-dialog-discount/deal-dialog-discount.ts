@@ -40,7 +40,6 @@ export class DealDialogDiscountComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    console.log(this.form.form.value.sum);
     this.dealService.dealDiscount(this.id, Number(this.form.form.value.after),
       this.form.form.value.comment)
       .subscribe((result) => {

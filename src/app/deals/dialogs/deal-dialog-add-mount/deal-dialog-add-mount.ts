@@ -42,7 +42,6 @@ export class DealDialogMountComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    console.log(this.form.form.value.comment);
     this.dealService.newMount(this.id,
       this.form.form.value.calendar,
       this.form.form.value.comment)

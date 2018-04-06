@@ -40,7 +40,6 @@ export class DialogCostComponentComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    console.log(this.form.form.value.sum);
     this.mountService.addCostComponent(this.mount.id, this.form.form.value.sum,
       this.form.form.value.comment)
       .subscribe((result) => {

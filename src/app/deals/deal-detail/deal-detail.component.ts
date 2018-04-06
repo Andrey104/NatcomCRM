@@ -97,7 +97,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked, OnDestroy 
           }
           break;
         }
-        case 'on_create_measurement_deal': {
+        case 'on_create_measurement': {
           if (Number(response.data.deal_id) === this.deal.id) {
             this.dealService.getDealById(this.deal.id)
               .subscribe((deal: DealResult) => {

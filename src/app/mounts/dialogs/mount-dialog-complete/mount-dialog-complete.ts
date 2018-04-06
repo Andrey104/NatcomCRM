@@ -35,10 +35,8 @@ export class MountDialogCompleteComponent implements OnInit {
   }
 
   submitForm() {
-    console.log('submit');
     this.mountService.mountComplete(this.id)
       .subscribe((result) => {
-        console.log('result');
         this.isRequest = false;
         this.visibleChange.emit(this.visible);
         this.successMountComplete.emit();
@@ -46,7 +44,6 @@ export class MountDialogCompleteComponent implements OnInit {
       }, (error) => {
         this.isRequest = false;
         if (error.status === 200) {
-          console.log('error');
           this.visibleChange.emit(this.visible);
           this.successMountComplete.emit();
           this.close();

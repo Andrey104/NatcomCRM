@@ -215,7 +215,6 @@ export class DealMountComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.subscribeOnSocket) {
-      console.log('asdas');
       this.subscribeOnSocket.unsubscribe();
     }
   }
