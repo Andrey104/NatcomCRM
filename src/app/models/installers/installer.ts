@@ -2,7 +2,8 @@
 export class Installer {
   id: number;
   fio: string;
-  phone: string;
+  phone1: string;
+  phone2: string;
 }
 /*"installers": [
                 {

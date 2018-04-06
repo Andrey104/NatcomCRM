@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
 import {WebsocketService} from './websocket.service';
 
 const URL = 'ws://188.225.46.31/ws/connect';

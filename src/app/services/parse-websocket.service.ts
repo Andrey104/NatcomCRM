@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {ChatService} from './chat.service';
 
 @Injectable()
 export class ParseWebsocketService {

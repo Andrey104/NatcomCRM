@@ -7,6 +7,8 @@ export class User {
   type: number;
   phone: string;
   telegram: string;
+  password: string;
+  token: string;
 }
 /*
 {
