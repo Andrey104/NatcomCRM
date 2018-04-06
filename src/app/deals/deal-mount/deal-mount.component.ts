@@ -77,7 +77,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked, OnDestroy {
           break;
         }
         case 'on_close_mount': {
-          if (response.data.id_mount === this.mount.id) {
+          if (Number(response.data.mount_id) === this.mount.id) {
             this.mountService.getMount(this.mount.id)
               .subscribe((mount: DealMount) => {
                 this.mount = mount;
@@ -86,7 +86,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked, OnDestroy {
           break;
         }
         case 'on_reject_mount': {
-          if (response.data.id_mount === this.mount.id) {
+          if (Number(response.data.mount_id) === this.mount.id) {
             this.mountService.getMount(this.mount.id)
               .subscribe((mount: DealMount) => {
                 this.mount = mount;
@@ -95,7 +95,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked, OnDestroy {
           break;
         }
         case 'on_transfer_mount': {
-          if (response.data.id_mount === this.mount.id) {
+          if (Number(response.data.mount_id) === this.mount.id) {
             this.mountService.getMount(this.mount.id)
               .subscribe((mount: DealMount) => {
                 this.mount = mount;

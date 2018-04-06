@@ -36,7 +36,7 @@ export class OrderDetailComponent implements OnInit {
     this.webSocketService.message.subscribe((response) => {
       switch (response.event) {
         case 'on_reject_order': {
-          if (response.data.order_id === this.order.id) {
+          if (Number(response.data.order_id) === this.order.id) {
             this.orderService.getOrderById(this.order.id)
               .subscribe((result) => {
                 this.order = result;
@@ -45,7 +45,7 @@ export class OrderDetailComponent implements OnInit {
           break;
         }
         case 'on_defer_order': {
-          if (response.data.order_id === this.order.id) {
+          if (Number(response.data.order_id) === this.order.id) {
             this.orderService.getOrderById(this.order.id)
               .subscribe((result) => {
                 this.order = result;
@@ -54,7 +54,7 @@ export class OrderDetailComponent implements OnInit {
           break;
         }
         case 'on_return_order': {
-          if (response.data.order_id === this.order.id) {
+          if (Number(response.data.order_id) === this.order.id) {
             this.orderService.getOrderById(this.order.id)
               .subscribe((result) => {
                 this.order = result;
@@ -63,7 +63,7 @@ export class OrderDetailComponent implements OnInit {
           break;
         }
         case 'on_create_deal': {
-          if (response.data.order_id === this.order.id) {
+          if (Number(response.data.order_id) === this.order.id) {
             this.orderService.getOrderById(this.order.id)
               .subscribe((result) => {
                 this.order = result;

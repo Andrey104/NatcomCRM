@@ -80,7 +80,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked, OnDestroy 
           break;
         }
         case 'on_reject_deal': {
-          if (response.data.deal_id === this.deal.id) {
+          if (Number(response.data.deal_id) === this.deal.id) {
             this.dealService.getDealById(this.deal.id)
               .subscribe((deal: DealResult) => {
                 this.deal = deal;
@@ -89,7 +89,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked, OnDestroy 
           break;
         }
         case 'on_close_deal': {
-          if (response.data.deal_id === this.deal.id) {
+          if (Number(response.data.deal_id) === this.deal.id) {
             this.dealService.getDealById(this.deal.id)
               .subscribe((deal: DealResult) => {
                 this.deal = deal;
@@ -98,7 +98,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked, OnDestroy 
           break;
         }
         case 'on_create_measurement_deal': {
-          if (response.data.deal_id === this.deal.id) {
+          if (Number(response.data.deal_id) === this.deal.id) {
             this.dealService.getDealById(this.deal.id)
               .subscribe((deal: DealResult) => {
                 this.deal = deal;
@@ -107,7 +107,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked, OnDestroy 
           break;
         }
         case 'on_create_mount_deal': {
-          if (response.data.deal_id === this.deal.id) {
+          if (Number(response.data.deal_id) === this.deal.id) {
             this.dealService.getDealById(this.deal.id)
               .subscribe((deal: DealResult) => {
                 this.deal = deal;

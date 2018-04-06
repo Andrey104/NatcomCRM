@@ -66,7 +66,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDes
           break;
         }
         case 'on_complete_measurement': {
-          if (response.data.id === this.measurement.id) {
+          if (Number(response.data.measurement_id) === this.measurement.id) {
             this.measurementService.getMeasurement(this.measurement.id)
               .subscribe((measurement: DealMeasurement) => {
                 this.measurement = measurement;
@@ -75,7 +75,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDes
           break;
         }
         case 'on_reject_measurement': {
-          if (response.data.id === this.measurement.id) {
+          if (Number(response.data.measurement_id) === this.measurement.id) {
             this.measurementService.getMeasurement(this.measurement.id)
               .subscribe((measurement: DealMeasurement) => {
                 this.measurement = measurement;
@@ -84,7 +84,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDes
           break;
         }
         case 'on_transfer_measurement': {
-          if (response.data.measurement_id === this.measurement.id) {
+          if (Number(response.data.measurement_id) === this.measurement.id) {
             this.measurementService.getMeasurement(this.measurement.id)
               .subscribe((measurement: DealMeasurement) => {
                 this.measurement = measurement;
@@ -93,7 +93,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDes
           break;
         }
         case 'on_take_measurement': {
-          if (response.data.measurement_id === this.measurement.id) {
+          if (Number(response.data.measurement_id) === this.measurement.id) {
             this.measurementService.getMeasurement(this.measurement.id)
               .subscribe((measurement: DealMeasurement) => {
                 this.measurement = measurement;
