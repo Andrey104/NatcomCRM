@@ -6,6 +6,7 @@ import {OurComment} from '../models/comment';
 import {MountPage} from '../models/mount/mount-page';
 import {BaseApi} from '../core/base-api';
 import {Cost} from '../models/cost';
+import {ComponentCost} from '../models/component-cost';
 
 @Injectable()
 export class MountService extends BaseApi {
@@ -73,4 +74,8 @@ export class MountService extends BaseApi {
   setInstaller(idMount: string, installers: InsertPosition): Observable<any> {
     return this.post(`mounts/${idMount}/installers/`, {installers});
   }
-}
+
+  editComponentCost(mountId: number, costId: number, data: any): Observable<ComponentCost> {
+    return this.patch(`mounts/${mountId.toString()}/component_costs/${costId.toString()}/`, data);
+  }
+ }

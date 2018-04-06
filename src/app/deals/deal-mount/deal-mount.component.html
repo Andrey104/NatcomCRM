@@ -121,8 +121,9 @@
     <div class="col s12 offset-s1 no-information">Нет затрат</div>
   </div>
   <div class="row col s12 valign-wrapper installer" *ngFor="let cost of mount.costs">
-    <div>
+    <div class="cost">
       <span id="cost_component">{{cost.sum | money}} - {{cost | mountCost}}</span>
+      <i class="tiny material-icons icon hover-element">edit</i>
     </div>
   </div>
   <div class="col s12 valign-wrapper detail-col">
@@ -140,10 +141,13 @@
   <div *ngIf="mount?.component_costs.length===0" class="row">
     <div class="col s12 offset-s1 no-information">Нет затрат</div>
   </div>
-  <div class="row col s12 valign-wrapper installer" *ngFor="let cost of mount.component_costs">
-    <div>
-      <span id="cost">{{cost.sum | money}}</span>
+  <div class="row col s12 valign-wrapper installer"
+       *ngFor="let cost of mount.component_costs; let i=index">
+    <div class="cost">
+      <span  id="cost">{{cost.sum | money}}</span>
       <span *ngIf="cost.comment">- {{cost.comment}}</span>
+      <i class="tiny material-icons icon hover-element"
+         (click)="showDialogComponentCost(i)">edit</i>
     </div>
   </div>
   <div class="col s12 row valign-wrapper detail-col">
@@ -241,6 +245,9 @@
 <app-image-modal [picture]="picture"
                  [(visible)]="showPicture"
                  (close)="closePicture()"></app-image-modal>
+<app-dialog-component-cost-edit [componentCost]="componentCost"
+                                (successCost)="successEditComponentCost()"
+                                [(visible)]="showComponentCostEdit"></app-dialog-component-cost-edit>
 
 <app-dialog-component-cost [mount]="mount" (successCost)="successMountUpdate()"
 [(visible)]="showAddCostComponent"></app-dialog-component-cost>

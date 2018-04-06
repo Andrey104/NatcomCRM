@@ -13,6 +13,7 @@ import {ParseWebsocketService} from '../../services/parse-websocket.service';
 import {ChatService} from '../../services/chat.service';
 import {Picture} from '../../models/picture';
 import {DomSanitizer} from '@angular/platform-browser';
+import {ComponentCost} from '../../models/component-cost';
 
 @Component({
   selector: 'app-deal-mount',
@@ -24,6 +25,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   url;
   backRouter;
   mount: DealMount;
+  componentCost: ComponentCost;
   dealId;
   picture: Picture;
   isSend = false;
@@ -38,6 +40,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   needSubscribe = true;
   showToDealButton = true;
   showPicture = false;
+  showComponentCostEdit = false;
   updateList: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
   addInstallerModalState: { open: Boolean, installers?: InstallerPosition[], stageId: string } = {open: false, installers: [], stageId: ''};
 
@@ -115,6 +118,16 @@ export class DealMountComponent implements OnInit, AfterViewChecked {
   }
 
   successMountUpdate() {
+    this.loadPage = true;
+    this.getMountById();
+  }
+
+  showDialogComponentCost(costNumber: number) {
+    this.componentCost = this.mount.component_costs[costNumber];
+    this.showComponentCostEdit = true;
+  }
+
+  successEditComponentCost() {
     this.loadPage = true;
     this.getMountById();
   }
