@@ -13,7 +13,7 @@ export class DealMount {
   clients: Client[];
   actions: Action[];
   transfers: any;
-  costs: Cost;
+  costs: Cost[];
   component_costs: any;
   comments: OurComment[];
   company: Company;

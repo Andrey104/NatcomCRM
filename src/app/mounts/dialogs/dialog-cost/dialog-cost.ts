@@ -40,9 +40,8 @@ export class DialogCostComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     this.formData = this.form.value;
-    console.log(this.form.form.value.sum);
     this.mountService.addCost(this.mount.id, this.form.form.value.sum,
-      this.form.form.value.comment)
+      this.form.form.value.comment, this.form.form.value.destination)
       .subscribe((result) => {
         this.isRequest = false;
         this.visibleChange.emit(this.visible);
