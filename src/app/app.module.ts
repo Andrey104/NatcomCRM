@@ -129,9 +129,10 @@ import { BrigadeListItemComponent } from './mounts/dialogs/add-installer/brigade
 import {ParseWebsocketService} from './services/parse-websocket.service';
 import { NewEventComponent } from './new-event/new-event.component';
 import {MountCostPipe} from './pipes/mount-cost.pipe';
+import {DialogCostEditComponent} from './mounts/dialogs/dialog-cost-edit/dialog-cost-edit';
+import {DialogComponentCostComponent} from './mounts/dialogs/dialog-component-cost-edit/dialog-component-cost-edit';
 import {MountEditDialogComponent} from './mounts/dialogs/mount-dialog-edit/mount-dialog-edit';
 import {MeasurementDialogDeletePhotoComponent} from './measurements/dialogs/measuremetn-dialog-delete-photo/measurement-dialog-delete-photo';
-
 
 
 @NgModule({
@@ -242,6 +243,8 @@ import {MeasurementDialogDeletePhotoComponent} from './measurements/dialogs/meas
     BrigadeListItemComponent,
     NewEventComponent,
     MountCostPipe,
+    DialogCostEditComponent,
+    DialogComponentCostComponent,
     MountEditDialogComponent,
     MeasurementDialogDeletePhotoComponent,
   ],

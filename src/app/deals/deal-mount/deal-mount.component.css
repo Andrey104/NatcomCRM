@@ -90,6 +90,14 @@ i.center-dialog-title:hover {
   bottom: 90px;
 }
 
+.cost i {
+  opacity: 0;
+}
+
+.cost:hover i {
+  opacity: 1;
+}
+
 
 hr {
   margin: 0;

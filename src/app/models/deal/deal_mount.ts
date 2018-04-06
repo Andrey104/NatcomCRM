@@ -6,6 +6,7 @@ import {Cost} from '../cost';
 import {Action} from '../action';
 import {Picture} from '../picture';
 import {Client} from '../clients/client';
+import {ComponentCost} from '../component-cost';
 
 export class DealMount {
   id: number;
@@ -14,7 +15,7 @@ export class DealMount {
   actions: Action[];
   transfers: any;
   costs: Cost[];
-  component_costs: any;
+  component_costs: ComponentCost[];
   comments: OurComment[];
   company: Company;
   user: User;
