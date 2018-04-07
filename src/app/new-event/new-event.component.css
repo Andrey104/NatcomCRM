@@ -1,0 +1,38 @@
+.event-window {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  height: 70px;
+  width: 150px;
+  opacity: .95;
+  z-index: 100000;
+}
+
+.message {
+  margin: auto;
+}
+
+
+.dialog-close-btn {
+  background-color: #aaa;
+  color: white;
+  top: 0;
+  right: 0;
+}
+
+.dialog-close-btn:hover {
+  background-color: #9e9e9e;
+  color: white;
+  top: 0;
+  right: 0;
+}
+
+.new-deal-div {
+  width: 100%;
+  height: 100%;
+  line-height: 70px;
+  vertical-align: center;
+  text-align: center;
+  color: #668;
+
+}

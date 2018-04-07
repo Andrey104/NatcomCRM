@@ -27,6 +27,5 @@ export class ImageModalComponent implements OnInit {
 
   zoom() {
     this.zoomIn = !this.zoomIn;
-    console.log(this.zoomIn);
   }
 }

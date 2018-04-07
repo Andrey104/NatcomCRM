@@ -40,6 +40,8 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
   orderId: number;
   orderStatus;
   subOnOrder: Subscription;
+  eventMessage = '';
+  eventRoute = '';
 
   constructor(private dealService: DealService,
               private measurementService: MeasurementService,
@@ -64,6 +66,16 @@ export class NewDealPageComponent implements OnInit, OnDestroy {
     //     });
     //     this.clients = this.dealService.deal.clients;
     //   }
+  }
+
+  parseEvent(msg) {
+    switch (msg.data.event) {
+      case 'on_create_order': {
+        this.eventMessage = 'Новая заявка';
+        this.eventRoute = `/orders/all/${msg.data.data.order_id}`;
+        break;
+      }
+    }
   }
 
   getOrder() {

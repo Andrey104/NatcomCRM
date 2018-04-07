@@ -64,7 +64,6 @@ import {MeasurementStatusPipe} from './pipes/measurement-status.pipe';
 import {ImageModalComponent} from './image-modal/image-modal.component';
 import {MountPageComponent} from './mounts/mount-page/mount-page.component';
 import {MountComponent} from './mounts/mount/mount.component';
-import {StageMountService} from './services/stage-mount.service';
 import {MeasurementPageComponent} from './measurements/measurement-page/measurement-page.component';
 import {MeasurementComponent} from './measurements/measurement/measurement.component';
 import {BaseApi} from './core/base-api';
@@ -123,11 +122,17 @@ import {MountDialogTransferComponent} from './mounts/dialogs/mount-dialog-transf
 import {MountDialogSetDateComponent} from './mounts/dialogs/mount-dialog-set-date/mount-dialog-set-date';
 import {MountTransferCausePipe} from './pipes/mount-transfer-cause.pipe';
 import {DialogCostComponentComponent} from './mounts/dialogs/dialog-component-cost/dialog-component-cost';
-import {ChatService} from './services/chat.service';
 import {WebsocketService} from './services/websocket.service';
-import { BrigadeListComponent } from './mounts/dialogs/add-installer/brigade-list/brigade-list.component';
-import { BrigadeListItemComponent } from './mounts/dialogs/add-installer/brigade-list/brigade-list-item/brigade-list-item.component';
-import {ParseWebsocketService} from './services/parse-websocket.service';
+import {BrigadeListComponent} from './mounts/dialogs/add-installer/brigade-list/brigade-list.component';
+import {BrigadeListItemComponent} from './mounts/dialogs/add-installer/brigade-list/brigade-list-item/brigade-list-item.component';
+import {NewEventComponent} from './new-event/new-event.component';
+import {MountCostPipe} from './pipes/mount-cost.pipe';
+import {DialogCostEditComponent} from './mounts/dialogs/dialog-cost-edit/dialog-cost-edit';
+import {DialogComponentCostComponent} from './mounts/dialogs/dialog-component-cost-edit/dialog-component-cost-edit';
+import {MountEditDialogComponent} from './mounts/dialogs/mount-dialog-edit/mount-dialog-edit';
+import {
+  MeasurementDialogDeletePhotoComponent
+} from './measurements/dialogs/measuremetn-dialog-delete-photo/measurement-dialog-delete-photo';
 
 
 @NgModule({
@@ -235,7 +240,13 @@ import {ParseWebsocketService} from './services/parse-websocket.service';
     MountTransferCausePipe,
     DialogCostComponentComponent,
     BrigadeListComponent,
-    BrigadeListItemComponent
+    BrigadeListItemComponent,
+    NewEventComponent,
+    MountCostPipe,
+    DialogCostEditComponent,
+    DialogComponentCostComponent,
+    MountEditDialogComponent,
+    MeasurementDialogDeletePhotoComponent,
   ],
   imports: [
     BrowserModule,
@@ -271,12 +282,9 @@ import {ParseWebsocketService} from './services/parse-websocket.service';
     ClientService,
     MeasurementService,
     MountService,
-    StageMountService,
     BrigadesService,
     BaseApi,
-    ChatService,
-    WebsocketService,
-    ParseWebsocketService
+    WebsocketService
   ],
   bootstrap:
     [AppComponent],

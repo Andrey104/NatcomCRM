@@ -1,4 +1,4 @@
-import {MeasurementResult} from './measurement-result';
+import {DealMeasurement} from '../deal/deal_measurement';
 
 export class MeasurementPage {
   count: number;
@@ -6,5 +6,5 @@ export class MeasurementPage {
   my_measurements: number;
   next: string;
   previous: string;
-  results: MeasurementResult[];
+  results: DealMeasurement[];
 }

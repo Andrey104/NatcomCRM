@@ -1,0 +1,12 @@
+<div *ngIf="visible"
+     class="purple lighten-5 event-window valign-wrapper">
+  <i *ngIf="closable"
+     class="material-icons hover-element dialog-close-btn"
+     (click)="close()">close</i>
+  <div *ngIf="orderId"
+       routerLink="orders/all/{{orderId}}"
+       (click)="close()"
+       class="no-border new-deal-div hover-element">
+    <p class="message">Новая заявка</p>
+  </div>
+</div>

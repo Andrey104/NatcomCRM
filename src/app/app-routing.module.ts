@@ -31,13 +31,15 @@ import {DealMeasurement} from './models/deal/deal_measurement';
 const measurements_routes: Routes = [
   {path: ':measurement_id', component: DealMeasurementComponent},
   {path: ':measurement_id/deal/:id', component: DealDetailComponent},
-  {path: ':measurement_id/deal/:id/mount/:mount_id', component: DealMountComponent}
+  {path: ':measurement_id/deal/:id/mount/:mount_id', component: DealMountComponent},
+  {path: ':measurement_id/deal/:id/client/:client_id', component: ClientInfoComponent}
 ];
 
 const mounts_routes: Routes = [
   {path: ':mount_id', component: DealMountComponent},
   {path: ':mount_id/deal/:id', component: DealDetailComponent},
   {path: ':mount_id/deal/:id/measurement/:measurement_id', component: DealMeasurementComponent},
+  {path: ':mount_id/deal/:id/client/:client_id', component: ClientInfoComponent}
 ];
 
 const deals_routes: Routes = [

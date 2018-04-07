@@ -9,11 +9,13 @@
                       (out)="term$.next($event)"
                       (outDate)="termDate$.next($event)"></app-input-search>
     <app-deal *ngFor="let deal of dealPage"
-               [deal]="deal">
+              [deal]="deal">
     </app-deal>
     <div [class.spinner-contener]="dealPage.length===0" *ngIf="!lastPage" class="col s10">
       <app-preloader></app-preloader>
     </div>
+    <!--<app-new-event [(visible)]="showEventDialog"-->
+                   <!--[newEvent]="event"></app-new-event>-->
   </div>
   <div class="col s9 detail-col">
     <div class="detail">

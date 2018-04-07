@@ -32,15 +32,11 @@ export class UtilsService {
   }
 
   showEditButtons(id: string) {
-    // console.log('user_type ' + localStorage.getItem('user_type'));
-    // console.log('id_manager ' + localStorage.getItem('id_manager'));
-    // console.log('id ' + id);
     if (localStorage.getItem('id_manager') === id) {
       return true;
     }
     if (localStorage.getItem('user_type') === '4' ||
-      localStorage.getItem('user_type') === '5' ||
-      localStorage.getItem('user_type') === '3') {
+      localStorage.getItem('user_type') === '5') {
       return true;
     }
     return false;
@@ -146,7 +142,6 @@ export class UtilsService {
   }
 
   orderActionDecoder(action: OrderAction) {
-    const user = action.user.first_name + ' ' + action.user.last_name;
     let type = '';
     const essence = 'заявку';
     let causeStr = '';
@@ -212,7 +207,7 @@ export class UtilsService {
       commentStr = ', с комментарием: ';
       comment = action.comment;
     }
-    return ' ' + user + ', ' + type + ' ' + essence +
+    return ', ' + type + ' ' + essence +
       ' ' + causeStr + ' ' + cause + commentStr + ' ' + comment;
   }
 
@@ -366,7 +361,7 @@ export class UtilsService {
     let status: { statusName: string, statusUrl: string };
     switch (statusStr) {
       case 'processing': {
-        status = {statusName: 'Заявки в процессе', statusUrl: 'status=0&&status=2'};
+        status = {statusName: 'Заявки в процессе', statusUrl: 'status=0&status=2'};
         break;
       }
       case 'completed': {

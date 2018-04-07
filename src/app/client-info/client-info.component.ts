@@ -7,6 +7,8 @@ import {UtilsService} from '../services/utils.service';
 import {OrderService} from '../services/order.service';
 import {DOCUMENT} from '@angular/common';
 import {DealService} from '../services/deal.service';
+import {MeasurementService} from '../services/measurement.service';
+import {MountService} from '../services/mount.service';
 
 @Component({
   selector: 'app-client-info',
@@ -29,6 +31,8 @@ export class ClientInfoComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private utils: UtilsService,
               private dealService: DealService,
+              private measurementService: MeasurementService,
+              private mountService: MountService,
               @Inject(DOCUMENT) private document: Document) {
     this.url = this.document.location.href;
   }
@@ -43,7 +47,7 @@ export class ClientInfoComponent implements OnInit {
         this.id = params['id'];
         this.id_client = params['client_id'];
         this.loader = true;
-        this.getBackUrl();
+        this.getBackUrl(params);
         this.clientService.getClient(this.id_client)
           .subscribe(client => {
             this.client = client;
@@ -52,13 +56,19 @@ export class ClientInfoComponent implements OnInit {
       });
   }
 
-  getBackUrl() {
+  getBackUrl(params) {
     if (this.url.indexOf('orders') !== -1) {
       const orderStatus = this.orderService.getOrderStatus();
       this.backUrl = `/orders/${orderStatus}/${this.id.toString()}`;
     } else if (this.url.indexOf('deals') !== -1) {
       const dealStatus = this.dealService.statusDeal;
       this.backUrl = `/deals/${dealStatus}/${this.id.toString()}`;
+    } else if (this.url.indexOf('measurements') !== -1) {
+      this.backUrl = `/measurements/${this.measurementService.measurementStatus}`;
+      this.backUrl += `/${params['measurement_id']}/deal/${params['id']}`;
+    } else if (this.url.indexOf('mounts') !== -1) {
+      this.backUrl = `/mounts/${this.mountService.statusMount}`;
+      this.backUrl += `/${params['mount_id']}/deal/${params['id']}`;
     } else if (this.url.indexOf('new_deal')) {
       this.backUrl = `/new_deal`;
     }

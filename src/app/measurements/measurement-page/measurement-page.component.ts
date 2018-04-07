@@ -1,17 +1,19 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MeasurementService} from '../../services/measurement.service';
-import {MeasurementResult} from '../../models/measurement/measurement-result';
+import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
+import {WebsocketService} from '../../services/websocket.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-measurement-page',
   templateUrl: './measurement-page.component.html',
   styleUrls: ['./measurement-page.component.css']
 })
-export class MeasurementPageComponent implements OnInit {
-  measurements: MeasurementResult[];
+export class MeasurementPageComponent implements OnInit, OnDestroy {
+  measurements: DealMeasurement[];
   page: number;
   load: boolean;
   lastPage: boolean;
@@ -20,32 +22,21 @@ export class MeasurementPageComponent implements OnInit {
   termDate$ = new Subject<string>();
   inputText = '';
   date = '';
-  pattern = /\d{4}-\d{2}-\d{2}/;
+  subOnWebSocket: Subscription;
 
   constructor(private measurementService: MeasurementService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private webSocketService: WebsocketService) {
   }
 
   ngOnInit() {
     this.subscribeOnUrl();
     this.subscribeOnInputField();
     this.subscribeOnDateField();
-  }
-
-  showMeasurements() {
-    this.page = 1;
-    this.load = true;
-    this.lastPage = false;
-    this.measurementService.getAllMeasurements(this.page, this.status.statusUrl)
-      .subscribe((measurementPage) => {
-        this.measurements = measurementPage.results;
-        if (measurementPage.next === null) {
-          this.lastPage = true;
-        }
-        this.load = false;
-        document.getElementById('scroll').scrollTop = 0;
-      });
+    this.subOnWebSocket = this.webSocketService.message.subscribe((response) => {
+      this.parseEvent(response);
+    });
   }
 
   subscribeOnUrl() {
@@ -80,6 +71,81 @@ export class MeasurementPageComponent implements OnInit {
           this.search();
         }
       );
+  }
+
+  parseEvent(msg) {
+    switch (msg.event) {
+      case 'on_create_measurement': {
+        this.measurementService.getMeasurement(msg.data.id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'undistributed') {
+              this.measurements.unshift(measurement);
+              this.measurements.pop();
+            }
+          });
+        break;
+      }
+      case 'on_complete_measurement': {
+        this.measurementService.getMeasurement(msg.data.id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus === 'closed') {
+              this.measurements.unshift(measurement);
+              this.measurements.pop();
+            } else if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'responsible') {
+              this.showMeasurements();
+            }
+          });
+        break;
+      }
+      case 'on_reject_measurement': {
+        this.measurementService.getMeasurement(msg.data.id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus !== 'closed' && this.measurementService.measurementStatus !== 'rejected') {
+              this.showMeasurements();
+            } else if (this.measurementService.measurementStatus === 'rejected') {
+              this.measurements.unshift(measurement);
+              this.measurements.pop();
+            }
+          });
+        break;
+      }
+      case 'on_transfer_measurement': {
+        this.measurementService.getMeasurement(msg.data.id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'responsible') {
+              this.showMeasurements();
+            }
+          });
+        break;
+      }
+      case 'on_take': {
+        this.measurementService.getMeasurement(msg.data.id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'undistributed') {
+              this.showMeasurements();
+            } else if (this.measurementService.measurementStatus === 'responsible') {
+              this.measurements.unshift(measurement);
+              this.measurements.pop();
+            }
+          });
+        break;
+      }
+    }
+  }
+
+  showMeasurements() {
+    this.page = 1;
+    this.load = true;
+    this.lastPage = false;
+    this.measurementService.getAllMeasurements(this.page, this.status.statusUrl)
+      .subscribe((measurementPage) => {
+        this.measurements = measurementPage.results;
+        if (measurementPage.next === null) {
+          this.lastPage = true;
+        }
+        this.load = false;
+        document.getElementById('scroll').scrollTop = 0;
+      });
   }
 
   onScrollMeasurement() {
@@ -144,6 +210,12 @@ export class MeasurementPageComponent implements OnInit {
           }
           this.load = false;
         });
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subOnWebSocket) {
+      this.subOnWebSocket.unsubscribe();
     }
   }
 }

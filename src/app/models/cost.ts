@@ -1,5 +1,6 @@
 export class Cost {
   id: number;
-  comment: string;
   sum: number;
+  destination: number;
+  comment: string;
 }

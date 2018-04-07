@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class BaseApi {
-  private baseUrl = 'api/';
+  private baseUrl = 'http://188.225.46.31/api/';
 
   constructor(public http: HttpClient) {
   }
@@ -63,6 +63,13 @@ export class BaseApi {
         headers: new HttpHeaders().set('Authorization', 'token ' + this.token()),
         params: params
       });
+  }
+
+  loginRequest(url: string = '', data?: any): Observable<any> {
+    return this.http.post(
+      this.getUrl(url),
+      data
+    );
   }
 
   private token() {

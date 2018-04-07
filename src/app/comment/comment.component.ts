@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -11,6 +11,7 @@ export class CommentComponent implements OnInit {
   form: FormGroup;
   commentArea;
   text = '';
+  @ViewChild('textArea') textArea: ElementRef;
 
   constructor() {
   }
@@ -26,15 +27,15 @@ export class CommentComponent implements OnInit {
       this.text = this.form.get('commentArea').value + '\n';
     } else if (event.keyCode === 13) {
       this.sendComment();
+      this.textArea.nativeElement.value = '';
     }
   }
 
   sendComment() {
     const userComment = this.form.get('commentArea').value;
     if (userComment !== '') {
-      this.form.reset();
-      document.getElementById('text').blur();
       this.comment.emit(userComment);
+      this.form.reset();
     }
   }
 

@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {DealMount} from '../models/deal/deal_mount';
 import {OurComment} from '../models/comment';
 import {MountPage} from '../models/mount/mount-page';
 import {BaseApi} from '../core/base-api';
 import {Cost} from '../models/cost';
+import {ComponentCost} from '../models/component-cost';
 
 @Injectable()
 export class MountService extends BaseApi {
@@ -56,11 +57,11 @@ export class MountService extends BaseApi {
     return this.post(`mounts/${idMount}/transfer/`, {new_date, comment, cause});
   }
 
-  addCost(idMount: string, sum: number, comment: string): Observable<Cost> {
+  addCost(idMount: string, sum: number, comment: string, destination: number): Observable<Cost> {
     if (comment === '') {
       comment = null;
     }
-    return this.post(`mounts/${idMount}/cost/`, {sum, comment});
+    return this.post(`mounts/${idMount}/cost/`, {sum, comment, destination});
   }
 
   addCostComponent(idMount: string, sum: number, comment: string): Observable<Cost> {
@@ -73,4 +74,25 @@ export class MountService extends BaseApi {
   setInstaller(idMount: string, installers: InsertPosition): Observable<any> {
     return this.post(`mounts/${idMount}/installers/`, {installers});
   }
+
+  editComponentCost(mountId: number, costId: number, data: any): Observable<ComponentCost> {
+    return this.patch(`mounts/${mountId.toString()}/component_costs/${costId.toString()}/`, data);
+  }
+
+  editCost(mountId: number, costId: number, data: any): Observable<ComponentCost> {
+    return this.patch(`mounts/${mountId.toString()}/costs/${costId.toString()}/`, data);
+  }
+
+  editMount(idMount: number, description: string, date: string): Observable<Object> {
+    if (description === '') {
+      description = null;
+    }
+
+    const data = {
+      description,
+      date
+    };
+    return this.put(`mounts/${idMount}/`, data);
+  }
 }
+

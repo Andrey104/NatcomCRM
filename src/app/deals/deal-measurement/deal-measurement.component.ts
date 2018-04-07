@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, Inject, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {DealMeasurement} from '../../models/deal/deal_measurement';
 import {ActivatedRoute} from '@angular/router';
 import {MeasurementService} from '../../services/measurement.service';
@@ -8,19 +8,22 @@ import {UtilsService} from '../../services/utils.service';
 import {DealService} from '../../services/deal.service';
 import {DOCUMENT} from '@angular/common';
 import {OrderService} from '../../services/order.service';
-import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import {DomSanitizer} from '@angular/platform-browser';
 import {MountService} from '../../services/mount.service';
-import {ParseWebsocketService} from '../../services/parse-websocket.service';
-import {ChatService} from '../../services/chat.service';
+import {DealResult} from '../../models/deal/deal_result';
+import {WebsocketService} from '../../services/websocket.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-deal-measurement',
   templateUrl: './deal-measurement.component.html',
   styleUrls: ['./deal-measurement.component.css'],
 })
-export class DealMeasurementComponent implements OnInit, AfterViewChecked {
+export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDestroy {
   measurement: DealMeasurement;
   id: number;
+  ws;
+  subscribeOnSocket: Subscription;
   showEditButtons = false;
   client: Client;
   flag = false;
@@ -29,6 +32,8 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
   showMeasurementReject = false;
   showMeasurementTransfer = false;
   showMeasurementEdit = false;
+  showDeletePhotoDialog = false;
+  photoDeleteID: number;
   showPicture = false;
   statusDeal: string;
   backUrl: string;
@@ -43,28 +48,61 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
               private orderService: OrderService,
               private sanitization: DomSanitizer,
               private mountService: MountService,
-              private parseWebsocket: ParseWebsocketService,
-              private chatService: ChatService) {
-    this.chatService.messages.subscribe(msg => {
-      this.parseEvent(msg);
-    });
+              private webSocketService: WebsocketService) {
     this.url = this.document.location.href;
   }
 
-  parseEvent(msg) {
-    switch (msg.data.event) {
-      case 'on_comment_measurement': {
-        if (msg.data.data.comment.user.id !== Number(localStorage.getItem('id_manager'))) {
-          this.measurement.comments.push(msg.data.data.comment);
-        }
-        break;
-      }
-    }
-  }
 
   ngOnInit() {
     this.subscribeOnMeasurement();
     this.getBackUrl();
+    this.subscribeOnSocket = this.webSocketService.message.subscribe((response) => {
+      switch (response.event) {
+        case 'on_comment_measurement': {
+          if ((response.data.comment.user.id !== Number(localStorage.getItem('id_manager')))
+            && (Number(response.data.measurement_id) === this.measurement.id)) {
+            this.measurement.comments.push(response.data.comment);
+          }
+          break;
+        }
+        case 'on_complete_measurement': {
+          if (Number(response.data.id) === this.measurement.id) {
+            this.measurementService.getMeasurement(this.measurement.id)
+              .subscribe((measurement: DealMeasurement) => {
+                this.measurement = measurement;
+              });
+          }
+          break;
+        }
+        case 'on_reject_measurement': {
+          if (Number(response.data.id) === this.measurement.id) {
+            this.measurementService.getMeasurement(this.measurement.id)
+              .subscribe((measurement: DealMeasurement) => {
+                this.measurement = measurement;
+              });
+          }
+          break;
+        }
+        case 'on_transfer_measurement': {
+          if (Number(response.data.id) === this.measurement.id) {
+            this.measurementService.getMeasurement(this.measurement.id)
+              .subscribe((measurement: DealMeasurement) => {
+                this.measurement = measurement;
+              });
+          }
+          break;
+        }
+        case 'on_take': {
+          if (Number(response.data.id) === this.measurement.id) {
+            this.measurementService.getMeasurement(this.measurement.id)
+              .subscribe((measurement: DealMeasurement) => {
+                this.measurement = measurement;
+              });
+          }
+          break;
+        }
+      }
+    });
   }
 
   ngAfterViewChecked(): void {
@@ -134,5 +172,16 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked {
 
   closePicture() {
     this.picture = null;
+  }
+
+  deletePicture(id) {
+    this.showDeletePhotoDialog = true;
+    this.photoDeleteID = id;
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscribeOnSocket) {
+      this.subscribeOnSocket.unsubscribe();
+    }
   }
 }

@@ -1,27 +1,19 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of';
-import {catchError, map, tap} from 'rxjs/operators';
 
 import {Orders} from '../models/orders/order';
 import {MessageService} from './message.service';
 import {OrderResult} from '../models/orders/order_result';
 import {BaseApi} from '../core/base-api';
-import {Subject} from 'rxjs/Subject';
-
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
 
 @Injectable()
 export class OrderService extends BaseApi {
   private order: OrderResult;
   private orderStatus;
 
-  constructor(public http: HttpClient,
-              private messageService: MessageService) {
+  constructor(public http: HttpClient) {
     super(http);
   }
 

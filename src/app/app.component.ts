@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {ChatService} from './services/chat.service';
-import {ParseWebsocketService} from './services/parse-websocket.service';
+import {Component} from '@angular/core';
+import {WebsocketService} from './services/websocket.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,17 @@ import {ParseWebsocketService} from './services/parse-websocket.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  orderId: number;
+  showEvent = false;
+  subOnWebSocket: Subscription;
 
-  constructor(private chatService: ChatService) {
+  constructor(private webSocketService: WebsocketService) {
+    this.webSocketService.makeSocketConnection();
+    this.subOnWebSocket = this.webSocketService.message.subscribe((response) => {
+      if (response.event === 'on_create_order') {
+        this.orderId = response.data.order_id;
+        this.showEvent = true;
+      }
+    });
   }
 }

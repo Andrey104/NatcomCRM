@@ -1,10 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {BrigadesService} from '../../../services/brigades.service';
 import {Installer} from '../../../models/installers/installer';
 import {InstallerPosition} from '../../../models/installers/installer_position';
 import {Brigade} from '../../../models/brigades/brigade';
-import {StageMountService} from '../../../services/stage-mount.service';
 import {MountService} from '../../../services/mount.service';
 
 @Component({
@@ -18,7 +15,6 @@ export class AddInstallerComponent implements OnInit, OnChanges {
   installerListIsOpen = false;
   brigadeListIsOpen = false;
   open = false;
-  openBtnList = false;
   @Input() modalState;
   @Output() onClose = new EventEmitter<Boolean>(); // false - отмена, true - успешное выполнение
 
@@ -56,6 +52,7 @@ export class AddInstallerComponent implements OnInit, OnChanges {
     this.onClose.emit(successfully);
     this.open = false;
     this.installerListIsOpen = false;
+    this.brigadeListIsOpen = false;
   }
 
   checkInstallerId(id: number, installers: InstallerPosition[]) {
@@ -126,7 +123,7 @@ export class AddInstallerComponent implements OnInit, OnChanges {
     installersMin = this.cloneObject(this.installers);
     installersMin = installersMin.map(this.brigadeMinMap);
     this.mountService.setInstaller(this.stageId, installersMin).subscribe(data => {
-      alert('Монтажники изменены успешно!');
+      // alert('Монтажники изменены успешно!');
       this.close(true);
     });
   }

@@ -1,25 +1,30 @@
 import {Company} from '../company';
 import {User} from '../user';
 import {OurComment} from '../comment';
-import {MountStage} from '../mount/mount-stage';
 import {InstallerPosition} from '../installers/installer_position';
 import {Cost} from '../cost';
-import {DealAction} from './deal_action';
+import {Action} from '../action';
+import {Picture} from '../picture';
+import {Client} from '../clients/client';
+import {ComponentCost} from '../component-cost';
 
 export class DealMount {
-  installers: InstallerPosition[];
-  transfers: object;
-  costs: Cost[];
-  component_costs: Cost[];
   id: number;
-  actions: DealAction[];
-  stages: MountStage[];
+  installers: InstallerPosition[];
+  clients: Client[];
+  actions: Action[];
+  transfers: any;
+  costs: Cost[];
+  component_costs: ComponentCost[];
   comments: OurComment[];
   company: Company;
+  user: User;
+  address: string;
+  address_comment: string;
   date_mount: string;
   date: string;
-  status: number;
   description: string;
+  status: number;
   deal: number;
-  user: User;
+  pictures: Picture[];
 }

@@ -1,18 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MountService} from '../../services/mount.service';
-import {MountResult} from '../../models/mount/mount-result';
 import {Subject} from 'rxjs/Subject';
 import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
 import {Subscription} from 'rxjs/Subscription';
+import {DealMount} from '../../models/deal/deal_mount';
+import {WebsocketService} from '../../services/websocket.service';
 
 @Component({
   selector: 'app-mount-page',
   templateUrl: './mount-page.component.html',
   styleUrls: ['./mount-page.component.css']
 })
-export class MountPageComponent implements OnInit {
-  mounts: MountResult[];
+export class MountPageComponent implements OnInit, OnDestroy {
+  mounts: DealMount[];
   status: { statusName: string, statusUrl: string };
   load: boolean;
   lastPage: boolean;
@@ -22,16 +23,21 @@ export class MountPageComponent implements OnInit {
   inputText = '';
   date = '';
   private subscriptions: Subscription[] = [];
+  subOnWebSocket: Subscription;
 
   constructor(private mountService: MountService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private webSocketService: WebsocketService) {
   }
 
   ngOnInit() {
     this.subscribeOnInputField();
     this.subscribeOnUrl();
     this.subscribeOnDateField();
+    this.subOnWebSocket = this.webSocketService.message.subscribe((response) => {
+      this.parseEvent(response);
+    });
   }
 
   subscribeOnInputField() {
@@ -64,6 +70,60 @@ export class MountPageComponent implements OnInit {
         this.mounts = [];
         this.showMounts();
       });
+  }
+
+  parseEvent(msg) {
+    switch (msg.event) {
+      case 'on_create_mount': {
+        this.mountService.getMount(msg.data.mount_id)
+          .subscribe((mount: DealMount) => {
+            if (mount.status === 1) {
+              if (this.mountService.statusMount === 'all' || this.mountService.statusMount === 'added_stage') {
+                this.mounts.unshift(mount);
+                this.mounts.pop();
+              }
+            } else if (mount.status === 0) {
+              if (this.mountService.statusMount === 'all' || this.mountService.statusMount === 'processing') {
+                this.mounts.unshift(mount);
+                this.mounts.pop();
+              }
+            }
+          });
+        break;
+      }
+      case 'on_close_mount': {
+        this.mountService.getMount(msg.data.mount_id)
+          .subscribe((mount: DealMount) => {
+            if (this.mountService.statusMount !== 'completed' && this.mountService.statusMount !== 'canceled') {
+              this.showMounts();
+            } else if (this.mountService.statusMount === 'completed') {
+              this.mounts.unshift(mount);
+              this.mounts.pop();
+            }
+          });
+        break;
+      }
+      case 'on_reject_mount': {
+        this.mountService.getMount(msg.data.mount_id)
+          .subscribe((mount: DealMount) => {
+            if (this.mountService.statusMount !== 'completed' && this.mountService.statusMount !== 'canceled') {
+              this.showMounts();
+            } else if (this.mountService.statusMount === 'canceled') {
+              this.mounts.unshift(mount);
+              this.mounts.pop();
+            }
+          });
+        break;
+      }
+      case 'on_transfer_mount': {
+        this.mountService.getMount(msg.data.mount_id)
+          .subscribe((mount: DealMount) => {
+            if (this.mountService.statusMount !== 'completed' && this.mountService.statusMount !== 'canceled') {
+              this.showMounts();
+            }
+          });
+      }
+    }
   }
 
   showMounts() {
@@ -168,5 +228,11 @@ export class MountPageComponent implements OnInit {
   onDeactivate(c) {
     this.subscriptions
       .forEach(s => s.unsubscribe());
+  }
+
+  ngOnDestroy() {
+    if (this.subOnWebSocket) {
+      this.subOnWebSocket.unsubscribe();
+    }
   }
 }

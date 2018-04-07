@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MountResult} from '../../models/mount/mount-result';
 import {UtilsService} from '../../services/utils.service';
+import {DealMount} from '../../models/deal/deal_mount';
 
 @Component({
   selector: 'app-mount',
@@ -8,7 +8,7 @@ import {UtilsService} from '../../services/utils.service';
   styleUrls: ['./mount.component.css']
 })
 export class MountComponent implements OnInit {
-  @Input() mount: MountResult;
+  @Input() mount: DealMount;
 
   constructor(private utils: UtilsService) {
   }

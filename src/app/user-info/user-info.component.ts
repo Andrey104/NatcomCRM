@@ -1,7 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {User} from '../models/user';
 import {AuthenticationService} from '../services/auntification.service';
-import {ChatService} from '../services/chat.service';
 
 @Component({
   selector: 'app-user-info',
@@ -19,9 +18,5 @@ export class UserInfoComponent implements OnInit {
       .subscribe((user: User) => {
         this.user = user;
       });
-  }
-
-  logOut(): void {
-    this.authenticationService.logout();
   }
 }

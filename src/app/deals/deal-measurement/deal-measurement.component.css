@@ -11,12 +11,27 @@
   font-size: 18px;
 }
 
+.icon-delete-photo {
+  position: absolute;
+  display: none;
+  right: 0;
+  top: 0;
+  background-color: #9e9e9e;
+  color: white;
+  cursor: pointer;
+}
+
 .img-container {
-  cursor: zoom-in;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 200px;
+  position: relative;
+}
+
+
+.container-img-delete {
+  position: relative
+}
+
+.container-img-delete:hover .icon-delete-photo {
+  display: block;
 }
 
 .avatar {
@@ -80,19 +95,6 @@
 .header {
   font-size: 14px;
   color: black;
-}
-
-.picture {
-  max-height: 300px;
-  max-width: 300px;
-
-}
-
-.picture-date {
-  font-size: 12px;
-  color: #9e9e9e;
-  margin-bottom: 10px;
-  margin-top: 5px;
 }
 
 .history {

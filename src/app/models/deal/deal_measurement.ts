@@ -5,13 +5,15 @@ import {Transfer} from '../transfer';
 import {OurComment} from '../comment';
 import {Picture} from '../picture';
 import {User} from '../user';
+import {ClientsList} from '../clients/clients-list';
+import {Action} from '../action';
 
 export class DealMeasurement {
   id: number;
   deal_user: User;
   reject_id: number;
   pictures: Picture[];
-  clients: Client[];
+  clients: ClientsList[];
   actions: object;
   transfers: Transfer[];
   comments: OurComment[];

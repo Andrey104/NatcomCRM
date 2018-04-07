@@ -42,7 +42,6 @@ export class OrderModalDealComponent implements OnInit {
   submitForm() {
     this.isRequest = true;
     this.isSubmitted = true;
-    console.log(this.form);
     this.formData = this.form.value;
     this.orderService.rejectOrder(this.id, this.comment.nativeElement.value, this.form.form.value.answer)
       .subscribe((response) => {

@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {UtilsService} from '../../services/utils.service';
 import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
+import {WebsocketService} from '../../services/websocket.service';
 
 
 @Component({
@@ -26,16 +27,21 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   inputText = '';
   date = '';
   private subscriptions: Subscription[] = [];
+  subOnWebSocket: Subscription;
 
   constructor(private orderService: OrderService,
               private activatedRoute: ActivatedRoute,
-              private utils: UtilsService) {
+              private utils: UtilsService,
+              private webSocketService: WebsocketService) {
   }
 
   ngOnInit() {
     this.subscribeOnInputField();
     this.subscribeOnOrderStatus();
     this.subscribeOnDateField();
+    this.subOnWebSocket = this.webSocketService.message.subscribe((response) => {
+      this.parseEvent(response);
+    });
   }
 
   subscribeOnInputField() {
@@ -72,6 +78,70 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       });
   }
 
+  parseEvent(msg) {
+    switch (msg.event) {
+      case 'on_create_order': {
+        this.refreshAllAndProcessing(Number(msg.data.order_id));
+        break;
+      }
+      case 'on_reject_order': {
+        if ((this.orderService.getOrderStatus() === 'all') ||
+          (this.orderService.getOrderStatus() === 'processing')) {
+          this.showOrders();
+        } else if (this.orderService.getOrderStatus() === 'canceled') {
+          this.orderService.getOrderById(msg.data.order_id)
+            .subscribe((result) => {
+              this.orders.unshift(result);
+              this.orders.pop();
+            });
+        }
+        break;
+      }
+      case 'on_defer_order': {
+        if ((this.orderService.getOrderStatus() === 'all') ||
+          (this.orderService.getOrderStatus() === 'processing')) {
+          this.showOrders();
+        }
+        break;
+      }
+      case 'on_return_order': {
+        if (this.orderService.getOrderStatus() === 'processing') {
+          this.orderService.getOrderById(msg.data.order_id)
+            .subscribe((result) => {
+              this.orders.unshift(result);
+              this.orders.pop();
+            });
+        } else if (this.orderService.getOrderStatus() === 'canceled' || this.orderService.getOrderStatus() === 'all') {
+          this.showOrders();
+        }
+        break;
+      }
+      case 'on_create_deal': {
+        if ((this.orderService.getOrderStatus() === 'all') ||
+          (this.orderService.getOrderStatus() === 'completed')) {
+          this.orderService.getOrderById(msg.data.order_id)
+            .subscribe((result) => {
+              this.orders.unshift(result);
+              this.orders.pop();
+            });
+        } else if (this.orderService.getOrderStatus() === 'processing') {
+          this.showOrders();
+        }
+      }
+    }
+  }
+
+  refreshAllAndProcessing(orderId: number) {
+    this.orderService.getOrderById(orderId)
+      .subscribe((result) => {
+        if ((this.orderService.getOrderStatus() === 'all') ||
+          (this.orderService.getOrderStatus() === 'processing')) {
+          this.orders.unshift(result);
+          this.orders.pop();
+        }
+      });
+  }
+
   // отображение первой страницы заказов в зависимости от содержимого поисковой строки
   search() {
     if ((this.date !== '' || this.inputText !== '') && this.orders !== []) {
@@ -81,7 +151,6 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       const params = this.utils.getSearchParams(this.inputText, this.date);
       this.orderService.getFilterOrders(this.page, params)
         .subscribe((orderPage) => {
-            console.log(orderPage);
             this.orders = orderPage.results;
             if (orderPage.next === null) {
               this.lastPage = true;
@@ -191,6 +260,8 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subInputField) {
       this.subInputField.unsubscribe();
+    } else if (this.subOnWebSocket) {
+      this.subOnWebSocket.unsubscribe();
     }
   }
 }

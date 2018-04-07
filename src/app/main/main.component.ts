@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -6,14 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  type = localStorage.getItem('user_type');
-  constructor() { }
+  type = Number(localStorage.getItem('user_type'));
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
+
   adminCheck() {
-    if ((this.type === '4' ) || (this.type === '5' ) ||
-      (this.type === '3' )) {
+    if ((this.type === 4) || (this.type === 5)) {
       return true;
     }
   }

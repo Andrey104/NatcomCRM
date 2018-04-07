@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Client} from '../models/clients/client';
 import {BaseApi} from '../core/base-api';
-import {Phone} from '../models/phone';
 import {ClientPage} from '../models/clients/client-page';
 
 

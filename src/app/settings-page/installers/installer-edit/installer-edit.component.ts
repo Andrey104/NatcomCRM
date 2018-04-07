@@ -21,7 +21,8 @@ export class InstallerEditComponent implements OnInit, OnChanges {
 
   installerForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
-    phone: new FormControl('', Validators.required),
+    phone1: new FormControl('', Validators.required),
+    phone2: new FormControl('', Validators.required),
   });
 
   ngOnInit() {
@@ -29,7 +30,13 @@ export class InstallerEditComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.modalState.installer != null) {
       this.header = 'Редактировать монтажника';
-      this.installerForm.setValue({name: this.modalState.installer.fio, phone: this.modalState.installer.phone});
+
+      this.installerForm.setValue({
+        name: this.modalState.installer.fio,
+        phone1: this.modalState.installer.phone1,
+        phone2: this.modalState.installer.phone2
+      });
+
       this.formInputSetActive();
       this.edit = true;
     } else {
@@ -53,29 +60,35 @@ export class InstallerEditComponent implements OnInit, OnChanges {
 
   ok() {
     const name = this.installerForm.value.name;
-    const phone = this.installerForm.value.phone;
+    const phone1 = this.installerForm.value.phone1;
+    const phone2 = this.installerForm.value.phone2;
     const installer = new Installer();
     installer.fio = name;
-    installer.phone = phone;
+    installer.phone1 = phone1;
+    installer.phone2 = phone2;
     if (this.edit) {
       installer.id = this.modalState.installer.id;
       this.installerService.editInstaller(installer).subscribe(data => {
         if (data) {
-          alert('Монтажник изменен успешно!');
+          // alert('Монтажник изменен успешно!');
           this.close(true);
         } else {
           alert('Ошибка при изменении монтажника! Попробуйте снова!');
         }
+      }, error2 => {
+          alert('Ошибка при изменении монтажника! Попробуйте снова!');
       });
     } else {
       this.installerService.addInstaller(installer).subscribe(data => {
         if (data) {
-          alert('Монтажник добавлен успешно!');
+          // alert('Монтажник добавлен успешно!');
           this.close(true);
         } else {
           alert('Ошибка при добавлении монтажника! Попробуйте снова!');
         }
-      });
+      }, error2 => {
+          alert('Ошибка при добавлении монтажника! Попробуйте снова!');
+        });
     }
   }
 
