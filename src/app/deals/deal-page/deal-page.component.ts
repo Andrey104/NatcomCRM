@@ -40,7 +40,6 @@ export class DealPageComponent implements OnInit, OnDestroy {
     this.subscribeOnInputField();
     this.subscribeOnDateField();
     this.subOnWebsocket = this.webSocketService.message.subscribe((response) => {
-      console.log(response);
       this.parseEvent(response);
     });
   }
@@ -73,7 +72,7 @@ export class DealPageComponent implements OnInit, OnDestroy {
               this.dealPage.unshift(deal);
               this.dealPage.pop();
             } else if (this.dealService.statusDeal !== 'completed') {
-              this.showDeals();
+              this.search();
             }
           });
         break;
@@ -85,7 +84,7 @@ export class DealPageComponent implements OnInit, OnDestroy {
               this.dealPage.unshift(deal);
               this.dealPage.pop();
             } else if (this.dealService.statusDeal === 'mount_assigned' || this.dealService.statusDeal === 'all') {
-              this.showDeals();
+              this.search();
             }
           });
         break;
@@ -97,7 +96,7 @@ export class DealPageComponent implements OnInit, OnDestroy {
               this.dealPage.unshift(deal);
               this.dealPage.pop();
             } else if (this.dealService.statusDeal === 'processing' || this.dealService.statusDeal === 'all') {
-              this.showDeals();
+              this.search();
             }
           });
         break;
@@ -109,7 +108,7 @@ export class DealPageComponent implements OnInit, OnDestroy {
               this.dealPage.unshift(deal);
               this.dealPage.pop();
             } else if (this.dealService.statusDeal === 'unconnected' || this.dealService.statusDeal === 'all') {
-              this.showDeals();
+              this.search();
             }
           });
         break;

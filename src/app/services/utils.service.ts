@@ -413,11 +413,11 @@ export class UtilsService {
     let status: { statusName: string, statusUrl: string };
     switch (statusStr) {
       case 'processing': {
-        status = {statusName: 'Монтажи в обработке', statusUrl: 'status=0'};
+        status = {statusName: 'Монтажи по звонку', statusUrl: 'status=0'};
         break;
       }
       case 'added_stage': {
-        status = {statusName: 'Монтажи в процессе', statusUrl: 'status=1'};
+        status = {statusName: 'Назначенные монтажи', statusUrl: 'status=1'};
         break;
       }
       case 'completed': {

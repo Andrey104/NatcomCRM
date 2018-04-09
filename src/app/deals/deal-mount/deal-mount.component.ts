@@ -193,7 +193,7 @@ export class DealMountComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.mount.comments.push(next);
         this.isSend = true;
       }, error => {
-        console.log(error.error);
+        alert('Комментарий не отправлен');
       });
   }
 

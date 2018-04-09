@@ -10,7 +10,6 @@ import {DOCUMENT} from '@angular/common';
 import {OrderService} from '../../services/order.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MountService} from '../../services/mount.service';
-import {DealResult} from '../../models/deal/deal_result';
 import {WebsocketService} from '../../services/websocket.service';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -161,7 +160,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDes
         this.measurement.comments.push(next);
         this.flag = true;
       }, error => {
-        console.log(error);
+        alert('Комментарий не отправлен');
       });
   }
 

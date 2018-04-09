@@ -92,7 +92,7 @@ export class MeasurementPageComponent implements OnInit, OnDestroy {
               this.measurements.unshift(measurement);
               this.measurements.pop();
             } else if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'responsible') {
-              this.showMeasurements();
+              this.search();
             }
           });
         break;
@@ -101,7 +101,7 @@ export class MeasurementPageComponent implements OnInit, OnDestroy {
         this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
             if (this.measurementService.measurementStatus !== 'closed' && this.measurementService.measurementStatus !== 'rejected') {
-              this.showMeasurements();
+              this.search();
             } else if (this.measurementService.measurementStatus === 'rejected') {
               this.measurements.unshift(measurement);
               this.measurements.pop();
@@ -113,7 +113,7 @@ export class MeasurementPageComponent implements OnInit, OnDestroy {
         this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
             if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'responsible') {
-              this.showMeasurements();
+              this.search();
             }
           });
         break;
@@ -122,7 +122,7 @@ export class MeasurementPageComponent implements OnInit, OnDestroy {
         this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
             if (this.measurementService.measurementStatus === 'all' || this.measurementService.measurementStatus === 'undistributed') {
-              this.showMeasurements();
+              this.search();
             } else if (this.measurementService.measurementStatus === 'responsible') {
               this.measurements.unshift(measurement);
               this.measurements.pop();

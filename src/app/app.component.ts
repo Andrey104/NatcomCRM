@@ -15,7 +15,7 @@ export class AppComponent {
   constructor(private webSocketService: WebsocketService) {
     this.webSocketService.makeSocketConnection();
     this.subOnWebSocket = this.webSocketService.message.subscribe((response) => {
-      if (response.event === 'on_create_order') {
+      if (response.event === 'on_create_order' && Number(localStorage.getItem('user_type')) === 2) {
         this.orderId = response.data.order_id;
         this.showEvent = true;
       }
