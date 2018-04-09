@@ -21,7 +21,8 @@ export class MountService extends BaseApi {
   }
 
   sendComment(idMount: number, comment: string): Observable<OurComment> {
-    return this.post(`mounts/${idMount.toString()}/comment/`, {text: comment});
+    const comment_type = 1;
+    return this.post(`mounts/${idMount.toString()}/comment/`, {text: comment , comment_type});
   }
 
   getMount(idMount: number): Observable<DealMount> {
@@ -79,8 +80,8 @@ export class MountService extends BaseApi {
     return this.patch(`mounts/${mountId.toString()}/component_costs/${costId.toString()}/`, data);
   }
 
-  editCost(mountId: number, costId: number, data: any): Observable<ComponentCost> {
-    return this.patch(`mounts/${mountId.toString()}/costs/${costId.toString()}/`, data);
+  editCost(mountId: number, costId: number, data: any): Observable<Cost> {
+    return this.patch(`mounts/${mountId}/cost/${costId}/`, data);
   }
 
   editMount(idMount: number, description: string, date: string): Observable<Object> {

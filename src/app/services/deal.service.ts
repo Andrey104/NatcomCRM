@@ -36,7 +36,8 @@ export class DealService extends BaseApi {
   }
 
   dealComment(idDeal: number, comment: string): Observable<Object> {
-    return this.post(`deals/${idDeal}/comment/`, {text: comment});
+    const comment_type = 1;
+    return this.post(`deals/${idDeal}/comment/`, {text: comment, comment_type});
   }
 
   getCompanies(): Observable<CompanyPage> {

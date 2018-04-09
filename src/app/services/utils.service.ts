@@ -391,11 +391,15 @@ export class UtilsService {
         break;
       }
       case 'closed': {
-        status = {statusName: 'Закрытые замеры', statusUrl: 'status=2&&status=3'};
+        status = {statusName: 'Закрытые замеры', statusUrl: 'status=2&status=3'};
+        break;
+      }
+      case 'fail_process': {
+        status = {statusName: 'Замеры в процессе отказа', statusUrl: 'status=5'};
         break;
       }
       case 'rejected': {
-        status = {statusName: 'Отклоненные замеры', statusUrl: 'status=4&&status=5'};
+        status = {statusName: 'Отклоненные замеры', statusUrl: 'status=4'};
         break;
       }
       case 'all': {

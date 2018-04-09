@@ -4,6 +4,7 @@ export class OurComment {
   id: number;
   user: User;
   auto_date: string;
+  comment_type: number;
   text: string;
-  read: boolean;
+  file: string;
 }

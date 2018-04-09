@@ -178,9 +178,6 @@ export class DealMountComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.mountService.getMount(this.id)
       .subscribe((mount) => {
         this.mount = mount;
-        for (const picture of this.mount.pictures) {
-          picture.url = 'http://188.225.46.31' + picture.url;
-        }
         this.dealId = this.mount.deal;
         this.showEditButtons = this.utils.showEditButtons(String(this.mount.user.id));
         if (localStorage.getItem('user_type') === '3') {

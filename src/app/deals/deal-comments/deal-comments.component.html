@@ -3,9 +3,15 @@
   <div class="col s8">
     <div class="comment-content">
       <div class="comment-name">{{comment?.user.first_name}} {{comment?.user.last_name}}</div>
-      <div class="comment-date">{{comment?.auto_date | dateFormat: 'fullDate'}}</div>
+      <div  class="comment-date">{{comment?.auto_date | dateFormat: 'fullDate'}}</div>
     </div>
-    <pre>{{comment?.text}}</pre>
+    <pre *ngIf="comment?.comment_type === 1">{{comment?.text}}</pre>
+    <audio *ngIf="comment?.comment_type === 2" controls>
+      <source src="{{comment?.file}}" type="audio/ogg; codecs=vorbis">
+      <source src="{{comment?.file}}" type="audio/mpeg">
+      <source src="{{comment?.file}}" type="audio/wav">
+      <source src="{{comment?.file}}" type="audio/aac; codecs=vorbis">
+    </audio>
   </div>
 </div>
 
