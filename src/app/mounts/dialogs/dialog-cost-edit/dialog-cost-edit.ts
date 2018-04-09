@@ -27,7 +27,7 @@ export class DialogCostEditComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      this.id = params['stage_id'];
+      this.id = params['mount_id'];
     });
   }
 
@@ -35,6 +35,7 @@ export class DialogCostEditComponent implements OnInit {
     this.isRequest = true;
     this.isSubmitted = true;
     const data = this.getFormData();
+    console.log(data);
     this.mountService.editCost(this.id, this.cost.id, data)
       .subscribe((result) => {
         this.isRequest = false;
@@ -50,7 +51,7 @@ export class DialogCostEditComponent implements OnInit {
   getFormData(): Object {
     const sum = this.form.form.value.sum;
     let comment = this.form.form.value.comment;
-    const destination = this.form.form.value.destination;
+    const destination = Number(this.form.form.value.destination);
     if (comment === '') {
       comment = null;
     }

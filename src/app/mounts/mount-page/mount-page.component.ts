@@ -95,7 +95,7 @@ export class MountPageComponent implements OnInit, OnDestroy {
         this.mountService.getMount(msg.data.mount_id)
           .subscribe((mount: DealMount) => {
             if (this.mountService.statusMount !== 'completed' && this.mountService.statusMount !== 'canceled') {
-              this.showMounts();
+              this.search();
             } else if (this.mountService.statusMount === 'completed') {
               this.mounts.unshift(mount);
               this.mounts.pop();
@@ -107,7 +107,7 @@ export class MountPageComponent implements OnInit, OnDestroy {
         this.mountService.getMount(msg.data.mount_id)
           .subscribe((mount: DealMount) => {
             if (this.mountService.statusMount !== 'completed' && this.mountService.statusMount !== 'canceled') {
-              this.showMounts();
+              this.search();
             } else if (this.mountService.statusMount === 'canceled') {
               this.mounts.unshift(mount);
               this.mounts.pop();
@@ -119,7 +119,7 @@ export class MountPageComponent implements OnInit, OnDestroy {
         this.mountService.getMount(msg.data.mount_id)
           .subscribe((mount: DealMount) => {
             if (this.mountService.statusMount !== 'completed' && this.mountService.statusMount !== 'canceled') {
-              this.showMounts();
+              this.search();
             }
           });
       }

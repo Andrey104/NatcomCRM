@@ -12,6 +12,7 @@ export class DealCommentsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.comment.file);
   }
 
 }

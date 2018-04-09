@@ -257,7 +257,7 @@ export class DealDetailComponent implements OnInit, AfterViewChecked, OnDestroy 
         this.deal.comments.push(next);
         this.flag = true;
       }, error => {
-        console.log(error.error);
+        alert('Комментарий не отправлен');
       });
   }
 
