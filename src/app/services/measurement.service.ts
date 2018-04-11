@@ -24,7 +24,8 @@ export class MeasurementService extends BaseApi {
   }
 
   measurementComment(idMeasurement, comment): Observable<OurComment> {
-    return this.post(`measurements/${idMeasurement}/comment/`, {'text': comment});
+    const comment_type = 1;
+    return this.post(`measurements/${idMeasurement}/comment/`, {text: comment, comment_type});
   }
 
   getFilterMeasurements(page: number, text: string): Observable<MeasurementPage> {

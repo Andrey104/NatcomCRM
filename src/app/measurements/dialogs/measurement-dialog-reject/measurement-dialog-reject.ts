@@ -17,7 +17,7 @@ export class MeasurementDialogRejectComponent implements OnInit {
   @ViewChild('form') form: NgForm;
   @Output() successRejectMeasurement = new EventEmitter();
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-  causes = [1, 2, 3];
+  causes = [1, 2, 3, 4];
   isSubmitted = false;
   isRequest = false;
   formData = {};

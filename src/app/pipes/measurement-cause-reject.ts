@@ -19,6 +19,10 @@ export class MeasurementRejectCausePipe implements PipeTransform {
         cause = 'Ошибка менеджера';
         break;
       }
+      case 4: {
+        cause = 'Отказ клиента';
+        break;
+      }
     }
     return cause;
   }

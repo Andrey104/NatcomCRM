@@ -58,6 +58,9 @@
         </div>
       </div>
     </div>
+    <div *ngIf="order?.actions.length === 0" class="col s12">
+      <div class="col s12 action">Нет истории</div>
+    </div>
     <button *ngIf="order?.status==1"
             (click)="confirmModal.showConfirmDialog = true"
             class="btn-dialog-submit">Вернуть заявку

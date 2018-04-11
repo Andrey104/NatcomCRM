@@ -391,11 +391,15 @@ export class UtilsService {
         break;
       }
       case 'closed': {
-        status = {statusName: 'Закрытые замеры', statusUrl: 'status=2&&status=3'};
+        status = {statusName: 'Закрытые замеры', statusUrl: 'status=2&status=3'};
+        break;
+      }
+      case 'fail_process': {
+        status = {statusName: 'Замеры в процессе отказа', statusUrl: 'status=5'};
         break;
       }
       case 'rejected': {
-        status = {statusName: 'Отклоненные замеры', statusUrl: 'status=4&&status=5'};
+        status = {statusName: 'Отклоненные замеры', statusUrl: 'status=4'};
         break;
       }
       case 'all': {
@@ -409,11 +413,11 @@ export class UtilsService {
     let status: { statusName: string, statusUrl: string };
     switch (statusStr) {
       case 'processing': {
-        status = {statusName: 'Монтажи в обработке', statusUrl: 'status=0'};
+        status = {statusName: 'Монтажи по звонку', statusUrl: 'status=0'};
         break;
       }
       case 'added_stage': {
-        status = {statusName: 'Монтажи в процессе', statusUrl: 'status=1'};
+        status = {statusName: 'Назначенные монтажи', statusUrl: 'status=1'};
         break;
       }
       case 'completed': {
@@ -467,6 +471,10 @@ export class UtilsService {
           }
           case 3: {
             cause = 'из-за ошибки замерщика';
+            break;
+          }
+          case 4: {
+            cause = 'из-за отказа клиента';
             break;
           }
         }
