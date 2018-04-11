@@ -473,6 +473,10 @@ export class UtilsService {
             cause = 'из-за ошибки замерщика';
             break;
           }
+          case 4: {
+            cause = 'из-за отказа клиента';
+            break;
+          }
         }
         break;
       }

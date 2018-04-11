@@ -18,7 +18,9 @@
       </div>
       <div class="main-info-card">
         <div class="address">{{measurement?.address | address}}</div>
-        <div>{{measurement?.status | measurementStatus}}</div>
+        <div [style.color]="measurement?.status === 2 ? 'red' : 'black'">
+          {{measurement?.status | measurementStatus}}
+        </div>
       </div>
     </div>
   </div>
