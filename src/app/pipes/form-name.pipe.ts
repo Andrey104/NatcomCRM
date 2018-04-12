@@ -7,7 +7,7 @@ export class FormNamePipe implements PipeTransform {
 
   transform(value: string): string {
     if (value === null || value === '') {
-      value = 'Имя не указано';
+      value = 'Название формы отсутствует';
     }
     return value;
   }
