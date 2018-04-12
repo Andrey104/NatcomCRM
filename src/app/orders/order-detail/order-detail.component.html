@@ -12,7 +12,7 @@
         <div class="company-name">{{order?.company?.name | companyName}}</div>
         <div class="create">Создана: {{order?.auto_date | dateFormat: 'fullDate'}}</div>
         <ul>
-          <li><i class="tiny material-icons icon">person</i> {{order?.nameform | formName }}</li>
+          <li><i class="tiny material-icons icon">format_indent_decrease</i> {{order?.nameform | formName }}</li>
           <li><i class="tiny material-icons icon">person</i> {{order?.fio | clientName}}</li>
           <li><i class="tiny material-icons icon">local_phone</i> {{order?.phone | phoneFormat}}</li>
           <li><i class="tiny material-icons icon">email</i> {{order?.email | email}}</li>
