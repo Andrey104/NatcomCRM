@@ -1,6 +1,4 @@
-import {Client} from "../clients/client";
-import {OrderAction} from "./order_action";
-import {OrderResult} from "./order_result";
+import {OrderResult} from './order_result';
 
 export class Orders {
   results: OrderResult[];

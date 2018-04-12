@@ -10,6 +10,7 @@ export class OrderResult {
   comment: string;
   info: string;
   source: string;
+  nameform: string;
   company: Company;
   fio: string;
   phone: string;
