@@ -7,7 +7,7 @@
       <div *ngIf="backUrl" routerLink="{{backUrl}}"
            class="row-back valign-wrapper hover-element no-border">
         <i class="small material-icons no-border icon-arrow-back">
-          keyboard_arrow_left
+          navigate_before
         </i>
         <span class="back icon-arrow-back">Назад к сделке</span>
       </div>
@@ -34,6 +34,10 @@
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">date_range</i>
           <span class="measurement-date">{{measurement?.date | dateFormat: 'date'}}</span>
+        </div>
+        <div class="valign-wrapper">
+          <i class="tiny material-icons icon">content_paste</i>
+          <div class="text">Сделка {{measurement?.deal | deal}}</div>
         </div>
         <div class="valign-wrapper">
           <i class="tiny material-icons icon">location_on</i>
