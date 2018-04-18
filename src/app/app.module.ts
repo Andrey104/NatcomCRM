@@ -134,6 +134,7 @@ import {
   MeasurementDialogDeletePhotoComponent
 } from './measurements/dialogs/measuremetn-dialog-delete-photo/measurement-dialog-delete-photo';
 import { FormNamePipe } from './pipes/form-name.pipe';
+import { MeasurementDialogReturnComponent } from './measurements/dialogs/measurement-dialog-return/measurement-dialog-return.component';
 
 
 @NgModule({
@@ -249,6 +250,7 @@ import { FormNamePipe } from './pipes/form-name.pipe';
     MountEditDialogComponent,
     MeasurementDialogDeletePhotoComponent,
     FormNamePipe,
+    MeasurementDialogReturnComponent,
   ],
   imports: [
     BrowserModule,

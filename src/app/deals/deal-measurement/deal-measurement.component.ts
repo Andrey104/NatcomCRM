@@ -29,6 +29,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDes
   loadPage: boolean;
   showMeasurementReject = false;
   showMeasurementTransfer = false;
+  showMeasurementReturn = false;
   showMeasurementEdit = false;
   showDeletePhotoDialog = false;
   photoDeleteID: number;
@@ -182,6 +183,10 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDes
     if ((this.userType === 4) || (this.userType === 5)) {
       return true;
     }
+  }
+
+  returnMeasurement() {
+    this.showMeasurementReturn = !this.showMeasurementReturn;
   }
 
   ngOnDestroy(): void {
