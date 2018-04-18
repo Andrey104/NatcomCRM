@@ -1,12 +1,11 @@
 import {Worker} from '../worker';
 import {Company} from '../company';
-import {Client} from '../clients/client';
 import {Transfer} from '../transfer';
 import {OurComment} from '../comment';
 import {Picture} from '../picture';
 import {User} from '../user';
 import {ClientsList} from '../clients/clients-list';
-import {Action} from '../action';
+
 
 export class DealMeasurement {
   id: number;
@@ -31,4 +30,6 @@ export class DealMeasurement {
   worker: Worker;
   deal: number;
   color: number;
+  worker_reject_cause: number;
+  manager_reject_cause: number;
 }

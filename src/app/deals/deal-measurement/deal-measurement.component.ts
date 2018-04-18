@@ -21,7 +21,6 @@ import {Subscription} from 'rxjs/Subscription';
 export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDestroy {
   measurement: DealMeasurement;
   id: number;
-  ws;
   subscribeOnSocket: Subscription;
   showEditButtons = false;
   client: Client;
@@ -38,6 +37,7 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDes
   backUrl: string;
   url: string;
   showToDealButton = true;
+  userType = Number(localStorage.getItem('user_type'));
 
   constructor(private activatedRoute: ActivatedRoute,
               private measurementService: MeasurementService,
@@ -176,6 +176,12 @@ export class DealMeasurementComponent implements OnInit, AfterViewChecked, OnDes
   deletePicture(id) {
     this.showDeletePhotoDialog = true;
     this.photoDeleteID = id;
+  }
+
+  adminCheck() {
+    if ((this.userType === 4) || (this.userType === 5)) {
+      return true;
+    }
   }
 
   ngOnDestroy(): void {
