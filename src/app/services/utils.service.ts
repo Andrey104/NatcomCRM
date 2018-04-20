@@ -462,15 +462,15 @@ export class UtilsService {
         type = ' отменил(а) замер ';
         switch (action.cause) {
           case 1: {
-            cause = 'из-за ошибки менеджера';
-            break;
-          }
-          case 2: {
             cause = 'из-за того, что клиент выбрал другую компанию';
             break;
           }
-          case 3: {
+          case 2: {
             cause = 'из-за ошибки замерщика';
+            break;
+          }
+          case 3: {
+            cause = 'из-за ошибки менеджера';
             break;
           }
         }
@@ -478,6 +478,10 @@ export class UtilsService {
       }
       case 3: {
         type = ' стал(а) ответсвенным(ой) ';
+        break;
+      }
+      case 4: {
+        type = ' вернул(а) замер ';
         break;
       }
     }
