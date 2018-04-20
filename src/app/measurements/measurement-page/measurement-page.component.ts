@@ -109,20 +109,19 @@ export class MeasurementPageComponent implements OnInit, OnDestroy {
           });
         break;
       }
-      // case 'on_return_measurement': {
-      //   this.measurementService.getMeasurement(msg.data.id)
-      //     .subscribe((measurement: DealMeasurement) => {
-      //       if (this.measurementService.measurementStatus !== 'undistributed' &&
-      //         this.measurementService.measurementStatus !== 'responsible' &&
-      //         this.measurementService.measurementStatus !== 'all') {
-      //         this.search();
-      //       } else if (this.measurementService.measurementStatus === 'rejected') {
-      //         this.measurements.unshift(measurement);
-      //         this.measurements.pop();
-      //       }
-      //     });
-      //   break;
-      // }
+      case 'on_return_measurement': {
+        this.measurementService.getMeasurement(msg.data.id)
+          .subscribe((measurement: DealMeasurement) => {
+            if (this.measurementService.measurementStatus === 'all' ||
+              this.measurementService.measurementStatus === 'undistributed' ||
+              this.measurementService.measurementStatus === 'fail_process' ||
+              this.measurementService.measurementStatus === 'rejected'
+            ) {
+              this.search();
+            }
+          });
+        break;
+      }
       case 'on_transfer_measurement': {
         this.measurementService.getMeasurement(msg.data.id)
           .subscribe((measurement: DealMeasurement) => {
