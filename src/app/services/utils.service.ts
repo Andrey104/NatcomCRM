@@ -39,7 +39,8 @@ export class UtilsService {
       localStorage.getItem('user_type') === '5') {
       return true;
     }
-    return false;
+    // Костыль, дающий всем менеджерам доступ ко всем сделкам
+    return true;
   }
 
   statusOrder(status: number) {
