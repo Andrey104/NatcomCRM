@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://xn-%2D77-vlcherag2a.xn-%2Dp1ai/calc/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Калькулятор</title>
+
+    <link rel="stylesheet" href="./index_files/style.css" type="text/css">
+    <script src="./index_files/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="data" role="form">
+    <div class="logical-block">
+        <div class="in1"><label class="lable">Первоночальная цена</label>
+            <div class="input-block"><input name="startPrice" id="startPrice"></div>
+        </div>
+        <div class="in1"><label class="lable">Периметр</label>
+            <div class="input-block"><input name="perimeter" id="perimeter"></div>
+        </div>
+    </div>
+    <div class="logical-block">
+        <div class="in1"><label class="lable">ПВХ белый до 3,6</label>
+            <div class="input-block"><input name="PVC36" id="PVC36"></div>
+        </div>
+        <div class="in1"><label class="lable">ПВХ белый свыше 4,0</label>
+            <div class="input-block"><input name="PVC40" id="PVC40"></div>
+        </div>
+        <div class="in1"><label class="lable">ПВХ цветной 3,2</label>
+            <div class="input-block"><input name="PCV32" id="PVC32"></div>
+        </div>
+        <div class="in1"><label class="lable">ПВХ цветной 5,0</label>
+            <div class="input-block"><input name="PVC50" id="PVC50"></div>
+        </div>
+        <div class="in1"><label class="lable">Дескор</label>
+            <div class="input-block"><input name="descor" id="descor"></div>
+        </div>
+    </div>
+    <div class="logical-block">
+        <div class="in1"><label class="lable">Обвод труб</label>
+            <div class="input-block"><input id="OBVODTR"></div>
+        </div>
+        <div class="in1"><label class="lable">Закладная под люстру</label>
+            <div class="input-block"><input id="ZAKLUSTRA"></div>
+        </div>
+        <div class="in1"><label class="lable">Светильник заказчика</label>
+            <div class="input-block"><input id="SVETZAKAZ"></div>
+        </div>
+        <div class="in1"><label class="lable">Светильники наши</label>
+            <div class="input-block"><input id="SVETNASH"></div>
+        </div>
+        <div class="in1"><label class="lable">Крюк под люстру</label>
+            <div class="input-block"><input id="KRUKLUSTRA"></div>
+        </div>
+        <div class="in1"><label class="lable">Работы по плитке</label>
+            <div class="input-block"><input id="PLITKA"></div>
+        </div>
+        <div class="in1"><label class="lable">Работы по керамограниту</label>
+            <div class="input-block"><input id="PLITKAKERAM"></div>
+        </div>
+        <div class="in1"><label class="lable">Брус</label>
+            <div class="input-block"><input id="BRUS"></div>
+        </div>
+        <div class="in1"><label class="lable">Закладные под карниз/пож.дат.</label>
+            <div class="input-block"><input id="ZAKKARNIZ"></div>
+        </div>
+        <div class="in1"><label class="lable">Кривые участки</label>
+            <div class="input-block"><input id="KRIVUCH"></div>
+        </div>
+        <div class="in1"><label class="lable">Переход уровня</label>
+            <div class="input-block"><input id="LEVELUP"></div>
+        </div>
+        <div class="in1"><label class="lable">Фотопечать</label>
+            <div class="input-block"><input id="PHOHTOPRINT"></div>
+        </div>
+        <div class="in1"><label class="lable">Плинтус</label>
+            <div class="input-block"><input id="PLINTUS"></div>
+        </div>
+        <div class="in1"><label class="lable">Пылесос</label>
+            <div class="input-block"><input id="PLS"></div>
+        </div>
+        <div class="in1"><label class="lable">Разделитель</label>
+            <div class="input-block"><input id="RAZDEL"></div>
+        </div>
+        <div class="in1"><label class="lable">Вентиляция</label>
+            <div class="input-block"><input id="VENT"></div>
+        </div>
+    </div>
+    <div class="logical-block">
+        <div class="in1"><label class="lable">Профиль световые линии</label>
+            <div class="input-block"><input id="PROFILSVET"></div>
+        </div>
+        <div class="in1"><label class="lable">Европрофиль, НЕ еврокраб!</label>
+            <div class="input-block"><input id="PROFILNOCRAB"></div>
+        </div>
+        <div class="in1"><label class="lable">Парящий / контурный профиль</label>
+            <div class="input-block"><input id="PROFILPAR"></div>
+        </div>
+        <div class="in1"><label class="lable">Гардина</label>
+            <div class="input-block"><input id="GARDINA"></div>
+        </div>
+        <div class="in1"><label class="lable">БП-40</label>
+            <div class="input-block"><input id="BP40"></div>
+        </div>
+    </div>
+
+    <div class="logical-block">
+        <div class="in1"><label class="lable">Светодиодная лента</label>
+            <div class="input-block"><input id="SVETLENTA"></div>
+        </div>
+        <div class="in1"><label class="lable">Трансформатор</label>
+            <div class="input-block"><input id="TRANSFORM"></div>
+        </div>
+        <div class="in1"><label class="lable">Контролер</label>
+            <div class="input-block"><input id="CONTROLER"></div>
+        </div>
+    </div>
+
+<div class="price">
+    <h2>Цена1:
+        <lable id="price1">89.38</lable>
+        р
+    </h2>
+    <h2>Цена2:
+        <lable id="price2">82.50</lable>
+        р
+    </h2>
+    <h2>Цена3:
+        <lable id="price3">75.63</lable>
+        р
+    </h2>
+    <button id="OK">Рассчитать</button>
+</div>
+<script type="text/javascript">
+    function calc() {
+        var startPrice = $("#startPrice").val();
+        var perimeter = $("#perimeter").val();
+
+        var PVC36 = $("#PVC36").val();
+        var PVC40 = $("#PVC40").val();
+        var PVC32 = $("#PVC32").val();
+        var PVC50 = $("#PVC50").val();
+        var descor = $("#descor").val();
+
+        var OBVODTR = $("#OBVODTR").val();
+        var ZAKLUSTRA = $("#ZAKLUSTRA").val();
+        var SVETZAKAZ = $("#SVETZAKAZ").val();
+        var SVETNASH = $("#SVETNASH").val();
+        var KRUKLUSTRA = $("#KRUKLUSTRA").val();
+        var PLITKA = $("#PLITKA").val();
+        var PLITKAKERAM = $("#PLITKAKERAM").val();
+        var BRUS = $("#BRUS").val();
+        var ZAKKARNIZ = $("#ZAKKARNIZ").val();
+        var KRIVUCH = $("#KRIVUCH").val();
+        var LEVELUP = $("#LEVELUP").val();
+        var PHOHTOPRINT = $("#PHOHTOPRINT").val();
+        var PLINTUS = $("#PLINTUS").val();
+        var PLS = $("#PLS").val();
+        var RAZDEL = $("#RAZDEL").val();
+        var VENT = $("#VENT").val();
+
+        var PROFILSVET = $("#PROFILSVET").val();
+        var PROFILNOCRAB = $("#PROFILNOCRAB").val();
+        var PROFILPAR = $("#PROFILPAR").val();
+        var GARDINA = $("#GARDINA").val();
+        var BP40 = $("#BP40").val();
+
+        var SVETLENTA = $("#SVETLENTA").val();
+        var TRANSFORM = $("#TRANSFORM").val();
+        var CONTROLER = $("#CONTROLER").val();
+
+        var sum;
+
+        var price1;
+        var price2;
+        var price3;
+
+        sum = 
+        (perimeter * 100) + 
+        (PVC36 * 190) + 
+        (PVC40 * 205) + 
+        (PVC32 * 250) + 
+        (PVC50 * 311) + 
+        (descor * 750) +
+        (OBVODTR * 25) + 
+        (ZAKLUSTRA * 100) + 
+        (SVETZAKAZ * 75) + 
+        (SVETNASH * 200) + 
+        (KRUKLUSTRA * 30) + 
+        (PLITKA * 20) + 
+        (PLITKAKERAM * 100) +
+        (BRUS * 70) + 
+        (ZAKKARNIZ * 65) + 
+        (KRIVUCH * 100) + 
+        (LEVELUP * 900) + 
+        (PHOHTOPRINT * 1100) + 
+        (PLINTUS * 25) + 
+        (PLS * 100) + 
+        (RAZDEL * 250) + 
+        (VENT * 100) +
+        (PROFILSVET * 450) +
+        (PROFILNOCRAB * 130) +
+        (PROFILPAR * 150) +
+        (GARDINA * 1300) +
+        (BP40 * 300) +
+        (SVETLENTA * 350) +
+        (TRANSFORM * 1500) +
+        (CONTROLER * 2000);
+
+
+
+        price3 = ((startPrice * 0.35) + sum) * 1.375;
+        price2 = ((startPrice * 0.35) + sum) * 1.5;
+        price1 = ((startPrice * 0.35) + sum) * 1.625;
+        
+
+
+        $("#price1").html(price1.toFixed(2));
+        $("#price2").html(price2.toFixed(2));
+        $("#price3").html(price3.toFixed(2));
+    }
+    $("#OK").click(calc);
+</script>
+
+
+</body></html>

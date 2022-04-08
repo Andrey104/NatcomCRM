@@ -1,0 +1,24 @@
+body {
+	padding: 20px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.logical-block{
+	padding-bottom: 40px;
+	
+}
+.data{
+	width: 400px;
+}
+.logical-block{
+	padding-right: 10px;
+}
+
+.price{
+	position: absolute;
+	top: 15px; /* Положение от нижнего края */
+    right: 15px; /* Положение от правого края */
+	width: 400px;
+}
